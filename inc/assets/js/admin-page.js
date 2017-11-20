@@ -534,7 +534,7 @@ var AstraSitesAjaxQueue = (function() {
 			AstraSitesAdmin._log( astraSitesAdmin.log.installingPlugin + ' ' + $button.data( 'slug' ) );
 
 			wp.updates.installPlugin( {
-				slug: $button.data( 'slug' )
+				slug:    $button.data( 'slug' )
 			} );
 		},
 
