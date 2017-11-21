@@ -58,7 +58,7 @@ https://wpastra.com/sites-suggestions/
 
 v1.1.0 - 21-Nov-2017
 * New: Import the site content using Event Source (SSE) which ensures faithful imports.
-* New: We have divided the site import process in separate AJAX calls to reduce the possibility of timeouts.
+* New: Divided the site import process in separate AJAX calls to reduce the possibility of timeouts.
 * New: Generated the import log file. It will be displayed in the UI if the import fails.
 * Improvement: Validate all the possible errors.
 * Improvement: Updated Astra sites HTML grid structure for WordPress v4.9 compatibility.
