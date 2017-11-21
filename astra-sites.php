@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Astra Sites - Lite
+ * Plugin Name: Astra Starter Sites
  * Plugin URI: http://www.wpastra.com/pro/
  * Description: Import free sites build with Astra theme.
- * Version: 1.0.14
+ * Version: 1.1.0
  * Author: Brainstorm Force
  * Author URI: http://www.brainstormforce.com
  * Text Domain: astra-sites
@@ -19,7 +19,7 @@ if ( ! defined( 'ASTRA_SITES_NAME' ) ) {
 }
 
 if ( ! defined( 'ASTRA_SITES_VER' ) ) {
-	define( 'ASTRA_SITES_VER', '1.0.14' );
+	define( 'ASTRA_SITES_VER', '1.1.0' );
 }
 
 if ( ! defined( 'ASTRA_SITES_FILE' ) ) {

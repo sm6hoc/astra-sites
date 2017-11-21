@@ -90,6 +90,11 @@
     text-align: center;
 }
 
+.wp-core-ui .wp-full-overlay-footer .button.button-hero,
+.wp-core-ui .wp-full-overlay-footer .button-group.button-hero .button {
+    padding: 0 10px 1px;
+}
+
 .wp-full-overlay-footer .installing:before {
     vertical-align: text-bottom;
 }
@@ -236,6 +241,9 @@
 #astra-sites-admin {
     height: 100vh;
 }
+.install-theme-info > .notice {
+    margin: 5px 0 10px 0;
+}
 
 .astra-sites-suggestions:before {
     border: 5px dashed #ccc;
@@ -285,4 +293,26 @@
 
 .no-themes .description {
     display: block;
+}
+
+/**
+ * Responsive Button UI
+ */
+.astra-sites-preview .wp-full-overlay-footer .devices button.active:before,
+.astra-sites-preview .wp-full-overlay-footer .devices button:hover:before {
+    color: #0073aa;
+}
+.astra-sites-preview .wp-full-overlay-footer .devices button:before {
+    color: #c1c1c1;
+}
+.astra-sites-preview .wp-full-overlay-footer .devices button:hover {
+    background-color: transparent;
+}
+.astra-sites-preview .wp-full-overlay-footer .devices button {
+    border: none;
+}
+.astra-sites-preview .wp-full-overlay-footer .devices button:focus,
+.astra-sites-preview .wp-full-overlay-footer .devices button.active:hover {
+    border-bottom-color: transparent;
+    background-color: transparent;
 }
