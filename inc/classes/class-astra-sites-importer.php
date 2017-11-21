@@ -150,7 +150,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 						$data['xml'] = $xml_path['data'];
 						wp_send_json_success( $data );
 					} else {
-						wp_send_json_error( __( 'Not able to download the XML file!', 'astra-sites' ) );
+						wp_send_json_error( __( 'There was an error downloading the XML file.', 'astra-sites' ) );
 					}
 				} else {
 					wp_send_json_error( $xml_path['data'] );
