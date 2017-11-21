@@ -57,6 +57,7 @@ https://wpastra.com/sites-suggestions/
 
 v1.0.15 - Unreleased
 * Enhancement: Updated plugin name from `Astra Sites - Lite` with `Astra Starter Sites`.
+* Improvement: Updated Astra sites HTML grid structure for WordPress v4.9 compatibility.
 
 v1.0.14 - 9-Nov-2017
 * New: All the linked images on the Astra Sites will be downloaded to your site, No more loading images from external URLs.
