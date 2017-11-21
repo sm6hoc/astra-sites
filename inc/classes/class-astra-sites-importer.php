@@ -73,7 +73,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Start Site Import
 		 *
-		 * @since 1.0.15
+		 * @since 1.1.0
 		 * @return void
 		 */
 		function import_start() {
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Prepare XML Data.
 		 *
-		 * @since 1.0.15
+		 * @since 1.1.0
 		 * @return void
 		 */
 		function prepare_xml_data() {

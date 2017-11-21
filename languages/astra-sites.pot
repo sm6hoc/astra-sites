@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Astra Starter Sites package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra Starter Sites 1.0.15\n"
+"Project-Id-Version: Astra Starter Sites 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2017-11-21 09:09:31+00:00\n"
+"POT-Creation-Date: 2017-11-21 10:13:05+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -183,7 +183,7 @@ msgid "Successfully plugin installed!"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:236
-msgid "Error! While Installing plugin "
+msgid "There was an error while installing the plugin "
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:237

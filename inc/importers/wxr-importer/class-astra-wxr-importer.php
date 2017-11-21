@@ -62,7 +62,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Constructor.
 	 *
-	 * @since  1.0.15
+	 * @since  1.1.0
 	 */
 	function sse_import() {
 
@@ -182,7 +182,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Get XML data.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 * @param  string $url Downloaded XML file absolute URL.
 	 * @return array  XML file data.
 	 */
@@ -198,7 +198,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Get Importer
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 * @return object   Importer object.
 	 */
 	public function get_importer() {
@@ -216,7 +216,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Send message when a post has been imported.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 * @param int   $id Post ID.
 	 * @param array $data Post data saved to the DB.
 	 */
@@ -233,7 +233,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Send message when a post is marked as already imported.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 * @param array $data Post data saved to the DB.
 	 */
 	public function already_imported_post( $data ) {
@@ -249,7 +249,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Send message when a comment has been imported.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 */
 	public function imported_comment() {
 		$this->emit_sse_message(
@@ -264,7 +264,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Send message when a term has been imported.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 */
 	public function imported_term() {
 		$this->emit_sse_message(
@@ -279,7 +279,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Send message when a user has been imported.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 */
 	public function imported_user() {
 		$this->emit_sse_message(
@@ -294,7 +294,7 @@ class Astra_WXR_Importer {
 	/**
 	 * Emit a Server-Sent Events message.
 	 *
-	 * @since 1.0.15
+	 * @since 1.1.0
 	 * @param mixed $data Data to be JSON-encoded and sent in the message.
 	 */
 	public function emit_sse_message( $data ) {
