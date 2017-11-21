@@ -56,7 +56,7 @@ class Astra_WXR_Importer {
 
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
-		add_filter( 'wxr_importer.pre_process.user', '__return_false' );
+		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
 	}
 
 	/**
