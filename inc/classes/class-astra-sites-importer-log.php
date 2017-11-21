@@ -310,7 +310,9 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			// File format e.g. 'import-31-Oct-2017-06-39-12.txt'.
 			self::$log_file = $upload_path . 'import-' . date( 'd-M-Y-h-i-s' ) . '.txt';
 
-			update_option( 'astra_sites_recent_import_log_file', self::$log_file );
+			if ( ! get_option( 'astra_sites_recent_import_log_file', false ) ) {
+				update_option( 'astra_sites_recent_import_log_file', self::$log_file );
+			}
 		}
 
 		/**
