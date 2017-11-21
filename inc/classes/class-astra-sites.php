@@ -151,6 +151,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
+			global $is_IE;
+
+			if ( $is_IE ) {
+				wp_enqueue_script( 'astra-sites-eventsource', ASTRA_SITES_URI . 'inc/assets/js/eventsource.min.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
+			}
+
 			// API.
 			wp_register_script( 'astra-sites-api', ASTRA_SITES_URI . 'inc/assets/js/astra-sites-api.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 
@@ -198,6 +204,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
+					'debug'           => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
 					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'siteURL'         => site_url(),
 					'getProText'      => __( 'Purchase', 'astra-sites' ),
@@ -213,13 +220,50 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'viewSite'             => __( 'Done! View Site', 'astra-sites' ),
 						'btnActivating'        => __( 'Activating', 'astra-sites' ) . '&hellip;',
 						'btnActive'            => __( 'Active', 'astra-sites' ),
+						'importFailBtn'        => __( 'Import failed.', 'astra-sites' ),
+						'importFailBtnLarge'   => __( 'Import failed. See error log.', 'astra-sites' ),
 						'importDemo'           => __( 'Import This Site', 'astra-sites' ),
-						'importingDemo'        => __( 'Importing Demo', 'astra-sites' ),
+						'importingDemo'        => __( 'Importing..', 'astra-sites' ),
 						'DescExpand'           => __( 'Read more', 'astra-sites' ) . '&hellip;',
 						'DescCollapse'         => __( 'Hide', 'astra-sites' ),
 						'responseError'        => __( 'There was a problem receiving a response from server.', 'astra-sites' ),
 						'searchNoFound'        => __( 'No Demos found, Try a different search.', 'astra-sites' ),
 						'importWarning'        => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
+					),
+					'log'             => array(
+						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
+						'installed'               => __( 'Successfully plugin installed!', 'astra-sites' ),
+						'installError'            => __( 'There was an error while installing the plugin ', 'astra-sites' ),
+						'activating'              => __( 'Activating plugin ', 'astra-sites' ),
+						'activated'               => __( 'Successfully plugin activated ', 'astra-sites' ),
+						'bulkActivation'          => __( 'Bulk plugin activation...', 'astra-sites' ),
+						'activate'                => __( 'Successfully plugin activate - ', 'astra-sites' ),
+						'activationError'         => __( 'Error! While activating plugin  - ', 'astra-sites' ),
+						'bulkInstall'             => __( 'Bulk plugin installation...', 'astra-sites' ),
+						'api'                     => __( 'Site API ', 'astra-sites' ),
+						'importing'               => __( 'Importing..', 'astra-sites' ),
+						'processingRequest'       => __( 'Processing requests...', 'astra-sites' ),
+						'importCustomizer'        => __( '1) Importing "Customizer Settings"...', 'astra-sites' ),
+						'importCustomizerSuccess' => __( 'Successfully imported customizer settings!', 'astra-sites' ),
+						'importXMLPrepare'        => __( '2) Preparing "XML" Data...', 'astra-sites' ),
+						'importXMLPrepareSuccess' => __( 'Successfully set XML data!', 'astra-sites' ),
+						'importXML'               => __( '3) Importing "XML"...', 'astra-sites' ),
+						'importXMLSuccess'        => __( 'Successfully imported XML!', 'astra-sites' ),
+						'importOptions'           => __( '4) Importing "Options"...', 'astra-sites' ),
+						'importOptionsSuccess'    => __( 'Successfully imported Options!', 'astra-sites' ),
+						'importWidgets'           => __( '5) Importing "Widgets"...', 'astra-sites' ),
+						'importWidgetsSuccess'    => __( 'Successfully imported Widgets!', 'astra-sites' ),
+						'serverConfiguration'     => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=import-error&utm_medium=wp-dashboard' ),
+						'success'                 => __( 'Site imported successfully! visit : ', 'astra-sites' ),
+						'gettingData'             => __( 'Getting Import Data..', 'astra-sites' ),
+						'importingCustomizer'     => __( 'Importing Customizer Settings..', 'astra-sites' ),
+						'importXMLPreparing'      => __( 'Setting up import data..', 'astra-sites' ),
+						'importingXML'            => __( 'Importing Pages, Posts & Media..', 'astra-sites' ),
+						'importingOptions'        => __( 'Importing Site Options..', 'astra-sites' ),
+						'importingWidgets'        => __( 'Importing Widgets..', 'astra-sites' ),
+						'importComplete'          => __( 'Import Complete..', 'astra-sites' ),
+						'preview'                 => __( 'Previewing ', 'astra-sites' ),
+						'importLogText'           => __( 'See Error Log &rarr;', 'astra-sites' ),
 					),
 				)
 			);

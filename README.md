@@ -49,6 +49,7 @@ https://wpastra.com/sites-suggestions/
 
 
 ## Screenshots ##
+
 1. Select the demo you want to import.
 2. Install and activate the required plugins.
 3. Import the demo.
@@ -56,8 +57,12 @@ https://wpastra.com/sites-suggestions/
 ## Changelog ##
 
 v1.0.15 - Unreleased
-* Enhancement: Updated plugin name from `Astra Sites - Lite` with `Astra Starter Sites`.
+* New: Importing site XML with Event Source (SSE) which keep the import process until XML import complete.
+* New: We have categorize the site import process in several AJAX calls.
+* New: Generated the import log file. We'll show this if Only if error occurred.
+* Improvement: Validate all the possible errors.
 * Improvement: Updated Astra sites HTML grid structure for WordPress v4.9 compatibility.
+* Enhancement: Updated plugin name from `Astra Sites - Lite` with `Astra Starter Sites`.
 
 v1.0.14 - 9-Nov-2017
 * New: All the linked images on the Astra Sites will be downloaded to your site, No more loading images from external URLs.

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites 1.0.15\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2017-11-21 05:28:11+00:00\n"
+"POT-Creation-Date: 2017-11-21 09:09:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,12 +28,48 @@ msgstr ""
 msgid "Astra Starter Sites"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:74
-msgid "You have not \"customize\" access to import the astra site."
+#: inc/classes/class-astra-sites-importer-log.php:349
+msgid "Enabled"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer-log.php:352
+msgid "Disabled"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer-log.php:479
+msgid "Yes"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer-log.php:482
+msgid "No"
 msgstr ""
 
 #: inc/classes/class-astra-sites-importer.php:82
-msgid "Demo Imported Successfully."
+msgid "You have not \"customize\" access to import the Astra site."
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:101
+msgid "Request site API URL is empty. Try again!"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:124
+msgid "Customizer data is empty!"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:153
+msgid "There was an error downloading the XML file."
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:159
+msgid "Invalid site XML file!"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:181
+msgid "Site options are empty!"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:203
+msgid "Widget data is empty!"
 msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:192
@@ -56,67 +92,75 @@ msgstr ""
 msgid "See Library"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:166
+#: inc/classes/class-astra-sites.php:172
 msgid "Page Builder"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:171
+#: inc/classes/class-astra-sites.php:177
 msgid "Categories"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:203
+#: inc/classes/class-astra-sites.php:210
 msgid "Purchase"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:205
+#: inc/classes/class-astra-sites.php:212
 msgid "Upgrade"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:210
+#: inc/classes/class-astra-sites.php:217
 msgid "Error!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:211
+#: inc/classes/class-astra-sites.php:218
 msgid "Error! Read Possibilities."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:213
+#: inc/classes/class-astra-sites.php:220
 msgid "Done! View Site"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:214
+#: inc/classes/class-astra-sites.php:221
 msgid "Activating"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:215
+#: inc/classes/class-astra-sites.php:222
 msgid "Active"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:216
+#: inc/classes/class-astra-sites.php:223
+msgid "Import failed."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:224
+msgid "Import failed. See error log."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:225
 msgid "Import This Site"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:217
-msgid "Importing Demo"
+#: inc/classes/class-astra-sites.php:226 inc/classes/class-astra-sites.php:244
+msgid "Importing.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:218 inc/includes/admin-page.php:102
+#: inc/classes/class-astra-sites.php:227 inc/includes/admin-page.php:103
 msgid "Read more"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:219
+#: inc/classes/class-astra-sites.php:228
 msgid "Hide"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:220
+#: inc/classes/class-astra-sites.php:229
 msgid "There was a problem receiving a response from server."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:221 inc/includes/admin-page.php:248
+#: inc/classes/class-astra-sites.php:230 inc/includes/admin-page.php:249
 msgid "No Demos found, Try a different search."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:222
+#: inc/classes/class-astra-sites.php:231
 msgid ""
 "Executing Demo Import will make your site similar as ours. Please bear in "
 "mind -\n"
@@ -130,11 +174,135 @@ msgid ""
 "placeholders."
 msgstr ""
 
+#: inc/classes/class-astra-sites.php:234
+msgid "Installing plugin "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:235
+msgid "Successfully plugin installed!"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:236
+msgid "Error! While Installing plugin "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:237
+msgid "Activating plugin "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:238
+msgid "Successfully plugin activated "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:239
+msgid "Bulk plugin activation..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:240
+msgid "Successfully plugin activate - "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:241
+msgid "Error! While activating plugin  - "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:242
+msgid "Bulk plugin installation..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:243
+msgid "Site API "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:245
+msgid "Processing requests..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:246
+msgid "1) Importing \"Customizer Settings\"..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:247
+msgid "Successfully imported customizer settings!"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:248
+msgid "2) Preparing \"XML\" Data..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:249
+msgid "Successfully set XML data!"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:250
+msgid "3) Importing \"XML\"..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:251
+msgid "Successfully imported XML!"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:252
+msgid "4) Importing \"Options\"..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:253
+msgid "Successfully imported Options!"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:254
+msgid "5) Importing \"Widgets\"..."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:255
+msgid "Successfully imported Widgets!"
+msgstr ""
+
 #: inc/classes/class-astra-sites.php:257
+msgid "Site imported successfully! visit : "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:258
+msgid "Getting Import Data.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:259
+msgid "Importing Customizer Settings.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:260
+msgid "Setting up import data.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:261
+msgid "Importing Pages, Posts & Media.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:262
+msgid "Importing Site Options.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:263
+msgid "Importing Widgets.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:264
+msgid "Import Complete.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:265
+msgid "Previewing "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:266
+msgid "See Error Log &rarr;"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:301
 msgid "No plugin specified"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:286
+#: inc/classes/class-astra-sites.php:330
 msgid "Plugin Successfully Activated"
 msgstr ""
 
@@ -172,6 +340,10 @@ msgstr ""
 
 #: inc/importers/class-widgets-importer.php:263
 msgid "No Title"
+msgstr ""
+
+#: inc/importers/wxr-importer/class-astra-wxr-importer.php:177
+msgid "Import complete!"
 msgstr ""
 
 #: inc/importers/wxr-importer/class-wxr-importer.php:130
@@ -321,75 +493,75 @@ msgstr ""
 msgid "Could not update comment #%d with mapped data"
 msgstr ""
 
-#: inc/includes/admin-page.php:40
+#: inc/includes/admin-page.php:41
 msgid "Search Sites"
 msgstr ""
 
-#: inc/includes/admin-page.php:41
+#: inc/includes/admin-page.php:42
 msgid "Search Sites..."
 msgstr ""
 
-#: inc/includes/admin-page.php:83
+#: inc/includes/admin-page.php:84
 msgid "Close"
 msgstr ""
 
-#: inc/includes/admin-page.php:84
+#: inc/includes/admin-page.php:85
 msgid "Previous"
 msgstr ""
 
-#: inc/includes/admin-page.php:85
+#: inc/includes/admin-page.php:86
 msgid "Next"
 msgstr ""
 
-#: inc/includes/admin-page.php:86 inc/includes/admin-page.php:114
+#: inc/includes/admin-page.php:87 inc/includes/admin-page.php:115
 msgid "Install Plugins"
 msgstr ""
 
-#: inc/includes/admin-page.php:105
+#: inc/includes/admin-page.php:106
 msgid "Required Plugins"
 msgstr ""
 
-#: inc/includes/admin-page.php:120
+#: inc/includes/admin-page.php:121
 msgid "Collapse"
 msgstr ""
 
-#: inc/includes/admin-page.php:126
+#: inc/includes/admin-page.php:127
 msgid "Enter desktop preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:129
+#: inc/includes/admin-page.php:130
 msgid "Enter tablet preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:132
+#: inc/includes/admin-page.php:133
 msgid "Enter mobile preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:140 inc/includes/admin-page.php:240
+#: inc/includes/admin-page.php:141 inc/includes/admin-page.php:241
 msgid "Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:155
+#: inc/includes/admin-page.php:156
 #. translators: %1$s & %2$s are a Demo API URL
 msgid ""
 "<p> It seems the demo data server, <i><a href=\"%1$s\">%2$s</a></i> is "
 "unreachable from your site.</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:157
+#: inc/includes/admin-page.php:158
 msgid ""
 "<p class=\"left-margin\"> 1. Sometimes, simple page reload fixes any "
 "temporary issues. No kidding!</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:159
+#: inc/includes/admin-page.php:160
 msgid ""
 "<p class=\"left-margin\"> 2. If that does not work, you will need to talk "
 "to your server administrator and check if demo server is being blocked by "
 "the firewall!</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:162
+#: inc/includes/admin-page.php:163
 #. translators: %1$s is a support link
 msgid ""
 "<p>If that does not help, please open up a <a href=\"%1$s\" "
@@ -397,11 +569,11 @@ msgid ""
 "for you.</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:230
+#: inc/includes/admin-page.php:231
 msgid "Details &amp; Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:252 inc/includes/admin-page.php:270
+#: inc/includes/admin-page.php:253 inc/includes/admin-page.php:271
 #. translators: %1$s External Link
 msgid ""
 "Don't see a site that you would like to import?<br>Please <a "
@@ -430,4 +602,15 @@ msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "http://www.brainstormforce.com"
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer-log.php:370
+#. translators: %1$s Memory Limit, %2$s Recommended memory limit.
+msgctxt "Recommended Memory Limit"
+msgid "Current memory limit %1$s. We recommend setting memory to at least %2$s."
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer-log.php:436
+msgctxt "PHP Version"
+msgid "We recommend to use php 5.4 or higher"
 msgstr ""

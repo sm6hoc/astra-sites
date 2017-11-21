@@ -14,6 +14,7 @@
 defined( 'ABSPATH' ) or exit;
 
 ?>
+
 <div class="wrap" id="astra-sites-admin">
 
 	<div id="astra-sites-filters" class="wp-filter hide-if-no-js">
@@ -273,3 +274,5 @@ defined( 'ABSPATH' ) or exit;
 		</div>
 	</div>
 </script>
+<?php
+wp_print_admin_notice_templates();
