@@ -1,4 +1,4 @@
-=== Astra Sites - Lite ===
+=== Astra Starter Sites ===
 Contributors: brainstormforce
 Donate link: https://wpastra.com/pro/
 Tags: demo, theme demos, one click import
@@ -8,7 +8,7 @@ Stable tag: 1.0.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Import Astra Sites - Lite with just one click.
+Import Astra Starter Sites with just one click.
 
 == Description ==
 
@@ -61,6 +61,8 @@ v1.0.15 - Unreleased
 * New: We have categorize the site import process in several AJAX calls.
 * New: Generated the import log file. We'll show this if Only if error occurred.
 * Improvement: Validate all the possible errors.
+* Improvement: Updated Astra sites HTML grid structure for WordPress v4.9 compatibility.
+* Enhancement: Updated plugin name from `Astra Sites - Lite` with `Astra Starter Sites`.
 
 v1.0.14 - 9-Nov-2017
 * New: All the linked images on the Astra Sites will be downloaded to your site, No more loading images from external URLs.
