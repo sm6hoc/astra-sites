@@ -151,9 +151,9 @@ var AstraSitesAjaxQueue = (function() {
 				var time = date.toLocaleTimeString();
 
 				if (typeof data == 'object') { 
-					console.log('%c ' + JSON.stringify( data ) + ' ' + time, 'background: #222; color: #bada55');
+					console.log('%c ' + JSON.stringify( data ) + ' ' + time, 'background: #ededed; color: #444');
 				} else {
-					console.log('%c ' + data + ' ' + time, 'background: #222; color: #bada55');
+					console.log('%c ' + data + ' ' + time, 'background: #ededed; color: #444');
 				}
 
 
