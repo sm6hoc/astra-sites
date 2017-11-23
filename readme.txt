@@ -23,7 +23,7 @@ This plugin is an add-on for the Astra WordPress Theme. It offers a library of r
 
 Use this imported site as a base for your project and don't waste time starting from scratch!
 
-_<a href="https://wpastra.com/ready-websites/">See list of all available sites to import Â»</a>_
+_<a href="https://wpastra.com/ready-websites/">See list of all available sites to import »</a>_
 
 #### Video Walkthrough by Adam from WPCrafter:
 [youtube https://www.youtube.com/watch?v=zYbz-jxE9_Q]

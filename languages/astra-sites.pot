@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2017-11-21 10:13:05+00:00\n"
+"POT-Creation-Date: 2017-11-21 12:29:44+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,23 +24,23 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n1.0.0\n"
 
-#. Plugin Name of the plugin/theme
-msgid "Astra Starter Sites"
+#: astra-sites.php:18 inc/classes/class-astra-sites-page.php:85
+msgid "Astra Sites"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer-log.php:349
+#: inc/classes/class-astra-sites-importer-log.php:351
 msgid "Enabled"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer-log.php:352
+#: inc/classes/class-astra-sites-importer-log.php:354
 msgid "Disabled"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer-log.php:479
+#: inc/classes/class-astra-sites-importer-log.php:481
 msgid "Yes"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer-log.php:482
+#: inc/classes/class-astra-sites-importer-log.php:484
 msgid "No"
 msgstr ""
 
@@ -263,7 +263,7 @@ msgid "Site imported successfully! visit : "
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:258
-msgid "Getting Import Data.."
+msgid "Getting Site Information.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:259
@@ -588,6 +588,10 @@ msgstr ""
 msgid "Plugin Description:"
 msgstr ""
 
+#. Plugin Name of the plugin/theme
+msgid "Astra Starter Sites"
+msgstr ""
+
 #. Plugin URI of the plugin/theme
 msgid "http://www.wpastra.com/pro/"
 msgstr ""
@@ -604,13 +608,13 @@ msgstr ""
 msgid "http://www.brainstormforce.com"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer-log.php:370
+#: inc/classes/class-astra-sites-importer-log.php:372
 #. translators: %1$s Memory Limit, %2$s Recommended memory limit.
 msgctxt "Recommended Memory Limit"
 msgid "Current memory limit %1$s. We recommend setting memory to at least %2$s."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer-log.php:436
+#: inc/classes/class-astra-sites-importer-log.php:438
 msgctxt "PHP Version"
 msgid "We recommend to use php 5.4 or higher"
 msgstr ""
