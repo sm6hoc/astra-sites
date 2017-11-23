@@ -57,7 +57,7 @@ https://wpastra.com/sites-suggestions/
 ## Changelog ##
 
 v1.1.1 - 23-Nov-2017
-* New: Change the primary domain to https://websitedemos.net/ from https://sites.wpastra.com/ for the astra sites api.
+* New: Change the api url for Astra sites to https://websitedemos.net/ from https://sites.wpastra.com/
 
 v1.1.1 - 21-Nov-2017
 * New: Import the site content using Event Source (SSE) which ensures faithful imports.
