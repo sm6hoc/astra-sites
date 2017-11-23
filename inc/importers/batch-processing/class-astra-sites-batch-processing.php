@@ -93,7 +93,8 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 				if (
 					strpos( $attachment['url'], 'brainstormforce.com' ) !== false ||
 					strpos( $attachment['url'], 'wpastra.com' ) !== false ||
-					strpos( $attachment['url'], 'sharkz.in' ) !== false
+					strpos( $attachment['url'], 'sharkz.in' ) !== false ||
+					strpos( $attachment['url'], 'websitedemos.net' ) !== false
 				) {
 					return false;
 				}
