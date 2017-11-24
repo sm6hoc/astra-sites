@@ -4,7 +4,7 @@ Donate link: https://wpastra.com/pro/
 Tags: demo, theme demos, one click import
 Requires at least: 4.4
 Tested up to: 4.9.0
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,7 +56,9 @@ https://wpastra.com/sites-suggestions/
 
 == Changelog ==
 
-v1.1.1 - 23-Nov-2017
+v1.1.2 - 24-Nov-2017
+* Fix: Force check bundle plugins.
+* Fix: Handling plugin installation errors.
 * New: Change the api url for Astra sites to https://websitedemos.net/ from https://sites.wpastra.com/
 
 v1.1.1 - 21-Nov-2017
