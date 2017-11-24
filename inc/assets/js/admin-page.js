@@ -614,8 +614,11 @@ var AstraSitesAjaxQueue = (function() {
 			AstraSitesAdmin._log( astraSitesAdmin.log.installError + ' ' + response.slug );
 
 			$card
-				.addClass( 'button-primary' )
-				.html( wp.updates.l10n.installNow );
+				.removeClass( 'button-primary' )
+				.addClass( 'disabled' )
+				.html( wp.updates.l10n.installFailedShort );
+
+			AstraSitesAdmin._importFailMessage( astraSitesAdmin.log.installError );
 		},
 
 		/**
