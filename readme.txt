@@ -57,11 +57,12 @@ https://wpastra.com/sites-suggestions/
 == Changelog ==
 
 v1.1.2 - 24-Nov-2017
-* Fix: Force check bundle plugins.
 * Fix: Handling plugin installation errors.
+
+v1.1.1 - 23-Nov-2017
 * New: Change the api url for Astra sites to https://websitedemos.net/ from https://sites.wpastra.com/
 
-v1.1.1 - 21-Nov-2017
+v1.1.0 - 21-Nov-2017
 * New: Import the site content using Event Source (SSE) which ensures faithful imports.
 * New: Divided the site import process in separate AJAX calls to reduce the possibility of timeouts.
 * New: Generated the import log file. It will be displayed in the UI if the import fails.
