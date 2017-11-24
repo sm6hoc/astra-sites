@@ -1113,6 +1113,9 @@ var AstraSitesAjaxQueue = (function() {
 									};
 
 				jQuery('.required-plugins').addClass('loading').html('<span class="spinner is-active"></span>');
+				jQuery('.astra-demo-import')
+					.removeAttr('data-import')
+					.addClass('disabled');
 
 			 	// Required Required.
 				$.ajax({
@@ -1132,6 +1135,9 @@ var AstraSitesAjaxQueue = (function() {
 
 					// Remove loader.
 					jQuery('.required-plugins').removeClass('loading').html('');
+					jQuery('.astra-demo-import')
+						.attr('data-import', 'disabled')
+						.removeClass('disabled');
 
 					/**
 					 * Count remaining plugins.
