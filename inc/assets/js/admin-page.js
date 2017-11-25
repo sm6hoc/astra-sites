@@ -1116,7 +1116,9 @@ var AstraSitesAjaxQueue = (function() {
 									};
 
 				// Add disabled class from import button.
-				$('.astra-demo-import').addClass('disabled').attr('data-import', 'disabled');
+				$('.astra-demo-import')
+					.addClass('disabled not-click-able')
+					.removeAttr('data-import');
 
 				jQuery('.required-plugins').addClass('loading').html('<span class="spinner is-active"></span>');
 
@@ -1137,7 +1139,9 @@ var AstraSitesAjaxQueue = (function() {
 				.done(function ( response ) {
 
 					// Release disabled class from import button.
-					$('.astra-demo-import').removeClass('disabled').removeAttr('data-import');
+					$('.astra-demo-import')
+						.removeClass('disabled not-click-able')
+						.attr('data-import', 'disabled');
 
 					// Remove loader.
 					jQuery('.required-plugins').removeClass('loading').html('');
