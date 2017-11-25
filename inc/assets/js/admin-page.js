@@ -609,8 +609,6 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_installError: function( event, response ) {
 
-			console.log('response: ' + JSON.stringify( response.errorMessage ));
-
 			var $card = jQuery( '.plugin-card-' + response.slug );
 
 			AstraSitesAdmin._log( response.errorMessage + ' ' + response.slug );
