@@ -233,7 +233,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'log'             => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
 						'installed'               => __( 'Successfully plugin installed!', 'astra-sites' ),
-						'installError'            => __( 'There was an error while installing the plugin ', 'astra-sites' ),
 						'activating'              => __( 'Activating plugin ', 'astra-sites' ),
 						'activated'               => __( 'Successfully plugin activated ', 'astra-sites' ),
 						'bulkActivation'          => __( 'Bulk plugin activation...', 'astra-sites' ),
