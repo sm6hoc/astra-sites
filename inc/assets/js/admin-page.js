@@ -849,7 +849,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			var disabled = $this.attr('data-import');
 
-			if ( typeof disabled !== 'undefined' && disabled === 'disabled' ) {
+			if ( typeof disabled !== 'undefined' && disabled === 'disabled' || $this.hasClass('disabled') ) {
 
 				$('.astra-demo-import').addClass('updating-message installing')
 					.text( wp.updates.l10n.installing );
@@ -1115,6 +1115,9 @@ var AstraSitesAjaxQueue = (function() {
 										required_plugins : requiredPlugins
 									};
 
+				// Add disabled class from import button.
+				$('.astra-demo-import').addClass('disabled').attr('data-import', 'disabled');
+
 				jQuery('.required-plugins').addClass('loading').html('<span class="spinner is-active"></span>');
 
 			 	// Required Required.
@@ -1132,6 +1135,9 @@ var AstraSitesAjaxQueue = (function() {
 					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
 				})
 				.done(function ( response ) {
+
+					// Release disabled class from import button.
+					$('.astra-demo-import').removeClass('disabled').removeAttr('data-import');
 
 					// Remove loader.
 					jQuery('.required-plugins').removeClass('loading').html('');
