@@ -423,7 +423,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'beaver-builder-lite-version/fl-builder.php' => array(
 						'slug' => 'bb-plugin',
 						'init' => 'bb-plugin/fl-builder.php',
-						'name' => 'Beaver Builder',
+						'name' => 'Beaver Builder Plugin',
 					),
 					'ultimate-addons-for-beaver-builder-lite/bb-ultimate-addon.php' => array(
 						'slug' => 'bb-ultimate-addon',
