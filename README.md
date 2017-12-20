@@ -57,7 +57,7 @@ https://wpastra.com/sites-suggestions/
 ## Changelog ##
 
 v1.1.3 - 20-Dec-2017
-* Improvement: Retain WooCommerce shop page.
+* Improvement: Retain WooCommerce shop page when importing the ready WooCommerce sites.
 
 v1.1.2 - 24-Nov-2017
 * Fix: Handling plugin installation errors.
