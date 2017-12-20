@@ -4,7 +4,7 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Tested up to:** 4.9.0  
-**Stable tag:** 1.1.2  
+**Stable tag:** 1.1.3  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -55,6 +55,9 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.1.3 - 20-Dec-2017
+* Improvement: Retain WooCommerce shop page.
 
 v1.1.2 - 24-Nov-2017
 * Fix: Handling plugin installation errors.
