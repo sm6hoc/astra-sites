@@ -80,6 +80,8 @@ class Astra_Site_Options_Import {
 			'_fl_builder_settings',
 			'_fl_builder_user_access',
 			'_fl_builder_enabled_templates',
+
+			'woocommerce_shop_page_id'
 		);
 	}
 
