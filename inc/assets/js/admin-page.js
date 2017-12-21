@@ -609,18 +609,16 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_installError: function( event, response ) {
 
-			console.log('response: ' + JSON.stringify( response.errorMessage ));
-
 			var $card = jQuery( '.plugin-card-' + response.slug );
 
-			AstraSitesAdmin._log( response.errorMessage + ' ' + response.slug );
+			AstraSitesAdmin._log( astraSitesAdmin.log.installError + ' ' + response.slug );
 
 			$card
 				.removeClass( 'button-primary' )
 				.addClass( 'disabled' )
 				.html( wp.updates.l10n.installFailedShort );
 
-			AstraSitesAdmin._importFailMessage( response.errorMessage );
+			AstraSitesAdmin._importFailMessage( astraSitesAdmin.log.installError );
 		},
 
 		/**

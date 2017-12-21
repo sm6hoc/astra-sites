@@ -82,6 +82,7 @@ class Astra_Site_Options_Import {
 			'_fl_builder_enabled_templates',
 
 			'woocommerce_shop_page_id',
+			'woocommerce_product_cat',
 		);
 	}
 
@@ -120,6 +121,11 @@ class Astra_Site_Options_Import {
 						// nav menu locations.
 						case 'nav_menu_locations':
 								$this->set_nav_menu_locations( $option_value );
+							break;
+
+						// import WooCommerce category images.
+						case 'woocommerce_product_cat':
+								$this->set_woocommerce_product_cat( $option_value );
 							break;
 
 						// insert logo.
@@ -180,6 +186,42 @@ class Astra_Site_Options_Import {
 		}
 	}
 
+	/**
+	 * Set WooCommerce category images.
+	 *
+	 * @since 1.1.4
+	 * 
+	 * @param array $cats Array of categories.
+	 */
+	private function set_woocommerce_product_cat( $cats = array() ) {
+
+		$menu_locations = array();
+
+		if ( isset( $cats ) ) {
+
+			foreach ( $cats as $key => $cat ) {
+
+				if( ! empty( $cat['slug'] ) && ! empty( $cat['thumbnail_src'] ) ) {
+
+					$image = (object) Astra_Sites_Helper::_sideload_image( $cat['thumbnail_src'] );
+
+					if ( ! is_wp_error( $image ) ) {
+
+						if ( isset( $image->attachment_id ) && ! empty( $image->attachment_id ) ) {
+
+							$term = get_term_by( 'slug', $cat['slug'], 'product_cat' );
+
+							if ( is_object( $term ) ) {
+								update_term_meta( $term->term_id, 'thumbnail_id', $image->attachment_id );
+							}
+
+						}
+					}
+
+				}
+			}
+		}
+	}
 
 	/**
 	 * Insert Logo By URL
