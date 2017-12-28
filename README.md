@@ -3,8 +3,8 @@
 **Donate link:** https://wpastra.com/pro/  
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
-**Tested up to:** 4.9.0  
-**Stable tag:** 1.1.3  
+**Tested up to:** 4.9.1  
+**Stable tag:** 1.1.4  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -55,6 +55,11 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.1.4 - 28-Dec-2017
+* Improvement: Importing WooCommerce product category images.
+* Improvement: Retain WooCommerce cart, checkout & my account pages when importing the ready WooCommerce sites.
+* Fix: Disabled WooCommerce plugin setup wizard after plugin install & activate.
 
 v1.1.3 - 20-Dec-2017
 * Improvement: Retain WooCommerce shop page when importing the ready WooCommerce sites.

@@ -197,6 +197,7 @@ var AstraSitesAjaxQueue = (function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
+				dataType: 'json',
 				data : {
 					action : 'astra-sites-import-end',
 				},
@@ -231,6 +232,7 @@ var AstraSitesAjaxQueue = (function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
+				dataType: 'json',
 				data : {
 					action       : 'astra-sites-import-widgets',
 					widgets_data : AstraSitesAdmin.widgets_data,
@@ -268,6 +270,7 @@ var AstraSitesAjaxQueue = (function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
+				dataType: 'json',
 				data : {
 					action       : 'astra-sites-import-options',
 					options_data : AstraSitesAdmin.options_data,
@@ -306,6 +309,7 @@ var AstraSitesAjaxQueue = (function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
+				dataType: 'json',
 				data : {
 					action  : 'astra-sites-import-prepare-xml',
 					wxr_url : AstraSitesAdmin.wxr_url,
@@ -375,6 +379,7 @@ var AstraSitesAjaxQueue = (function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
+				dataType: 'json',
 				data : {
 					action          : 'astra-sites-import-customizer-settings',
 					customizer_data : AstraSitesAdmin.customizer_data,
@@ -611,14 +616,14 @@ var AstraSitesAjaxQueue = (function() {
 
 			var $card = jQuery( '.plugin-card-' + response.slug );
 
-			AstraSitesAdmin._log( astraSitesAdmin.log.installError + ' ' + response.slug );
+			AstraSitesAdmin._log( response.errorMessage + ' ' + response.slug );
 
 			$card
 				.removeClass( 'button-primary' )
 				.addClass( 'disabled' )
 				.html( wp.updates.l10n.installFailedShort );
 
-			AstraSitesAdmin._importFailMessage( astraSitesAdmin.log.installError );
+			AstraSitesAdmin._importFailMessage( response.errorMessage );
 		},
 
 		/**
@@ -849,7 +854,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			var disabled = $this.attr('data-import');
 
-			if ( typeof disabled !== 'undefined' && disabled === 'disabled' ) {
+			if ( typeof disabled !== 'undefined' && disabled === 'disabled' || $this.hasClass('disabled') ) {
 
 				$('.astra-demo-import').addClass('updating-message installing')
 					.text( wp.updates.l10n.installing );
@@ -903,6 +908,7 @@ var AstraSitesAjaxQueue = (function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
+				dataType: 'json',
 				data : {
 					'action'  : 'astra-sites-import-set-site-data',
 					'api_url' : apiURL,
@@ -914,19 +920,17 @@ var AstraSitesAjaxQueue = (function() {
 		    })
 			.done(function ( demo_data ) {
 
-				/**
-				 * Set log file URL
-				 */
-				if( astraSitesAdmin.debug && ( undefined !== demo_data.data.log_file.abs_url || null !== demo_data.data.log_file.abs_url ) ) {
-					AstraSitesAdmin.log_file_url  = decodeURIComponent( demo_data.data.log_file.url ) || '';
-				}
-
 				// 1. Fail - Request Site Import
 				if( false === demo_data.success ) {
 
 					AstraSitesAdmin._importFailMessage( demo_data.data );
 
 				} else {
+
+					// Set log file URL.
+					if( 'log_file' in demo_data.data ){
+						AstraSitesAdmin.log_file_url  = decodeURIComponent( demo_data.data.log_file ) || '';
+					}
 
 					// 1. Pass - Request Site Import
 					AstraSitesAdmin._log( astraSitesAdmin.log.processingRequest );
@@ -1115,6 +1119,11 @@ var AstraSitesAjaxQueue = (function() {
 										required_plugins : requiredPlugins
 									};
 
+				// Add disabled class from import button.
+				$('.astra-demo-import')
+					.addClass('disabled not-click-able')
+					.removeAttr('data-import');
+
 				jQuery('.required-plugins').addClass('loading').html('<span class="spinner is-active"></span>');
 
 			 	// Required Required.
@@ -1132,6 +1141,11 @@ var AstraSitesAjaxQueue = (function() {
 					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
 				})
 				.done(function ( response ) {
+
+					// Release disabled class from import button.
+					$('.astra-demo-import')
+						.removeClass('disabled not-click-able')
+						.attr('data-import', 'disabled');
 
 					// Remove loader.
 					jQuery('.required-plugins').removeClass('loading').html('');

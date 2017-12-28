@@ -150,15 +150,11 @@ if ( ! class_exists( 'Astra_Sites_Notices' ) ) :
 				}
 
 				// Notice ID.
-				$notice_id    = 'astra-sites-notices-id-' . $key;
-				$notice['id'] = $notice_id;
-				if ( ! isset( $notice['id'] ) ) {
-					$notice_id    = 'astra-sites-notices-id-' . $key;
-					$notice['id'] = $notice_id;
-				} else {
+				$notice_id = 'astra-sites-notices-id-' . $key;
+				if ( isset( $notice['id'] ) && ! empty( $notice['id'] ) ) {
 					$notice_id = $notice['id'];
 				}
-
+				$notice['id']      = $notice_id;
 				$notice['classes'] = implode( ' ', $classes );
 
 				// User meta.

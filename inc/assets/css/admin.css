@@ -316,3 +316,6 @@
     border-bottom-color: transparent;
     background-color: transparent;
 }
+.not-click-able {
+    pointer-events: none !important;
+}
