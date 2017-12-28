@@ -74,7 +74,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			Astra_Sites_Notices::add_notice(
 				array(
-					'id'               => 'theme-activation-nag',
+					'id'               => 'astra-theme-activation-nag',
 					'type'             => 'error',
 					'show_if'          => ( ! defined( 'ASTRA_THEME_SETTINGS' ) ) ? true : false,
 					/* translators: 1: theme.php file*/
@@ -233,7 +233,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'log'             => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
 						'installed'               => __( 'Successfully plugin installed!', 'astra-sites' ),
-						'installError'            => __( 'There was an error while installing the plugin ', 'astra-sites' ),
 						'activating'              => __( 'Activating plugin ', 'astra-sites' ),
 						'activated'               => __( 'Successfully plugin activated ', 'astra-sites' ),
 						'bulkActivation'          => __( 'Bulk plugin activation...', 'astra-sites' ),
@@ -424,7 +423,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'beaver-builder-lite-version/fl-builder.php' => array(
 						'slug' => 'bb-plugin',
 						'init' => 'bb-plugin/fl-builder.php',
-						'name' => 'Beaver Builder Plugin (Agency Version)',
+						'name' => 'Beaver Builder Plugin',
 					),
 					'ultimate-addons-for-beaver-builder-lite/bb-ultimate-addon.php' => array(
 						'slug' => 'bb-ultimate-addon',
@@ -444,6 +443,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			return false;
 		}
+
 	}
 
 	/**
