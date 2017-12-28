@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-	jQuery( '.astra-notice.is-dismissible' ).on( 'click', function() {
+	jQuery( '.astra-notice.is-dismissible .notice-dismiss' ).on( 'click', function() {
 		var $id = jQuery( this ).attr( 'id' ) || '';
 		var $time = jQuery( this ).attr( 'dismissible-time' ) || '';
 		var $meta = jQuery( this ).attr( 'dismissible-meta' ) || '';
