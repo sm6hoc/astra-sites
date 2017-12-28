@@ -76,6 +76,8 @@ module.exports = function( grunt ) {
                         '!README.md',
                         '!sass/**',
                         '!codesniffer.ruleset.xml',
+                        '!package-lock.json',
+                        '!phpcs.xml.dist',
                     ],
                     dest: 'astra-sites/'
                 }
