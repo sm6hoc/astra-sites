@@ -74,7 +74,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			Astra_Sites_Notices::add_notice(
 				array(
-					'id'               => 'theme-activation-nag',
+					'id'               => 'astra-theme-activation-nag',
 					'type'             => 'error',
 					'show_if'          => ( ! defined( 'ASTRA_THEME_SETTINGS' ) ) ? true : false,
 					/* translators: 1: theme.php file*/
@@ -443,6 +443,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			return false;
 		}
+
 	}
 
 	/**
