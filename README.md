@@ -4,7 +4,7 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Tested up to:** 4.9.1  
-**Stable tag:** 1.1.4  
+**Stable tag:** 1.1.5  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -55,6 +55,9 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.1.5 - Unreleased
+* New: Added SVG file support for importing the SVG images.
 
 v1.1.4 - 28-Dec-2017
 * Improvement: Importing WooCommerce product category images.
