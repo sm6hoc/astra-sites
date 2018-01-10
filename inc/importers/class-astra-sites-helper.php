@@ -56,8 +56,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 		 * @param object $attachment Attachment object.
 		 * @param array  $meta        Attachment meta data.
 		 */
-		function add_svg_image_support( $response, $attachment, $meta )
-		{
+		function add_svg_image_support( $response, $attachment, $meta ) {
 			if ( ! function_exists( 'simplexml_load_file' ) ) {
 				return $response;
 			}
