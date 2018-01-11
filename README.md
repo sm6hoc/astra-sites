@@ -56,7 +56,7 @@ https://wpastra.com/sites-suggestions/
 
 ## Changelog ##
 
-v1.1.5 - Unreleased
+v1.1.5 - 11-January-2018
 * New: Added SVG file support for importing the SVG images.
 
 v1.1.4 - 28-Dec-2017
