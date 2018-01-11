@@ -44,6 +44,72 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 		 */
 		public function __construct() {
 			add_filter( 'wie_import_data', array( $this, 'custom_menu_widget' ) );
+			add_filter( 'wp_prepare_attachment_for_js', array( $this, 'add_svg_image_support' ), 10, 3 );
+		}
+
+		/**
+		 * Add svg image support
+		 *
+		 * @since 1.1.5
+		 *
+		 * @param array  $response    Attachment response.
+		 * @param object $attachment Attachment object.
+		 * @param array  $meta        Attachment meta data.
+		 */
+		function add_svg_image_support( $response, $attachment, $meta ) {
+			if ( ! function_exists( 'simplexml_load_file' ) ) {
+				return $response;
+			}
+
+			if ( ! empty( $response['sizes'] ) ) {
+				return $response;
+			}
+
+			if ( 'image/svg+xml' !== $response['mime'] ) {
+				return $response;
+			}
+
+			$svg_path = get_attached_file( $attachment->ID );
+
+			$dimensions = self::get_svg_dimensions( $svg_path );
+
+			$response['sizes'] = array(
+				'full' => array(
+					'url'         => $response['url'],
+					'width'       => $dimensions->width,
+					'height'      => $dimensions->height,
+					'orientation' => $dimensions->width > $dimensions->height ? 'landscape' : 'portrait',
+				),
+			);
+
+			return $response;
+		}
+
+		/**
+		 * Get SVG Dimensions
+		 *
+		 * @since 1.1.5
+		 *
+		 * @param  string $svg SVG file path.
+		 * @return array      Return SVG file height & width for valid SVG file.
+		 */
+		public static function get_svg_dimensions( $svg ) {
+
+			$svg = simplexml_load_file( $svg );
+
+			if ( false === $svg ) {
+				$width  = '0';
+				$height = '0';
+			} else {
+				$attributes = $svg->attributes();
+				$width      = (string) $attributes->width;
+				$height     = (string) $attributes->height;
+			}
+
+			return (object) array(
+				'width'  => $width,
+				'height' => $height,
+			);
 		}
 
 		/**
