@@ -134,14 +134,20 @@ class Astra_WXR_Importer {
 	/**
 	 * Add .xml files as supported format in the uploader.
 	 *
+	 * @since 1.1.5 Added SVG file support.
+	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $mimes Already supported mime types.
 	 */
 	public function custom_upload_mimes( $mimes ) {
-		$mimes = array_merge(
-			$mimes, array(
-				'xml' => 'application/xml',
-			)
-		);
+
+		// Allow SVG files.
+		$mimes['svg']  = 'image/svg+xml';
+		$mimes['svgz'] = 'image/svg+xml';
+
+		// Allow XML files.
+		$mimes['xml'] = 'application/xml';
 
 		return $mimes;
 	}
