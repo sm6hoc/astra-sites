@@ -4,7 +4,7 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Tested up to:** 4.9.1  
-**Stable tag:** 1.1.5  
+**Stable tag:** 1.1.6  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -55,6 +55,11 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.1.6 - 18-January-2018
+* New: Added filter `astra_sites_xml_import_options` to change the XML import options.
+* Fix: Astra Pro plugin 'Custom Layouts' & 'Page Headers' not setting right display location due to different page, tax, category ids.
+* Fix: WooCommerce shop, checkout cart page ids not setting issue.
 
 v1.1.5 - 11-January-2018
 * New: Added SVG file support for importing the SVG images.

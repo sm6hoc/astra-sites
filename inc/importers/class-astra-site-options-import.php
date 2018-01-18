@@ -83,10 +83,17 @@ class Astra_Site_Options_Import {
 			'_fl_builder_enabled_templates',
 
 			// Plugin: WooCommerce.
+			// Pages.
 			'woocommerce_shop_page_title',
 			'woocommerce_cart_page_title',
 			'woocommerce_checkout_page_title',
 			'woocommerce_myaccount_page_title',
+			'woocommerce_edit_address_page_title',
+			'woocommerce_view_order_page_title',
+			'woocommerce_change_password_page_title',
+			'woocommerce_logout_page_title',
+
+			// Categories.
 			'woocommerce_product_cat',
 		);
 	}
@@ -116,11 +123,18 @@ class Astra_Site_Options_Import {
 
 					switch ( $option_name ) {
 
-						// Set page ID by page Title.
+						// Set WooCommerce page ID by page Title.
 						case 'woocommerce_shop_page_title':
 						case 'woocommerce_cart_page_title':
 						case 'woocommerce_checkout_page_title':
 						case 'woocommerce_myaccount_page_title':
+						case 'woocommerce_edit_address_page_title':
+						case 'woocommerce_view_order_page_title':
+						case 'woocommerce_change_password_page_title':
+						case 'woocommerce_logout_page_title':
+								$this->update_woocommerce_page_id_by_option_value( $option_name, $option_value );
+							break;
+
 						case 'page_for_posts':
 						case 'page_on_front':
 								$this->update_page_id_by_option_value( $option_name, $option_value );
@@ -164,6 +178,20 @@ class Astra_Site_Options_Import {
 		if ( is_object( $page ) ) {
 			update_option( $option_name, $page->ID );
 		}
+	}
+
+	/**
+	 * Update WooCommerce page ids.
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param  string $option_name  Option name.
+	 * @param  mixed  $option_value Option value.
+	 * @return void
+	 */
+	private function update_woocommerce_page_id_by_option_value( $option_name, $option_value ) {
+		$option_name = str_replace( '_title', '_id', $option_name );
+		$this->update_page_id_by_option_value( $option_name, $option_value );
 	}
 
 	/**

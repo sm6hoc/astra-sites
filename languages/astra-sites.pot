@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Astra Starter Sites package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra Starter Sites 1.1.5\n"
+"Project-Id-Version: Astra Starter Sites 1.1.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2018-01-11 06:38:47+00:00\n"
+"POT-Creation-Date: 2018-01-18 08:35:11+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -48,27 +48,27 @@ msgstr ""
 msgid "You have not \"customize\" access to import the Astra site."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:104
+#: inc/classes/class-astra-sites-importer.php:106
 msgid "Request site API URL is empty. Try again!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:127
+#: inc/classes/class-astra-sites-importer.php:129
 msgid "Customizer data is empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:156
+#: inc/classes/class-astra-sites-importer.php:158
 msgid "There was an error downloading the XML file."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:162
+#: inc/classes/class-astra-sites-importer.php:164
 msgid "Invalid site XML file!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:184
+#: inc/classes/class-astra-sites-importer.php:186
 msgid "Site options are empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:206
+#: inc/classes/class-astra-sites-importer.php:208
 msgid "Widget data is empty!"
 msgstr ""
 
