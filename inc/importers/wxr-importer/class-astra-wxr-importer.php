@@ -208,9 +208,11 @@ class Astra_WXR_Importer {
 	 * @return object   Importer object.
 	 */
 	public function get_importer() {
-		$options  = array(
-			'fetch_attachments' => true,
-			'default_author'    => get_current_user_id(),
+		$options  = apply_filters(
+			'astra_sites_xml_import_options', array(
+				'fetch_attachments' => true,
+				'default_author'    => get_current_user_id(),
+			)
 		);
 		$importer = new WXR_Importer( $options );
 		$logger   = new WP_Importer_Logger_ServerSentEvents();
