@@ -68,8 +68,13 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 
 			// Prepare Widgets.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-widgets.php';
+
+			// Prepare Page Builders.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-beaver-builder.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php';
+
+			// Prepare Misc.
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-misc.php';
 
 			self::$process_all = new WP_Background_Process_Astra();
 
@@ -138,6 +143,18 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 				}
 			} else {
 				Astra_Sites_Image_Importer::log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
+			}
+
+			// Add "astra-addon" in import [queue].
+			if ( is_plugin_active( 'astra-addon/astra-addon.php' ) ) {
+				if ( class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) {
+					self::$process_all->push_to_queue( Astra_Sites_Compatibility_Astra_Pro::get_instance() );
+				}
+			}
+
+			// Add "misc" in import [queue].
+			if ( class_exists( 'Astra_Sites_Batch_Processing_Misc' ) ) {
+				self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Misc::get_instance() );
 			}
 
 			// Dispatch Queue.
