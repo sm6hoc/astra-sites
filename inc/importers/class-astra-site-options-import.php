@@ -183,7 +183,7 @@ class Astra_Site_Options_Import {
 	/**
 	 * Update WooCommerce page ids.
 	 *
-	 * @since 1.0.6
+	 * @since 1.1.6
 	 *
 	 * @param  string $option_name  Option name.
 	 * @param  mixed  $option_value Option value.

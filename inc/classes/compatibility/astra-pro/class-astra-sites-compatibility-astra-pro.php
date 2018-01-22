@@ -32,7 +32,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		 * @since 1.0.0
 		 * @return object initialized object of class.
 		 */
-		public static function instance() {
+		public static function get_instance() {
 			if ( ! isset( self::$instance ) ) {
 				self::$instance = new self;
 			}
@@ -47,9 +47,18 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		public function __construct() {
 			add_action( 'astra_sites_after_plugin_activation', array( $this, 'astra_pro' ), 10, 2 );
 			add_action( 'astra_sites_import_start', array( $this, 'import_enabled_extension' ), 10, 2 );
+		}
 
-			// Post mapping.
-			add_action( 'astra_sites_image_import_complete', array( $this, 'start_post_mapping' ) );
+		/**
+		 * Import
+		 *
+		 * @since 1.1.6
+		 * @return void
+		 */
+		public function import() {
+			Astra_Sites_Image_Importer::log( '---- Processing Mapping - for Astra Pro ----' );
+
+			self::start_post_mapping();
 		}
 
 		/**
@@ -115,11 +124,11 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		/**
 		 * Start post meta mapping of Astra Addon
 		 *
-		 * @since 1.0.6
+		 * @since 1.1.6
 		 *
 		 * @return null     If there is no import option data found.
 		 */
-		function start_post_mapping() {
+		public static function start_post_mapping() {
 			$demo_data = get_option( 'astra_sites_import_data', array() );
 			if ( ! isset( $demo_data['astra-post-data-mapping'] ) ) {
 				return;
@@ -154,14 +163,16 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		/**
 		 * Update Header Mapping Data
 		 *
-		 * @since 1.0.6
+		 * @since 1.1.6
 		 *
 		 * @param  int    $post_id     Post ID.
 		 * @param  string $meta_key Post meta key.
 		 * @param  array  $mapping  Mapping array.
 		 * @return void
 		 */
-		public static function update_header_mapping( $post_id, $meta_key, $mapping = array() ) {
+		public static function update_header_mapping( $post_id = '', $meta_key = '', $mapping = array() ) {
+			Astra_Sites_Image_Importer::log( 'Mapping "' . $meta_key . '" for ' . $post_id );
+
 			$headers_old = get_post_meta( $post_id, $meta_key, true );
 			$headers_new = self::get_header_mapping( $headers_old, $mapping );
 			update_post_meta( $post_id, $meta_key, $headers_new );
@@ -170,7 +181,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		/**
 		 * Update Location Rules
 		 *
-		 * @since 1.0.6
+		 * @since 1.1.6
 		 *
 		 * @param  int    $post_id     Post ID.
 		 * @param  string $meta_key Post meta key.
@@ -178,6 +189,8 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		 * @return void
 		 */
 		public static function update_location_rules( $post_id = '', $meta_key = '', $mapping = array() ) {
+			Astra_Sites_Image_Importer::log( 'Mapping "' . $meta_key . '" for ' . $post_id );
+
 			$location_new = self::get_location_mappings( $mapping );
 			update_post_meta( $post_id, $meta_key, $location_new );
 		}
@@ -185,7 +198,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		/**
 		 * Get mapping locations.
 		 *
-		 * @since 1.0.6
+		 * @since 1.1.6
 		 *
 		 * @param  array $location Location data.
 		 * @return array            Location mapping data.
@@ -234,7 +247,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		/**
 		 * Get advanced header mapping data
 		 *
-		 * @since 1.0.6
+		 * @since 1.1.6
 		 *
 		 * @param  array $headers_old  Header mapping stored data.
 		 * @param  array $headers_data Header mapping data.
@@ -270,8 +283,8 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 	}
 
 	/**
-	 * Kicking this off by calling 'instance()' method
+	 * Kicking this off by calling 'get_instance()' method
 	 */
-	Astra_Sites_Compatibility_Astra_Pro::instance();
+	Astra_Sites_Compatibility_Astra_Pro::get_instance();
 
 endif;
