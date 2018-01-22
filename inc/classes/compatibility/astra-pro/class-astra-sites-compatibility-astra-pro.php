@@ -124,18 +124,11 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		/**
 		 * Start post meta mapping of Astra Addon
 		 *
-		 * @since 1.0.6
-		 *
-		 * @return null     If there is no import option data found.
-		 */
-		function start_post_mapping() {
-=======
 		 * @since 1.1.6
 		 *
 		 * @return null     If there is no import option data found.
 		 */
 		public static function start_post_mapping() {
->>>>>>> a3bfee7f4ff29ad46f830f1fc67a7e343e11c8ee
 			$demo_data = get_option( 'astra_sites_import_data', array() );
 			if ( ! isset( $demo_data['astra-post-data-mapping'] ) ) {
 				return;
