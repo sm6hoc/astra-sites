@@ -48,9 +48,12 @@ defined( 'ABSPATH' ) or exit;
 
 	<?php do_action( 'astra_sites_before_site_grid' ); ?>
 
-
 	<div class="theme-browser rendered">
 		<div id="astra-sites" class="themes wp-clearfix"></div>
+	</div>
+
+	<div class="select-page-builder">
+		<h3><span class="up-arrow">&curarr;</span><?php _e( 'Select Page Builder', 'astra-sites' ); ?></h3>
 	</div>
 
 	<div class="spinner-wrap">

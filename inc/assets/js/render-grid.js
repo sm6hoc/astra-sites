@@ -355,7 +355,7 @@
 		_loadFirstGrid: function( event, data ) {
 			AstraRender._addFilters( event, data );
 			setTimeout(function() {
-				AstraRender._showSites();
+				$('body').removeClass('loading-content');
 			}, 100);
 		},
 
@@ -370,7 +370,7 @@
 
 			if( jQuery('#' + data.args.id).length ) {
 				var template = wp.template('astra-site-filters');
-				jQuery('#' + data.args.id).html(template( data )).find('li:first a').addClass('current');
+				jQuery('#' + data.args.id).html(template( data ));
 			}
 
 		},
@@ -414,6 +414,7 @@
 
 			var template = wp.template('astra-sites-list');
 
+			$('body').addClass( 'page-builder-selected' );
 			$('body').removeClass( 'loading-content' );
 			$('.filter-count .count').text( data.items_count );
 

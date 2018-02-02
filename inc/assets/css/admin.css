@@ -319,3 +319,22 @@
 .not-click-able {
     pointer-events: none !important;
 }
+body.page-builder-selected .select-page-builder,
+body.loading-content .select-page-builder {
+    display: none;
+}
+.select-page-builder .up-arrow {
+    transform: rotate(200deg);
+    display: inline-block;
+    font-size: 2.5em;
+    color: #c7c7c7;
+    vertical-align: middle;
+    margin-right: 0.2em;
+}
+.select-page-builder h3 {
+    margin:  0;
+    font-size: 1.5em;
+}
+.select-page-builder {
+    margin-left: 6em;
+}
