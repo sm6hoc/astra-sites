@@ -53,7 +53,7 @@ defined( 'ABSPATH' ) or exit;
 	</div>
 
 	<div class="select-page-builder">
-		<h3><span class="up-arrow">&curarr;</span><?php _e( 'Select Page Builder', 'astra-sites' ); ?></h3>
+		<h3><span class="up-arrow">&#8626;</span><?php _e( 'Select Your Favorite Page Builder', 'astra-sites' ); ?></h3>
 		<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/sites-screenshot.jpg' ); ?>" alt="<?php _e( 'Sites List..', 'astra-sites' ); ?>" title="<?php _e( 'Sites List..', 'astra-sites' ); ?>" />
 	</div>
 
