@@ -57,7 +57,7 @@ https://wpastra.com/sites-suggestions/
 ## Changelog ##
 
 v1.1.7 - 2-February-2018
-* UX Improvements: Some users reported confusion in the default option of choosing page builder. We have made UX improvements so users now must select the Page Builder first before selecting any website.
+* Improvements: Some users reported confusion in the default option of choosing page builder. We have made UX improvements so users now must select the Page Builder first before selecting any website.
 
 v1.1.6 - 22-January-2018
 * New: Added filter `astra_sites_xml_import_options` to change the XML import options.
