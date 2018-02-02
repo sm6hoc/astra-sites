@@ -61,6 +61,10 @@
 
 			event.preventDefault();
 
+			if( $( this ).parents('.astra-site-category').length && ! $('body').hasClass('page-builder-selected') ) {
+				return;
+			}
+
 			$(this).parents('.filter-links').find('a').removeClass('current');
 			$(this).addClass('current');
 
@@ -92,6 +96,10 @@
 		 */
 		_search: function() {
 
+			if( ! $('body').hasClass('page-builder-selected') ) {
+				return;
+			}
+
 			$this = jQuery('#wp-filter-search-input').val();
 
 			// Prepare Before Search.
@@ -120,6 +128,10 @@
 		 * On Scroll
 		 */
 		_scroll: function(event) {
+
+			if( ! $('body').hasClass('page-builder-selected') ) {
+				return;
+			}
 
 			if( ! $('body').hasClass('listed-all-sites') ) {
 
