@@ -237,7 +237,8 @@ defined( 'ABSPATH' ) or exit;
 					</span>
 					<span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span>
 					<# if ( data.items[ key ]['astra-site-type'] ) { #>
-						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{data.items[ key ]['astra-site-type']}}</span>
+						<# var type = ( data.items[ key ]['astra-site-type'] !== 'premium' ) ? ( data.items[ key ]['astra-site-type'] ) : 'agency'; #>
+						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{ type }}</span>
 					<# } #>
 					<# if ( data.items[ key ].status ) { #>
 						<span class="status {{data.items[ key ].status}}">{{data.items[ key ].status}}</span>
