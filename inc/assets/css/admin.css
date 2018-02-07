@@ -348,12 +348,6 @@ body.loading-content .select-page-builder {
     animation-name: bounce;
     -moz-animation-name: bounce;
 }
-.select-page-builder h3 {
-    margin:  0;
-    font-size: 2em;
-    display: flex;
-    align-items: baseline;
-}
 .select-page-builder {
     margin-left: 6em;
 }
@@ -363,9 +357,13 @@ body.loading-content .select-page-builder {
 }
 
 .select-page-builder h3 {
+    margin:  0;
+    font-size: 2em;
+    display: flex;
+    align-items: baseline;
     position: absolute;
     padding: 40px 0;
-    margin-left: 90px;
+    margin-left: 160px;
 }
 .select-page-builder {
     margin: -20px 0 0 -5px;
