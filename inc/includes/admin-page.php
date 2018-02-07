@@ -53,7 +53,10 @@ defined( 'ABSPATH' ) or exit;
 	</div>
 
 	<div class="select-page-builder">
-		<h3><span class="up-arrow">&#8626;</span><?php _e( 'Select Your Favorite Page Builder', 'astra-sites' ); ?></h3>
+		<h3>
+			<span class="up-arrow dashicons dashicons-editor-break"></span>
+			<span class="note"><?php _e( 'Select Your Favorite Page Builder', 'astra-sites' ); ?></span>
+		</h3>
 		<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/sites-screenshot.jpg' ); ?>" alt="<?php _e( 'Sites List..', 'astra-sites' ); ?>" title="<?php _e( 'Sites List..', 'astra-sites' ); ?>" />
 	</div>
 
@@ -234,7 +237,8 @@ defined( 'ABSPATH' ) or exit;
 					</span>
 					<span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span>
 					<# if ( data.items[ key ]['astra-site-type'] ) { #>
-						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{data.items[ key ]['astra-site-type']}}</span>
+						<# var type = ( data.items[ key ]['astra-site-type'] !== 'premium' ) ? ( data.items[ key ]['astra-site-type'] ) : 'agency'; #>
+						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{ type }}</span>
 					<# } #>
 					<# if ( data.items[ key ].status ) { #>
 						<span class="status {{data.items[ key ].status}}">{{data.items[ key ].status}}</span>
