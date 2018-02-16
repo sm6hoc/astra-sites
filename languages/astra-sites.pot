@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites 1.1.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2018-02-02 15:17:09+00:00\n"
+"POT-Creation-Date: 2018-02-16 06:01:25+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Importing.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:227 inc/includes/admin-page.php:107
+#: inc/classes/class-astra-sites.php:227 inc/includes/admin-page.php:110
 msgid "Read more"
 msgstr ""
 
@@ -156,7 +156,7 @@ msgstr ""
 msgid "There was a problem receiving a response from server."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:230 inc/includes/admin-page.php:253
+#: inc/classes/class-astra-sites.php:230 inc/includes/admin-page.php:257
 msgid "No Demos found, Try a different search."
 msgstr ""
 
@@ -497,75 +497,75 @@ msgstr ""
 msgid "Search Sites..."
 msgstr ""
 
-#: inc/includes/admin-page.php:56
+#: inc/includes/admin-page.php:58
 msgid "Select Your Favorite Page Builder"
 msgstr ""
 
-#: inc/includes/admin-page.php:57
+#: inc/includes/admin-page.php:60
 msgid "Sites List.."
 msgstr ""
 
-#: inc/includes/admin-page.php:88
+#: inc/includes/admin-page.php:91
 msgid "Close"
 msgstr ""
 
-#: inc/includes/admin-page.php:89
+#: inc/includes/admin-page.php:92
 msgid "Previous"
 msgstr ""
 
-#: inc/includes/admin-page.php:90
+#: inc/includes/admin-page.php:93
 msgid "Next"
 msgstr ""
 
-#: inc/includes/admin-page.php:91 inc/includes/admin-page.php:119
+#: inc/includes/admin-page.php:94 inc/includes/admin-page.php:122
 msgid "Install Plugins"
 msgstr ""
 
-#: inc/includes/admin-page.php:110
+#: inc/includes/admin-page.php:113
 msgid "Required Plugins"
 msgstr ""
 
-#: inc/includes/admin-page.php:125
+#: inc/includes/admin-page.php:128
 msgid "Collapse"
 msgstr ""
 
-#: inc/includes/admin-page.php:131
+#: inc/includes/admin-page.php:134
 msgid "Enter desktop preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:134
+#: inc/includes/admin-page.php:137
 msgid "Enter tablet preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:137
+#: inc/includes/admin-page.php:140
 msgid "Enter mobile preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:145 inc/includes/admin-page.php:245
+#: inc/includes/admin-page.php:148 inc/includes/admin-page.php:249
 msgid "Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:160
+#: inc/includes/admin-page.php:163
 #. translators: %1$s & %2$s are a Demo API URL
 msgid ""
 "<p> It seems the demo data server, <i><a href=\"%1$s\">%2$s</a></i> is "
 "unreachable from your site.</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:162
+#: inc/includes/admin-page.php:165
 msgid ""
 "<p class=\"left-margin\"> 1. Sometimes, simple page reload fixes any "
 "temporary issues. No kidding!</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:164
+#: inc/includes/admin-page.php:167
 msgid ""
 "<p class=\"left-margin\"> 2. If that does not work, you will need to talk "
 "to your server administrator and check if demo server is being blocked by "
 "the firewall!</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:167
+#: inc/includes/admin-page.php:170
 #. translators: %1$s is a support link
 msgid ""
 "<p>If that does not help, please open up a <a href=\"%1$s\" "
@@ -573,15 +573,15 @@ msgid ""
 "for you.</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:235
+#: inc/includes/admin-page.php:238
 msgid "Details &amp; Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:257 inc/includes/admin-page.php:275
+#: inc/includes/admin-page.php:261 inc/includes/admin-page.php:279
 #. translators: %1$s External Link
 msgid ""
-"Don't see a site that you would like to import?<br>Please <a "
-"target=\"_blank\" href=\"%1$s\">suggest us</a>!"
+"Don't see a site that you would like to import?<br><a target=\"_blank\" "
+"href=\"%1$s\">Please suggest us!</a>"
 msgstr ""
 
 #: inc/includes/white-label.php:23
