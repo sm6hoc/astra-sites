@@ -60,7 +60,7 @@ class Astra_WXR_Importer {
 		if ( ! class_exists( 'WXR_Importer' ) ) {
 			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
 		}
-		
+
 		if ( ! class_exists( 'WXR_Import_Info' ) ) {
 			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
 		}
