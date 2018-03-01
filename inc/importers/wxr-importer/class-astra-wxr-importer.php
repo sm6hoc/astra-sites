@@ -49,10 +49,21 @@ class Astra_WXR_Importer {
 			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 		}
 
-		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
-		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
-		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
-		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
+		if ( ! class_exists( 'WP_Importer_Logger' ) ) {
+			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
+		}
+
+		if ( ! class_exists( 'WP_Importer_Logger_ServerSentEvents' ) ) {
+			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
+		}
+
+		if ( ! class_exists( 'WXR_Importer' ) ) {
+			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
+		}
+		
+		if ( ! class_exists( 'WXR_Import_Info' ) ) {
+			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
+		}
 
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
