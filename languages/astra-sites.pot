@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Astra Starter Sites package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra Starter Sites 1.1.7\n"
+"Project-Id-Version: Astra Starter Sites 1.1.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2018-02-16 06:01:25+00:00\n"
+"POT-Creation-Date: 2018-03-05 06:49:12+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -338,7 +338,7 @@ msgstr ""
 msgid "No Title"
 msgstr ""
 
-#: inc/importers/wxr-importer/class-astra-wxr-importer.php:183
+#: inc/importers/wxr-importer/class-astra-wxr-importer.php:194
 msgid "Import complete!"
 msgstr ""
 
