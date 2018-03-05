@@ -267,4 +267,4 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 	new Astra_Sites_Page;
 
-}// End if().
+}// End if.

@@ -3,8 +3,9 @@ Contributors: brainstormforce
 Donate link: https://wpastra.com/pro/
 Tags: demo, theme demos, one click import
 Requires at least: 4.4
+Requires PHP: 5.3
 Tested up to: 4.9.1
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +56,11 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 == Changelog ==
+
+v1.1.8 - 5-March-2018
+* Improvements: Updated processing button animation while installation/activating plugin and importing site.
+* Improvements: Updated suggestion box message.
+* Fix: PHP fatal errors for WXR importer classes `WXR_Import_Info`, `WXR_Importer`, `WP_Importer_Logger_ServerSentEvents` and `WP_Importer_Logger`.
 
 v1.1.7 - 2-February-2018
 * Improvements: Some users reported confusion in the default option of choosing page builder. We have made UX improvements so users now must select the Page Builder first before selecting any website.
