@@ -215,7 +215,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 				);
 			}
 
-			// Success!
+			// Success.
 			return array(
 				'success' => true,
 				'data'    => $results,

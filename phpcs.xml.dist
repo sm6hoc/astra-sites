@@ -29,6 +29,12 @@
         <severity>0</severity>
     </rule>
 
+    <rule ref="PHPCompatibility">
+		<exclude name="PHPCompatibility.PHP.NewFunctionParameters.array_unique_sort_flagsFound"/>
+		<exclude name="PHPCompatibility.PHP.NewIniDirectives.max_input_varsFound"/>
+	</rule>
+
+
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 </ruleset>
