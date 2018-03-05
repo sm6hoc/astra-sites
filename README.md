@@ -3,6 +3,7 @@
 **Donate link:** https://wpastra.com/pro/  
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
+**Requires PHP:** 5.3  
 **Tested up to:** 4.9.1  
 **Stable tag:** 1.1.7  
 **License:** GPLv2 or later  

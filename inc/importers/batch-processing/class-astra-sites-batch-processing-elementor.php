@@ -227,7 +227,9 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 					return null;
 				}
 
-				return $this->process_element_export_import_content( $element, $method );
+				$instance = new Astra_Sites_Batch_Processing_Elementor();
+
+				return $instance->process_element_export_import_content( $element, $method );
 			}
 		);
 	}
