@@ -359,7 +359,6 @@ body.loading-content .select-page-builder {
 .select-page-builder h3 {
     margin:  0;
     font-size: 2em;
-    display: flex;
     align-items: baseline;
     position: absolute;
     padding: 40px 0;
@@ -368,6 +367,9 @@ body.loading-content .select-page-builder {
 .select-page-builder {
     margin: -20px 0 0 -5px;
     position: absolute;
+}
+.select-page-builder .note {
+    margin-left: 2em;
 }
 
 @keyframes bounce {
