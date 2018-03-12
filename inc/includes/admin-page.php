@@ -53,10 +53,12 @@ defined( 'ABSPATH' ) or exit;
 	</div>
 
 	<div class="select-page-builder">
-		<h3>
-			<span class="up-arrow dashicons dashicons-editor-break"></span>
-			<span class="note"><?php _e( 'Select Your Favorite Page Builder', 'astra-sites' ); ?></span>
-		</h3>
+		<div class="note-wrap">
+			<h3>
+				<span class="up-arrow dashicons dashicons-editor-break"></span>
+				<div class="note"><?php _e( 'Select Your Favorite Page Builder', 'astra-sites' ); ?></div>
+			</h3>
+		</div>
 		<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/sites-screenshot.jpg' ); ?>" alt="<?php _e( 'Sites List..', 'astra-sites' ); ?>" title="<?php _e( 'Sites List..', 'astra-sites' ); ?>" />
 	</div>
 

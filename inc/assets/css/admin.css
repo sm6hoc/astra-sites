@@ -356,18 +356,24 @@ body.loading-content .select-page-builder {
     max-width: 100%;
 }
 
-.select-page-builder h3 {
-    margin:  0;
-    font-size: 2em;
-    display: flex;
-    align-items: baseline;
+.select-page-builder .note-wrap {
     position: absolute;
     padding: 40px 0;
     margin-left: 170px;
+    right: 0;
+    left: 0;
+}
+
+.select-page-builder h3 {
+    margin:  0;
+    font-size: 2em;
 }
 .select-page-builder {
     margin: -20px 0 0 -5px;
     position: absolute;
+}
+.select-page-builder .note {
+    margin-left: 1.5em;
 }
 
 @keyframes bounce {
