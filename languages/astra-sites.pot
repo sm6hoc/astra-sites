@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Astra Starter Sites package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra Starter Sites 1.1.9\n"
+"Project-Id-Version: Astra Starter Sites 1.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2018-03-12 13:23:13+00:00\n"
+"POT-Creation-Date: 2018-03-22 07:15:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -302,7 +302,8 @@ msgstr ""
 msgid "Plugin Successfully Activated"
 msgstr ""
 
-#: inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php:58
+#: inc/importers/batch-processing/class-astra-sites-batch-processing-elementor-v2.php:60
+#: inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php:59
 msgid "Remote"
 msgstr ""
 
