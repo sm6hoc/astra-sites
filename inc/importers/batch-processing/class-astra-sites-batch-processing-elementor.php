@@ -34,8 +34,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Astra Source Remote
  */
-class Astra_Sites_Batch_Processing_Elementor extends Source_Base
-{
+class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
+
 
 	/**
 	 * Get ID
@@ -238,6 +238,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base
 	/**
 	 * Process Element/Export Import Content.
 	 *
+	 * @param \Elementor\Controls_Stack $element Element.
 	 * @param string                    $method Method.
 	 *
 	 * @return array

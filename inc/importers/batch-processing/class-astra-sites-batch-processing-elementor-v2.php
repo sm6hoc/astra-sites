@@ -35,8 +35,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Astra Source Remote
  */
-class Astra_Sites_Batch_Processing_Elementor extends Source_Base
-{
+class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
+
 
 	/**
 	 * Get ID
