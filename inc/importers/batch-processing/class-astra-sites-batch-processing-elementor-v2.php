@@ -15,6 +15,7 @@ if ( ! class_exists( '\Elementor\Plugin' ) ) {
 
 namespace Elementor\TemplateLibrary;
 
+use Elementor\Controls_Stack;
 use Elementor\Core\Settings\Manager as SettingsManager;
 use Elementor\TemplateLibrary\Classes\Import_Images;
 use Elementor\TemplateLibrary;
@@ -243,7 +244,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 *
 	 * @return array
 	 */
-	public function process_element_export_import_content( $element, $method ) {
+	public function process_element_export_import_content( Controls_Stack $element, $method ) {
 		$element_data = $element->get_data();
 
 		if ( method_exists( $element, $method ) ) {
