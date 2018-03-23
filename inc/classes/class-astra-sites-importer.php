@@ -297,8 +297,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 *
 		 * @since  1.0.9
 		 */
-		public function clear_cache() {
-
+		public function clear_cache()
+		{
 			// Clear 'Elementor' file cache.
 			if ( class_exists( '\Elementor\Plugin' ) ) {
 				Elementor\Plugin::$instance->posts_css_manager->clear_cache();
@@ -307,6 +307,12 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			// Clear 'Builder Builder' cache.
 			if ( is_callable( 'FLBuilderModel::delete_asset_cache_for_all_posts' ) ) {
 				FLBuilderModel::delete_asset_cache_for_all_posts();
+			}
+
+			// Clear 'Astra Addon' cache.
+			if( class_exists('Astra_Minify') ) {
+				$astra_minify = new Astra_Minify;
+				$astra_minify->refresh_assets();
 			}
 		}
 
