@@ -309,9 +309,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			}
 
 			// Clear 'Astra Addon' cache.
-			if ( class_exists( 'Astra_Minify' ) ) {
-				$astra_minify = new Astra_Minify;
-				$astra_minify->refresh_assets();
+			if ( is_callable( 'Astra_Minify::refresh_assets' ) ) {
+				Astra_Minify::refresh_assets();
 			}
 		}
 
