@@ -57,7 +57,7 @@ https://wpastra.com/sites-suggestions/
 
 ## Changelog ##
 
-v1.2.2 - 23-March-2018
+v1.2.2 - 26-March-2018
 * Fix: Correctly load the Elementor Pro 2.0 compatibility class for beta versions.
 
 v1.2.1 - 23-March-2018
