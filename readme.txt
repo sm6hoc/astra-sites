@@ -5,7 +5,7 @@ Tags: demo, theme demos, one click import
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 4.9.1
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 == Changelog ==
+
+v1.2.2 - 26-March-2018
+* Fix: Correctly load the Elementor Pro 2.0 compatibility class for beta versions.
 
 v1.2.1 - 23-March-2018
 * Improvement: Clear the Astra Pro plugin cache after site import.
