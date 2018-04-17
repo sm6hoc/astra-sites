@@ -57,6 +57,9 @@ https://wpastra.com/sites-suggestions/
 
 == Changelog ==
 
+v1.2.3 - Unreleased
+* Improvement: Astra Sites not importing in Window EDGE browser. Added the support for EDGE browser.
+
 v1.2.2 - 26-March-2018
 * Fix: Correctly load the Elementor Pro 2.0 compatibility class for beta versions.
 
