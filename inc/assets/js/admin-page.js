@@ -216,7 +216,10 @@ var AstraSitesAjaxQueue = (function() {
 					AstraSitesAdmin._importFailMessage( data.data );
 					AstraSitesAdmin._log( data.data );
 				} else {
-					
+
+					$('body').removeClass('importing-site');
+					$('.previous-theme, .next-theme').removeClass('disabled');
+
 					// 5. Pass - Import Complete.
 					AstraSitesAdmin._importSuccessMessage();
 					AstraSitesAdmin._log( astraSitesAdmin.log.success + ' ' + astraSitesAdmin.siteURL );
@@ -937,9 +940,6 @@ var AstraSitesAjaxQueue = (function() {
 					AstraSitesAdmin._importFailMessage( demo_data.data );
 
 				} else {
-
-					$('body').removeClass('importing-site');
-					$('.previous-theme, .next-theme').removeClass('disabled');
 
 					// Set log file URL.
 					if( 'log_file' in demo_data.data ){
