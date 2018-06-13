@@ -57,6 +57,10 @@ https://wpastra.com/sites-suggestions/
 
 == Changelog ==
 
+Unreleased
+* Fix: The log file was not created if server does not support the file handling functions.
+* Fix: Clear the Astra Pro plugin cache after site import.
+
 v1.2.2 - 26-March-2018
 * Fix: Correctly load the Elementor Pro 2.0 compatibility class for beta versions.
 
