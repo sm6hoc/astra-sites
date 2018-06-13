@@ -151,9 +151,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			global $is_IE;
+			global $is_IE, $is_edge;
 
-			if ( $is_IE ) {
+			if ( $is_IE || $is_edge ) {
 				wp_enqueue_script( 'astra-sites-eventsource', ASTRA_SITES_URI . 'inc/assets/js/eventsource.min.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
 			}
 
