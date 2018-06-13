@@ -287,8 +287,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		 * @since 1.2.3
 		 * @return void
 		 */
-		function clear_cache()
-		{
+		function clear_cache() {
 			if ( is_callable( 'Astra_Minify::refresh_assets' ) ) {
 				Astra_Minify::refresh_assets();
 			}
