@@ -151,9 +151,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			global $is_IE;
+			global $is_IE, $is_edge;
 
-			if ( $is_IE ) {
+			if ( $is_IE || $is_edge ) {
 				wp_enqueue_script( 'astra-sites-eventsource', ASTRA_SITES_URI . 'inc/assets/js/eventsource.min.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
 			}
 
@@ -214,21 +214,22 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'_ajax_nonce'     => wp_create_nonce( 'astra-sites' ),
 					'requiredPlugins' => array(),
 					'strings'         => array(
-						'importFailedBtnSmall' => __( 'Error!', 'astra-sites' ),
-						'importFailedBtnLarge' => __( 'Error! Read Possibilities.', 'astra-sites' ),
-						'importFailedURL'      => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=import-failed' ),
-						'viewSite'             => __( 'Done! View Site', 'astra-sites' ),
-						'btnActivating'        => __( 'Activating', 'astra-sites' ) . '&hellip;',
-						'btnActive'            => __( 'Active', 'astra-sites' ),
-						'importFailBtn'        => __( 'Import failed.', 'astra-sites' ),
-						'importFailBtnLarge'   => __( 'Import failed. See error log.', 'astra-sites' ),
-						'importDemo'           => __( 'Import This Site', 'astra-sites' ),
-						'importingDemo'        => __( 'Importing..', 'astra-sites' ),
-						'DescExpand'           => __( 'Read more', 'astra-sites' ) . '&hellip;',
-						'DescCollapse'         => __( 'Hide', 'astra-sites' ),
-						'responseError'        => __( 'There was a problem receiving a response from server.', 'astra-sites' ),
-						'searchNoFound'        => __( 'No Demos found, Try a different search.', 'astra-sites' ),
-						'importWarning'        => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
+						'warningBeforeCloseWindow' => __( 'Warning! Astra Site Import process is not complete. Don\'t close the window until import process complete. Do you still want to leave the window?', 'astra-sites' ),
+						'importFailedBtnSmall'     => __( 'Error!', 'astra-sites' ),
+						'importFailedBtnLarge'     => __( 'Error! Read Possibilities.', 'astra-sites' ),
+						'importFailedURL'          => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=import-failed' ),
+						'viewSite'                 => __( 'Done! View Site', 'astra-sites' ),
+						'btnActivating'            => __( 'Activating', 'astra-sites' ) . '&hellip;',
+						'btnActive'                => __( 'Active', 'astra-sites' ),
+						'importFailBtn'            => __( 'Import failed.', 'astra-sites' ),
+						'importFailBtnLarge'       => __( 'Import failed. See error log.', 'astra-sites' ),
+						'importDemo'               => __( 'Import This Site', 'astra-sites' ),
+						'importingDemo'            => __( 'Importing..', 'astra-sites' ),
+						'DescExpand'               => __( 'Read more', 'astra-sites' ) . '&hellip;',
+						'DescCollapse'             => __( 'Hide', 'astra-sites' ),
+						'responseError'            => __( 'There was a problem receiving a response from server.', 'astra-sites' ),
+						'searchNoFound'            => __( 'No Demos found, Try a different search.', 'astra-sites' ),
+						'importWarning'            => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
 					),
 					'log'             => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),

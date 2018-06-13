@@ -58,7 +58,8 @@ https://wpastra.com/sites-suggestions/
 == Changelog ==
 
 Unreleased
-* Fix: The log file was not created if server does not support the file handling functions.
+* Improvement: Added windows EDGE browser support for importing the sites.
+* Improvement: The log file was not created if server does not support the file handling functions.
 * Fix: Clear the Astra Pro plugin cache after site import.
 
 v1.2.2 - 26-March-2018
