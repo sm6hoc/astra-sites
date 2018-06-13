@@ -287,10 +287,10 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			if ( ! file_exists( $dir_info['path'] ) ) {
 
 				// Create the directory.
-				mkdir( $dir_info['path'] );
+				wp_mkdir_p( $dir_info['path'] );
 
 				// Add an index file for security.
-				file_put_contents( $dir_info['path'] . 'index.html', '' );
+				self::get_filesystem()->put_contents( $dir_info['path'] . 'index.html', '' );
 			}
 
 			return $dir_info;

@@ -216,7 +216,10 @@ var AstraSitesAjaxQueue = (function() {
 					AstraSitesAdmin._importFailMessage( data.data );
 					AstraSitesAdmin._log( data.data );
 				} else {
-					
+
+					$('body').removeClass('importing-site');
+					$('.previous-theme, .next-theme').removeClass('disabled');
+
 					// 5. Pass - Import Complete.
 					AstraSitesAdmin._importSuccessMessage();
 					AstraSitesAdmin._log( astraSitesAdmin.log.success + ' ' + astraSitesAdmin.siteURL );
@@ -708,10 +711,18 @@ var AstraSitesAjaxQueue = (function() {
 		_fullOverlay: function (event) {
 			event.preventDefault();
 
-			jQuery('.theme-install-overlay').css('display', 'none');
-			jQuery('.theme-install-overlay').remove();
-			jQuery('.theme-preview-on').removeClass('theme-preview-on');
-			jQuery('html').removeClass('astra-site-preview-on');
+			// Import process is started?
+			// And Closing the window? Then showing the warning confirm message.
+			if( $('body').hasClass('importing-site') && ! confirm( astraSitesAdmin.strings.warningBeforeCloseWindow ) ) {
+				return;
+			}
+
+			$('body').removeClass('importing-site');
+			$('.previous-theme, .next-theme').removeClass('disabled');
+			$('.theme-install-overlay').css('display', 'none');
+			$('.theme-install-overlay').remove();
+			$('.theme-preview-on').removeClass('theme-preview-on');
+			$('html').removeClass('astra-site-preview-on');
 		},
 
 		/**
@@ -871,6 +882,9 @@ var AstraSitesAjaxQueue = (function() {
 			if( ! confirm( astraSitesAdmin.strings.importWarning ) ) {
 				return;
 			}
+
+			$('body').addClass('importing-site');
+			$('.previous-theme, .next-theme').addClass('disabled');
 
 			// Remove all notices before import start.
 			$('.install-theme-info > .notice').remove();
@@ -1124,7 +1138,7 @@ var AstraSitesAjaxQueue = (function() {
 					.addClass('disabled not-click-able')
 					.removeAttr('data-import');
 
-				jQuery('.required-plugins').addClass('loading').html('<span class="spinner is-active"></span>');
+				$('.required-plugins').addClass('loading').html('<span class="spinner is-active"></span>');
 
 			 	// Required Required.
 				$.ajax({
@@ -1148,7 +1162,7 @@ var AstraSitesAjaxQueue = (function() {
 						.attr('data-import', 'disabled');
 
 					// Remove loader.
-					jQuery('.required-plugins').removeClass('loading').html('');
+					$('.required-plugins').removeClass('loading').html('');
 
 					/**
 					 * Count remaining plugins.

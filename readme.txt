@@ -4,8 +4,8 @@ Donate link: https://wpastra.com/pro/
 Tags: demo, theme demos, one click import
 Requires at least: 4.4
 Requires PHP: 5.3
-Tested up to: 4.9.1
-Stable tag: 1.2.2
+Tested up to: 4.9.6
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,12 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 == Changelog ==
+
+v1.2.3 - 13-June-2018
+* Improvement: Added windows EDGE browser support for importing the sites.
+* Improvement: The log file was not created if server does not support the file handling functions.
+* Fix: Load WXR importer on init to avoid redirect loop when loading WooCommerce importer.
+* Fix: Clear the Astra Pro plugin cache after site import.
 
 v1.2.2 - 26-March-2018
 * Fix: Correctly load the Elementor Pro 2.0 compatibility class for beta versions.

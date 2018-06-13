@@ -47,6 +47,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		public function __construct() {
 			add_action( 'astra_sites_after_plugin_activation', array( $this, 'astra_pro' ), 10, 2 );
 			add_action( 'astra_sites_import_start', array( $this, 'import_enabled_extension' ), 10, 2 );
+			add_action( 'astra_sites_import_complete', array( $this, 'clear_cache' ) );
 		}
 
 		/**
@@ -280,6 +281,17 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 			return $headers_old;
 		}
 
+		/**
+		 * Clear Cache
+		 *
+		 * @since 1.2.3
+		 * @return void
+		 */
+		function clear_cache() {
+			if ( is_callable( 'Astra_Minify::refresh_assets' ) ) {
+				Astra_Minify::refresh_assets();
+			}
+		}
 	}
 
 	/**
