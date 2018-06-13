@@ -14,6 +14,7 @@
 defined( 'ABSPATH' ) or exit;
 
 ?>
+
 <div class="wrap" id="astra-sites-admin">
 
 	<div id="astra-sites-filters" class="wp-filter hide-if-no-js">
@@ -41,15 +42,24 @@ defined( 'ABSPATH' ) or exit;
 				<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
 			</div>
 
-		 </div>
+		</div>
 
 	</div>
 
 	<?php do_action( 'astra_sites_before_site_grid' ); ?>
 
-
 	<div class="theme-browser rendered">
 		<div id="astra-sites" class="themes wp-clearfix"></div>
+	</div>
+
+	<div class="select-page-builder">
+		<div class="note-wrap">
+			<h3>
+				<span class="up-arrow dashicons dashicons-editor-break"></span>
+				<div class="note"><?php _e( 'Select Your Favorite Page Builder', 'astra-sites' ); ?></div>
+			</h3>
+		</div>
+		<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/sites-screenshot.jpg' ); ?>" alt="<?php _e( 'Sites List..', 'astra-sites' ); ?>" title="<?php _e( 'Sites List..', 'astra-sites' ); ?>" />
 	</div>
 
 	<div class="spinner-wrap">
@@ -119,6 +129,21 @@ defined( 'ABSPATH' ) or exit;
 					<span class="collapse-sidebar-arrow"></span>
 					<span class="collapse-sidebar-label"><?php esc_html_e( 'Collapse', 'astra-sites' ); ?></span>
 				</button>
+
+				<div class="devices-wrapper">
+					<div class="devices">
+						<button type="button" class="preview-desktop active" aria-pressed="true" data-device="desktop">
+							<span class="screen-reader-text"><?php _e( 'Enter desktop preview mode', 'astra-sites' ); ?></span>
+						</button>
+						<button type="button" class="preview-tablet" aria-pressed="false" data-device="tablet">
+							<span class="screen-reader-text"><?php _e( 'Enter tablet preview mode', 'astra-sites' ); ?></span>
+						</button>
+						<button type="button" class="preview-mobile" aria-pressed="false" data-device="mobile">
+							<span class="screen-reader-text"><?php _e( 'Enter mobile preview mode', 'astra-sites' ); ?></span>
+						</button>
+					</div>
+				</div>
+
 			</div>
 		</div>
 		<div class="wp-full-overlay-main">
@@ -137,14 +162,14 @@ defined( 'ABSPATH' ) or exit;
 		<?php
 
 		/* translators: %1$s & %2$s are a Demo API URL */
-		printf( __( '<p> It seems the demo data server, <i><a href="%1$s">%2$s</a></i> is unreachable from your site.</p>', 'astra-sites' ) , esc_url( Astra_Sites::$api_url ), esc_url( Astra_Sites::$api_url ) );
+		printf( __( '<p> It seems the demo data server, <i><a href="%1$s">%2$s</a></i> is unreachable from your site.</p>', 'astra-sites' ), esc_url( Astra_Sites::$api_url ), esc_url( Astra_Sites::$api_url ) );
 
 		_e( '<p class="left-margin"> 1. Sometimes, simple page reload fixes any temporary issues. No kidding!</p>', 'astra-sites' );
 
 		_e( '<p class="left-margin"> 2. If that does not work, you will need to talk to your server administrator and check if demo server is being blocked by the firewall!</p>', 'astra-sites' );
 
 		/* translators: %1$s is a support link */
-		printf( __( '<p>If that does not help, please open up a <a href="%1$s" target="_blank">Support Ticket</a> and we will be glad take a closer look for you.</p>', 'astra-sites' ), esc_url( 'https://wpastra.com/support/' ) );
+		printf( __( '<p>If that does not help, please open up a <a href="%1$s" target="_blank">Support Ticket</a> and we will be glad take a closer look for you.</p>', 'astra-sites' ), esc_url( 'https://wpastra.com/support/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=api-request-failed' ) );
 		?>
 	</div>
 </script>
@@ -159,7 +184,7 @@ defined( 'ABSPATH' ) or exit;
 	<# if ( data ) { #>
 
 		<ul class="{{ data.args.wrapper_class }} {{ data.args.class }}">
-			
+
 			<# if ( data.args.show_all ) { #>
 				<li>
 					<a href="#" data-group="all"> All </a>
@@ -170,7 +195,7 @@ defined( 'ABSPATH' ) or exit;
 				<# if ( data.items[ key ].count ) { #>
 					<li>
 						<a href="#" data-group='{{ data.items[ key ].id }}' class="{{ data.items[ key ].name }}">
-							 {{ data.items[ key ].name }}
+							{{ data.items[ key ].name }}
 						</a>
 					</li>
 				<# } #>
@@ -205,33 +230,59 @@ defined( 'ABSPATH' ) or exit;
 				<input type="hidden" class="astra-enabled-extensions" value="{{ JSON.stringify(data.items[ key ]['astra-enabled-extensions'] ) }}" />
 
 				<div class="inner">
-				<span class="site-preview" data-href="{{ data.items[ key ]['astra-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}">		
-				
-				<div class="theme-screenshot">
-				<# if( '' !== data.items[ key ]['featured-image-url'] ) { #>
-					<img src="{{ data.items[ key ]['featured-image-url'] }}" />
-				<# } #>
-				</div>
-
-				<a href="{{{data.astra_demo_url}}}" target="_blank" class="view-demo-wrap">
-					<span class="more-details view-demo" id="astra-theme-action"><?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?></span>
-				</a>
-
-				</span>
-				<h3 class="theme-name" id="astra-theme-name"> {{{ data.items[ key ].title.rendered }}} </h3>
-				<# if ( data.items[ key ]['astra-site-type'] ) { #>
-					<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{data.items[ key ]['astra-site-type']}}</span>
-				<# } #>
-				<# if ( data.items[ key ].status ) { #>
-					<span class="status {{data.items[ key ].status}}">{{data.items[ key ].status}}</span>
-				<# } #>
-				<div class="theme-actions">
-					<button class="button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
-				</div>
+					<span class="site-preview" data-href="{{ data.items[ key ]['astra-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}">
+						<div class="theme-screenshot">
+						<# if( '' !== data.items[ key ]['featured-image-url'] ) { #>
+							<img src="{{ data.items[ key ]['featured-image-url'] }}" />
+						<# } #>
+						</div>
+					</span>
+					<span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span>
+					<# if ( data.items[ key ]['astra-site-type'] ) { #>
+						<# var type = ( data.items[ key ]['astra-site-type'] !== 'premium' ) ? ( data.items[ key ]['astra-site-type'] ) : 'agency'; #>
+						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{ type }}</span>
+					<# } #>
+					<# if ( data.items[ key ].status ) { #>
+						<span class="status {{data.items[ key ].status}}">{{data.items[ key ].status}}</span>
+					<# } #>
+					<div class="theme-id-container">
+						<h3 class="theme-name" id="astra-theme-name"> {{{ data.items[ key ].title.rendered }}} </h3>
+						<div class="theme-actions">
+							<button class="button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
+						</div>
+					</div>
 				</div>
 			</div>
 		<# } #>
 	<# } else { #>
-		<p class="no-themes" style="display:block;"> <?php _e( 'No Demos found, Try a different search.', 'astra-sites' ); ?> </p>
+		<p class="no-themes" style="display:block;">
+			<?php _e( 'No Demos found, Try a different search.', 'astra-sites' ); ?>
+			<span class="description">
+				<?php
+				/* translators: %1$s External Link */
+				printf( __( 'Don\'t see a site that you would like to import?<br><a target="_blank" href="%1$s">Please suggest us!</a>', 'astra-sites' ), esc_url( 'https://wpastra.com/sites-suggestions/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=suggestions' ) );
+				?>
+			</span>
+		</p>
 	<# } #>
 </script>
+
+<?php
+/**
+ * TMPL - List
+ */
+?>
+<script type="text/template" id="tmpl-astra-sites-suggestions">
+	<div class="theme astra-theme site-single astra-sites-suggestions">
+		<div class="inner">
+			<p>
+			<?php
+			/* translators: %1$s External Link */
+			printf( __( 'Don\'t see a site that you would like to import?<br><a target="_blank" href="%1$s">Please suggest us!</a>', 'astra-sites' ), esc_url( 'https://wpastra.com/sites-suggestions/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=suggestions' ) );
+			?>
+			</p>
+		</div>
+	</div>
+</script>
+<?php
+wp_print_admin_notice_templates();

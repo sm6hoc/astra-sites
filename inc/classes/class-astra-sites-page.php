@@ -82,7 +82,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		static public function init_admin_settings() {
 
-			self::$menu_page_title  = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites' , 'astra-sites' ) );
+			self::$menu_page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
 
 			if ( isset( $_REQUEST['page'] ) && strpos( $_REQUEST['page'], self::$plugin_slug ) !== false ) {
 
@@ -267,4 +267,4 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 	new Astra_Sites_Page;
 
-}// End if().
+}// End if.
