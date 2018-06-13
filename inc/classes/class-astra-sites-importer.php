@@ -71,7 +71,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Load WordPress WXR importer.
 		 */
-		public function load_importer () {
+		public function load_importer() {
 			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-astra-wxr-importer.php';
 		}
 
