@@ -404,8 +404,6 @@
 		_addFilters: function( event, data ) {
 			event.preventDefault();
 
-			console.log( data.items );
-
 			if( $('#' + data.args.id).length ) {
 				var template = wp.template('astra-site-filters');
 				$('#' + data.args.id).html(template( data ));
