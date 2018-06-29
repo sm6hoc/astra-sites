@@ -279,11 +279,28 @@
 
 		/**
 		 * Get Category Params
+		 *
+		 * @since 1.2.4
+		 * @param  {string} category_slug Category Slug.
+		 * @return {mixed}               Add `include=<category-ids>` in API request.
+		 */
+		_getPageBuilderParams: function()
+		{
+			if( astraRenderGrid.page_builder_id ) {
+				return '?include='+astraRenderGrid.page_builder_id;
+			}
+
+			return '';
+		},
+
+		/**
+		 * Get Category Params
 		 * 
 		 * @param  {string} category_slug Category Slug.
 		 * @return {mixed}               Add `include=<category-ids>` in API request.
 		 */
-		_getCategoryParams: function( category_slug ) {
+		_getCategoryParams: function( category_slug )
+		{
 
 			// Has category?
 			if( category_slug in astraRenderGrid.settings ) {
@@ -324,14 +341,14 @@
 		/**
 		 * Show Filters
 		 */
-		_showFilters: function() {
-
+		_showFilters: function()
+		{
 			/**
 			 * Categories
 			 */
 			var category_slug = 'astra-site-page-builder';
 			var category = {
-				slug          : category_slug + AstraRender._getCategoryParams( category_slug ),
+				slug          : category_slug + AstraRender._getPageBuilderParams(),
 				id            : category_slug,
 				class         : category_slug,
 				trigger       : 'astra-api-category-loaded',
@@ -367,7 +384,14 @@
 		_loadFirstGrid: function( event, data ) {
 			AstraRender._addFilters( event, data );
 			setTimeout(function() {
-				$('body').removeClass('loading-content');
+				if( astraRenderGrid.page_builder_id ) {
+					AstraRender._showSites();
+				} else {
+					$('body').removeClass('loading-content');
+					if( ! $('#astra-sites-admin .astra-site-select-page-builder').length ) {
+						$('#astra-sites-admin').append( wp.template( 'astra-site-select-page-builder' ) );
+					}
+				}
 			}, 100);
 		},
 
@@ -380,9 +404,13 @@
 		_addFilters: function( event, data ) {
 			event.preventDefault();
 
-			if( jQuery('#' + data.args.id).length ) {
+			if( $('#' + data.args.id).length ) {
 				var template = wp.template('astra-site-filters');
-				jQuery('#' + data.args.id).html(template( data ));
+				$('#' + data.args.id).html(template( data ));
+
+				if( astraRenderGrid.page_builder_id ) {
+					$('#' + data.args.id).find('li:first a').addClass('current');
+				}
 			}
 
 		},
