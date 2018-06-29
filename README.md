@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 4.9.6  
-**Stable tag:** 1.2.3  
+**Stable tag:** 1.2.4  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -56,6 +56,10 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.4 - 29-June-2018
+* Improvement: Removed custom license validation form and used Graupi in-build license validation form.
+* Improvement: Set default page builders depends on the packaged purchase.
 
 v1.2.3 - 13-June-2018
 * Improvement: Added windows EDGE browser support for importing the sites.
