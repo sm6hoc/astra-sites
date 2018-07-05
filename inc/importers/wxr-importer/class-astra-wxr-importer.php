@@ -68,6 +68,51 @@ class Astra_WXR_Importer {
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
+
+		// Elementor Import Support.
+		add_filter( 'wp_import_post_meta', array( $this, 'import_post_meta' ) );
+		add_filter( 'wxr_importer.pre_process.post_meta', array( $this, 'pre_process_post_meta' ) );
+	}
+
+	/**
+	 * Process post meta before WP importer.
+	 *
+	 * Normalize Elementor post meta on import, We need the `wp_slash` in order
+	 * to avoid the unslashing during the `add_post_meta`.
+	 *
+	 * @since 1.2.5
+	 *
+	 * @param array $post_meta Post meta.
+	 * @return array Updated post meta.
+	 */
+	function import_post_meta( $post_meta ) {
+		foreach ( $post_meta as &$meta ) {
+			if ( '_elementor_data' === $meta['key'] ) {
+				$meta['value'] = wp_slash( $meta['value'] );
+				break;
+			}
+		}
+
+		return $post_meta;
+	}
+
+	/**
+	 * Process post meta before WXR importer.
+	 *
+	 * Normalize Elementor post meta on import with the new WP_importer, We need
+	 * the `wp_slash` in order to avoid the unslashing during the `add_post_meta`.
+	 *
+	 * @since 1.2.5
+	 *
+	 * @param array $post_meta Post meta.
+	 * @return array Updated post meta.
+	 */
+	function pre_process_post_meta( $post_meta ) {
+		if ( '_elementor_data' === $post_meta['key'] ) {
+			$post_meta['value'] = wp_slash( $post_meta['value'] );
+		}
+
+		return $post_meta;
 	}
 
 	/**
