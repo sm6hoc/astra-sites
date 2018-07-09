@@ -4,8 +4,8 @@ Donate link: https://wpastra.com/pro/
 Tags: demo, theme demos, one click import
 Requires at least: 4.4
 Requires PHP: 5.3
-Tested up to: 4.9.6
-Stable tag: 1.2.5
+Tested up to: 4.9.7
+Stable tag: 1.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 == Changelog ==
+
+v1.2.6 - 9-July-2018
+* Fix: We have added `wp_slash` to normalize the Elementor post meta. Elementor have also normalize it. So, We have avoided `wp_slash` while importing sites.
 
 v1.2.5 - 5-July-2018
 * Fix: Normalize Elementor post meta by using `wp_slash` to avoid the unslashing data.
