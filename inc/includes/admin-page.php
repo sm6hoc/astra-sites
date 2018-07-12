@@ -18,8 +18,8 @@ defined( 'ABSPATH' ) or exit;
 <div class="wrap" id="astra-sites-admin">
 
 	<div id="astra-sites-filters">
-		
-		<?php if( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
+
+		<?php if ( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
 			<div class="wp-filter hide-if-no-js">
 				<div class="section-left">
 
