@@ -188,14 +188,11 @@
 			var selected_category_id = jQuery('.filter-links.astra-site-category').find('.current').data('group') || '';
 			if( '' !== selected_category_id && 'all' !== selected_category_id ) {
 				AstraRender._api_params['astra-site-category'] =  selected_category_id;
-			} else if( 'astra-site-category' in astraRenderGrid.settings ) {
-
-				if( $.inArray('all', astraRenderGrid.settings['astra-site-category']) !== -1 ) {
-					var storedCategories = astraRenderGrid.settings['astra-site-category'];
-					storedCategories = jQuery.grep(storedCategories, function(value) {
-						return value != 'all';
-					});
-					AstraRender._api_params['astra-site-category'] =  storedCategories.join(',');
+			} else if( astraRenderGrid.sites && astraRenderGrid['categories'].include ) {
+				if( AstraRender._isArray( astraRenderGrid['categories'].include ) ) {
+					AstraRender._api_params['astra-site-category'] = astraRenderGrid['categories'].include.join(',');
+				} else {
+					AstraRender._api_params['astra-site-category'] = astraRenderGrid['categories'].include;
 				}
 			}
 		},
@@ -205,13 +202,11 @@
 			var selected_page_builder_id = jQuery('.filter-links.astra-site-page-builder').find('.current').data('group') || '';
 			if( '' !== selected_page_builder_id && 'all' !== selected_page_builder_id ) {
 				AstraRender._api_params['astra-site-page-builder'] =  selected_page_builder_id;
-			} else if( 'astra-site-page-builder' in astraRenderGrid.settings ) {
-				if( $.inArray('all', astraRenderGrid.settings['astra-site-page-builder']) !== -1 ) {
-					var storedBuilders = astraRenderGrid.settings['astra-site-page-builder'];
-					storedBuilders = jQuery.grep(storedBuilders, function(value) {
-						return value != 'all';
-					});
-					AstraRender._api_params['astra-site-page-builder'] = storedBuilders.join(',');
+			} else if( astraRenderGrid.sites && astraRenderGrid['page-builders'].include ) {
+				if( AstraRender._isArray( astraRenderGrid['page-builders'].include ) ) {
+					AstraRender._api_params['astra-site-page-builder'] = astraRenderGrid['page-builders'].include.join(',');
+				} else {
+					AstraRender._api_params['astra-site-page-builder'] = astraRenderGrid['page-builders'].include;
 				}
 			}
 		},
@@ -287,17 +282,25 @@
 		 */
 		_getPageBuilderParams: function()
 		{
-			var _category_params = {};
+			var _params = {};
 
 			if( astraRenderGrid.sites && astraRenderGrid.sites.purchase_key ) {
-				_category_params['purchase_key'] = astraRenderGrid.sites.purchase_key;
+				_params['purchase_key'] = astraRenderGrid.sites.purchase_key;
 			}
 
 			if( astraRenderGrid.sites && astraRenderGrid.sites.site_url ) {
-				_category_params['site_url'] = astraRenderGrid.sites.site_url;
+				_params['site_url'] = astraRenderGrid.sites.site_url;
 			}
 
-			return '/?' + decodeURIComponent( $.param( _category_params ) );
+			if( astraRenderGrid.sites && astraRenderGrid['page-builders'].include ) {
+				if( AstraRender._isArray( astraRenderGrid['page-builders'].include ) ) {
+					_params['include'] = astraRenderGrid['page-builders'].include.join(',');
+				} else {
+					_params['include'] = astraRenderGrid['page-builders'].include;
+				}
+			}
+
+			return '/?' + decodeURIComponent( $.param( _params ) );
 		},
 
 		/**
@@ -308,20 +311,17 @@
 		 */
 		_getCategoryParams: function( category_slug ) {
 
-			// Has category?
-			if( category_slug in astraRenderGrid.settings ) {
+			var _params = {};
 
-				var storedBuilders = astraRenderGrid.settings[ category_slug ];
-
-				// Remove `all` from stored list?
-				storedBuilders = jQuery.grep(storedBuilders, function(value) {
-					return value != 'all';
-				});
-
-				return '?include='+storedBuilders.join(',');
+			if( astraRenderGrid.sites && astraRenderGrid['categories'].include ) {
+				if( AstraRender._isArray( astraRenderGrid['categories'].include ) ) {
+					_params['include'] = astraRenderGrid['categories'].include.join(',');
+				} else {
+					_params['include'] = astraRenderGrid['categories'].include;
+				}
 			}
 
-			return '';
+			return '/?' + decodeURIComponent( $.param( _params ) );
 		},
 
 		/**
@@ -389,6 +389,8 @@
 						$('#astra-sites-admin').append( wp.template( 'astra-site-select-page-builder' ) );
 					}
 				}
+			} else {
+				AstraRender._showSites();
 			}
 
 		},
@@ -545,6 +547,11 @@
 			jQuery('body').attr('data-astra-demo-search', '');
 			jQuery('body').attr('data-scrolling', false);
 
+		},
+
+		// Returns if a value is an array
+		_isArray: function(value) {
+			return value && typeof value === 'object' && value.constructor === Array;
 		}
 
 	};
