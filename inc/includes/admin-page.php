@@ -17,32 +17,36 @@ defined( 'ABSPATH' ) or exit;
 
 <div class="wrap" id="astra-sites-admin">
 
-	<div id="astra-sites-filters" class="wp-filter hide-if-no-js">
+	<div id="astra-sites-filters">
+		
+		<?php if( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
+			<div class="wp-filter hide-if-no-js">
+				<div class="section-left">
 
-		<div class="section-left">
+					<!-- All Filters -->
+					<div class="filter-count">
+						<span class="count"></span>
+					</div>
+					<div class="filters-wrap">
+						<div id="astra-site-page-builder"></div>
+					</div>				
 
-			<!-- All Filters -->
-			<div class="filter-count">
-				<span class="count"></span>
+				</div>
+
+				<div class="section-right">
+
+					<div class="filters-wrap">
+						<div id="astra-site-category"></div>
+					</div>
+
+					<div class="search-form">
+						<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
+						<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
+					</div>
+
+				</div>
 			</div>
-			<div class="filters-wrap">
-				<div id="astra-site-page-builder"></div>
-			</div>				
-
-		</div>
-
-		<div class="section-right">
-
-			<div class="filters-wrap">
-				<div id="astra-site-category"></div>
-			</div>
-
-			<div class="search-form">
-				<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
-				<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
-			</div>
-
-		</div>
+		<?php } ?>
 
 	</div>
 
