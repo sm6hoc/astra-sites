@@ -32,8 +32,8 @@ _<a href="https://wpastra.com/ready-websites/">See list of all available sites t
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/astra-sites` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Appearance->Astra->Astra Free Sites to select the page to be displayed as header and footer.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Navigate to Appearance -> Astra Sites to preview and import sites.
 
 == Frequently Asked Questions ==
 
