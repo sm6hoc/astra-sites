@@ -461,3 +461,8 @@ body.loading-content .select-page-builder {
         transform: rotate(360deg);
     }
 }
+
+#astra-sites-filters {
+    display: inline-block;
+    width: 100%;
+}
