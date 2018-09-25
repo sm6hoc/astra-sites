@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites 1.2.7\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2018-07-12 09:29:35+00:00\n"
+"POT-Creation-Date: 2018-09-25 12:46:31+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,23 +56,30 @@ msgstr ""
 msgid "Customizer data is empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:163
+#: inc/classes/class-astra-sites-importer.php:150
+#: inc/classes/class-astra-sites-page.php:106
+msgid ""
+"The XMLReader is not enabled on your server. To enable it please contact "
+"your server administrator."
+msgstr ""
+
+#: inc/classes/class-astra-sites-importer.php:167
 msgid "There was an error downloading the XML file."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:169
+#: inc/classes/class-astra-sites-importer.php:173
 msgid "Invalid site XML file!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:191
+#: inc/classes/class-astra-sites-importer.php:195
 msgid "Site options are empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:213
+#: inc/classes/class-astra-sites-importer.php:217
 msgid "Widget data is empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:192
+#: inc/classes/class-astra-sites-page.php:204
 msgid "Settings saved successfully."
 msgstr ""
 
