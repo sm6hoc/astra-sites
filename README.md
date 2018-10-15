@@ -4,8 +4,8 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
-**Tested up to:** 4.9.6  
-**Stable tag:** 1.2.4  
+**Tested up to:** 4.9.7  
+**Stable tag:** 1.2.7  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -32,8 +32,8 @@ _<a href="https://wpastra.com/ready-websites/">See list of all available sites t
 ## Installation ##
 
 1. Upload the plugin files to the `/wp-content/plugins/astra-sites` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Appearance->Astra->Astra Free Sites to select the page to be displayed as header and footer.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. Navigate to Appearance -> Astra Sites to preview and import sites.
 
 ## Frequently Asked Questions ##
 
@@ -56,6 +56,16 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.7 - 12-July-2018
+* Improvement: Added page builder and category filter support to show selected page builder with selected categories.
+* Improvement: Added filter `astra_sites_show_filters` to enable/disable the filter list from admin page.
+
+v1.2.6 - 9-July-2018
+* Fix: We have added `wp_slash` to normalize the Elementor post meta. Elementor have also normalize it. So, We have avoided `wp_slash` while importing sites.
+
+v1.2.5 - 5-July-2018
+* Fix: Normalize Elementor post meta by using `wp_slash` to avoid the unslashing data.
 
 v1.2.4 - 29-June-2018
 * Improvement: Removed custom license validation form and used Graupi in-build license validation form.
