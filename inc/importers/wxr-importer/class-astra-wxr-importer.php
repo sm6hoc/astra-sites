@@ -45,8 +45,9 @@ class Astra_WXR_Importer {
 	private function __construct() {
 
 		if ( ! class_exists( 'WP_Importer' ) ) {
-			defined( 'WP_LOAD_IMPORTERS' ) || define( 'WP_LOAD_IMPORTERS', true );
-			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
+			if ( defined( 'WP_LOAD_IMPORTERS' ) && WP_LOAD_IMPORTERS ) {
+				require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
+			}
 		}
 
 		if ( ! class_exists( 'WP_Importer_Logger' ) ) {
@@ -57,7 +58,7 @@ class Astra_WXR_Importer {
 			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
 		}
 
-		if ( ! class_exists( 'WXR_Importer' ) ) {
+		if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) {
 			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
 		}
 
