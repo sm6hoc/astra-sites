@@ -52,10 +52,10 @@ class Astra_Site_Options_Import {
 			'page_on_front',
 			'page_for_posts',
 
-			// Plugin Name: SiteOrigin Widgets Bundle.
+			// Plugin: SiteOrigin Widgets Bundle.
 			'siteorigin_widgets_active',
 
-			// Plugin Name: Elementor.
+			// Plugin: Elementor.
 			'elementor_container_width',
 			'elementor_cpt_support',
 			'elementor_css_print_method',
@@ -72,6 +72,7 @@ class Astra_Site_Options_Import {
 			'elementor_space_between_widgets',
 			'elementor_stretched_section_container',
 
+			// Plugin: Beaver Builder.
 			'_fl_builder_enabled_icons',
 			'_fl_builder_enabled_modules',
 			'_fl_builder_post_types',
@@ -80,6 +81,20 @@ class Astra_Site_Options_Import {
 			'_fl_builder_settings',
 			'_fl_builder_user_access',
 			'_fl_builder_enabled_templates',
+
+			// Plugin: WooCommerce.
+			// Pages.
+			'woocommerce_shop_page_title',
+			'woocommerce_cart_page_title',
+			'woocommerce_checkout_page_title',
+			'woocommerce_myaccount_page_title',
+			'woocommerce_edit_address_page_title',
+			'woocommerce_view_order_page_title',
+			'woocommerce_change_password_page_title',
+			'woocommerce_logout_page_title',
+
+			// Categories.
+			'woocommerce_product_cat',
 		);
 	}
 
@@ -108,8 +123,18 @@ class Astra_Site_Options_Import {
 
 					switch ( $option_name ) {
 
-						// page on front.
-						// page on front.
+						// Set WooCommerce page ID by page Title.
+						case 'woocommerce_shop_page_title':
+						case 'woocommerce_cart_page_title':
+						case 'woocommerce_checkout_page_title':
+						case 'woocommerce_myaccount_page_title':
+						case 'woocommerce_edit_address_page_title':
+						case 'woocommerce_view_order_page_title':
+						case 'woocommerce_change_password_page_title':
+						case 'woocommerce_logout_page_title':
+								$this->update_woocommerce_page_id_by_option_value( $option_name, $option_value );
+							break;
+
 						case 'page_for_posts':
 						case 'page_on_front':
 								$this->update_page_id_by_option_value( $option_name, $option_value );
@@ -118,6 +143,11 @@ class Astra_Site_Options_Import {
 						// nav menu locations.
 						case 'nav_menu_locations':
 								$this->set_nav_menu_locations( $option_value );
+							break;
+
+						// import WooCommerce category images.
+						case 'woocommerce_product_cat':
+								$this->set_woocommerce_product_cat( $option_value );
 							break;
 
 						// insert logo.
@@ -135,7 +165,7 @@ class Astra_Site_Options_Import {
 	}
 
 	/**
-	 * Update Page ID
+	 * Update post option
 	 *
 	 * @since 1.0.2
 	 *
@@ -148,6 +178,20 @@ class Astra_Site_Options_Import {
 		if ( is_object( $page ) ) {
 			update_option( $option_name, $page->ID );
 		}
+	}
+
+	/**
+	 * Update WooCommerce page ids.
+	 *
+	 * @since 1.1.6
+	 *
+	 * @param  string $option_name  Option name.
+	 * @param  mixed  $option_value Option value.
+	 * @return void
+	 */
+	private function update_woocommerce_page_id_by_option_value( $option_name, $option_value ) {
+		$option_name = str_replace( '_title', '_id', $option_name );
+		$this->update_page_id_by_option_value( $option_name, $option_value );
 	}
 
 	/**
@@ -178,6 +222,40 @@ class Astra_Site_Options_Import {
 		}
 	}
 
+	/**
+	 * Set WooCommerce category images.
+	 *
+	 * @since 1.1.4
+	 *
+	 * @param array $cats Array of categories.
+	 */
+	private function set_woocommerce_product_cat( $cats = array() ) {
+
+		$menu_locations = array();
+
+		if ( isset( $cats ) ) {
+
+			foreach ( $cats as $key => $cat ) {
+
+				if ( ! empty( $cat['slug'] ) && ! empty( $cat['thumbnail_src'] ) ) {
+
+					$image = (object) Astra_Sites_Helper::_sideload_image( $cat['thumbnail_src'] );
+
+					if ( ! is_wp_error( $image ) ) {
+
+						if ( isset( $image->attachment_id ) && ! empty( $image->attachment_id ) ) {
+
+							$term = get_term_by( 'slug', $cat['slug'], 'product_cat' );
+
+							if ( is_object( $term ) ) {
+								update_term_meta( $term->term_id, 'thumbnail_id', $image->attachment_id );
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 	/**
 	 * Insert Logo By URL
@@ -188,12 +266,13 @@ class Astra_Site_Options_Import {
 	 */
 	private function insert_logo( $image_url = '' ) {
 
-		$data = Astra_Sites_Helper::_sideload_image( $image_url );
+		$data = (object) Astra_Sites_Helper::_sideload_image( $image_url );
 
 		if ( ! is_wp_error( $data ) ) {
 
-			set_theme_mod( 'custom_logo', $data->attachment_id );
-
+			if ( isset( $data->attachment_id ) && ! empty( $data->attachment_id ) ) {
+				set_theme_mod( 'custom_logo', $data->attachment_id );
+			}
 		}
 	}
 

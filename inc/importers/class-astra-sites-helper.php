@@ -44,6 +44,72 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 		 */
 		public function __construct() {
 			add_filter( 'wie_import_data', array( $this, 'custom_menu_widget' ) );
+			add_filter( 'wp_prepare_attachment_for_js', array( $this, 'add_svg_image_support' ), 10, 3 );
+		}
+
+		/**
+		 * Add svg image support
+		 *
+		 * @since 1.1.5
+		 *
+		 * @param array  $response    Attachment response.
+		 * @param object $attachment Attachment object.
+		 * @param array  $meta        Attachment meta data.
+		 */
+		function add_svg_image_support( $response, $attachment, $meta ) {
+			if ( ! function_exists( 'simplexml_load_file' ) ) {
+				return $response;
+			}
+
+			if ( ! empty( $response['sizes'] ) ) {
+				return $response;
+			}
+
+			if ( 'image/svg+xml' !== $response['mime'] ) {
+				return $response;
+			}
+
+			$svg_path = get_attached_file( $attachment->ID );
+
+			$dimensions = self::get_svg_dimensions( $svg_path );
+
+			$response['sizes'] = array(
+				'full' => array(
+					'url'         => $response['url'],
+					'width'       => $dimensions->width,
+					'height'      => $dimensions->height,
+					'orientation' => $dimensions->width > $dimensions->height ? 'landscape' : 'portrait',
+				),
+			);
+
+			return $response;
+		}
+
+		/**
+		 * Get SVG Dimensions
+		 *
+		 * @since 1.1.5
+		 *
+		 * @param  string $svg SVG file path.
+		 * @return array      Return SVG file height & width for valid SVG file.
+		 */
+		public static function get_svg_dimensions( $svg ) {
+
+			$svg = simplexml_load_file( $svg );
+
+			if ( false === $svg ) {
+				$width  = '0';
+				$height = '0';
+			} else {
+				$attributes = $svg->attributes();
+				$width      = (string) $attributes->width;
+				$height     = (string) $attributes->height;
+			}
+
+			return (object) array(
+				'width'  => $width,
+				'height' => $height,
+			);
 		}
 
 		/**
@@ -62,7 +128,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 
 			// Get current menu ID & Slugs.
 			$menu_locations = array();
-			$nav_menus = (object) wp_get_nav_menus();
+			$nav_menus      = (object) wp_get_nav_menus();
 			if ( isset( $nav_menus ) ) {
 				foreach ( $nav_menus as $menu_key => $menu ) {
 					if ( is_object( $menu ) ) {
@@ -128,11 +194,11 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 				// we downloaded the file from a remote server, so there
 				// will be no form fields
 				// Default is true.
-				'test_form' => false,
+				'test_form'   => false,
 
 				// Setting this to false lets WordPress allow empty files, not recommended.
 				// Default is true.
-				'test_size' => true,
+				'test_size'   => true,
 
 				// A properly uploaded file will pass this test. There should be no reason to override this one.
 				'test_upload' => true,
@@ -149,7 +215,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 				);
 			}
 
-			// Success!
+			// Success.
 			return array(
 				'success' => true,
 				'data'    => $results,
@@ -179,8 +245,8 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 			if ( ! empty( $file ) ) {
 
 				// Set variables for storage, fix file filename for query strings.
-				preg_match( '/[^\?]+\.(jpe?g|jpe|gif|png)\b/i', $file, $matches );
-				$file_array = array();
+				preg_match( '/[^\?]+\.(jpe?g|jpe|svg|gif|png)\b/i', $file, $matches );
+				$file_array         = array();
 				$file_array['name'] = basename( $matches[0] );
 
 				// Download file to temp location.
@@ -201,12 +267,12 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 				}
 
 				// Build the object to return.
-				$meta                   = wp_get_attachment_metadata( $id );
-				$data->attachment_id    = $id;
-				$data->url              = wp_get_attachment_url( $id );
-				$data->thumbnail_url    = wp_get_attachment_thumb_url( $id );
-				$data->height           = $meta['height'];
-				$data->width            = $meta['width'];
+				$meta                = wp_get_attachment_metadata( $id );
+				$data->attachment_id = $id;
+				$data->url           = wp_get_attachment_url( $id );
+				$data->thumbnail_url = wp_get_attachment_thumb_url( $id );
+				$data->height        = $meta['height'];
+				$data->width         = $meta['width'];
 			}
 
 			return $data;
