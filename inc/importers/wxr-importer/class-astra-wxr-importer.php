@@ -221,7 +221,8 @@ class Astra_WXR_Importer {
 	 */
 	public function get_importer() {
 		$options  = apply_filters(
-			'astra_sites_xml_import_options', array(
+			'astra_sites_xml_import_options',
+			array(
 				'fetch_attachments' => true,
 				'default_author'    => get_current_user_id(),
 			)

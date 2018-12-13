@@ -436,7 +436,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 */
 		public static function get_xmlreader_status() {
 
-			if( class_exists( 'XMLReader' ) ) {
+			if ( class_exists( 'XMLReader' ) ) {
 				return __( 'Yes', 'astra-sites' );
 			}
 

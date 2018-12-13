@@ -146,7 +146,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			do_action( 'astra_sites_import_prepare_xml_data' );
 
-			if( ! class_exists( 'XMLReader' ) ) {
+			if ( ! class_exists( 'XMLReader' ) ) {
 				wp_send_json_error( __( 'The XMLReader is not enabled on your server. To enable it please contact your server administrator.', 'astra-sites' ) );
 			}
 
@@ -255,14 +255,16 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			);
 
 			$api_args = apply_filters(
-				'astra_sites_api_args', array(
+				'astra_sites_api_args',
+				array(
 					'timeout' => 15,
 				)
 			);
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params', array(
+				'astra_sites_api_params',
+				array(
 					'purchase_key' => '',
 					'site_url'     => '',
 				)

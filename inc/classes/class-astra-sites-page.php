@@ -102,7 +102,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @since 1.2.8
 		 */
 		public static function notices() {
-			if( ! class_exists( 'XMLReader' ) ) {
+			if ( ! class_exists( 'XMLReader' ) ) {
 				?>
 				<div class="notice astra-sites-xml-notice notice-error">
 					<p><b><?php _e( 'Required XMLReader PHP extension is missing on your server!', 'astra-sites' ); ?></b></p>
@@ -163,7 +163,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			if ( empty( self::$view_actions ) ) {
 
 				self::$view_actions = apply_filters(
-					'astra_sites_menu_item', array()
+					'astra_sites_menu_item',
+					array()
 				);
 			}
 

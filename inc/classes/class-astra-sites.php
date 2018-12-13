@@ -165,26 +165,30 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
 
-			$data = apply_filters( 'astra_sites_localize_vars', array(
-				'ApiURL'  => self::$api_url,
-				'filters' => array(
-					'page_builder' => array(
-						'title'   => __( 'Page Builder', 'astra-sites' ),
-						'slug'    => 'astra-site-page-builder',
-						'trigger' => 'astra-api-category-loaded',
+			$data = apply_filters(
+				'astra_sites_localize_vars',
+				array(
+					'ApiURL'  => self::$api_url,
+					'filters' => array(
+						'page_builder' => array(
+							'title'   => __( 'Page Builder', 'astra-sites' ),
+							'slug'    => 'astra-site-page-builder',
+							'trigger' => 'astra-api-category-loaded',
+						),
+						'categories'   => array(
+							'title'   => __( 'Categories', 'astra-sites' ),
+							'slug'    => 'astra-site-category',
+							'trigger' => 'astra-api-category-loaded',
+						),
 					),
-					'categories'   => array(
-						'title'   => __( 'Categories', 'astra-sites' ),
-						'slug'    => 'astra-site-category',
-						'trigger' => 'astra-api-category-loaded',
-					),
-				),
-			));
+				)
+			);
 			wp_localize_script( 'astra-sites-api', 'astraSitesApi', $data );
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params', array(
+				'astra_sites_api_params',
+				array(
 					'purchase_key' => '',
 					'site_url'     => '',
 					'par-page'     => 15,
@@ -206,18 +210,19 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
-					'debug'           => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
-					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
-					'siteURL'         => site_url(),
-					'getProText'      => __( 'Purchase', 'astra-sites' ),
-					'getProURL'       => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
-					'getUpgradeText'  => __( 'Upgrade', 'astra-sites' ),
-					'getUpgradeURL'   => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
-					'_ajax_nonce'     => wp_create_nonce( 'astra-sites' ),
-					'requiredPlugins' => array(),
+					'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
+					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'siteURL'           => site_url(),
+					'getProText'        => __( 'Purchase', 'astra-sites' ),
+					'getProURL'         => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
+					'getUpgradeText'    => __( 'Upgrade', 'astra-sites' ),
+					'getUpgradeURL'     => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
+					'_ajax_nonce'       => wp_create_nonce( 'astra-sites' ),
+					'requiredPlugins'   => array(),
 					'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
-					'strings'         => array(
-						'warningXMLReader'         => sprintf( __( '%sRequired XMLReader PHP extension is missing on your server!%sAstra Sites import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), '<div class="notice astra-sites-xml-notice notice-error"><p><b>', '</b></p><p>', '</p></div>' ),
+					'strings'           => array(
+						/* translators: %s are HTML tags. */
+						'warningXMLReader'         => sprintf( __( '%1$sRequired XMLReader PHP extension is missing on your server!%2$sAstra Sites import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), '<div class="notice astra-sites-xml-notice notice-error"><p><b>', '</b></p><p>', '</p></div>' ),
 						'warningBeforeCloseWindow' => __( 'Warning! Astra Site Import process is not complete. Don\'t close the window until import process complete. Do you still want to leave the window?', 'astra-sites' ),
 						'importFailedBtnSmall'     => __( 'Error!', 'astra-sites' ),
 						'importFailedBtnLarge'     => __( 'Error! Read Possibilities.', 'astra-sites' ),
@@ -235,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'searchNoFound'            => __( 'No Demos found, Try a different search.', 'astra-sites' ),
 						'importWarning'            => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
 					),
-					'log'             => array(
+					'log'               => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
 						'installed'               => __( 'Successfully plugin installed!', 'astra-sites' ),
 						'activating'              => __( 'Activating plugin ', 'astra-sites' ),
@@ -424,7 +429,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			// Lite init => Pro init.
 			$plugins = apply_filters(
-				'astra_sites_pro_plugin_exist', array(
+				'astra_sites_pro_plugin_exist',
+				array(
 					'beaver-builder-lite-version/fl-builder.php' => array(
 						'slug' => 'bb-plugin',
 						'init' => 'bb-plugin/fl-builder.php',
@@ -435,7 +441,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'init' => 'bb-ultimate-addon/bb-ultimate-addon.php',
 						'name' => 'Ultimate Addon for Beaver Builder',
 					),
-				), $lite_version
+				),
+				$lite_version
 			);
 
 			if ( isset( $plugins[ $lite_version ] ) ) {
