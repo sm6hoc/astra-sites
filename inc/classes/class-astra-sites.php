@@ -215,7 +215,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'getUpgradeURL'   => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
 					'_ajax_nonce'     => wp_create_nonce( 'astra-sites' ),
 					'requiredPlugins' => array(),
+					'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
 					'strings'         => array(
+						'warningXMLReader'         => sprintf( __( '%sRequired XMLReader PHP extension is missing on your server!%sAstra Sites import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), '<div class="notice astra-sites-xml-notice notice-error"><p><b>', '</b></p><p>', '</p></div>' ),
 						'warningBeforeCloseWindow' => __( 'Warning! Astra Site Import process is not complete. Don\'t close the window until import process complete. Do you still want to leave the window?', 'astra-sites' ),
 						'importFailedBtnSmall'     => __( 'Error!', 'astra-sites' ),
 						'importFailedBtnLarge'     => __( 'Error! Read Possibilities.', 'astra-sites' ),

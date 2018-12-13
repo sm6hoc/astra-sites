@@ -103,7 +103,12 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		public static function notices() {
 			if( ! class_exists( 'XMLReader' ) ) {
-				echo '<div class="notice notice-error"><p>'.__( 'The XMLReader is not enabled on your server. To enable it please contact your server administrator.', 'astra-sites' ).'</p></div>';
+				?>
+				<div class="notice astra-sites-xml-notice notice-error">
+					<p><b><?php _e( 'Required XMLReader PHP extension is missing on your server!', 'astra-sites' ); ?></b></p>
+					<p><?php _e( 'Astra Sites import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ); ?></p>
+				</div>
+				<?php
 			}
 		}
 

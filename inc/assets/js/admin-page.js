@@ -1293,11 +1293,22 @@ var AstraSitesAjaxQueue = (function() {
 
 							if( all_buttons === disabled_buttons ) {
 
-								jQuery('.astra-demo-import')
-									.removeAttr('data-import')
-									.removeClass('installing updating-message')
-									.addClass('button-primary')
-									.text( astraSitesAdmin.strings.importDemo );
+								// XML reader not available notice.
+								if( astraSitesAdmin.XMLReaderDisabled ) {
+									if( ! $('.install-theme-info .astra-sites-xml-notice').length ) {
+										$('.install-theme-info').prepend( astraSitesAdmin.strings.warningXMLReader );
+									}
+									$('.astra-demo-import')
+										.removeClass('installing updating-message')
+										.addClass('disabled')
+										.text( astraSitesAdmin.strings.importDemo );	
+								} else {
+									$('.astra-demo-import')
+										.removeAttr('data-import')
+										.removeClass('installing updating-message')
+										.addClass('button-primary')
+										.text( astraSitesAdmin.strings.importDemo );
+								}
 							}
 
 					break;

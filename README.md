@@ -57,6 +57,9 @@ https://wpastra.com/sites-suggestions/
 
 ## Changelog ##
 
+v1.2.8 - Unreleased
+* Improvement: Added admin notice if XMLReader is not installed. XMLReader is required to import the XML of the website.
+
 v1.2.7 - 12-July-2018
 * Improvement: Added page builder and category filter support to show selected page builder with selected categories.
 * Improvement: Added filter `astra_sites_show_filters` to enable/disable the filter list from admin page.
