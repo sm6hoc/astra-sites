@@ -54,7 +54,7 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 				$args->search   = '';
 				$paged          = '1';
 
-				$list = (array) Astra_Sites::set_instance()->get_astra_demos( $args, $paged );
+				$list = (array) Astra_Sites::get_instance()->get_astra_demos( $args, $paged );
 
 				set_transient( 'astra-sites', $list, 24 * HOUR_IN_SECONDS );
 			}
@@ -118,27 +118,27 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 					}
 
 					// Import Enabled Extensions.
-					Astra_Sites::set_instance()->import_astra_enabled_extension( $demo_data['astra-enabled-extensions'] );
+					Astra_Sites::get_instance()->import_astra_enabled_extension( $demo_data['astra-enabled-extensions'] );
 					WP_CLI::line( __( 'Imported enabled extensions.', 'astra-sites' ) );
 
 					// Import Customizer Settings.
-					Astra_Sites::set_instance()->import_customizer_settings( $demo_data['astra-site-customizer-data'] );
+					Astra_Sites::get_instance()->import_customizer_settings( $demo_data['astra-site-customizer-data'] );
 					WP_CLI::line( __( 'Imported customizer settings.', 'astra-sites' ) );
 
 					// Import XML.
-					Astra_Sites::set_instance()->import_wxr( $demo_data['astra-site-wxr-path'] );
+					Astra_Sites::get_instance()->import_wxr( $demo_data['astra-site-wxr-path'] );
 					WP_CLI::line( __( 'Imported XML.', 'astra-sites' ) );
 
 					// Import WordPress site options.
-					Astra_Sites::set_instance()->import_site_options( $demo_data['astra-site-options-data'] );
+					Astra_Sites::get_instance()->import_site_options( $demo_data['astra-site-options-data'] );
 					WP_CLI::line( __( 'Imported WordPress site options.', 'astra-sites' ) );
 
 					// Import Custom 404 extension options.
-					Astra_Sites::set_instance()->import_custom_404_extension_options( $demo_data['astra-custom-404'] );
+					Astra_Sites::get_instance()->import_custom_404_extension_options( $demo_data['astra-custom-404'] );
 					WP_CLI::line( __( 'Imported custom 404 extension options.', 'astra-sites' ) );
 
 					// Import Widgets data.
-					Astra_Sites::set_instance()->import_widgets( $demo_data['astra-site-widgets-data'] );
+					Astra_Sites::get_instance()->import_widgets( $demo_data['astra-site-widgets-data'] );
 					WP_CLI::line( __( 'Imported widgets data.', 'astra-sites' ) );
 
 					WP_CLI::success( sprintf( __( 'Astra site imported form API: %1$s', 'text-domain' ) , $url ) );
@@ -185,27 +185,27 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 			}
 
 			// Import Enabled Extensions.
-			Astra_Sites::set_instance()->import_astra_enabled_extension( $demo_data['astra-enabled-extensions'] );
+			Astra_Sites::get_instance()->import_astra_enabled_extension( $demo_data['astra-enabled-extensions'] );
 			WP_CLI::line( __( 'Imported enabled extensions.', 'astra-sites' ) );
 
 			// Import Customizer Settings.
-			Astra_Sites::set_instance()->import_customizer_settings( $demo_data['astra-site-customizer-data'] );
+			Astra_Sites::get_instance()->import_customizer_settings( $demo_data['astra-site-customizer-data'] );
 			WP_CLI::line( __( 'Imported customizer settings.', 'astra-sites' ) );
 
 			// Import XML.
-			Astra_Sites::set_instance()->import_wxr( $demo_data['astra-site-wxr-path'] );
+			Astra_Sites::get_instance()->import_wxr( $demo_data['astra-site-wxr-path'] );
 			WP_CLI::line( __( 'Imported XML.', 'astra-sites' ) );
 
 			// Import WordPress site options.
-			Astra_Sites::set_instance()->import_site_options( $demo_data['astra-site-options-data'] );
+			Astra_Sites::get_instance()->import_site_options( $demo_data['astra-site-options-data'] );
 			WP_CLI::line( __( 'Imported WordPress site options.', 'astra-sites' ) );
 
 			// Import Custom 404 extension options.
-			Astra_Sites::set_instance()->import_custom_404_extension_options( $demo_data['astra-custom-404'] );
+			Astra_Sites::get_instance()->import_custom_404_extension_options( $demo_data['astra-custom-404'] );
 			WP_CLI::line( __( 'Imported custom 404 extension options.', 'astra-sites' ) );
 
 			// Import Widgets data.
-			Astra_Sites::set_instance()->import_widgets( $demo_data['astra-site-widgets-data'] );
+			Astra_Sites::get_instance()->import_widgets( $demo_data['astra-site-widgets-data'] );
 			WP_CLI::line( __( 'Imported widgets data.', 'astra-sites' ) );
 
 			WP_CLI::success( sprintf( __( 'Astra site imported form API: %1$s', 'text-domain' ) , $url ) );
@@ -224,14 +224,14 @@ if ( class_exists( 'WP_CLI_Command' ) && ! class_exists( 'Astra_Sites_WP_CLI' ) 
 		 */
 		public function list( $args, $assoc_args ) {
 
-			$args           = new stdClass();
-			$args->category = 'all';
-			$args->id       = 'all';
-			$args->search   = '';
-			$paged          = '1';
-
-			$list = (array) Astra_Sites::set_instance()->get_astra_demos( $args, $paged );
+			$args           = array();
+			// $args['category'] = 'all';
+			// $args['id']       = 'all';
+			// $args['search']   = '';
+			// $args['per_page']   = '100';
+			$list = (array) Astra_Sites::get_instance()->get_astra_demos( $args );
 			$list = $list['sites'];
+			// WP_CLI::error( print_r( $list ) );
 
 			foreach ($list as $key => $item) {
 

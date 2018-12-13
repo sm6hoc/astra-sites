@@ -53,7 +53,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public function __construct() {
 
-			self::set_api_url();
+			$this->set_api_url();
 
 			$this->includes();
 
@@ -65,6 +65,29 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// AJAX.
 			add_action( 'wp_ajax_astra-required-plugins', array( $this, 'required_plugin' ) );
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
+
+			add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ), 9999 );
+		}
+
+		/**
+		 * Add .xml files as supported format in the uploader.
+		 *
+		 * @since 1.1.5 Added SVG file support.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $mimes Already supported mime types.
+		 */
+		public function custom_upload_mimes( $mimes ) {
+
+			// Allow SVG files.
+			$mimes['svg']  = 'image/svg+xml';
+			$mimes['svgz'] = 'image/svg+xml';
+
+			// Allow XML files.
+			$mimes['xml'] = 'application/xml';
+
+			return $mimes;
 		}
 
 		/**
@@ -129,10 +152,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 *
 		 * @since  1.0.0
 		 */
-		public static function set_api_url() {
+		public function set_api_url() {
+			self::$api_url = $this->get_api_url();
+		}
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
-
+		/**
+		 * Getter for $api_url
+		 *
+		 * @since  1.0.0
+		 */
+		public function get_api_url() {
+			return apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
 		}
 
 		/**
@@ -486,13 +516,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			$paged          = isset( $_POST['paged'] ) ? esc_attr( $_POST['paged'] ) : '1';
-			$args           = new stdClass();
-			$args->search   = isset( $_POST['search'] ) ? esc_attr( $_POST['search'] ) : '';
-			$args->page_builder_id       = isset( $_POST['page_builder_id'] ) ? esc_attr( $_POST['page_builder_id'] ) : '';
-			$args->category_id       = isset( $_POST['category_id'] ) ? esc_attr( $_POST['category_id'] ) : '';
+			$args                    = array();
+			$args['search']          = isset( $_POST['search'] ) ? esc_attr( $_POST['search'] ) : '';
+			$args['page_builder_id'] = isset( $_POST['page_builder_id'] ) ? esc_attr( $_POST['page_builder_id'] ) : '';
+			$args['category_id']     = isset( $_POST['category_id'] ) ? esc_attr( $_POST['category_id'] ) : '';
 
-			return wp_send_json( self::get_astra_demos( $args, $paged ) );
+			return wp_send_json( $this->get_astra_demos( $args ) );
 		}
 
 		/**
@@ -586,9 +615,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @param  (String) $wxr_url URL of the xml export of the demo to be imported.
 		 */
 		public function import_wxr( $wxr_url ) {
+			$file         = Astra_Sites_Helper::get_instance();
+			$xml_path     = $file->download_file( $wxr_url );
+
+			WP_CLI::line( $wxr_url );
+			WP_CLI::error( print_r($xml_path) );
 			$wxr_importer = Astra_WXR_Importer::instance();
-			$xml_path     = $wxr_importer->download_xml( $wxr_url );
-			$wxr_importer->import_xml( $xml_path['file'] );
+			$importer     = $wxr_importer->get_importer();
+			$response     = $importer->import( $xml_path['file'] );
+
+
+			// $wxr_importer->import_xml( $xml_path['file'] );
 		}
 
 		/**
@@ -700,9 +737,18 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @param  (Array)  $args For selecting the demos (Search terms, pagination etc).
 		 * @param  (String) $paged Page number.
 		 */
-		public static function get_astra_demos( $args, $paged = '1' ) {
+		public function get_astra_demos( $args = array() ) {
 
-			$url = self::get_api_url( $args, $paged );
+			$args = (array) $args;
+			// WP_CLI::error( print_r( $args) );
+
+			$url = add_query_arg( $args, $this->get_api_url() . 'astra-sites' );
+			
+			// WP_CLI::error( $data );
+			// WP_CLI::error( $this->get_api_url() );
+
+
+			// $url = self::get_api_url( $args, $paged );
 
 			$astra_demos = array(
 				'sites' => array(),
