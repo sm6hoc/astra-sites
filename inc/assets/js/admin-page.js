@@ -331,7 +331,8 @@ var AstraSitesAjaxQueue = (function() {
 				// 2. Fail - Prepare XML Data.
 				if( false === xml_data.success ) {
 					AstraSitesAdmin._log( xml_data );
-					AstraSitesAdmin._importFailMessage( xml_data.data );
+					var message = xml_data.data.error || xml_data.data;
+					AstraSitesAdmin._importFailMessage( message );
 					AstraSitesAdmin._log( xml_data.data );
 
 				} else {
