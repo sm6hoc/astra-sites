@@ -152,12 +152,7 @@ class Astra_WXR_Importer {
 		$mimes['svgz'] = 'image/svg+xml';
 
 		// Allow XML files.
-		$mimes['xml'] = 'application/xml';
 		$mimes['xml'] = 'text/xml';
-
-		$mimes['csv'] = 'text/csv';
-		$mimes['csv'] = 'text/plain';
-		
 
 		return $mimes;
 	}
