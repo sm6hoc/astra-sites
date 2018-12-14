@@ -43,33 +43,25 @@ class Astra_WXR_Importer {
 	 * @since  1.0.0
 	 */
 	private function __construct() {
-
-		if ( ! class_exists( 'WP_Importer' ) ) {
-			if ( defined( 'WP_LOAD_IMPORTERS' ) && WP_LOAD_IMPORTERS ) {
-				require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
-			}
-		}
-
-		if ( ! class_exists( 'WP_Importer_Logger' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
-		}
-
-		if ( ! class_exists( 'WP_Importer_Logger_ServerSentEvents' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
-		}
-
-		if ( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
-		}
-
-		if ( ! class_exists( 'WXR_Import_Info' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
-		}
-
+		add_action( 'admin_head-appearance_page_astra-sites', array($this, 'load_files' ) );
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
+	}
 
+	/**
+	 * Load Importer Files
+	 *
+	 * @since 1.2.8
+	 * 
+	 * @return void
+	 */
+	function load_files() {
+		require_once ABSPATH . '/wp-admin/includes/class-wp-importer.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
 	}
 
 	/**
@@ -161,6 +153,11 @@ class Astra_WXR_Importer {
 
 		// Allow XML files.
 		$mimes['xml'] = 'application/xml';
+		$mimes['xml'] = 'text/xml';
+
+		$mimes['csv'] = 'text/csv';
+		$mimes['csv'] = 'text/plain';
+		
 
 		return $mimes;
 	}
@@ -227,6 +224,7 @@ class Astra_WXR_Importer {
 				'default_author'    => get_current_user_id(),
 			)
 		);
+
 		$importer = new WXR_Importer( $options );
 		$logger   = new WP_Importer_Logger_ServerSentEvents();
 
