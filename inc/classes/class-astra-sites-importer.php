@@ -250,14 +250,16 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			);
 
 			$api_args = apply_filters(
-				'astra_sites_api_args', array(
+				'astra_sites_api_args',
+				array(
 					'timeout' => 15,
 				)
 			);
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params', array(
+				'astra_sites_api_params',
+				array(
 					'purchase_key' => '',
 					'site_url'     => '',
 				)
