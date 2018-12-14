@@ -4,8 +4,8 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
-**Tested up to:** 5.0  
-**Stable tag:** 1.2.7  
+**Tested up to:** 5.0.1  
+**Stable tag:** 1.2.8  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -56,6 +56,10 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.8 - 14-Dec-2018
+* Improvement: Added admin notice if XMLReader is not installed. XMLReader is required to import the XML of the website.
+* Fix: XML not import due to improved verification of MIME file types in WordPress v5.0.1.
 
 v1.2.7 - 12-July-2018
 * Improvement: Added page builder and category filter support to show selected page builder with selected categories.

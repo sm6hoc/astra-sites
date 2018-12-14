@@ -144,6 +144,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			Astra_Sites_Importer_Log::add( "Operating System \t: " . self::get_os() );
 			Astra_Sites_Importer_Log::add( "Software \t\t: " . self::get_software() );
 			Astra_Sites_Importer_Log::add( "MySQL version \t\t: " . self::get_mysql_version() );
+			Astra_Sites_Importer_Log::add( "XML Reader \t\t: " . self::get_xmlreader_status() );
 			Astra_Sites_Importer_Log::add( "PHP Version \t\t: " . self::get_php_version() );
 			Astra_Sites_Importer_Log::add( "PHP Max Input Vars \t: " . self::get_php_max_input_vars() );
 			Astra_Sites_Importer_Log::add( "PHP Max Post Size \t: " . self::get_php_max_post_size() );
@@ -425,6 +426,21 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		public static function get_mysql_version() {
 			global $wpdb;
 			return $wpdb->db_version();
+		}
+
+		/**
+		 * XML Reader
+		 *
+		 * @since 1.2.8
+		 * @return string Current XML Reader status.
+		 */
+		public static function get_xmlreader_status() {
+
+			if ( class_exists( 'XMLReader' ) ) {
+				return __( 'Yes', 'astra-sites' );
+			}
+
+			return __( 'No', 'astra-sites' );
 		}
 
 		/**

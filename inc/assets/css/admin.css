@@ -221,7 +221,7 @@
     overflow: hidden;
 }
 
-#astra-sites-menu-page .notice {
+.appearance_page_astra-sites .notice {
     margin-left: 0;
     width: auto;
     float: none;
@@ -404,6 +404,9 @@ body.loading-content .select-page-builder {
 /**
  * Processing Animation
  */
+.astra-demo-import.disabled {
+    pointer-events: none;
+}
 .astra-demo-import.button.updating-message:before,
 .astra-demo-import.button.installing:before {
     -webkit-animation: cssAnimation .72s ease infinite;

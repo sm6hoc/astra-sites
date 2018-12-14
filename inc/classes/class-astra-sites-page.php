@@ -93,6 +93,29 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			add_action( 'admin_menu', __CLASS__ . '::add_admin_menu', 100 );
 
 			add_action( 'astra_sites_menu_general_action', __CLASS__ . '::general_page' );
+			add_action( 'admin_notices', __CLASS__ . '::notices' );
+		}
+
+		/**
+		 * Admin notice
+		 *
+		 * @since 1.2.8
+		 */
+		public static function notices() {
+
+			if ( 'appearance_page_astra-sites' !== get_current_screen()->id ) {
+				return;
+			}
+
+			if ( ! class_exists( 'XMLReader' ) ) {
+				?>
+				<div class="notice astra-sites-xml-notice notice-error">
+					<p><b><?php _e( 'Required XMLReader PHP extension is missing on your server!', 'astra-sites' ); ?></b></p>
+					<?php /* translators: %s is the white label name. */ ?>
+					<p><?php printf( __( '%s import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), self::$menu_page_title ); ?></p>
+				</div>
+				<?php
+			}
 		}
 
 		/**
@@ -146,7 +169,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			if ( empty( self::$view_actions ) ) {
 
 				self::$view_actions = apply_filters(
-					'astra_sites_menu_item', array()
+					'astra_sites_menu_item',
+					array()
 				);
 			}
 
