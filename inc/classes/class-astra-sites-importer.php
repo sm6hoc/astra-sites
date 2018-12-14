@@ -62,7 +62,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			// Hooks in AJAX.
 			add_action( 'astra_sites_import_complete', array( $this, 'clear_cache' ) );
-			
+
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing.php';
 
 			add_action( 'astra_sites_image_import_complete', array( $this, 'clear_cache' ) );
@@ -243,14 +243,16 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			);
 
 			$api_args = apply_filters(
-				'astra_sites_api_args', array(
+				'astra_sites_api_args',
+				array(
 					'timeout' => 15,
 				)
 			);
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params', array(
+				'astra_sites_api_params',
+				array(
 					'purchase_key' => '',
 					'site_url'     => '',
 				)

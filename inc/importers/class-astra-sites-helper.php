@@ -203,7 +203,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 				// A properly uploaded file will pass this test. There should be no reason to override this one.
 				'test_upload' => true,
 
-				'mimes' => array(
+				'mimes'       => array(
 					'xml' => 'text/xml',
 				),
 			);

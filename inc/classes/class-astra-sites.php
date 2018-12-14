@@ -165,26 +165,30 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
 
-			$data = apply_filters( 'astra_sites_localize_vars', array(
-				'ApiURL'  => self::$api_url,
-				'filters' => array(
-					'page_builder' => array(
-						'title'   => __( 'Page Builder', 'astra-sites' ),
-						'slug'    => 'astra-site-page-builder',
-						'trigger' => 'astra-api-category-loaded',
+			$data = apply_filters(
+				'astra_sites_localize_vars',
+				array(
+					'ApiURL'  => self::$api_url,
+					'filters' => array(
+						'page_builder' => array(
+							'title'   => __( 'Page Builder', 'astra-sites' ),
+							'slug'    => 'astra-site-page-builder',
+							'trigger' => 'astra-api-category-loaded',
+						),
+						'categories'   => array(
+							'title'   => __( 'Categories', 'astra-sites' ),
+							'slug'    => 'astra-site-category',
+							'trigger' => 'astra-api-category-loaded',
+						),
 					),
-					'categories'   => array(
-						'title'   => __( 'Categories', 'astra-sites' ),
-						'slug'    => 'astra-site-category',
-						'trigger' => 'astra-api-category-loaded',
-					),
-				),
-			));
+				)
+			);
 			wp_localize_script( 'astra-sites-api', 'astraSitesApi', $data );
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params', array(
+				'astra_sites_api_params',
+				array(
 					'purchase_key' => '',
 					'site_url'     => '',
 					'par-page'     => 15,
@@ -422,7 +426,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			// Lite init => Pro init.
 			$plugins = apply_filters(
-				'astra_sites_pro_plugin_exist', array(
+				'astra_sites_pro_plugin_exist',
+				array(
 					'beaver-builder-lite-version/fl-builder.php' => array(
 						'slug' => 'bb-plugin',
 						'init' => 'bb-plugin/fl-builder.php',
@@ -433,7 +438,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'init' => 'bb-ultimate-addon/bb-ultimate-addon.php',
 						'name' => 'Ultimate Addon for Beaver Builder',
 					),
-				), $lite_version
+				),
+				$lite_version
 			);
 
 			if ( isset( $plugins[ $lite_version ] ) ) {
