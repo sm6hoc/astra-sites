@@ -43,25 +43,17 @@ class Astra_WXR_Importer {
 	 * @since  1.0.0
 	 */
 	private function __construct() {
-		add_action( 'admin_head-appearance_page_astra-sites', array( $this, 'load_files' ) );
-		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
-		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
-		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
-	}
 
-	/**
-	 * Load Importer Files
-	 *
-	 * @since 1.2.8
-	 *
-	 * @return void
-	 */
-	function load_files() {
 		require_once ABSPATH . '/wp-admin/includes/class-wp-importer.php';
 		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
 		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
 		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
 		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
+
+		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
+		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
+		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
+
 	}
 
 	/**
@@ -213,9 +205,8 @@ class Astra_WXR_Importer {
 	 * @return object   Importer object.
 	 */
 	public function get_importer() {
-		$options = apply_filters(
-			'astra_sites_xml_import_options',
-			array(
+		$options  = apply_filters(
+			'astra_sites_xml_import_options', array(
 				'fetch_attachments' => true,
 				'default_author'    => get_current_user_id(),
 			)

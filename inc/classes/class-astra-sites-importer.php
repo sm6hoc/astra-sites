@@ -50,7 +50,6 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/importers/class-widgets-importer.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/class-astra-customizer-import.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/class-astra-site-options-import.php';
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-astra-wxr-importer.php';
 
 			// Import AJAX.
 			add_action( 'wp_ajax_astra-sites-import-set-site-data', array( $this, 'import_start' ) );
@@ -62,10 +61,18 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			// Hooks in AJAX.
 			add_action( 'astra_sites_import_complete', array( $this, 'clear_cache' ) );
+			add_action( 'init', array( $this, 'load_importer' ) );
 
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing.php';
 
 			add_action( 'astra_sites_image_import_complete', array( $this, 'clear_cache' ) );
+		}
+
+		/**
+		 * Load WordPress WXR importer.
+		 */
+		public function load_importer() {
+			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-astra-wxr-importer.php';
 		}
 
 		/**
@@ -243,16 +250,14 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			);
 
 			$api_args = apply_filters(
-				'astra_sites_api_args',
-				array(
+				'astra_sites_api_args', array(
 					'timeout' => 15,
 				)
 			);
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params',
-				array(
+				'astra_sites_api_params', array(
 					'purchase_key' => '',
 					'site_url'     => '',
 				)

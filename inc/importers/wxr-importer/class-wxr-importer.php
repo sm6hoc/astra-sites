@@ -1,6 +1,6 @@
 <?php
 
-if( ! class_exists( 'WXR_Importer' ) ) :
+if( ! class_exists( 'WXR_Importer' ) && class_exists( 'WP_Importer' ) ) :
 	class WXR_Importer extends WP_Importer {
 		/**
 		 * Maximum supported WXR version
