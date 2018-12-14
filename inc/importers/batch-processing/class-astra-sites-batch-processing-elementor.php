@@ -202,7 +202,8 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 */
 	public function replace_elements_ids( $content ) {
 		return Plugin::$instance->db->iterate_data(
-			$content, function( $element ) {
+			$content,
+			function( $element ) {
 				$element['id'] = Utils::generate_random_string();
 
 				return $element;
@@ -220,7 +221,8 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 */
 	public function process_export_import_content( $content, $method ) {
 		return Plugin::$instance->db->iterate_data(
-			$content, function( $element_data ) use ( $method ) {
+			$content,
+			function( $element_data ) use ( $method ) {
 				$element = Plugin::$instance->elements_manager->create_element_instance( $element_data );
 
 				// If the widget/element isn't exist, like a plugin that creates a widget but deactivated.

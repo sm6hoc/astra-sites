@@ -154,7 +154,6 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				$xml_path = Astra_Sites_Helper::download_file( $wxr_url );
 
 				if ( $xml_path['success'] ) {
-
 					if ( isset( $xml_path['data']['file'] ) ) {
 						$data        = Astra_WXR_Importer::instance()->get_xml_data( $xml_path['data']['file'] );
 						$data['xml'] = $xml_path['data'];
@@ -251,14 +250,16 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			);
 
 			$api_args = apply_filters(
-				'astra_sites_api_args', array(
+				'astra_sites_api_args',
+				array(
 					'timeout' => 15,
 				)
 			);
 
 			// Use this for premium demos.
 			$request_params = apply_filters(
-				'astra_sites_api_params', array(
+				'astra_sites_api_params',
+				array(
 					'purchase_key' => '',
 					'site_url'     => '',
 				)

@@ -146,7 +146,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			if ( empty( self::$view_actions ) ) {
 
 				self::$view_actions = apply_filters(
-					'astra_sites_menu_item', array()
+					'astra_sites_menu_item',
+					array()
 				);
 			}
 
