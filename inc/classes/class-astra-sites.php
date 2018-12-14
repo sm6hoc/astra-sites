@@ -210,16 +210,19 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
-					'debug'           => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
-					'ajaxurl'         => esc_url( admin_url( 'admin-ajax.php' ) ),
-					'siteURL'         => site_url(),
-					'getProText'      => __( 'Purchase', 'astra-sites' ),
-					'getProURL'       => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
-					'getUpgradeText'  => __( 'Upgrade', 'astra-sites' ),
-					'getUpgradeURL'   => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
-					'_ajax_nonce'     => wp_create_nonce( 'astra-sites' ),
-					'requiredPlugins' => array(),
-					'strings'         => array(
+					'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
+					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'siteURL'           => site_url(),
+					'getProText'        => __( 'Purchase', 'astra-sites' ),
+					'getProURL'         => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
+					'getUpgradeText'    => __( 'Upgrade', 'astra-sites' ),
+					'getUpgradeURL'     => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
+					'_ajax_nonce'       => wp_create_nonce( 'astra-sites' ),
+					'requiredPlugins'   => array(),
+					'XMLReaderDisabled' => ! class_exists( 'XMLReader' ) ? true : false,
+					'strings'           => array(
+						/* translators: %s are HTML tags. */
+						'warningXMLReader'         => sprintf( __( '%1$sRequired XMLReader PHP extension is missing on your server!%2$sAstra Sites import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), '<div class="notice astra-sites-xml-notice notice-error"><p><b>', '</b></p><p>', '</p></div>' ),
 						'warningBeforeCloseWindow' => __( 'Warning! Astra Site Import process is not complete. Don\'t close the window until import process complete. Do you still want to leave the window?', 'astra-sites' ),
 						'importFailedBtnSmall'     => __( 'Error!', 'astra-sites' ),
 						'importFailedBtnLarge'     => __( 'Error! Read Possibilities.', 'astra-sites' ),
@@ -237,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'searchNoFound'            => __( 'No Demos found, Try a different search.', 'astra-sites' ),
 						'importWarning'            => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
 					),
-					'log'             => array(
+					'log'               => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
 						'installed'               => __( 'Successfully plugin installed!', 'astra-sites' ),
 						'activating'              => __( 'Activating plugin ', 'astra-sites' ),

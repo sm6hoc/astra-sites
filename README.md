@@ -58,6 +58,7 @@ https://wpastra.com/sites-suggestions/
 ## Changelog ##
 
 v1.2.8 - 14-Dec-2018
+* Improvement: Added admin notice if XMLReader is not installed. XMLReader is required to import the XML of the website.
 * Fix: XML not import due to improved verification of MIME file types in WordPress v5.0.1.
 
 v1.2.7 - 12-July-2018

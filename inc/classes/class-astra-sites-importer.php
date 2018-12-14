@@ -146,6 +146,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			do_action( 'astra_sites_import_prepare_xml_data' );
 
+			if ( ! class_exists( 'XMLReader' ) ) {
+				wp_send_json_error( __( 'If XMLReader is not available, it imports all other settings and only skips XML import. This creates an incomplete website. We should bail early and not import anything if this is not present.', 'astra-sites' ) );
+			}
+
 			$wxr_url = ( isset( $_REQUEST['wxr_url'] ) ) ? urldecode( $_REQUEST['wxr_url'] ) : '';
 
 			if ( isset( $wxr_url ) ) {
