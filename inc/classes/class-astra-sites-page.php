@@ -103,7 +103,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		public static function notices() {
 
-			if( 'appearance_page_astra-sites' !== get_current_screen()->id ) {
+			if ( 'appearance_page_astra-sites' !== get_current_screen()->id ) {
 				return;
 			}
 
@@ -111,6 +111,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				?>
 				<div class="notice astra-sites-xml-notice notice-error">
 					<p><b><?php _e( 'Required XMLReader PHP extension is missing on your server!', 'astra-sites' ); ?></b></p>
+					<?php /* translators: %s is the white label name. */ ?>
 					<p><?php printf( __( '%s import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), self::$menu_page_title ); ?></p>
 				</div>
 				<?php
