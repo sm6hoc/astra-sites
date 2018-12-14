@@ -92,6 +92,11 @@ class Astra_Site_Options_Import {
 			'woocommerce_view_order_page_title',
 			'woocommerce_change_password_page_title',
 			'woocommerce_logout_page_title',
+			'woocommerce_enable_guest_checkout',
+			'woocommerce_enable_checkout_login_reminder',
+			'woocommerce_enable_signup_and_login_from_checkout',
+			'woocommerce_enable_myaccount_registration',
+			'woocommerce_registration_generate_username',
 
 			// Categories.
 			'woocommerce_product_cat',
