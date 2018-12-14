@@ -158,7 +158,6 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				$xml_path = Astra_Sites_Helper::download_file( $wxr_url );
 
 				if ( $xml_path['success'] ) {
-
 					if ( isset( $xml_path['data']['file'] ) ) {
 						$data        = Astra_WXR_Importer::instance()->get_xml_data( $xml_path['data']['file'] );
 						$data['xml'] = $xml_path['data'];

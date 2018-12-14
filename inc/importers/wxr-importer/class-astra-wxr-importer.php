@@ -44,26 +44,11 @@ class Astra_WXR_Importer {
 	 */
 	private function __construct() {
 
-		if ( ! class_exists( 'WP_Importer' ) ) {
-			defined( 'WP_LOAD_IMPORTERS' ) || define( 'WP_LOAD_IMPORTERS', true );
-			require ABSPATH . '/wp-admin/includes/class-wp-importer.php';
-		}
-
-		if ( ! class_exists( 'WP_Importer_Logger' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
-		}
-
-		if ( ! class_exists( 'WP_Importer_Logger_ServerSentEvents' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
-		}
-
-		if ( ! class_exists( 'WXR_Importer' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
-		}
-
-		if ( ! class_exists( 'WXR_Import_Info' ) ) {
-			require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
-		}
+		require_once ABSPATH . '/wp-admin/includes/class-wp-importer.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-logger.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wp-importer-logger-serversentevents.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-importer.php';
+		require_once ASTRA_SITES_DIR . 'inc/importers/wxr-importer/class-wxr-import-info.php';
 
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
@@ -159,7 +144,7 @@ class Astra_WXR_Importer {
 		$mimes['svgz'] = 'image/svg+xml';
 
 		// Allow XML files.
-		$mimes['xml'] = 'application/xml';
+		$mimes['xml'] = 'text/xml';
 
 		return $mimes;
 	}
@@ -220,13 +205,14 @@ class Astra_WXR_Importer {
 	 * @return object   Importer object.
 	 */
 	public function get_importer() {
-		$options  = apply_filters(
+		$options = apply_filters(
 			'astra_sites_xml_import_options',
 			array(
 				'fetch_attachments' => true,
 				'default_author'    => get_current_user_id(),
 			)
 		);
+
 		$importer = new WXR_Importer( $options );
 		$logger   = new WP_Importer_Logger_ServerSentEvents();
 
