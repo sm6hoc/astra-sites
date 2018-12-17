@@ -53,7 +53,32 @@ class Astra_WXR_Importer {
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
+		add_filter( 'wp_check_filetype_and_ext', 'real_mime_type_for_xml', 10, 4 );
+	}
 
+	/**
+	 * Different MIME type of different PHP version
+	 *
+	 * Filters the "real" file type of the given file.
+	 *
+	 * @since 1.2.9
+	 *
+	 * @param array  $defaults File data array containing 'ext', 'type', and
+	 *                                          'proper_filename' keys.
+	 * @param string $file                      Full path to the file.
+	 * @param string $filename                  The name of the file (may differ from $file due to
+	 *                                          $file being in a tmp directory).
+	 * @param array  $mimes                     Key is the file extension with value as the mime type.
+	 */
+	function real_mime_type_for_xml( $defaults, $file, $filename, $mimes ) {
+
+		// Set EXT and real MIME type only for the file name `wxr.xml`.
+		if ( 'wxr.xml' == $filename ) {
+			$defaults['ext']  = 'xml';
+			$defaults['type'] = 'text/xml';
+		}
+
+		return $defaults;
 	}
 
 	/**
