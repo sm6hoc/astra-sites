@@ -53,7 +53,7 @@ class Astra_WXR_Importer {
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
-		add_filter( 'wp_check_filetype_and_ext', 'real_mime_type_for_xml', 10, 4 );
+		add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_type_for_xml' ), 10, 4 );
 	}
 
 	/**
