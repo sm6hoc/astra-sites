@@ -58,12 +58,12 @@ class Astra_WXR_Importer {
 
 	/**
 	 * Different MIME type of different PHP version
-	 * 
+	 *
 	 * Filters the "real" file type of the given file.
 	 *
 	 * @since 1.2.9
-	 * 
-	 * @param array  $wp_check_filetype_and_ext File data array containing 'ext', 'type', and
+	 *
+	 * @param array  $defaults File data array containing 'ext', 'type', and
 	 *                                          'proper_filename' keys.
 	 * @param string $file                      Full path to the file.
 	 * @param string $filename                  The name of the file (may differ from $file due to
@@ -73,7 +73,7 @@ class Astra_WXR_Importer {
 	function real_mime_type_for_xml( $defaults, $file, $filename, $mimes ) {
 
 		// Set EXT and real MIME type only for the file name `wxr.xml`.
-		if( 'wxr.xml' == $filename ) {
+		if ( 'wxr.xml' == $filename ) {
 			$defaults['ext']  = 'xml';
 			$defaults['type'] = 'text/xml';
 		}
