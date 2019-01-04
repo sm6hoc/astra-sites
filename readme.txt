@@ -58,7 +58,7 @@ https://wpastra.com/sites-suggestions/
 == Changelog ==
 
 v1.2.10 - 4-Jan-2019
-* Improvement: Validated query parameter before sending though API request.
+* Fix: Astra Sites not accessible due to incorrect query parameters.
 
 v1.2.9 - 17-Dec-2018
 * Fix: XML not import due to getting different MIME file types on different PHP versions.
