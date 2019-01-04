@@ -4,8 +4,8 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
-**Tested up to:** 5.0.1  
-**Stable tag:** 1.2.9  
+**Tested up to:** 5.0.2  
+**Stable tag:** 1.2.10  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -56,6 +56,9 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.10 - 4-Jan-2019
+* Improvement: Validated query parameter before sending though API request.
 
 v1.2.9 - 17-Dec-2018
 * Fix: XML not import due to getting different MIME file types on different PHP versions.
