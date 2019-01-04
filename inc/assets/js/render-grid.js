@@ -300,7 +300,13 @@
 				}
 			}
 
-			return '/?' + decodeURIComponent( $.param( _params ) );
+			var decoded_params = decodeURIComponent( $.param( _params ) );
+
+			if( decoded_params.length ) {
+				return '/?' + decoded_params;
+			}
+
+			return '/';
 		},
 
 		/**
@@ -321,7 +327,13 @@
 				}
 			}
 
-			return '/?' + decodeURIComponent( $.param( _params ) );
+			var decoded_params = decodeURIComponent( $.param( _params ) );
+
+			if( decoded_params.length ) {
+				return '/?' + decoded_params;
+			}
+
+			return '/';
 		},
 
 		/**
