@@ -13,7 +13,6 @@
 			// Set API Request Data.
 			var data = {
 				url: AstraSitesAPI._api_url + args.slug,
-				cache: false,
 			};
 
 			if( astraRenderGrid.headers ) {
