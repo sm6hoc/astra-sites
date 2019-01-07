@@ -345,6 +345,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Required Plugin
 		 *
+		 * @hook astra-required-plugins
 		 * @since 1.0.0
 		 * @return void
 		 */
@@ -364,6 +365,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
+			// vl( $required_plugins );
+			// wp_die();			
 
 			if ( count( $required_plugins ) > 0 ) {
 				foreach ( $required_plugins as $key => $plugin ) {

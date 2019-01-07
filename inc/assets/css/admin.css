@@ -465,7 +465,45 @@ body.loading-content .select-page-builder {
     }
 }
 
+#astra-sites-site-details {
+    display: none;
+}
+
 #astra-sites-filters {
     display: inline-block;
     width: 100%;
+}
+
+.astra-sites-site-details {
+    display: flex;
+    background: #fff;
+    width: 100%;
+}
+
+.astra-sites-site-details .thumbnail {
+    width: 40%;
+    padding: 2em;
+}
+
+.astra-sites-site-details img {
+    max-width: 100%;
+}
+
+.astra-sites-site-details .details {
+    padding: 2em;
+    border-left: 1px solid #f1f1f1;
+    width: 60%;
+}
+
+.astra-sites-site-details .actions {
+    text-align: right;
+}
+
+.astra-sites-site-details .updating-message::before {
+    animation: rotation 2s infinite linear;
+    display: inline-block;
+}
+
+.astra-sites-site-details .required-plugins .plugin-card {
+    display: block;
 }

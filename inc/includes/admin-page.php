@@ -17,52 +17,124 @@ defined( 'ABSPATH' ) or exit;
 
 <div class="wrap" id="astra-sites-admin">
 
-	<div id="astra-sites-filters">
+	<div id="astra-sites-site-details"></div>
 
-		<?php if ( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
-			<div class="wp-filter hide-if-no-js">
-				<div class="section-left">
+	<div id="astra-sites-grid">
 
-					<!-- All Filters -->
-					<div class="filter-count">
-						<span class="count"></span>
+		<div id="astra-sites-filters">
+
+			<?php if ( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
+				<div class="wp-filter hide-if-no-js">
+					<div class="section-left">
+
+						<!-- All Filters -->
+						<div class="filter-count">
+							<span class="count"></span>
+						</div>
+						<div class="filters-wrap">
+							<div id="astra-site-page-builder"></div>
+						</div>				
+
 					</div>
-					<div class="filters-wrap">
-						<div id="astra-site-page-builder"></div>
-					</div>				
 
+					<div class="section-right">
+
+						<div class="filters-wrap">
+							<div id="astra-site-category"></div>
+						</div>
+
+						<div class="search-form">
+							<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
+							<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
+						</div>
+
+					</div>
 				</div>
+			<?php } ?>
+		</div>
 
-				<div class="section-right">
+		<?php do_action( 'astra_sites_before_site_grid' ); ?>
 
-					<div class="filters-wrap">
-						<div id="astra-site-category"></div>
-					</div>
+		<div class="theme-browser rendered">
+			<div id="astra-sites" class="themes wp-clearfix"></div>
+		</div>
 
-					<div class="search-form">
-						<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
-						<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
-					</div>
+		<div class="spinner-wrap">
+			<span class="spinner"></span>
+		</div>
 
-				</div>
-			</div>
-		<?php } ?>
+		<?php do_action( 'astra_sites_after_site_grid' ); ?>
 
-	</div>
-
-	<?php do_action( 'astra_sites_before_site_grid' ); ?>
-
-	<div class="theme-browser rendered">
-		<div id="astra-sites" class="themes wp-clearfix"></div>
-	</div>
-
-	<div class="spinner-wrap">
-		<span class="spinner"></span>
-	</div>
-
-	<?php do_action( 'astra_sites_after_site_grid' ); ?>
+	</div><!-- #astra-sites-grid -->
 
 </div>
+
+<?php
+/**
+ * TMPL - Single Site Detail's
+ */
+?>
+<script type="text/template" id="tmpl-astra-sites-site-details">
+	<div class="astra-sites-site-details">
+		{{console.log( data )}}
+
+		<div class="thumbnail">
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Previous Site" class="prev button button-small"><span class="dashicons dashicons-arrow-left"></span><span class="screen-reader-text">Previous</span></button>
+				<button title="Next Site" class="next button button-small"><span class="dashicons dashicons-arrow-right"></span><span class="screen-reader-text">Next</span></button>
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="required-plugins"></div>
+
+			<h2>Information:</h2>
+			<p><input type="checkbox" name="site-content">Content</p>
+			<p><input type="checkbox" name="customizer-settings">Customizer Settings</p>
+			<p><input type="checkbox" name="widgets">Widgets</p>
+		</div>
+
+	</div>
+</script>
+
+<?php
+/**
+ * TMPL - Required Plugins
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-required-plugins">
+	<h2>Plugins</h2>
+	<p>The following plugins can be installed and activated automatically.</p>
+	<# console.log( data ); #>
+
+	<# if( data.notinstalled ) { #>
+		<# for ( key in data.notinstalled ) { #>
+			<# console.log( data.notinstalled[ key ] ) #>
+		<# } #>
+	<# } #>
+
+	<# if( data.inactive ) { #>
+		<# for ( key in data.inactive ) { #>
+			<# console.log( data.inactive[ key ] ) #>
+		<# } #>
+	<# } #>
+
+	<# if( data.active ) { #>
+		<# for ( key in data.active ) { #>
+			<# console.log( data.active[ key ] ) #>
+		<# } #>
+	<# } #>
+
+	<!-- output  = '<div class="plugin-card ';
+				// 			output += ' 		plugin-card-'+plugin.slug+'"';
+				// 			output += ' 		data-slug="'+plugin.slug+'"';
+				// 			output += ' 		data-init="'+plugin.init+'">';
+				// 			output += '	<span class="dashicons dashicons-arrow-right"></span>'; -->
+</script>
 
 <?php
 /**
