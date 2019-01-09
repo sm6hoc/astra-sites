@@ -174,6 +174,7 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
+			$( document ).on('click'                     , '.astra-sites-site-details .backup-options', AstraSitesAdmin._backup_options);
 			$( document ).on('click'					 , '.devices button', AstraSitesAdmin._previewDevice);
 			$( document ).on('click'                     , '.astra-sites-site-details .site-preview, .theme-browser .theme-screenshot, .theme-browser .more-details', AstraSitesAdmin._preview);
 			$( document ).on('click'                     , '.theme-browser .install-theme-preview', AstraSitesAdmin._single_site_details);
@@ -423,6 +424,30 @@ var AstraSitesAjaxQueue = (function() {
 					$(document).trigger( 'astra-sites-import-customizer-settings-done' );
 				}
 			});
+		},
+
+		_backup_options: function( event ) {
+			event.preventDefault();
+
+			var btn = $(this);
+
+			$.ajax({
+				url: astraSitesAdmin.ajaxurl,
+				type: 'POST',
+				data: {
+					'action' : 'astra-sites-backup-options',
+				},
+			})
+			.done(function (data) {
+				download( data, 'backup-options.json', 'application/json' );
+
+				setTimeout( function() {
+					btn.text( 'Import Options' );
+					btn.removeClass( 'backup-options' );
+					btn.addClass( 'import-options' );
+				}, 500 );
+			});
+
 		},
 
 		/**
