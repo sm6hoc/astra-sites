@@ -157,6 +157,7 @@ defined( 'ABSPATH' ) or exit;
 			<div class="actions">
 				<button class="button site-step-plugin-list">Back</button>
 				<span>
+					<button class="button site-step-skip-show-content">Skip</button>
 					<button class="button button-primary backup-options">Backup Options</button>
 				</span>
 			</div>
@@ -178,6 +179,48 @@ defined( 'ABSPATH' ) or exit;
 					<# if( value ) { #>
 					<# } #>
 				<# }); #>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</script>
+
+<?php
+/**
+ * TMPL - Site Content - Screen 4
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-content">
+
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-step-plugin-list">Back</button>
+				<span>
+					<button class="button site-step-skip-show-content">Skip</button>
+					<button class="button button-primary backup-options">Import Content</button>
+				</span>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+
+				<h2>Select Pages</h2>
+				
+				<p>Select specific pages to import.</p>
+
+				<div class="page-list"> <span class="spinner is-active"></span> </div>
 
 			</div>
 

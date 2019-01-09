@@ -202,6 +202,7 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('astra-sites-import-widgets-done'             , AstraSitesAdmin._importEnd );
 			
 			$( document ).on('click', '.site-step-skip-goto-site-options', AstraSitesAdmin._site_step_skip_goto_site_options);
+			$( document ).on('click', '.site-step-skip-show-content', AstraSitesAdmin._site_step_skip_show_content);
 
 			$( document ).on('click', '.astra-sites-site-details .next', AstraSitesAdmin._nextSingleSite);
 			$( document ).on('click', '.astra-sites-site-details .previous', AstraSitesAdmin._previousSingleSite);
@@ -246,9 +247,43 @@ var AstraSitesAjaxQueue = (function() {
 			$( '#astra-sites-site-details' ).html( template( AstraSitesAdmin.templateData ) );
 		},
 
-		/**
-		 * 5. Import Complete.
-		 */
+		_site_step_skip_show_content: function( event ) {
+			event.preventDefault();
+			var template = wp.template('astra-site-content');
+			$( '#astra-sites-site-details' ).html( template( AstraSitesAdmin.templateData ) );
+
+			console.log( AstraSitesAdmin.templateData.astra_demo_url + '/wp-json/wp/v2/pages' );
+				
+			// Replace ./data.json with your JSON feed
+			fetch( AstraSitesAdmin.templateData.astra_demo_url + '/wp-json/wp/v2/pages' ).then(response => {
+				return response.json();
+			}).then(pages => {
+				// Work with JSON pages here
+				console.log(pages);
+
+				$( '.page-list' ).html( '' );
+
+				for ( key in pages ) {
+					console.log( pages[ key ] );
+					var output  = '<div class="page">';
+					    output += '    <div class="inner">';
+					    output += '        <div class="title">'+pages[ key ].title.rendered+'</div>';
+					    // output += '        <img class="theme-screenshot" src="#" alt="">';
+					    output += '        <span class="actions">';
+					    output += '        	<input type="checkbox" name="page[]">';
+				        output += '    		<a href="'+pages[ key ].link+'" target="blank">Preview <i class="dashicons dashicons-external"></i></a>';
+				        output += '    	</span>';
+					    output += '    </div>';
+					    output += '</div>';
+
+					$( '.page-list' ).append( output );
+				}
+
+			}).catch(err => {
+				// Do something for an error here
+			});
+		},
+
 		_site_step_skip_goto_site_options: function( event ) {
 			event.preventDefault();
 			var template = wp.template('astra-site-options');

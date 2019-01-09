@@ -550,3 +550,7 @@ body.loading-content .select-page-builder {
 .astra-sites-site-details .actions > span .button:nth-child(2) {
     margin-left: .5em;
 }
+
+.astra-sites-site-details .title {
+    padding: 1em 0;
+}
