@@ -71,14 +71,17 @@ defined( 'ABSPATH' ) or exit;
 
 <?php
 /**
- * TMPL - Single Site Detail's
+ * TMPL - Single Site Detail's - Screen 1
  */
 ?>
 <script type="text/template" id="tmpl-astra-sites-site-details">
 	<div class="astra-sites-site-details">
-		{{console.log( data )}}
 
 		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-preview">Preview</button>
+				<button class="button button-primary site-plugin-list">Get Started</button>
+			</div>
 			<# if ( data.screenshot.length ) { #>
 				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
 			<# } #>
@@ -90,15 +93,81 @@ defined( 'ABSPATH' ) or exit;
 				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
 			</div>
 
-			<div class="required-plugins"></div>
+			<div class="inner">
+				<h2>Overview</h2>
+				<p>{{ data.content }}</p>
+			</div>
 
-			<h2>Information:</h2>
-			<p><input type="checkbox" name="site-content">Content</p>
-			<p><input type="checkbox" name="customizer-settings">Customizer Settings</p>
-			<p><input type="checkbox" name="widgets">Widgets</p>
 		</div>
 
 	</div>
+</script>
+
+<?php
+/**
+ * TMPL - Required Plugins List - Screen 2
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-required-plugins-list">
+
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-step-back-details">Back</button>
+				<span>
+					<button class="button site-step-skip">Skip</button>
+					<button class="button button-primary install-plugins">Install Plugins</button>
+				</span>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+
+				<h2>Plugins</h2>
+				<p>The following plugins can be installed and activated automatically.</p>
+			
+				<div class="required-plugins"></div>
+				<!-- <div class="page-list">
+				    <div class="page">
+				        <div class="inner">
+				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
+						</a></span>
+				        </div>
+				    </div>
+				    <div class="page">
+				        <div class="inner">
+				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
+						</a></span>
+				        </div>
+				    </div>
+				    <div class="page">
+				        <div class="inner">
+				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
+						</a></span>
+				        </div>
+				    </div>
+				    <div class="page">
+				        <div class="inner">
+				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
+						</a></span>
+				        </div>
+				    </div>
+				</div> -->
+
+			</div>
+
+		</div>
+
+	</div>
+
 </script>
 
 <?php
@@ -107,33 +176,45 @@ defined( 'ABSPATH' ) or exit;
  */
 ?>
 <script type="text/template" id="tmpl-astra-site-required-plugins">
-	<h2>Plugins</h2>
-	<p>The following plugins can be installed and activated automatically.</p>
 	<# console.log( data ); #>
+	<# console.log( data.data ); #>
 
-	<# if( data.notinstalled ) { #>
-		<# for ( key in data.notinstalled ) { #>
-			<# console.log( data.notinstalled[ key ] ) #>
+	<# if( data.data.notinstalled.length ) { #>
+		<h4>Not Installed Plugins</h4>
+		<p>Below plugins are not installed yet! We'll install and activate them in import process.</p>
+		<# for ( key in data.data.notinstalled ) { #>
+			<# console.log( data.data.notinstalled[ key ] ) #>
+			<div data-slug="{{data.data.notinstalled[ key ].slug}}" data-init="{{data.data.notinstalled[ key ].init}}">
+				<span class="notinstalled dashicons dashicons-arrow-right"></span>
+				{{data.data.notinstalled[ key ].name}}
+			</div>
 		<# } #>
 	<# } #>
 
-	<# if( data.inactive ) { #>
-		<# for ( key in data.inactive ) { #>
-			<# console.log( data.inactive[ key ] ) #>
+	<# if( data.data.inactive.length ) { #>
+		<h4>Inactive Plugins</h4>
+		<p>Below plugins are inactivate. We'll activate them in import process.</p>
+		<# for ( key in data.data.inactive ) { #>
+			<# console.log( data.data.inactive[ key ] ) #>
+			<div data-slug="{{data.data.inactive[ key ].slug}}" data-init="{{data.data.inactive[ key ].init}}">
+				<span class="inactive dashicons dashicons-arrow-right"></span>
+				{{data.data.inactive[ key ].name}}
+			</div>
 		<# } #>
 	<# } #>
 
-	<# if( data.active ) { #>
-		<# for ( key in data.active ) { #>
-			<# console.log( data.active[ key ] ) #>
+	<# if( data.data.active.length ) { #>
+		<h4>Active Plugins</h4>
+		<p>Below plugins are activate.</p>
+		<# for ( key in data.data.active ) { #>
+			<# console.log( data.data.active[ key ] ) #>
+			<div data-slug="{{data.data.active[ key ].slug}}" data-init="{{data.data.active[ key ].init}}">
+				<span class="active dashicons dashicons-arrow-right"></span>
+				{{data.data.active[ key ].name}}
+			</div>
 		<# } #>
 	<# } #>
 
-	<!-- output  = '<div class="plugin-card ';
-				// 			output += ' 		plugin-card-'+plugin.slug+'"';
-				// 			output += ' 		data-slug="'+plugin.slug+'"';
-				// 			output += ' 		data-init="'+plugin.init+'">';
-				// 			output += '	<span class="dashicons dashicons-arrow-right"></span>'; -->
 </script>
 
 <?php

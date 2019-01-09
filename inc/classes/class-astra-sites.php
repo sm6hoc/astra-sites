@@ -131,7 +131,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://sites-wpastra.sharkz.in/wp-json/wp/v2/' );
 
 		}
 
@@ -364,9 +364,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( $response );
 			}
 
-			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
-			// vl( $required_plugins );
-			// wp_die();			
+			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? json_decode( stripslashes( $_POST['required_plugins'] ), true ) : array();
 
 			if ( count( $required_plugins ) > 0 ) {
 				foreach ( $required_plugins as $key => $plugin ) {
@@ -406,6 +404,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					}
 				}
 			}
+
+			// vl( $response );
+			// wp_die();
+
 
 			// Send response.
 			wp_send_json_success( $response );

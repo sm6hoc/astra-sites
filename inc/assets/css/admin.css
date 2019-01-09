@@ -239,7 +239,7 @@
     display: none !important;
 }
 #astra-sites-admin {
-    height: 100vh;
+    min-height: 100vh;
 }
 .install-theme-info > .notice {
     margin: 5px 0 10px 0;
@@ -487,6 +487,7 @@ body.loading-content .select-page-builder {
 
 .astra-sites-site-details img {
     max-width: 100%;
+    border: 1px solid #f1f1f1;
 }
 
 .astra-sites-site-details .details {
@@ -499,6 +500,12 @@ body.loading-content .select-page-builder {
     text-align: right;
 }
 
+.astra-sites-site-details .thumbnail .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+}
+
 .astra-sites-site-details .updating-message::before {
     animation: rotation 2s infinite linear;
     display: inline-block;
@@ -506,4 +513,40 @@ body.loading-content .select-page-builder {
 
 .astra-sites-site-details .required-plugins .plugin-card {
     display: block;
+}
+
+/**
+ * Pages
+ */
+.page-list {
+    margin-left: -1em;
+    margin-right: -1em;
+}
+.page-list .page {
+    width: 33%;
+    text-align: center;
+    float: left;
+    padding: 0px;
+}
+.page-list  a {
+    text-decoration: none;
+}
+.page-list .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 1em .5em 1em;
+    border-top: 1px solid #f1f1f1;
+}
+.page-list .inner {
+    border: 1px solid #f1f1f1;
+    margin: 1em;
+}
+
+.astra-sites-site-details .actions > span {
+    flex: 1;
+}
+
+.astra-sites-site-details .actions > span .button:nth-child(2) {
+    margin-left: .5em;
 }
