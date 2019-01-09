@@ -116,7 +116,7 @@ defined( 'ABSPATH' ) or exit;
 			<div class="actions">
 				<button class="button site-step-back-details">Back</button>
 				<span>
-					<button class="button site-step-skip">Skip</button>
+					<button class="button site-step-skip-goto-site-options">Skip</button>
 					<button class="button button-primary install-plugins">Install Plugins</button>
 				</span>
 			</div>
@@ -157,7 +157,6 @@ defined( 'ABSPATH' ) or exit;
 			<div class="actions">
 				<button class="button site-step-plugin-list">Back</button>
 				<span>
-					<button class="button site-step-skip">Skip</button>
 					<button class="button button-primary backup-options">Backup Options</button>
 				</span>
 			</div>
