@@ -135,32 +135,50 @@ defined( 'ABSPATH' ) or exit;
 				<p>The following plugins can be installed and activated automatically.</p>
 			
 				<div class="required-plugins"></div>
-				<!-- <div class="page-list">
-				    <div class="page">
-				        <div class="inner">
-				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
-						</a></span>
-				        </div>
-				    </div>
-				    <div class="page">
-				        <div class="inner">
-				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
-						</a></span>
-				        </div>
-				    </div>
-				    <div class="page">
-				        <div class="inner">
-				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
-						</a></span>
-				        </div>
-				    </div>
-				    <div class="page">
-				        <div class="inner">
-				            <img class="theme-screenshot" src="https://websitedemos.net/wp-content/uploads/2018/12/outdoor.jpg" alt=""><span class="actions"><input type="checkbox" name="page[]"><a href="#" target="blank">Preview <i class="dashicons dashicons-external"></i>
-						</a></span>
-				        </div>
-				    </div>
-				</div> -->
+
+			</div>
+
+		</div>
+
+	</div>
+
+</script>
+
+<?php
+/**
+ * TMPL - Site Options - Screen 3
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-options">
+
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-step-plugin-list">Back</button>
+				<span>
+					<button class="button site-step-skip">Skip</button>
+					<button class="button button-primary backup-options">Backup Options</button>
+				</span>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+
+				<h2>Active Addons</h2>
+
+				<# _.each( JSON.parse( data.astra_enabled_extensions ), function(value, key, obj) { #>
+						<div>{{ key }}</div>
+					<# if( value ) { #>
+					<# } #>
+				<# }); #>
 
 			</div>
 

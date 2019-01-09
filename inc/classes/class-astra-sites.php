@@ -65,6 +65,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// AJAX.
 			add_action( 'wp_ajax_astra-required-plugins', array( $this, 'required_plugin' ) );
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
+			add_action( 'wp_ajax_astra-required-plugin-activate-new', array( $this, 'required_plugin_activate_new' ) );
 		}
 
 		/**
@@ -293,6 +294,45 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/class-astra-sites-compatibility.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-white-label.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-importer.php';
+
+		}
+
+		/**
+		 * Required Plugin Activate
+		 *
+		 * @since 1.0.0
+		 */
+		public function required_plugin_activate_new() {
+
+			if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => __( 'No plugin specified', 'astra-sites' ),
+					)
+				);
+			}
+
+			$data        = array();
+			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
+
+			$activate = activate_plugin( $plugin_init, '', false, true );
+
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					)
+				);
+			}
+
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => __( 'Plugin Successfully Activated', 'astra-sites' ),
+				)
+			);
 
 		}
 
