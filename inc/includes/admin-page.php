@@ -187,6 +187,18 @@ defined( 'ABSPATH' ) or exit;
 
 <?php
 /**
+ * TMPL - Site Down
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-down">
+	<div class="postbox astra-site-down">
+		<h1>Website is Unreachable</h1>
+		<p class="description">This website is currently unreachable. Please try again.</p>
+	</div>
+</script>
+
+<?php
+/**
  * TMPL - Filters
  */
 ?>

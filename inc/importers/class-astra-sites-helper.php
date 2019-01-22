@@ -88,7 +88,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 		/**
 		 * Get SVG Dimensions
 		 *
-		 * @since 1.1.5
+		 * @since x.x.x.
 		 *
 		 * @param  string $svg SVG file path.
 		 * @return array      Return SVG file height & width for valid SVG file.
