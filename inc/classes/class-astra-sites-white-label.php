@@ -220,8 +220,6 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 */
 		function set_white_labels() {
 			
-			$whitelabel_settings = array();
-
 			$name = $description = $support_link = '';
 			if ( is_callable( 'Astra_Ext_White_Label_Markup::get_white_label' ) ) {
 				$name         = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
