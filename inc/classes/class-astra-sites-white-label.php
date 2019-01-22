@@ -220,15 +220,17 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 */
 		function set_white_labels() {
 			
-			$name = $description = $support_link = '';
+			$name = $description = $support_link = $author = '';
 			if ( is_callable( 'Astra_Ext_White_Label_Markup::get_white_label' ) ) {
 				$name         = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
 				$description  = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'description' );
 				$support_link = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author_url' );
+				$author       = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author' );
 			}
 
 			$this->settings = array(
 				'name'         => ( ! empty( $name ) ) ? $name : __( 'Astra Sites', 'astra-sites' ),
+				'author'       => ( ! empty( $author ) ) ? $author : __( 'Brainstorm Force', 'astra-sites' ),
 				'description'  => ( ! empty( $description ) ) ? $description : __( 'Import free sites build with Astra theme.', 'astra-sites'),
 				'support-link' => ( ! empty( $support_link ) ) ? $support_link : 'mailto:support@bsf.io',
 			);
@@ -255,6 +257,17 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 */
 		function get_description() {
 			return $this->settings['description'];
+		}
+
+		/**
+		 * Get Author
+		 * 
+		 * @since 1.2.11
+		 * 
+		 * @return string
+		 */
+		function get_author() {
+			return $this->settings['author'];
 		}
 
 		/**

@@ -195,7 +195,7 @@ defined( 'ABSPATH' ) or exit;
 		<?php /* translators: %s is a Support Link */ ?>
 		<p><?php printf( __( 'Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="%s" target="_blank">contact us</a>, otherwise we&rsquo;ll be back online shortly!', 'astra-sites' ), Astra_Sites_White_Label::get_instance()->get_support_link() ); ?></p>
 		<?php /* translators: %s is a Brand Name */ ?>
-		<p><?php printf( __( '&mdash; %s', 'astra-sites' ), Astra_Sites_White_Label::get_instance()->get_name() ); ?></p>
+		<p><?php printf( __( '&mdash; %s', 'astra-sites' ), Astra_Sites_White_Label::get_instance()->get_author() ); ?></p>
 	</div>
 </script>
 
