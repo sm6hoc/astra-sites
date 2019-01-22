@@ -13,6 +13,15 @@
 
 defined( 'ABSPATH' ) or exit;
 
+// Set White Labels.
+$brand_name = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
+if( empty( $brand_name ) ) {
+	$brand_name = 'Brainstorm Force';
+}
+$brand_uri = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author_url' );
+if( empty( $brand_uri ) ) {
+	$brand_uri = 'mailto:support@bsf.io';
+}
 ?>
 
 <div class="wrap" id="astra-sites-admin">
@@ -192,9 +201,9 @@ defined( 'ABSPATH' ) or exit;
 ?>
 <script type="text/template" id="tmpl-astra-site-down">
 	<div class="postbox astra-site-down">
-		<h1><?php _e( 'We&rsquo;ll be back soon!', 'astra-sites' ); ?></h1>
-		<p><?php _e( 'Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="mailto:support@bsf.io">contact us</a>, otherwise we&rsquo;ll be back online shortly!', 'astra-sites' ); ?></p>
-		<p><?php _e( '&mdash; Brainstorm Force', 'astra-sites' ); ?></p>
+		<h2><?php _e( 'We&rsquo;ll be back soon!', 'astra-sites' ); ?></h2>
+		<p><?php printf( __( 'Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="%s" target="_blank">contact us</a>, otherwise we&rsquo;ll be back online shortly!', 'astra-sites' ), $brand_uri ); ?></p>
+		<p><?php printf( __( '&mdash; %s', 'astra-sites' ), $brand_name ); ?></p>
 	</div>
 </script>
 
