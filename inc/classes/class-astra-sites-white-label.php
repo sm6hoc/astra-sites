@@ -38,7 +38,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		/**
 		 * Settings
 		 *
-		 * @since 1.0.12
+		 * @since 1.2.11
 		 *
 		 * @var array settings
 		 * 
