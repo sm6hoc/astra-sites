@@ -51,7 +51,7 @@
 		/**
 		 * Website is Down
 		 *
-		 * @since x.x.x
+		 * @since 1.2.11
 		 * @return null
 		 */
 		_site_down: function() {

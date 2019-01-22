@@ -192,8 +192,9 @@ defined( 'ABSPATH' ) or exit;
 ?>
 <script type="text/template" id="tmpl-astra-site-down">
 	<div class="postbox astra-site-down">
-		<h1>Website is Unreachable</h1>
-		<p class="description">This website is currently unreachable. Please try again.</p>
+		<h1><?php _e( 'We&rsquo;ll be back soon!', 'astra-sites' ); ?></h1>
+		<p><?php _e( 'Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="mailto:support@bsf.io">contact us</a>, otherwise we&rsquo;ll be back online shortly!', 'astra-sites' ); ?></p>
+		<p><?php _e( '&mdash; Brainstorm Force', 'astra-sites' ); ?></p>
 	</div>
 </script>
 

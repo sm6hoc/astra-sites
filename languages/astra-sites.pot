@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites 1.2.10\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2019-01-04 13:44:02+00:00\n"
+"POT-Creation-Date: 2019-01-22 06:13:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -192,7 +192,7 @@ msgstr ""
 msgid "There was a problem receiving a response from server."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:240 inc/includes/admin-page.php:270
+#: inc/classes/class-astra-sites.php:240 inc/includes/admin-page.php:283
 msgid "No Demos found, Try a different search."
 msgstr ""
 
@@ -578,7 +578,7 @@ msgstr ""
 msgid "Enter mobile preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:161 inc/includes/admin-page.php:262
+#: inc/includes/admin-page.php:161 inc/includes/admin-page.php:275
 msgid "Preview"
 msgstr ""
 
@@ -610,11 +610,27 @@ msgid ""
 "for you.</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:251
+#: inc/includes/admin-page.php:195
+msgid "We&rsquo;ll be back soon!"
+msgstr ""
+
+#: inc/includes/admin-page.php:196
+msgid ""
+"Sorry for the inconvenience but we&rsquo;re performing some maintenance at "
+"the moment. If you need to you can always <a "
+"href=\"mailto:support@bsf.io\">contact us</a>, otherwise we&rsquo;ll be "
+"back online shortly!"
+msgstr ""
+
+#: inc/includes/admin-page.php:197
+msgid "&mdash; Brainstorm Force"
+msgstr ""
+
+#: inc/includes/admin-page.php:264
 msgid "Details &amp; Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:274 inc/includes/admin-page.php:292
+#: inc/includes/admin-page.php:287 inc/includes/admin-page.php:305
 #. translators: %1$s External Link
 msgid ""
 "Don't see a site that you would like to import?<br><a target=\"_blank\" "
