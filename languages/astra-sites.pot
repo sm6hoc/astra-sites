@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Astra Starter Sites package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Astra Starter Sites 1.2.10\n"
+"Project-Id-Version: Astra Starter Sites 1.2.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2019-01-22 06:13:03+00:00\n"
+"POT-Creation-Date: 2019-01-24 06:48:32+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,7 @@ msgstr ""
 "X-Generator: grunt-wp-i18n1.0.0\n"
 
 #: astra-sites.php:18 inc/classes/class-astra-sites-page.php:85
+#: inc/classes/class-astra-sites-white-label.php:232
 msgid "Astra Sites"
 msgstr ""
 
@@ -97,9 +98,17 @@ msgstr ""
 msgid "Settings saved successfully."
 msgstr ""
 
-#: inc/classes/class-astra-sites-white-label.php:176
+#: inc/classes/class-astra-sites-white-label.php:189
 #. translators: %1$s product name
 msgid "%1$s Branding"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Brainstorm Force"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Import free sites build with Astra theme."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:81
@@ -180,7 +189,7 @@ msgstr ""
 msgid "Importing.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:237 inc/includes/admin-page.php:123
+#: inc/classes/class-astra-sites.php:237 inc/includes/admin-page.php:122
 msgid "Read more"
 msgstr ""
 
@@ -192,7 +201,7 @@ msgstr ""
 msgid "There was a problem receiving a response from server."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:240 inc/includes/admin-page.php:283
+#: inc/classes/class-astra-sites.php:240 inc/includes/admin-page.php:282
 msgid "No Demos found, Try a different search."
 msgstr ""
 
@@ -526,83 +535,83 @@ msgstr ""
 msgid "Could not update comment #%d with mapped data"
 msgstr ""
 
-#: inc/includes/admin-page.php:43
+#: inc/includes/admin-page.php:42
 msgid "Search Sites"
 msgstr ""
 
-#: inc/includes/admin-page.php:44
+#: inc/includes/admin-page.php:43
 msgid "Search Sites..."
 msgstr ""
 
-#: inc/includes/admin-page.php:77
+#: inc/includes/admin-page.php:76
 msgid "Select Your Favorite Page Builder"
 msgstr ""
 
-#: inc/includes/admin-page.php:80
+#: inc/includes/admin-page.php:79
 msgid "Sites List.."
 msgstr ""
 
-#: inc/includes/admin-page.php:104
+#: inc/includes/admin-page.php:103
 msgid "Close"
 msgstr ""
 
-#: inc/includes/admin-page.php:105
+#: inc/includes/admin-page.php:104
 msgid "Previous"
 msgstr ""
 
-#: inc/includes/admin-page.php:106
+#: inc/includes/admin-page.php:105
 msgid "Next"
 msgstr ""
 
-#: inc/includes/admin-page.php:107 inc/includes/admin-page.php:135
+#: inc/includes/admin-page.php:106 inc/includes/admin-page.php:134
 msgid "Install Plugins"
 msgstr ""
 
-#: inc/includes/admin-page.php:126
+#: inc/includes/admin-page.php:125
 msgid "Required Plugins"
 msgstr ""
 
-#: inc/includes/admin-page.php:141
+#: inc/includes/admin-page.php:140
 msgid "Collapse"
 msgstr ""
 
-#: inc/includes/admin-page.php:147
+#: inc/includes/admin-page.php:146
 msgid "Enter desktop preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:150
+#: inc/includes/admin-page.php:149
 msgid "Enter tablet preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:153
+#: inc/includes/admin-page.php:152
 msgid "Enter mobile preview mode"
 msgstr ""
 
-#: inc/includes/admin-page.php:161 inc/includes/admin-page.php:275
+#: inc/includes/admin-page.php:160 inc/includes/admin-page.php:274
 msgid "Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:176
+#: inc/includes/admin-page.php:175
 #. translators: %1$s & %2$s are a Demo API URL
 msgid ""
 "<p> It seems the demo data server, <i><a href=\"%1$s\">%2$s</a></i> is "
 "unreachable from your site.</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:178
+#: inc/includes/admin-page.php:177
 msgid ""
 "<p class=\"left-margin\"> 1. Sometimes, simple page reload fixes any "
 "temporary issues. No kidding!</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:180
+#: inc/includes/admin-page.php:179
 msgid ""
 "<p class=\"left-margin\"> 2. If that does not work, you will need to talk "
 "to your server administrator and check if demo server is being blocked by "
 "the firewall!</p>"
 msgstr ""
 
-#: inc/includes/admin-page.php:183
+#: inc/includes/admin-page.php:182
 #. translators: %1$s is a support link
 msgid ""
 "<p>If that does not help, please open up a <a href=\"%1$s\" "
@@ -610,27 +619,28 @@ msgid ""
 "for you.</p>"
 msgstr ""
 
+#: inc/includes/admin-page.php:194
+msgid "Under Maintenance.."
+msgstr ""
+
 #: inc/includes/admin-page.php:195
-msgid "We&rsquo;ll be back soon!"
+msgid ""
+"If you are seeing this message, most likely our servers are under routine "
+"maintenance and we will be back shortly. "
 msgstr ""
 
 #: inc/includes/admin-page.php:196
 msgid ""
-"Sorry for the inconvenience but we&rsquo;re performing some maintenance at "
-"the moment. If you need to you can always <a "
-"href=\"mailto:support@bsf.io\">contact us</a>, otherwise we&rsquo;ll be "
-"back online shortly!"
+"In rare case, it is possible your website is having trouble connecting with "
+"ours. If you need help, please feel free to get in touch with us from our "
+"website."
 msgstr ""
 
-#: inc/includes/admin-page.php:197
-msgid "&mdash; Brainstorm Force"
-msgstr ""
-
-#: inc/includes/admin-page.php:264
+#: inc/includes/admin-page.php:263
 msgid "Details &amp; Preview"
 msgstr ""
 
-#: inc/includes/admin-page.php:287 inc/includes/admin-page.php:305
+#: inc/includes/admin-page.php:286 inc/includes/admin-page.php:304
 #. translators: %1$s External Link
 msgid ""
 "Don't see a site that you would like to import?<br><a target=\"_blank\" "
@@ -651,14 +661,6 @@ msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid "http://www.wpastra.com/pro/"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "Import free sites build with Astra theme."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "Brainstorm Force"
 msgstr ""
 
 #. Author URI of the plugin/theme
