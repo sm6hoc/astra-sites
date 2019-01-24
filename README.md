@@ -57,8 +57,9 @@ https://wpastra.com/sites-suggestions/
 
 ## Changelog ##
 
-v1.2.11 - 22-Jan-2019
+v1.2.11 - 24-Jan-2019
 * Improvement: Display a maintenance message if the Astra Sites API is unreachable.
+* Fix: EventSource abort the import process if default charset is not UTF-8.
 
 v1.2.10 - 4-Jan-2019
 * Fix: Astra Sites not accessible due to incorrect query parameters.
