@@ -1,4 +1,5 @@
 (function($){
+
 	AstraRender = {
 
 		_ref			: null,
@@ -54,8 +55,11 @@
 		 * @since 1.2.11
 		 * @return null
 		 */
-		_site_unreachable: function() {
-			$('#astra-sites-admin').html( wp.template('astra-site-down') )
+		_site_unreachable: function( event, jqXHR, textStatus, args ) {
+			event.preventDefault();
+			if ( 'astra-site-page-builder' === args.id ) {
+				$('#astra-sites-admin').html( wp.template('astra-site-down') )
+			}
 		},
 
 		/**
