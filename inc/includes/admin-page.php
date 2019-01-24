@@ -191,11 +191,11 @@ defined( 'ABSPATH' ) or exit;
 ?>
 <script type="text/template" id="tmpl-astra-site-down">
 	<div class="postbox astra-site-down">
-		<h2><?php _e( 'We&rsquo;ll be back soon!', 'astra-sites' ); ?></h2>
+		<h2><?php _e( 'Under Maintenance..', 'astra-sites' ); ?></h2>
 		<?php /* translators: %s is a Support Link */ ?>
-		<p><?php printf( __( 'Sorry for the inconvenience but we&rsquo;re performing some maintenance at the moment. If you need to you can always <a href="%s" target="_blank">contact us</a>, otherwise we&rsquo;ll be back online shortly!', 'astra-sites' ), Astra_Sites_White_Label::get_instance()->get_support_link() ); ?></p>
+		<p><?php _e( 'If you are seeing this message, most likely our servers are under routine maintenance and we will be back shortly. ', 'astra-sites' ); ?></p>
 		<?php /* translators: %s is a Brand Name */ ?>
-		<p><?php printf( __( '&mdash; %s', 'astra-sites' ), Astra_Sites_White_Label::get_instance()->get_author() ); ?></p>
+		<p><?php _e( 'In rare case, it is possible your website is having trouble connecting with ours. If you need help, please feel free to get in touch with us from our website.', 'astra-sites' ); ?></p>
 	</div>
 </script>
 
