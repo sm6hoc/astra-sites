@@ -89,7 +89,7 @@ class Astra_WXR_Importer {
 	function sse_import() {
 
 		// Start the event stream.
-		header( 'Content-Type: text/event-stream' );
+		header( 'Content-Type: text/event-stream, charset=UTF-8' );
 
 		// Turn off PHP output compression.
 		$previous = error_reporting( error_reporting() ^ E_WARNING );

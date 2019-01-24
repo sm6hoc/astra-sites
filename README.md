@@ -4,8 +4,8 @@
 **Tags:** demo, theme demos, one click import  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
-**Tested up to:** 5.0.2  
-**Stable tag:** 1.2.10  
+**Tested up to:** 5.0  
+**Stable tag:** 1.2.11  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -56,6 +56,10 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.11 - 24-Jan-2019
+* Improvement: Display a maintenance message if the Astra Sites API is unreachable.
+* Fix: EventSource abort the import process if default charset is not UTF-8.
 
 v1.2.10 - 4-Jan-2019
 * Fix: Astra Sites not accessible due to incorrect query parameters.

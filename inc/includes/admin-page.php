@@ -12,7 +12,6 @@
  */
 
 defined( 'ABSPATH' ) or exit;
-
 ?>
 
 <div class="wrap" id="astra-sites-admin">
@@ -182,6 +181,19 @@ defined( 'ABSPATH' ) or exit;
 		/* translators: %1$s is a support link */
 		printf( __( '<p>If that does not help, please open up a <a href="%1$s" target="_blank">Support Ticket</a> and we will be glad take a closer look for you.</p>', 'astra-sites' ), esc_url( 'https://wpastra.com/support/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=api-request-failed' ) );
 		?>
+	</div>
+</script>
+
+<?php
+/**
+ * TMPL - Site Down
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-down">
+	<div class="postbox astra-site-down">
+		<h2><?php _e( 'Under Maintenance..', 'astra-sites' ); ?></h2>
+		<p><?php _e( 'If you are seeing this message, most likely our servers are under routine maintenance and we will be back shortly. ', 'astra-sites' ); ?></p>
+		<p><?php _e( 'In rare case, it is possible your website is having trouble connecting with ours. If you need help, please feel free to get in touch with us from our website.', 'astra-sites' ); ?></p>
 	</div>
 </script>
 

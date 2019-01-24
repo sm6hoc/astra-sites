@@ -45,7 +45,17 @@
 			$( document ).on('click'                           , '.filter-links a', AstraRender._filterClick );
 			$( document ).on('keyup input'                     , '#wp-filter-search-input', AstraRender._search );
 			$( document ).on('scroll'                          , AstraRender._scroll );
+			$( document ).on('astra-sites-api-request-fail', AstraRender._site_unreachable );
+		},
 
+		/**
+		 * Website is Down
+		 *
+		 * @since 1.2.11
+		 * @return null
+		 */
+		_site_unreachable: function() {
+			$('#astra-sites-admin').html( wp.template('astra-site-down') )
 		},
 
 		/**

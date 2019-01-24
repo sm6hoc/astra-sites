@@ -469,3 +469,8 @@ body.loading-content .select-page-builder {
     display: inline-block;
     width: 100%;
 }
+
+.astra-site-down {
+    padding: 1em 2em;
+    margin-top: 1em;
+}
