@@ -54,6 +54,30 @@ class Astra_WXR_Importer {
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
 		add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_type_for_xml' ), 10, 4 );
+		add_filter( 'wxr_importer.pre_process.post', array( $this, 'gutenberg_content_fix' ), 10, 4 );
+	}
+
+	/**
+	 * Gutenberg Content Data Fix
+	 *
+	 * Gutenberg encode the page content. In import process the encoded characterless e.g. <, > are
+	 * decoded into HTML tag and it break the Gutenberg render markup.
+	 *
+	 * Note: We have not check the post is created with Gutenberg or not. We have imported other sites
+	 * and confirm that this works for every other page builders too.
+	 *
+	 * @since 1.2.12
+	 *
+	 * @param array $data Post data. (Return empty to skip.).
+	 * @param array $meta Meta data.
+	 * @param array $comments Comments on the post.
+	 * @param array $terms Terms on the post.
+	 */
+	function gutenberg_content_fix( $data, $meta, $comments, $terms ) {
+		if ( isset( $data['post_content'] ) ) {
+			$data['post_content'] = wp_slash( $data['post_content'] );
+		}
+		return $data;
 	}
 
 	/**
