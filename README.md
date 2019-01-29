@@ -57,7 +57,7 @@ https://wpastra.com/sites-suggestions/
 
 ## Changelog ##
 
-v1.2.12 - 28-Jan-2019
+v1.2.12 - 29-Jan-2019
 * Fix: Gutenberg render markup is invalid due to encoded characterless e.g. <, > are decoded into HTML tag.
 
 v1.2.11 - 24-Jan-2019
