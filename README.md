@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.0  
-**Stable tag:** 1.2.11  
+**Stable tag:** 1.2.12  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -56,6 +56,9 @@ https://wpastra.com/sites-suggestions/
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.12 - 28-Jan-2019
+* Fix: Gutenberg render markup is invalid due to encoded characterless e.g. <, > are decoded into HTML tag.
 
 v1.2.11 - 24-Jan-2019
 * Improvement: Display a maintenance message if the Astra Sites API is unreachable.
