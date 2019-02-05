@@ -139,7 +139,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 
 				// Get file name without extension.
 				// To check it exist in attachment.
-				$filename = preg_replace( '/\\.[^.\\s]{3,4}$/', '', basename( $attachment['url'] ) );
+				$filename = basename( $attachment['url'] );
 
 				$post_id = $wpdb->get_var(
 					$wpdb->prepare(
@@ -147,6 +147,15 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 							WHERE `meta_key` = \'_wp_attached_file\'
 							AND `meta_value` LIKE %s
 						;',
+						'%' . $filename . '%'
+					)
+				);
+				
+				$post_id = $wpdb->get_var(
+					$wpdb->prepare( 
+						"SELECT post_id FROM {$wpdb->postmeta}
+						WHERE meta_key = '_wp_attached_file'
+						AND meta_value LIKE %s",
 						'%' . $filename . '%'
 					)
 				);
@@ -181,7 +190,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 				return $saved_image;
 			}
 
-			$file_content = wp_remote_retrieve_body( wp_safe_remote_get( $attachment['url'] ) );
+			$file_content = wp_remote_retrieve_body( wp_safe_remote_get( $attachment['url'], array( 'timeout' => '60', 'sslverify' => false) ) );
 
 			// Empty file content?
 			if ( empty( $file_content ) ) {
