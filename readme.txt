@@ -1,7 +1,7 @@
 === Astra Starter Sites ===
 Contributors: brainstormforce
 Donate link: https://wpastra.com/pro/
-Tags: demo, theme demos, one click import
+Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.0
