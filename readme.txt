@@ -50,13 +50,13 @@ Over 200,000+ users are empowering their websites with Astra! From beginners to 
 
 = Here are a few reasons why they love Astra - =
 
-== Faster Performance - ==  Built with speed and performance in mind, Astra follows the best coding standards and lets you build faster loading and better performing websites.
+**Faster Performance** - Built with speed and performance in mind, Astra follows the best coding standards and lets you build faster loading and better performing websites.
 
-== Easy Customization - == With all the settings managed through the customizer, Astra keeps it simple and gives you lots of options to customize everything with a few clicks.
+**Easy Customization** - With all the settings managed through the customizer, Astra keeps it simple and gives you lots of options to customize everything with a few clicks.
 
-== Pixel Perfect Design - == Astra reduces your design time by giving you pixel-perfect FREE ready-to-use websites demos within a huge library of starter sites.
+**Pixel Perfect Design** - Astra reduces your design time by giving you pixel-perfect FREE ready-to-use websites demos within a huge library of starter sites.
 
-== Deeper Integrations - == Astra works seamlessly with all WooCommerce plugins, LifterLMS, LearnDash etc. This means that you can create and beautify eCommerce websites and those that offer online courses in minutes.
+**Deeper Integrations** - Astra works seamlessly with all WooCommerce plugins, LifterLMS, LearnDash etc. This means that you can create and beautify eCommerce websites and those that offer online courses in minutes.
 
 Fetch the website, tweak images and content and go live!
 
