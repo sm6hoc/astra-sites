@@ -37,10 +37,10 @@ All you need to do is select the demo that suits your needs, import, tweak and g
 
 Businesses like restaurants, lawyers, agencies, interior designers, artist shops, brandstore, pet services, charity, plumber, dental clinic, construction, fitness trainer, gardening, makeup artist and a lot more. You can take a look at all of them built with different page builders. 
 
-- [Elementor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=elementor&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
-- [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
-- [Gutenberg Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
-- [Brizy Free Website Templates](https://wpastra.com/ready-websites/?page-builder=brizy&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
+- [Elementor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=elementor&category=free)
+- [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
+- [Gutenberg Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free)
+- [Brizy Free Website Templates](https://wpastra.com/ready-websites/?page-builder=brizy&category=free)
 
 You can extend this library with premium ready-to-use website demos by purchasing one of the Agency Bundles, i.e. either the Mini Agency Bundle or the Agency Bundle.
 
@@ -48,21 +48,21 @@ You can extend this library with premium ready-to-use website demos by purchasin
 
 Over 200,000+ users are empowering their websites with Astra! From beginners to industry experts, everyone is loving Astra for its performance and ease of use.
 
-Here are a few reasons why they love Astra -
+= Here are a few reasons why they love Astra - =
 
-= Faster Performance - =  Built with speed and performance in mind, Astra follows the best coding standards and lets you build faster loading and better performing websites.
+== Faster Performance - ==  Built with speed and performance in mind, Astra follows the best coding standards and lets you build faster loading and better performing websites.
 
-= Easy Customization - = With all the settings managed through the customizer, Astra keeps it simple and gives you lots of options to customize everything with a few clicks.
+== Easy Customization - == With all the settings managed through the customizer, Astra keeps it simple and gives you lots of options to customize everything with a few clicks.
 
-= Pixel Perfect Design - = Astra reduces your design time by giving you pixel-perfect FREE ready-to-use websites demos within a huge library of starter sites.
+== Pixel Perfect Design - == Astra reduces your design time by giving you pixel-perfect FREE ready-to-use websites demos within a huge library of starter sites.
 
-= Deeper Integrations - = Astra works seamlessly with all WooCommerce plugins, LifterLMS, LearnDash etc. This means that you can create and beautify eCommerce websites and those that offer online courses in minutes.
+== Deeper Integrations - == Astra works seamlessly with all WooCommerce plugins, LifterLMS, LearnDash etc. This means that you can create and beautify eCommerce websites and those that offer online courses in minutes.
 
 Fetch the website, tweak images and content and go live!
 
 Use this imported site as a base for your project and don't waste time starting from scratch!
 
-_<a href="https://wpastra.com/ready-websites/">See list of all available sites to import »</a>_
+_<a href="https://wpastra.com/ready-websites/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme">See list of all available sites to import »</a>_
 
 #### Video Walkthrough by Adam from WPCrafter:
 [youtube https://www.youtube.com/watch?v=zYbz-jxE9_Q]
