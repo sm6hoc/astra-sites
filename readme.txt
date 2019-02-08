@@ -37,10 +37,10 @@ All you need to do is select the demo that suits your needs, import, tweak and g
 
 Businesses like restaurants, lawyers, agencies, interior designers, artist shops, brandstore, pet services, charity, plumber, dental clinic, construction, fitness trainer, gardening, makeup artist and a lot more. You can take a look at all of them built with different page builders. 
 
-- [Elementor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=elementor&category=free)
-- [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
-- [Gutenberg Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free)
-- [Brizy Free Website Templates](https://wpastra.com/ready-websites/?page-builder=brizy&category=free)
+- [Elementor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=elementor&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
+- [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
+- [Gutenberg Free Website Templates](https://wpastra.com/ready-websites/?page-builder=gutenberg&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
+- [Brizy Free Website Templates](https://wpastra.com/ready-websites/?page-builder=brizy&category=free/?utm_source=wp-repo&utm_medium=link&utm_campaign=readme)
 
 You can extend this library with premium ready-to-use website demos by purchasing one of the Agency Bundles, i.e. either the Mini Agency Bundle or the Agency Bundle.
 
