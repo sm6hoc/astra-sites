@@ -1,4 +1,4 @@
-=== Astra Starter Sites ===
+=== Astra Starter Sites - Elementor Templates ===
 Contributors: brainstormforce
 Donate link: https://wpastra.com/pro/
 Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
@@ -9,7 +9,7 @@ Stable tag: 1.2.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Import Astra Starter Sites with just one click.
+The growing library of 90+ ready-to-use free website templates built for Elementor, Beaver Builder page builder and the default WordPress editor Gutenberg.
 
 == Description ==
 
