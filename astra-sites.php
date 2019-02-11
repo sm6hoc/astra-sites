@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Astra Starter Sites
+ * Plugin Name: Astra Starter Sites - Elementor Templates
  * Plugin URI: http://www.wpastra.com/pro/
  * Description: Import free sites build with Astra theme.
  * Version: 1.2.12
