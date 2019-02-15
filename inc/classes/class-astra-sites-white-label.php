@@ -198,8 +198,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 */
 		function page_title( $title ) {
 
-			$get_white_labels = 'Astra_Ext_White_Label_Markup::get_whitelabel_strings';
-			if ( is_callable( $get_white_labels, true ) ) {
+			if ( is_callable( 'Astra_Ext_White_Label_Markup::get_whitelabel_strings', true ) ) {
 				$astra_sites_name = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
 				if ( ! empty( $astra_sites_name ) ) {
 					$title = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
