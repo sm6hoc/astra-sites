@@ -15,6 +15,7 @@ if ( ! class_exists( '\Elementor\Plugin' ) ) {
 
 namespace Elementor\TemplateLibrary;
 
+use Elementor\Controls_Stack;
 use Elementor\Core\Settings\Manager as SettingsManager;
 use Elementor\TemplateLibrary\Classes\Import_Images;
 use Elementor\TemplateLibrary;
@@ -35,6 +36,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Astra Source Remote
  */
 class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
+
 
 	/**
 	 * Get ID
@@ -75,7 +77,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 * @param  array $args Arguments.
 	 * @return array
 	 */
-	public function get_items( $args = array() ) {
+	public function get_items( array $args = array() ) {
 		$templates_data = Api::get_templates_data();
 
 		$templates = array();
@@ -201,8 +203,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 */
 	public function replace_elements_ids( $content ) {
 		return Plugin::$instance->db->iterate_data(
-			$content,
-			function( $element ) {
+			$content, function( $element ) {
 				$element['id'] = Utils::generate_random_string();
 
 				return $element;
@@ -220,8 +221,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 */
 	public function process_export_import_content( $content, $method ) {
 		return Plugin::$instance->db->iterate_data(
-			$content,
-			function( $element_data ) use ( $method ) {
+			$content, function( $element_data ) use ( $method ) {
 				$element = Plugin::$instance->elements_manager->create_element_instance( $element_data );
 
 				// If the widget/element isn't exist, like a plugin that creates a widget but deactivated.
@@ -244,7 +244,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Base {
 	 *
 	 * @return array
 	 */
-	public function process_element_export_import_content( $element, $method ) {
+	public function process_element_export_import_content( Controls_Stack $element, $method ) {
 		$element_data = $element->get_data();
 
 		if ( method_exists( $element, $method ) ) {
