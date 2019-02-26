@@ -41,7 +41,7 @@
 			})
 			.fail(function( jqXHR, textStatus ) {
 
-				$(document).trigger( 'astra-sites-api-request-fail' );
+				$(document).trigger( 'astra-sites-api-request-fail', [jqXHR, textStatus, args] );
 
 			})
 			.always(function() {
