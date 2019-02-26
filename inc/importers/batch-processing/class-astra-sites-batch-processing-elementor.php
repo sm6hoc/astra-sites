@@ -74,9 +74,6 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 					$data = add_magic_quotes( $data );
 					$data = json_decode( $data, true );
 
-					// $data = json_decode( $data, true );
-					// $data = $this->replace_elements_ids( $data );
-					// $data = $this->process_export_import_content( $data, 'on_import' );
 					// Import the data.
 					$content = $this->process_export_import_content( $content, 'on_import' );
 
