@@ -67,6 +67,49 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
 			add_action( 'wp_ajax_astra-required-plugin-activate-new', array( $this, 'required_plugin_activate_new' ) );
 			add_action( 'wp_ajax_astra-sites-backup-options', array( $this, 'backup_options' ) );
+			add_action( 'wp_ajax_astra-sites-create-pages', array( $this, 'create_pages' ) );
+		}
+
+		/**
+		 * Backup our existing options.
+		 */
+		function create_pages() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			$data = isset( $_POST['data'] ) ? $_POST['data'] : array();
+
+			if( empty( $data ) ) {
+				wp_send_json_error( 'Empty page data.' );
+			}
+
+			$page_id   = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
+			$title     = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
+			$content   = isset( $_POST['data']['content']['rendered'] ) ? $_POST['data']['content']['rendered'] : '';
+			$excerpt   = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
+
+			$post_args = array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'   => $title,
+				'post_content' => $content,
+				'post_excerpt' => $excerpt,
+			);
+
+			$post_meta = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
+			if( ! empty( $post_meta ) ) {
+				$post_args['meta_input'] = $post_meta;
+			}
+
+			$new_page_id = wp_insert_post( $post_args );
+
+			wp_send_json_success( array(
+				'remove-page-id' => $page_id,
+				'id'             => $new_page_id,
+				'link'           => get_permalink( $new_page_id ),
+			) );
 		}
 
 		/**
@@ -148,7 +191,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://sites-wpastra.sharkz.in/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://astra-zip.sharkz.in/wp-json/wp/v2/' );
 
 		}
 

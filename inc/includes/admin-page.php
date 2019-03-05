@@ -173,11 +173,13 @@ defined( 'ABSPATH' ) or exit;
 
 				<h2>Active Addons</h2>
 
-				<# _.each( JSON.parse( data.astra_enabled_extensions ), function(value, key, obj) { #>
-						<div>{{ key }}</div>
-					<# if( value ) { #>
-					<# } #>
-				<# }); #>
+				<# if( data.astra_enabled_extensions ) { #>
+					<ul>
+					<# _.each( JSON.parse( data.astra_enabled_extensions ), function(value, key, obj) { #>
+						<li>{{ key }}</li>
+					<# }); #>
+					</ul>
+				<# } #>
 
 			</div>
 
@@ -201,7 +203,7 @@ defined( 'ABSPATH' ) or exit;
 				<button class="button site-step-plugin-list">Back</button>
 				<span>
 					<button class="button site-step-skip-show-content">Skip</button>
-					<button class="button button-primary backup-options">Import Content</button>
+					<button class="button button-primary import-content">Import Content</button>
 				</span>
 			</div>
 			<# if ( data.screenshot.length ) { #>

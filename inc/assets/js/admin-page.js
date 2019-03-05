@@ -174,6 +174,7 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
+			$( document ).on('click'                     , '.astra-sites-site-details .import-content', AstraSitesAdmin._import_content);
 			$( document ).on('click'                     , '.astra-sites-site-details .backup-options', AstraSitesAdmin._backup_options);
 			$( document ).on('click'					 , '.devices button', AstraSitesAdmin._previewDevice);
 			$( document ).on('click'                     , '.astra-sites-site-details .site-preview, .theme-browser .theme-screenshot, .theme-browser .more-details', AstraSitesAdmin._preview);
@@ -255,7 +256,7 @@ var AstraSitesAjaxQueue = (function() {
 			console.log( AstraSitesAdmin.templateData.astra_demo_url + '/wp-json/wp/v2/pages' );
 				
 			// Replace ./data.json with your JSON feed
-			fetch( AstraSitesAdmin.templateData.astra_demo_url + '/wp-json/wp/v2/pages' ).then(response => {
+			fetch( 'http:' + AstraSitesAdmin.templateData.astra_demo_url + '/wp-json/wp/v2/pages' ).then(response => {
 				return response.json();
 			}).then(pages => {
 				// Work with JSON pages here
@@ -265,13 +266,14 @@ var AstraSitesAjaxQueue = (function() {
 
 				for ( key in pages ) {
 					console.log( pages[ key ] );
-					var output  = '<div class="page">';
+					var output  = '<div class="page" data-page-id="'+pages[ key ].id+'">';
 					    output += '    <div class="inner">';
 					    output += '        <div class="title">'+pages[ key ].title.rendered+'</div>';
-					    // output += '        <img class="theme-screenshot" src="#" alt="">';
+					    output += '        <img class="theme-screenshot" src="'+pages[ key ]['featured-image-url']+'">';
+					    // output += '        <img class="theme-screenshot" src="http://s.wordpress.com/mshots/v1/'+pages[ key ].link+'?w=600">';
 					    output += '        <span class="actions">';
 					    output += '        	<input type="checkbox" name="page[]">';
-				        output += '    		<a href="'+pages[ key ].link+'" target="blank">Preview <i class="dashicons dashicons-external"></i></a>';
+				        output += '    		<a href="'+pages[ key ].link+'" target="_blank">Preview <i class="dashicons dashicons-external"></i></a>';
 				        output += '    	</span>';
 					    output += '    </div>';
 					    output += '</div>';
@@ -509,6 +511,129 @@ var AstraSitesAjaxQueue = (function() {
 					$(document).trigger( 'astra-sites-import-customizer-settings-done' );
 				}
 			});
+		},
+
+		_import_content: function( event ) {
+			event.preventDefault();
+
+			var selected_pages = $('.page-list input:checkbox:checked');
+
+			console.log( selected_pages.length );
+			if( selected_pages.length ) {
+
+				// Activate ALl Plugins.
+				AstraSitesAjaxQueue.stop();
+				AstraSitesAjaxQueue.run();
+
+				selected_pages.each(function(index, element) {
+					console.log( element );
+					var	parent = $(element).parents('.page');
+					var	page_id = parent.data('page-id');
+					console.log( page_id );
+
+					parent.find( 'input' ).hide();
+					parent.find( '.actions' ).prepend( '<span class="spinner is-active" style="margin: 0;text-align: left;padding-left: 2em;font-style: italic;">Creating..</span>' );
+
+
+					if( page_id ) {
+						// Replace ./data.json with your JSON feed
+						fetch( 'http:' + AstraSitesAdmin.templateData.astra_demo_url + '/wp-json/wp/v2/pages/' + page_id ).then(response => {
+							return response.json();
+						}).then(data => {
+
+							// Work with JSON page here
+							console.log(data);
+
+							// Send to AJAX.
+							AstraSitesAjaxQueue.add({
+								url: astraSitesAdmin.ajaxurl,
+								type: 'POST',
+								data: {
+									'action' : 'astra-sites-create-pages',
+									'data'   : data,
+								},
+								success: function( data ) {
+
+									var remote_page_id = data.data['remove-page-id'];
+									console.log( data );
+									console.log( data.data['id'] );
+									console.log( data.data['link'] );
+									console.log( data.data['remove-page-id'] );
+
+									if( data.success ) {
+										if( $('.page[data-page-id="'+remote_page_id+'"]').length ) {
+											$('.page[data-page-id="'+remote_page_id+'"]').find('.actions .spinner').remove();
+											$('.page[data-page-id="'+remote_page_id+'"]').find('.actions').prepend( '<span class="page-imported" style="text-align: left;"><i class="dashicons dashicons-yes"></i> Created!</span>' );
+		
+											setTimeout(function() {
+												$('.page[data-page-id="'+remote_page_id+'"]').find('.actions .page-imported').remove();
+												$('.page[data-page-id="'+remote_page_id+'"]').find('.actions').prepend( '<a href="'+data.data['link']+'" target="_blank">See <i class="dashicons dashicons-external"></i></a>' );
+											}, 1000);
+										}
+
+									}
+								}
+							});
+
+						}).catch(err => {
+							// Do something for an error here
+						});
+					}
+				});
+
+			} else {
+				console.log( 'Please select pages..' );
+			}
+
+
+
+
+			
+
+			
+
+
+			// // Activate ALl Plugins.
+			// AstraSitesAjaxQueue.stop();
+			// AstraSitesAjaxQueue.run();
+			// $.each( '.page-list .page', function(index, page) {
+			// AstraSitesAjaxQueue.add({
+			// 	url: astraSitesAdmin.ajaxurl,
+			// 	type: 'POST',
+			// 	data: {
+			// 		'action' : 'astra-sites-create-pages',
+			// 		'id'     : $(page).data('page-id') || '',
+			// 		// 'options'           : $siteOptions,
+			// 		// 'enabledExtensions' : $enabledExtensions,
+			// 	},
+			// 	success: function( result ) {
+			// 		console.log( result );
+			// 	}
+			// });
+			// 
+			// 
+			// 
+			// ========
+			// 
+			// 
+			// 
+			// $.ajax({
+			// 	url: astraSitesAdmin.ajaxurl,
+			// 	type: 'POST',
+			// 	data: {
+			// 		'action' : 'astra-sites-create-pages',
+			// 	},
+			// })
+			// .done(function (data) {
+			// 	// download( data, 'backup-options.json', 'application/json' );
+
+			// 	// setTimeout( function() {
+			// 	// 	btn.text( 'Import Options' );
+			// 	// 	btn.removeClass( 'backup-options' );
+			// 	// 	btn.addClass( 'import-options' );
+			// 	// }, 500 );
+			// });
+
 		},
 
 		_backup_options: function( event ) {
