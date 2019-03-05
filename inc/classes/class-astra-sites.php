@@ -65,6 +65,23 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// AJAX.
 			add_action( 'wp_ajax_astra-required-plugins', array( $this, 'required_plugin' ) );
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
+			add_action( 'wp_ajax_astra-required-plugin-activate-new', array( $this, 'required_plugin_activate_new' ) );
+			add_action( 'wp_ajax_astra-sites-backup-options', array( $this, 'backup_options' ) );
+		}
+
+		/**
+		 * Backup our existing options.
+		 */
+		function backup_options() {
+
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			echo json_encode( get_option( 'astra-settings', array() ) );
+
+			die();
+
 		}
 
 		/**
@@ -131,7 +148,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://sites-wpastra.sharkz.in/wp-json/wp/v2/' );
 
 		}
 
@@ -160,9 +177,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// API.
 			wp_register_script( 'astra-sites-api', ASTRA_SITES_URI . 'inc/assets/js/astra-sites-api.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 
+			// Download.js
+			wp_register_script( 'astra-sites-download-js', ASTRA_SITES_URI . 'inc/assets/js/download.js', array( 'jquery' ), ASTRA_SITES_VER, true );
+			
 			// Admin Page.
 			wp_enqueue_style( 'astra-sites-admin', ASTRA_SITES_URI . 'inc/assets/css/admin.css', ASTRA_SITES_VER, true );
-			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
+			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates', 'astra-sites-download-js' ), ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
 
 			$data = apply_filters(
@@ -301,6 +321,45 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 *
 		 * @since 1.0.0
 		 */
+		public function required_plugin_activate_new() {
+
+			if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => __( 'No plugin specified', 'astra-sites' ),
+					)
+				);
+			}
+
+			$data        = array();
+			$plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
+
+			$activate = activate_plugin( $plugin_init, '', false, true );
+
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					)
+				);
+			}
+
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => __( 'Plugin Successfully Activated', 'astra-sites' ),
+				)
+			);
+
+		}
+
+		/**
+		 * Required Plugin Activate
+		 *
+		 * @since 1.0.0
+		 */
 		public function required_plugin_activate() {
 
 			if ( ! current_user_can( 'install_plugins' ) || ! isset( $_POST['init'] ) || ! $_POST['init'] ) {
@@ -345,6 +404,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Required Plugin
 		 *
+		 * @hook astra-required-plugins
 		 * @since 1.0.0
 		 * @return void
 		 */
@@ -363,7 +423,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( $response );
 			}
 
-			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? $_POST['required_plugins'] : array();
+			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? json_decode( stripslashes( $_POST['required_plugins'] ), true ) : array();
 
 			if ( count( $required_plugins ) > 0 ) {
 				foreach ( $required_plugins as $key => $plugin ) {
@@ -403,6 +463,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					}
 				}
 			}
+
+			// vl( $response );
+			// wp_die();
+
 
 			// Send response.
 			wp_send_json_success( $response );

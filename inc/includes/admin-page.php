@@ -16,52 +16,265 @@ defined( 'ABSPATH' ) or exit;
 
 <div class="wrap" id="astra-sites-admin">
 
-	<div id="astra-sites-filters">
+	<div id="astra-sites-site-details"></div>
 
-		<?php if ( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
-			<div class="wp-filter hide-if-no-js">
-				<div class="section-left">
+	<div id="astra-sites-grid">
 
-					<!-- All Filters -->
-					<div class="filter-count">
-						<span class="count"></span>
+		<div id="astra-sites-filters">
+
+			<?php if ( apply_filters( 'astra_sites_show_filters', true ) ) { ?>
+				<div class="wp-filter hide-if-no-js">
+					<div class="section-left">
+
+						<!-- All Filters -->
+						<div class="filter-count">
+							<span class="count"></span>
+						</div>
+						<div class="filters-wrap">
+							<div id="astra-site-page-builder"></div>
+						</div>				
+
 					</div>
-					<div class="filters-wrap">
-						<div id="astra-site-page-builder"></div>
-					</div>				
 
+					<div class="section-right">
+
+						<div class="filters-wrap">
+							<div id="astra-site-category"></div>
+						</div>
+
+						<div class="search-form">
+							<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
+							<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
+						</div>
+
+					</div>
 				</div>
+			<?php } ?>
+		</div>
 
-				<div class="section-right">
+		<?php do_action( 'astra_sites_before_site_grid' ); ?>
 
-					<div class="filters-wrap">
-						<div id="astra-site-category"></div>
-					</div>
+		<div class="theme-browser rendered">
+			<div id="astra-sites" class="themes wp-clearfix"></div>
+		</div>
 
-					<div class="search-form">
-						<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
-						<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
-					</div>
+		<div class="spinner-wrap">
+			<span class="spinner"></span>
+		</div>
 
-				</div>
-			</div>
-		<?php } ?>
+		<?php do_action( 'astra_sites_after_site_grid' ); ?>
 
-	</div>
-
-	<?php do_action( 'astra_sites_before_site_grid' ); ?>
-
-	<div class="theme-browser rendered">
-		<div id="astra-sites" class="themes wp-clearfix"></div>
-	</div>
-
-	<div class="spinner-wrap">
-		<span class="spinner"></span>
-	</div>
-
-	<?php do_action( 'astra_sites_after_site_grid' ); ?>
+	</div><!-- #astra-sites-grid -->
 
 </div>
+
+<?php
+/**
+ * TMPL - Single Site Detail's - Screen 1
+ */
+?>
+<script type="text/template" id="tmpl-astra-sites-site-details">
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-preview">Preview</button>
+				<button class="button button-primary site-plugin-list">Get Started</button>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Previous Site" class="prev button button-small"><span class="dashicons dashicons-arrow-left"></span><span class="screen-reader-text">Previous</span></button>
+				<button title="Next Site" class="next button button-small"><span class="dashicons dashicons-arrow-right"></span><span class="screen-reader-text">Next</span></button>
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+				<h2>Overview</h2>
+				<p>{{ data.content }}</p>
+			</div>
+
+		</div>
+
+	</div>
+</script>
+
+<?php
+/**
+ * TMPL - Required Plugins List - Screen 2
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-required-plugins-list">
+
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-step-back-details">Back</button>
+				<span>
+					<button class="button site-step-skip-goto-site-options">Skip</button>
+					<button class="button button-primary install-plugins">Install Plugins</button>
+				</span>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+
+				<h2>Plugins</h2>
+				<p>The following plugins can be installed and activated automatically.</p>
+			
+				<div class="required-plugins"></div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</script>
+
+<?php
+/**
+ * TMPL - Site Options - Screen 3
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-options">
+
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-step-plugin-list">Back</button>
+				<span>
+					<button class="button site-step-skip-show-content">Skip</button>
+					<button class="button button-primary backup-options">Backup Options</button>
+				</span>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+
+				<h2>Active Addons</h2>
+
+				<# _.each( JSON.parse( data.astra_enabled_extensions ), function(value, key, obj) { #>
+						<div>{{ key }}</div>
+					<# if( value ) { #>
+					<# } #>
+				<# }); #>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</script>
+
+<?php
+/**
+ * TMPL - Site Content - Screen 4
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-content">
+
+	<div class="astra-sites-site-details">
+
+		<div class="thumbnail">
+			<div class="actions">
+				<button class="button site-step-plugin-list">Back</button>
+				<span>
+					<button class="button site-step-skip-show-content">Skip</button>
+					<button class="button button-primary backup-options">Import Content</button>
+				</span>
+			</div>
+			<# if ( data.screenshot.length ) { #>
+				<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+			<# } #>
+		</div>
+		<div class="details">
+			<div class="actions">
+				<button title="Close" class="close button button-small"><span class="dashicons dashicons-no-alt"></span><span class="screen-reader-text">Close</span></button>
+			</div>
+
+			<div class="inner">
+
+				<h2>Select Pages</h2>
+				
+				<p>Select specific pages to import.</p>
+
+				<div class="page-list"> <span class="spinner is-active"></span> </div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</script>
+
+<?php
+/**
+ * TMPL - Required Plugins
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-required-plugins">
+	<# console.log( data ); #>
+	<# console.log( data.data ); #>
+
+	<# if( data.data.notinstalled.length ) { #>
+		<h4>Not Installed Plugins</h4>
+		<p>Below plugins are not installed yet! We'll install and activate them in import process.</p>
+		<# for ( key in data.data.notinstalled ) { #>
+			<# console.log( data.data.notinstalled[ key ] ) #>
+			<div data-slug="{{data.data.notinstalled[ key ].slug}}" data-init="{{data.data.notinstalled[ key ].init}}">
+				<span class="notinstalled dashicons dashicons-arrow-right"></span>
+				{{data.data.notinstalled[ key ].name}}
+			</div>
+		<# } #>
+	<# } #>
+
+	<# if( data.data.inactive.length ) { #>
+		<h4>Inactive Plugins</h4>
+		<p>Below plugins are inactivate. We'll activate them in import process.</p>
+		<# for ( key in data.data.inactive ) { #>
+			<# console.log( data.data.inactive[ key ] ) #>
+			<div data-slug="{{data.data.inactive[ key ].slug}}" data-init="{{data.data.inactive[ key ].init}}">
+				<span class="inactive dashicons dashicons-arrow-right"></span>
+				{{data.data.inactive[ key ].name}}
+			</div>
+		<# } #>
+	<# } #>
+
+	<# if( data.data.active.length ) { #>
+		<h4>Active Plugins</h4>
+		<p>Below plugins are activate.</p>
+		<# for ( key in data.data.active ) { #>
+			<# console.log( data.data.active[ key ] ) #>
+			<div data-slug="{{data.data.active[ key ].slug}}" data-init="{{data.data.active[ key ].init}}">
+				<span class="active dashicons dashicons-arrow-right"></span>
+				{{data.data.active[ key ].name}}
+			</div>
+		<# } #>
+	<# } #>
+
+</script>
 
 <?php
 /**
