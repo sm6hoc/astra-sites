@@ -175,8 +175,15 @@ defined( 'ABSPATH' ) or exit;
 
 				<# if( data.astra_enabled_extensions ) { #>
 					<ul>
-					<# _.each( JSON.parse( data.astra_enabled_extensions ), function(value, key, obj) { #>
-						<li>{{ key }}</li>
+					<# _.each( JSON.parse( data.astra_enabled_extensions ), function(value, key, obj) {
+						if( 'all' !== key ) {
+							var title = key.toLowerCase().replace(/\b[a-z]/g, function(key) {
+							    return key.toUpperCase();
+							});
+							title = title.replace('-', ' ');
+							#>
+							<li><span class="dashicons dashicons-arrow-right"></span> {{ title }}</li>
+							<# } #>
 					<# }); #>
 					</ul>
 				<# } #>
@@ -202,8 +209,8 @@ defined( 'ABSPATH' ) or exit;
 			<div class="actions">
 				<button class="button site-step-plugin-list">Back</button>
 				<span>
-					<button class="button site-step-skip-show-content">Skip</button>
-					<button class="button button-primary import-content">Import Content</button>
+					<!-- <button class="button site-step-skip-show-content">Skip</button> -->
+					<button class="button button-primary import-content disabled">Import Content</button>
 				</span>
 			</div>
 			<# if ( data.screenshot.length ) { #>

@@ -44,6 +44,10 @@
     margin: 0.5em 0 0 0;
 }
 
+.astra-sites-site-details .theme-screenshot {
+    cursor: pointer;
+}
+
 .astra-sites-preview .theme-screenshot {
     width: 100%;
 }
