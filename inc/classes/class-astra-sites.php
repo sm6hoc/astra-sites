@@ -105,6 +105,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$new_page_id = wp_insert_post( $post_args );
 
+			do_action( 'astra_sites_process_single', $new_page_id );
+
 			wp_send_json_success( array(
 				'remove-page-id' => $page_id,
 				'id'             => $new_page_id,

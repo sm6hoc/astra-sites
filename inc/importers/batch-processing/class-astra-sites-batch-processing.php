@@ -32,6 +32,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 * @access public
 		 */
 		public static $process_all;
+		public static $process_single;
 
 		/**
 		 * Initiator
@@ -65,6 +66,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-async-request.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-background-process.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-background-process-astra.php';
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-background-process-astra-single.php';
 
 			// Prepare Widgets.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-widgets.php';
@@ -81,10 +83,12 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-misc.php';
 
 			self::$process_all = new WP_Background_Process_Astra();
+			self::$process_single = new WP_Background_Process_Astra_Single();
 
 			// Start image importing after site import complete.
 			add_filter( 'astra_sites_image_importer_skip_image', array( $this, 'skip_image' ), 10, 2 );
 			add_action( 'astra_sites_import_complete', array( $this, 'start_process' ) );
+			add_action( 'astra_sites_process_single', array( $this, 'start_process_single' ) );
 		}
 
 		/**
@@ -119,6 +123,23 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 *
 		 * @return void
 		 */
+		public function start_process_single( $page_id ) {
+			// Add "elementor" in import [queue].
+			// @todo Remove required `allow_url_fopen` support.
+			if ( ini_get( 'allow_url_fopen' ) ) {
+				if ( is_plugin_active( 'elementor/elementor.php' ) ) {
+					if ( class_exists( '\Elementor\TemplateLibrary\Astra_Sites_Batch_Processing_Elementor' ) ) {
+						self::$process_single->push_to_queue( $page_id );
+					}
+				}
+			} else {
+				error_log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
+			}
+
+			// Dispatch Queue.
+			self::$process_single->save()->dispatch();
+		}
+
 		public function start_process() {
 
 			Astra_Sites_Image_Importer::log( '=================== ' . Astra_Sites_White_Label::get_instance()->page_title( ASTRA_SITES_NAME ) . ' - Importing Images for Blog name \'' . get_bloginfo( 'name' ) . '\' (' . get_current_blog_id() . ') ===================' );
