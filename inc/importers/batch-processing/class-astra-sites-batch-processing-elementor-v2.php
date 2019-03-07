@@ -2,7 +2,7 @@
 /**
  * Elementor Importer
  *
- * @package CARTFLOWS
+ * @package Astra Sites
  */
 namespace Elementor\TemplateLibrary;
 use Elementor\Core\Base\Document;
