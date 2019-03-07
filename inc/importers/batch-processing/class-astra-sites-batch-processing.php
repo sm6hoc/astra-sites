@@ -176,12 +176,13 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		public static function get_pages() {
 
 			$args = array(
-				'post_type'     => 'any',
+				'post_type'      => 'any',
 
 				// Query performance optimization.
-				'fields'        => 'ids',
-				'no_found_rows' => true,
-				'post_status'   => 'publish',
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
 			);
 
 			$query = new WP_Query( $args );

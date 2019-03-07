@@ -131,7 +131,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://astra-zip.sharkz.in/wp-json/wp/v2/' );
 
 		}
 
@@ -254,18 +254,21 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'processingRequest'       => __( 'Processing requests...', 'astra-sites' ),
 						'importCustomizer'        => __( '1) Importing "Customizer Settings"...', 'astra-sites' ),
 						'importCustomizerSuccess' => __( 'Successfully imported customizer settings!', 'astra-sites' ),
-						'importXMLPrepare'        => __( '2) Preparing "XML" Data...', 'astra-sites' ),
+						'importWPForms'           => __( '2) Importing "WPForms"...', 'astra-sites' ),
+						'importWPFormsSuccess'    => __( 'Successfully imported WPForms!', 'astra-sites' ),
+						'importXMLPrepare'        => __( '3) Preparing "XML" Data...', 'astra-sites' ),
 						'importXMLPrepareSuccess' => __( 'Successfully set XML data!', 'astra-sites' ),
-						'importXML'               => __( '3) Importing "XML"...', 'astra-sites' ),
+						'importXML'               => __( '4) Importing "XML"...', 'astra-sites' ),
 						'importXMLSuccess'        => __( 'Successfully imported XML!', 'astra-sites' ),
-						'importOptions'           => __( '4) Importing "Options"...', 'astra-sites' ),
+						'importOptions'           => __( '5) Importing "Options"...', 'astra-sites' ),
 						'importOptionsSuccess'    => __( 'Successfully imported Options!', 'astra-sites' ),
-						'importWidgets'           => __( '5) Importing "Widgets"...', 'astra-sites' ),
+						'importWidgets'           => __( '6) Importing "Widgets"...', 'astra-sites' ),
 						'importWidgetsSuccess'    => __( 'Successfully imported Widgets!', 'astra-sites' ),
 						'serverConfiguration'     => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=import-error&utm_medium=wp-dashboard' ),
 						'success'                 => __( 'Site imported successfully! visit : ', 'astra-sites' ),
 						'gettingData'             => __( 'Getting Site Information..', 'astra-sites' ),
 						'importingCustomizer'     => __( 'Importing Customizer Settings..', 'astra-sites' ),
+						'importingWPForms'        => __( 'Importing WP Forms..', 'astra-sites' ),
 						'importXMLPreparing'      => __( 'Setting up import data..', 'astra-sites' ),
 						'importingXML'            => __( 'Importing Pages, Posts & Media..', 'astra-sites' ),
 						'importingOptions'        => __( 'Importing Site Options..', 'astra-sites' ),
