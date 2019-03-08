@@ -54,7 +54,10 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 		}
 
 		foreach ( $post_ids as $post_id ) {
-			$this->import_single_post( $post_id );
+			$is_elementor_post = get_post_meta( $post_id, '_elementor_version', true );
+			if( $is_elementor_post ) {
+				$this->import_single_post( $post_id );
+			}
 		}
 	}
 	/**

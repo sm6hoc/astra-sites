@@ -52,3 +52,9 @@ if ( ! function_exists( 'astra_sites_setup' ) ) :
 	add_action( 'plugins_loaded', 'astra_sites_setup' );
 
 endif;
+
+
+add_action( 'wp_head', function() {
+	vl( get_post_meta( get_the_id() ) );
+	wp_die();
+});
