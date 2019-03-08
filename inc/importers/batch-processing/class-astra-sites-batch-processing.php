@@ -72,6 +72,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			// Prepare Page Builders.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-beaver-builder.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php';
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-gutenberg.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-brizy.php';
 
 			// Prepare Misc.
@@ -124,6 +125,9 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			if ( class_exists( 'Astra_Sites_Batch_Processing_Widgets' ) ) {
 				self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Widgets::get_instance() );
 			}
+
+			// Add "gutenberg" in import [queue].
+			self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Gutenberg::get_instance() );
 
 			// Add "brizy" in import [queue].
 			if ( is_plugin_active( 'brizy/brizy.php' ) ) {
