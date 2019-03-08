@@ -118,7 +118,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 * Import WP Forms
 		 *
 		 * @since x.x.x
-		 * 
+		 *
 		 * @return void
 		 */
 		function import_wpforms() {
