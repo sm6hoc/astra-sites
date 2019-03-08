@@ -48,16 +48,16 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		/**
 		 * Allowed tags for the batch update process.
 		 *
-		 * @param  array $allowedposttags	Array of default allowable HTML tags.
-		 * @param  string|array $context	The context for which to retrieve tags. Allowed values are 'post',
- 		 *                            	    'strip', 'data', 'entities', or the name of a field filter such as
- 		 *                            	    'pre_user_description'.
+		 * @param  array        $allowedposttags   Array of default allowable HTML tags.
+		 * @param  string|array $context    The context for which to retrieve tags. Allowed values are 'post',
+		 *                                  'strip', 'data', 'entities', or the name of a field filter such as
+		 *                                  'pre_user_description'.
 		 * @return array Array of allowed HTML tags and their allowed attributes.
 		 */
 		function allowed_tags_and_attributes( $allowedposttags, $context ) {
 
 			// Keep only for 'post' contenxt.
-			if( 'post' === $context ) {
+			if ( 'post' === $context ) {
 
 				// <svg> tag and attributes.
 				$allowedposttags['svg'] = array(
@@ -121,17 +121,19 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			}
 
 			// # Tweak
-			// Gutenberg break block markup from render. Because the '&' is updated in database with '&amp;' and it 
+			// Gutenberg break block markup from render. Because the '&' is updated in database with '&amp;' and it
 			// expects as 'u0026amp;'. So, Converted '&amp;' with 'u0026amp;'.
-			// 
+			//
 			// @todo This affect for normal page content too. Detect only Gutenberg pages and process only on it.
-			$content = str_replace( '&amp;', 'u0026amp;', $content );			
+			$content = str_replace( '&amp;', 'u0026amp;', $content );
 
 			// Update content.
-			wp_update_post( array(
-				'ID'           => $post_id,
-				'post_content' => $content,
-			) );
+			wp_update_post(
+				array(
+					'ID'           => $post_id,
+					'post_content' => $content,
+				)
+			);
 		}
 
 	}

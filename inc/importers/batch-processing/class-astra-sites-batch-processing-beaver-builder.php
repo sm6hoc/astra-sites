@@ -72,7 +72,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Beaver_Builder' ) ) :
 
 			foreach ( $post_ids as $post_id ) {
 				$is_bb_post = get_post_meta( $post_id, '_fl_builder_enabled', true );
-				if( $is_bb_post ) {
+				if ( $is_bb_post ) {
 					$this->import_single_post( $post_id );
 				}
 			}

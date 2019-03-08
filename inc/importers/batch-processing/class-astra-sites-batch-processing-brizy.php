@@ -71,7 +71,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 
 			foreach ( $post_ids as $post_id ) {
 				$is_brizy_post = get_post_meta( $post_id, 'brizy_post_uid', true );
-				if( $is_brizy_post ) {
+				if ( $is_brizy_post ) {
 					$this->import_single_post( $post_id );
 				}
 			}
