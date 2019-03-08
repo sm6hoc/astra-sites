@@ -56,11 +56,22 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Beaver_Builder' ) ) :
 
 			Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for Beaver Builder ----' );
 
-			$post_ids = Astra_Sites_Batch_Processing::get_pages();
-			if ( is_array( $post_ids ) ) {
-				foreach ( $post_ids as $post_id ) {
-					$this->import_single_post( $post_id );
-				}
+			if ( ! is_callable( 'FLBuilderModel::get_post_types' ) ) {
+				return;
+			}
+
+			$post_types = FLBuilderModel::get_post_types( 'post-types' );
+			if ( empty( $post_types ) && ! is_array( $post_types ) ) {
+				return;
+			}
+
+			$post_ids = Astra_Sites_Batch_Processing::get_pages( $post_types );
+			if ( empty( $post_ids ) && ! is_array( $post_ids ) ) {
+				return;
+			}
+
+			foreach ( $post_ids as $post_id ) {
+				$this->import_single_post( $post_id );
 			}
 		}
 
