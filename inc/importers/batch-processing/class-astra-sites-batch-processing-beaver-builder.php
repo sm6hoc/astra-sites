@@ -162,9 +162,6 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Beaver_Builder' ) ) :
 					// Keep old data in temp.
 					$updated_data = $settings->text;
 
-					error_log( 'Old' );
-					error_log( json_encode( $updated_data ) );
-
 					// Update WP form IDs.
 					foreach ( $ids_mapping as $old_id => $new_id ) {
 						$updated_data = str_replace( '[wpforms id="' . $old_id, '[wpforms id="' . $new_id, $updated_data );
@@ -172,9 +169,6 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Beaver_Builder' ) ) :
 
 					// Update modified data.
 					$settings->text = $updated_data;
-
-					error_log( 'New' );
-					error_log( json_encode( $updated_data ) );
 				}
 			}
 
