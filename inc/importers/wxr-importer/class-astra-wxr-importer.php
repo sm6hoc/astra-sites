@@ -53,7 +53,7 @@ class Astra_WXR_Importer {
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
-		add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_type_for_xml' ), 10, 4 );
+		add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_type_for_xml' ), 10, 5 );
 		add_filter( 'wxr_importer.pre_process.post', array( $this, 'gutenberg_content_fix' ), 10, 4 );
 	}
 
@@ -94,12 +94,18 @@ class Astra_WXR_Importer {
 	 *                                          $file being in a tmp directory).
 	 * @param array  $mimes                     Key is the file extension with value as the mime type.
 	 */
-	function real_mime_type_for_xml( $defaults, $file, $filename, $mimes ) {
+	function real_mime_type_for_xml( $defaults, $file, $filename, $mimes, $real_mime ) {
 
 		// Set EXT and real MIME type only for the file name `wxr.xml`.
 		if ( 'wxr.xml' == $filename ) {
 			$defaults['ext']  = 'xml';
 			$defaults['type'] = 'text/xml';
+		}
+
+		// Set EXT and real MIME type only for the file name `wpforms.json`.
+		if ( 'wpforms.json' == $filename ) {
+			$defaults['ext']  = 'json';
+			$defaults['type'] = 'text/plain';
 		}
 
 		return $defaults;
@@ -194,6 +200,9 @@ class Astra_WXR_Importer {
 
 		// Allow XML files.
 		$mimes['xml'] = 'text/xml';
+
+		// Allow JSON files.
+		$mimes['json'] = 'application/json';
 
 		return $mimes;
 	}
