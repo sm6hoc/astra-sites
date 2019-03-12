@@ -212,6 +212,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				array(
 					'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
 					'isPro'             => defined( 'ASTRA_PRO_SITES_NAME' ) ? true : false,
+					'isWhiteLabeled'    => ( 'Astra Sites' !== Astra_Sites_White_Label::get_instance()->get_name() ) ? true : false,
 					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'siteURL'           => site_url(),
 					'getProText'        => __( 'Get Agency Bundle', 'astra-sites' ),
