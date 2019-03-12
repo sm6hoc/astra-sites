@@ -27,6 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Elementor template library local source handler class is responsible for
  * handling local Elementor templates saved by the user locally on his site.
  *
+ * @since 1.2.13 Added compatibility for Elemetnor v2.5.0
  * @since 1.0.0
  */
 class Astra_Sites_Batch_Processing_Elementor extends Source_Local {

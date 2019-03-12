@@ -211,7 +211,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		/**
 		 * Is Astra sites White labeled
 		 *
-		 * @since x.x.x
+		 * @since 1.2.13
 		 *
 		 * @return string
 		 */
