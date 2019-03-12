@@ -1340,7 +1340,7 @@ var AstraSitesAjaxQueue = (function() {
 									.text( astraSitesAdmin.getProText )
 									.append('<i class="dashicons dashicons-external"></i>');
 
-							if( false === astraSitesAdmin.isWhiteLabeled ) {
+							if( false == astraSitesAdmin.isWhiteLabeled ) {
 								if( astraSitesAdmin.isPro ) {
 									$('.install-theme-info .theme-details').prepend( wp.template('astra-sites-pro-inactive-site-description') );
 								} else {
