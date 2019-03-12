@@ -65,6 +65,28 @@ defined( 'ABSPATH' ) or exit;
 
 <?php
 /**
+ * TMPL - Pro Site Description
+ */
+?>
+<script type="text/template" id="tmpl-astra-sites-pro-site-description">
+	<p><?php _e( 'Liked this demo?', 'astra-sites'); ?></p>
+	<p><?php printf( __('It is a premium website demo which is available only with the Agency Bundles <a href="%s" target="_blank">Buy Now!</a>', 'astra-sites' ), 'https://wpastra.com/pricing/' ); ?></p>
+	<p><?php printf( __( 'Already own an Agency Bundle? Read an article to know how you can <a href="%s" target="_blank">import a premium website demo</a>.', 'astra-sites' ), 'https://wpastra.com/docs/import-astra-agency-website-demos/' ); ?></p>
+</script>
+
+<?php
+/**
+ * TMPL - Pro Site Description for Inactive license
+ */
+?>
+<script type="text/template" id="tmpl-astra-sites-pro-inactive-site-description">
+	<p><?php _e( 'You are just 2 minutes away from importing this demo!', 'astra-sites'); ?></p>
+	<p><?php _e('It is a premium website demo and you need to activate the license to access it.', 'astra-sites' ); ?></p>
+	<p><?php printf( __( 'Learn how you can <a href="%s" target="_blank">activate the license</a> of the Astra Premium Sites plugin.', 'astra-sites' ), 'https://wpastra.com/docs/activate-license-for-astra-premium-sites-plugin/' ); ?></p>
+</script>
+
+<?php
+/**
  * TMPL - Single Demo Preview
  */
 ?>

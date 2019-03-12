@@ -211,9 +211,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				'astra_sites_localize_vars',
 				array(
 					'debug'             => ( ( defined( 'WP_DEBUG' ) && WP_DEBUG ) || isset( $_GET['debug'] ) ) ? true : false,
+					'isPro'             => defined( 'ASTRA_PRO_SITES_NAME' ) ? true : false,
 					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'siteURL'           => site_url(),
-					'getProText'        => __( 'Purchase', 'astra-sites' ),
+					'getProText'        => __( 'Get Agency Bundle', 'astra-sites' ),
 					'getProURL'         => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
 					'getUpgradeText'    => __( 'Upgrade', 'astra-sites' ),
 					'getUpgradeURL'     => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
