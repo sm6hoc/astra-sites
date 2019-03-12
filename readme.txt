@@ -1,4 +1,4 @@
-=== Astra Starter Sites - Elementor Templates ===
+=== Astra Starter Sites – Elementor, Beaver Builder & Gutenberg Templates ===
 Contributors: brainstormforce
 Donate link: https://wpastra.com/pro/
 Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites

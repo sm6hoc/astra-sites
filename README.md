@@ -1,4 +1,4 @@
-# Astra Starter Sites #
+# Astra Starter Sites – Elementor, Beaver Builder & Gutenberg Templates #
 **Contributors:** [brainstormforce](https://profiles.wordpress.org/brainstormforce)  
 **Donate link:** https://wpastra.com/pro/  
 **Tags:** demo, theme demos, one click import  
