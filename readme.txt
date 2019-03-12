@@ -118,7 +118,7 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v1.2.13 - 12-March-2019
-* Improvement: Added Elementor version 2.5.0 support.
+* Improvement: Elementor template image import logic.
 * Improvement: Added more description of the Agency sites.
 * Fix: Incorrect images was set after batch process complete.
 
