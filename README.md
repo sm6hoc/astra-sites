@@ -118,9 +118,8 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 
 v1.2.13 - 12-March-2019
-* Improvement: Added Elementor version 2.5.0 support.
 * Improvement: Added more description of the Agency sites.
-* Fix: Match image import from server by its actual name with its extension. Recently, Some rare cases It was check without extension and set wrong image.
+* Fix: Incorrect images was set after batch process complete.
 
 v1.2.12 - 29-Jan-2019
 * Fix: Gutenberg render markup is invalid due to encoded characterless e.g. <, > are decoded into HTML tag.
