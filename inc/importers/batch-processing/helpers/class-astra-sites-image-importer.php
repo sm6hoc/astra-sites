@@ -150,9 +150,9 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 						'%' . $filename . '%'
 					)
 				);
-				
+
 				$post_id = $wpdb->get_var(
-					$wpdb->prepare( 
+					$wpdb->prepare(
 						"SELECT post_id FROM {$wpdb->postmeta}
 						WHERE meta_key = '_wp_attached_file'
 						AND meta_value LIKE %s",
@@ -190,7 +190,15 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 				return $saved_image;
 			}
 
-			$file_content = wp_remote_retrieve_body( wp_safe_remote_get( $attachment['url'], array( 'timeout' => '60', 'sslverify' => false) ) );
+			$file_content = wp_remote_retrieve_body(
+				wp_safe_remote_get(
+					$attachment['url'],
+					array(
+						'timeout'   => '60',
+						'sslverify' => false,
+					)
+				)
+			);
 
 			// Empty file content?
 			if ( empty( $file_content ) ) {
