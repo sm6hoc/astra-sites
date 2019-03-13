@@ -85,6 +85,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
+
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
 			// Empty mapping? Then return.
@@ -93,13 +94,14 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 			}
 
 			$json_value = null;
-			$instance   = Brizy_Editor_Storage_Post::instance( $post_id );
-			$data       = $instance->get( Brizy_Editor_Post::BRIZY_POST, false );
+			
+			$post = Brizy_Editor_Post::get( (int) $post_id );
+			$data = $post->storage()->get( Brizy_Editor_Post::BRIZY_POST, false );
 
 			// Decode current data.
 			$json_value = base64_decode( $data['editor_data'] );
 
-			// Replace ID's.
+			// Update WPForm IDs.
 			foreach ( $ids_mapping as $old_id => $new_id ) {
 				$json_value = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $json_value );
 			}
@@ -107,16 +109,11 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 			// Encode modified data.
 			$data['editor_data'] = base64_encode( $json_value );
 
-			// Update data.
-			if ( is_object( $json_value ) ) {
-				$data->set_editor_data( $json_value );
-			}
+			$post->set_editor_data( $json_value );
 
-			$instance->set( Brizy_Editor_Post::BRIZY_POST, $data );
+			$post->storage()->set( Brizy_Editor_Post::BRIZY_POST, $data );
 
-			// Save data.
-			$post = new Brizy_Admin_Migrations_PostStorage( $post_id );
-
+			$post->compile_page();
 			$post->save();
 		}
 
