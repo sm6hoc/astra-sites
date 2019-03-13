@@ -43,8 +43,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Misc' ) ) :
 		 *
 		 * @since 1.1.6
 		 */
-		public function __construct() {
-		}
+		public function __construct() {}
 
 		/**
 		 * Import
