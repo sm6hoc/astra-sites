@@ -71,9 +71,17 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 
 			// Prepare Page Builders.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-beaver-builder.php';
+<<<<<<< HEAD
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-gutenberg.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-brizy.php';
+=======
+
+			// Elementor.
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php';
+			}
+>>>>>>> cd637904b928870f7ef1628ad1ff7be2b9fc21be
 
 			// Prepare Misc.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-misc.php';

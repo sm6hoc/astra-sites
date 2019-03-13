@@ -463,7 +463,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return string Current PHP Max Input Vars
 		 */
 		public static function get_php_max_input_vars() {
-			return ini_get( 'max_input_vars' );
+			return ini_get( 'max_input_vars' ); // phpcs:disable PHPCompatibility.IniDirectives.NewIniDirectives.max_input_varsFound
 		}
 
 		/**

@@ -7,6 +7,10 @@
 
 namespace Elementor\TemplateLibrary;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 // If plugin - 'Elementor' not exist then return.
 if ( ! class_exists( '\Elementor\Plugin' ) ) {
 	return;
@@ -21,18 +25,18 @@ use Elementor\Editor;
 use Elementor\Plugin;
 use Elementor\Settings;
 use Elementor\Utils;
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+
 /**
  * Elementor template library local source.
  *
  * Elementor template library local source handler class is responsible for
  * handling local Elementor templates saved by the user locally on his site.
  *
+ * @since 1.2.13 Added compatibility for Elemetnor v2.5.0
  * @since 1.0.0
  */
 class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
+
 	/**
 	 * Import
 	 *
@@ -89,10 +93,11 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 						}
 					}
 
+					$data = add_magic_quotes( $data );
 					$data = json_decode( $data, true );
 
-					$data = $this->replace_elements_ids( $data );
-					$data = $this->process_export_import_content( $data, 'on_import' );
+					// Import the data.
+					$content = $this->process_export_import_content( $content, 'on_import' );
 
 					// Update processed meta.
 					update_metadata( 'post', $post_id, '_elementor_data', $data );
