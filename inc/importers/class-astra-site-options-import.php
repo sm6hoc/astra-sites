@@ -98,6 +98,9 @@ class Astra_Site_Options_Import {
 			'woocommerce_enable_myaccount_registration',
 			'woocommerce_registration_generate_username',
 
+			// Plugin: WPForms.
+			'wpforms_settings',
+
 			// Categories.
 			'woocommerce_product_cat',
 		);
