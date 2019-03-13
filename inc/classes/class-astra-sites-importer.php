@@ -117,7 +117,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Import WP Forms
 		 *
-		 * @since x.x.x
+		 * @since 1.2.14
 		 *
 		 * @return void
 		 */

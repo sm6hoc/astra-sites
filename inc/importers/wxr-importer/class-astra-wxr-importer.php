@@ -93,6 +93,7 @@ class Astra_WXR_Importer {
 	 * @param string $filename                  The name of the file (may differ from $file due to
 	 *                                          $file being in a tmp directory).
 	 * @param array  $mimes                     Key is the file extension with value as the mime type.
+	 * @param string $real_mime                Real MIME type of the uploaded file.
 	 */
 	function real_mime_type_for_xml( $defaults, $file, $filename, $mimes, $real_mime ) {
 

@@ -3,7 +3,7 @@
  * Batch Processing
  *
  * @package Astra Sites
- * @since x.x.x
+ * @since 1.2.14
  */
 
 if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
@@ -11,14 +11,14 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 	/**
 	 * Astra Sites Batch Processing Brizy
 	 *
-	 * @since x.x.x
+	 * @since 1.2.14
 	 */
 	class Astra_Sites_Batch_Processing_Brizy {
 
 		/**
 		 * Instance
 		 *
-		 * @since x.x.x
+		 * @since 1.2.14
 		 * @access private
 		 * @var object Class object.
 		 */
@@ -27,7 +27,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		/**
 		 * Initiator
 		 *
-		 * @since x.x.x
+		 * @since 1.2.14
 		 * @return object initialized object of class.
 		 */
 		public static function get_instance() {
@@ -41,14 +41,14 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		/**
 		 * Constructor
 		 *
-		 * @since x.x.x
+		 * @since 1.2.14
 		 */
 		public function __construct() {}
 
 		/**
 		 * Import
 		 *
-		 * @since x.x.x
+		 * @since 1.2.14
 		 * @return void
 		 */
 		public function import() {
