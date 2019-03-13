@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites – Elementor, Beaver Builder & "
-"Gutenberg Templates 1.2.13\n"
+"Gutenberg Templates 1.2.14\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2019-03-12 10:21:32+00:00\n"
+"POT-Creation-Date: 2019-03-13 08:33:42+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,38 +47,38 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:87
+#: inc/classes/class-astra-sites-importer.php:88
 msgid "You have not \"customize\" access to import the Astra site."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:111
+#: inc/classes/class-astra-sites-importer.php:112
 msgid "Request site API URL is empty. Try again!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:134
+#: inc/classes/class-astra-sites-importer.php:204
 msgid "Customizer data is empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:150
+#: inc/classes/class-astra-sites-importer.php:220
 msgid ""
 "If XMLReader is not available, it imports all other settings and only skips "
 "XML import. This creates an incomplete website. We should bail early and "
 "not import anything if this is not present."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:166
+#: inc/classes/class-astra-sites-importer.php:236
 msgid "There was an error downloading the XML file."
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:172
+#: inc/classes/class-astra-sites-importer.php:242
 msgid "Invalid site XML file!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:194
+#: inc/classes/class-astra-sites-importer.php:264
 msgid "Site options are empty!"
 msgstr ""
 
-#: inc/classes/class-astra-sites-importer.php:216
+#: inc/classes/class-astra-sites-importer.php:286
 msgid "Widget data is empty!"
 msgstr ""
 
@@ -260,82 +260,94 @@ msgid "Successfully imported customizer settings!"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:259
-msgid "2) Preparing \"XML\" Data..."
+msgid "2) Importing \"WPForms\"..."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:260
-msgid "Successfully set XML data!"
+msgid "Successfully imported WPForms!"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:261
-msgid "3) Importing \"XML\"..."
+msgid "3) Preparing \"XML\" Data..."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:262
-msgid "Successfully imported XML!"
+msgid "Successfully set XML data!"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:263
-msgid "4) Importing \"Options\"..."
+msgid "4) Importing \"XML\"..."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:264
-msgid "Successfully imported Options!"
+msgid "Successfully imported XML!"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:265
-msgid "5) Importing \"Widgets\"..."
+msgid "5) Importing \"Options\"..."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:266
-msgid "Successfully imported Widgets!"
+msgid "Successfully imported Options!"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:267
+msgid "6) Importing \"Widgets\"..."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:268
-msgid "Site imported successfully! visit : "
-msgstr ""
-
-#: inc/classes/class-astra-sites.php:269
-msgid "Getting Site Information.."
+msgid "Successfully imported Widgets!"
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:270
-msgid "Importing Customizer Settings.."
+msgid "Site imported successfully! visit : "
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:271
-msgid "Setting up import data.."
+msgid "Getting Site Information.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:272
-msgid "Importing Pages, Posts & Media.."
+msgid "Importing Customizer Settings.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:273
-msgid "Importing Site Options.."
+msgid "Importing WP Forms.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:274
-msgid "Importing Widgets.."
+msgid "Setting up import data.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:275
-msgid "Import Complete.."
+msgid "Importing Pages, Posts & Media.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:276
-msgid "Previewing "
+msgid "Importing Site Options.."
 msgstr ""
 
 #: inc/classes/class-astra-sites.php:277
+msgid "Importing Widgets.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:278
+msgid "Import Complete.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:279
+msgid "Previewing "
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:280
 msgid "See Error Log &rarr;"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:312
+#: inc/classes/class-astra-sites.php:315
 msgid "No plugin specified"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:341
+#: inc/classes/class-astra-sites.php:344
 msgid "Plugin Successfully Activated"
 msgstr ""
 
@@ -371,7 +383,7 @@ msgstr ""
 msgid "No Title"
 msgstr ""
 
-#: inc/importers/wxr-importer/class-astra-wxr-importer.php:229
+#: inc/importers/wxr-importer/class-astra-wxr-importer.php:239
 msgid "Import complete!"
 msgstr ""
 

@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.1  
-**Stable tag:** 1.2.13  
+**Stable tag:** 1.2.14  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -116,6 +116,9 @@ We are open to suggestions and would love to work on topics that our users are l
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.14 - 13-March-2019
+- Improvement: Added support for the WPForms plugin.
 
 v1.2.13 - 12-March-2019
 - Improvement: Improved logic to download images in the Elementor templates.
