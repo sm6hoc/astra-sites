@@ -85,7 +85,6 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
-
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
 			// Empty mapping? Then return.
@@ -94,7 +93,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 			}
 
 			$json_value = null;
-			
+
 			$post = Brizy_Editor_Post::get( (int) $post_id );
 			$data = $post->storage()->get( Brizy_Editor_Post::BRIZY_POST, false );
 
