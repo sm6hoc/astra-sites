@@ -279,6 +279,7 @@
 
 			// API Request.
 			var api_post = {
+				id: 'astra-sites',
 				slug: 'astra-sites?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
 				trigger: trigger,
 			};
