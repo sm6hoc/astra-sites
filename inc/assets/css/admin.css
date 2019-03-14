@@ -699,3 +699,8 @@ body.loading-content .select-page-builder {
     padding: .5rem 1rem;
     height: auto;
 }
+
+.astra-site-page-builder {
+    opacity: 0;
+    visibility: hidden;
+}

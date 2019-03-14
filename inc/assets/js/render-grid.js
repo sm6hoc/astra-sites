@@ -299,6 +299,10 @@
 		{
 			var _params = {};
 
+			if( astraRenderGrid.default_page_builder ) {
+				_params['search'] = astraRenderGrid.default_page_builder;
+			}
+
 			if( astraRenderGrid.sites && astraRenderGrid.sites.purchase_key ) {
 				_params['purchase_key'] = astraRenderGrid.sites.purchase_key;
 			}
@@ -316,6 +320,7 @@
 			}
 
 			var decoded_params = decodeURIComponent( $.param( _params ) );
+
 
 			if( decoded_params.length ) {
 				return '/?' + decoded_params;
@@ -436,10 +441,10 @@
 				$('#' + data.args.id).html(template( data ));
 
 				// @TESTING
-				// if( 1 === parseInt( data.items_count ) ) {
+				if( 1 === parseInt( data.items_count ) ) {
 					$('body').attr( 'data-default-page-builder-selected', true );
 					$('#' + data.args.id).find('li:first a').addClass('current');
-				// }
+				}
 			}
 
 			/**

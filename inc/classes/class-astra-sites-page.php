@@ -27,9 +27,30 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		// public $settings = array();
 
 		/**
-		 * Constructor
+		 * Member Variable
+		 *
+		 * @var instance
 		 */
-		function __construct() {
+		private static $instance;
+
+		/**
+		 * Initiator
+		 *
+		 * @since x.x.x
+		 */
+		public static function get_instance() {
+			if ( ! isset( self::$instance ) ) {
+				self::$instance = new self;
+			}
+			return self::$instance;
+		}
+
+		/**
+		 * Constructor
+		 * 
+		 * @since x.x.x
+		 */
+		public function __construct() {
 
 			if ( ! is_admin() ) {
 				return;
@@ -63,6 +84,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 				// Update settings.
 				update_option( 'astra_sites_settings', $data );
+
+				wp_redirect( admin_url( '/themes.php?page=astra-sites' ) );
 			}
 		}
 
@@ -194,7 +217,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			// vl( $default_page_builder );
 			// update_option( 'astra_sites_settings', '' );
 
-			if( empty( $default_page_builder ) ) { ?>
+			if( empty( $default_page_builder ) || isset( $_GET['reset-page-builder'] ) ) { ?>
 				<div class="astra-sites-welcome">
 					<div class="inner">
 						<form id="astra-sites-welcome-form" enctype="multipart/form-data" method="post">
@@ -219,6 +242,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				<?php
 				$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
 				?>
+				<a style="float: right;margin-right: 15px;" href="<?php echo admin_url( 'themes.php?page=astra-sites&reset-page-builder' ); ?>">Reset Page Builder</a>
 				<div class="nav-tab-wrapper">
 					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
 					<?php
@@ -306,13 +330,13 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		public function general_page() {
 			$default_page_builder = $this->get_setting('page_builder');
-			if( empty( $default_page_builder ) ) {
+			if( empty( $default_page_builder ) || isset( $_GET['reset-page-builder'] ) ) {
 				return;
 			}
 			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
 		}
 	}
 
-	new Astra_Sites_Page;
+	Astra_Sites_Page::get_instance();
 
 }// End if.
