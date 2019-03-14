@@ -170,6 +170,7 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
+			$( document ).on('click'                     , '.astra-backup-settings', AstraSitesAdmin._backup_settings);
 			$( document ).on('click'					 , '.devices button', AstraSitesAdmin._previewDevice);
 			$( document ).on('click'                     , '.theme-browser .theme-screenshot, .theme-browser .more-details, .theme-browser .install-theme-preview', AstraSitesAdmin._preview);
 			$( document ).on('click'                     , '.next-theme', AstraSitesAdmin._nextTheme);
@@ -189,6 +190,30 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('astra-sites-import-xml-done'                 , AstraSitesAdmin._importSiteOptions );
 			$( document ).on('astra-sites-import-options-done'             , AstraSitesAdmin._importWidgets );
 			$( document ).on('astra-sites-import-widgets-done'             , AstraSitesAdmin._importEnd );
+		},
+
+		_backup_settings: function( event ) {
+			event.preventDefault();
+
+			var btn = $(this);
+
+			$.ajax({
+				url: astraSitesAdmin.ajaxurl,
+				type: 'POST',
+				data: {
+					'action' : 'astra-sites-backup-settings',
+				},
+			})
+			.done(function (data) {
+				download( data, 'backup-settings.json', 'application/json' );
+
+				setTimeout( function() {
+					btn.text( 'Import Settings' );
+					btn.removeClass( 'backup-settings' );
+					btn.addClass( 'import-settings' );
+				}, 500 );
+			});
+
 		},
 
 		/**

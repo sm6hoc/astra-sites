@@ -139,6 +139,7 @@ defined( 'ABSPATH' ) or exit;
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
+				<a class="button hide-if-no-customize astra-backup-settings" href="#" data-import="disabled"><?php esc_html_e( 'Backup Settings', 'astra-sites' ); ?></a>
 				<a class="button hide-if-no-customize astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
 
 			</div>
@@ -167,6 +168,9 @@ defined( 'ABSPATH' ) or exit;
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
 					<a class="button button-hero hide-if-no-customize astra-demo-import" href="#" data-import="disabled">
+						<?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?>
+					</a>
+					<a class="button button-hero hide-if-no-customize astra-backup-settings" href="#">
 						<?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?>
 					</a>
 				</div>
