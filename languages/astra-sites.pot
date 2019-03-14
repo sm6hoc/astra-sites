@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites – Elementor, Beaver Builder & "
-"Gutenberg Templates 1.2.14\n"
+"Gutenberg Templates 1.2.15\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2019-03-13 08:33:42+00:00\n"
+"POT-Creation-Date: 2019-03-14 05:41:15+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -94,11 +94,15 @@ msgid ""
 "extension."
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:216
+#: inc/classes/class-astra-sites-page.php:188
+msgid "Astra Starter Sites - Your Library of 100+ Ready Templates!"
+msgstr ""
+
+#: inc/classes/class-astra-sites-page.php:218
 msgid "Settings saved successfully."
 msgstr ""
 
-#: inc/classes/class-astra-sites-white-label.php:186
+#: inc/classes/class-astra-sites-white-label.php:187
 #. translators: %1$s product name
 msgid "%1$s Branding"
 msgstr ""
