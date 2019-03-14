@@ -59,6 +59,11 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			add_action( 'admin_init', array( $this, 'save_page_builder' ) );
 		}
 
+		/**
+		 * Help Tabs
+		 * 
+		 * @return void
+		 */
 		function help_tabs()
 		{
 		    $screen = get_current_screen();
