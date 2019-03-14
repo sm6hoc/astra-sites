@@ -26,17 +26,16 @@ defined( 'ABSPATH' ) or exit;
 					<div class="filter-count">
 						<span class="count"></span>
 					</div>
-					<div class="filters-wrap">
+					<div class="filters-wrap" style="display: none;">
 						<div id="astra-site-page-builder"></div>
 					</div>				
+					<div class="filters-wrap">
+						<div id="astra-site-category"></div>
+					</div>
 
 				</div>
 
 				<div class="section-right">
-
-					<div class="filters-wrap">
-						<div id="astra-site-category"></div>
-					</div>
 
 					<div class="search-form">
 						<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>

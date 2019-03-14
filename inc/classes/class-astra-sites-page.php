@@ -23,77 +23,120 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @since 1.0.6
 		 * @var array $view_actions
 		 */
-		static public $view_actions = array();
+		public $view_actions = array();
 
 		/**
-		 * Menu page title
+		 * Member Variable
 		 *
-		 * @since 1.0.6
-		 * @var array $menu_page_title
+		 * @var instance
 		 */
-		static public $menu_page_title = ASTRA_SITES_NAME;
+		private static $instance;
 
 		/**
-		 * Plugin slug
+		 * Initiator
 		 *
-		 * @since 1.0.6
-		 * @var array $plugin_slug
+		 * @since x.x.x
 		 */
-		static public $plugin_slug = 'astra-sites';
-
-		/**
-		 * Default Menu position
-		 *
-		 * @since 1.0.6
-		 * @var array $default_menu_position
-		 */
-		static public $default_menu_position = 'themes.php';
-
-		/**
-		 * Parent Page Slug
-		 *
-		 * @since 1.0.6
-		 * @var array $parent_page_slug
-		 */
-		static public $parent_page_slug = 'general';
-
-		/**
-		 * Current Slug
-		 *
-		 * @since 1.0.6
-		 * @var array $current_slug
-		 */
-		static public $current_slug = 'general';
+		public static function get_instance() {
+			if ( ! isset( self::$instance ) ) {
+				self::$instance = new self;
+			}
+			return self::$instance;
+		}
 
 		/**
 		 * Constructor
+		 *
+		 * @since x.x.x
 		 */
-		function __construct() {
+		public function __construct() {
 
 			if ( ! is_admin() ) {
 				return;
 			}
 
-			add_action( 'after_setup_theme', __CLASS__ . '::init_admin_settings', 99 );
+			add_action( 'after_setup_theme', array( $this, 'init_admin_settings' ), 99 );
+			add_action( 'admin_init', array( $this, 'save_page_builder' ) );
+		}
+
+		/**
+		 * Save Page Builder
+		 *
+		 * @return void
+		 */
+		function save_page_builder() {
+
+			// Only admins can save settings.
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			// Make sure we have a valid nonce.
+			if ( isset( $_REQUEST['astra-sites-page-builder'] ) && wp_verify_nonce( $_REQUEST['astra-sites-page-builder'], 'astra-sites-welcome-screen' ) ) {
+
+				// Stored Settings.
+				$stored_data = $this->get_settings();
+
+				// New settings.
+				$new_data = array(
+					'page_builder' => ( isset( $_REQUEST['page_builder'] ) ) ? sanitize_key( $_REQUEST['page_builder'] ) : '',
+				);
+
+				// Merge settings.
+				$data = wp_parse_args( $new_data, $stored_data );
+
+				// Update settings.
+				update_option( 'astra_sites_settings', $data );
+
+				wp_redirect( admin_url( '/themes.php?page=astra-sites' ) );
+			}
+		}
+
+		/**
+		 * Get single setting value
+		 *
+		 * @param  string $key      Setting key.
+		 * @param  mixed  $defaults Setting value.
+		 * @return mixed           Stored setting value.
+		 */
+		function get_setting( $key = '', $defaults = '' ) {
+
+			$settings = $this->get_settings();
+
+			if ( empty( $settings ) ) {
+				return $defaults;
+			}
+
+			if ( array_key_exists( $key, $settings ) ) {
+				return $settings[ $key ];
+			}
+
+			return $defaults;
+		}
+
+		/**
+		 * Get Settings
+		 *
+		 * @return array Stored settings.
+		 */
+		function get_settings() {
+
+			$defaults = array(
+				'page_builder' => '',
+			);
+
+			$stored_data = get_option( 'astra_sites_settings', $defaults );
+
+			return wp_parse_args( $stored_data, $defaults );
 		}
 
 		/**
 		 * Admin settings init
 		 */
-		static public function init_admin_settings() {
-
-			self::$menu_page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
-
-			if ( isset( $_REQUEST['page'] ) && strpos( $_REQUEST['page'], self::$plugin_slug ) !== false ) {
-
-				// Let extensions hook into saving.
-				self::save_settings();
-			}
-
-			add_action( 'admin_menu', __CLASS__ . '::add_admin_menu', 100 );
-
-			add_action( 'astra_sites_menu_general_action', __CLASS__ . '::general_page' );
-			add_action( 'admin_notices', __CLASS__ . '::notices' );
+		public function init_admin_settings() {
+			add_action( 'admin_menu', array( $this, 'add_admin_menu' ), 100 );
+			add_action( 'admin_notices', array( $this, 'notices' ) );
+			add_action( 'astra_sites_menu_general_action', array( $this, 'general_page' ) );
 		}
 
 		/**
@@ -101,7 +144,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 *
 		 * @since 1.2.8
 		 */
-		public static function notices() {
+		public function notices() {
 
 			if ( 'appearance_page_astra-sites' !== get_current_screen()->id ) {
 				return;
@@ -112,24 +155,10 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				<div class="notice astra-sites-xml-notice notice-error">
 					<p><b><?php _e( 'Required XMLReader PHP extension is missing on your server!', 'astra-sites' ); ?></b></p>
 					<?php /* translators: %s is the white label name. */ ?>
-					<p><?php printf( __( '%s import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), self::$menu_page_title ); ?></p>
+					<p><?php printf( __( '%s import requires XMLReader extension to be installed. Please contact your web hosting provider and ask them to install and activate the XMLReader PHP extension.', 'astra-sites' ), ASTRA_SITES_NAME ); ?></p>
 				</div>
 				<?php
 			}
-		}
-
-		/**
-		 * Save All admin settings here
-		 */
-		static public function save_settings() {
-
-			// Only admins can save settings.
-			if ( ! current_user_can( 'manage_options' ) ) {
-				return;
-			}
-
-			// Let extensions hook into saving.
-			do_action( 'astra_sites_save_settings' );
 		}
 
 		/**
@@ -138,10 +167,10 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @param mixed $action Action name.
 		 * @since 1.0.6
 		 */
-		static public function init_nav_menu( $action = '' ) {
+		public function init_nav_menu( $action = '' ) {
 
 			if ( '' !== $action ) {
-				self::render_tab_menu( $action );
+				$this->render_tab_menu( $action );
 			}
 		}
 
@@ -151,10 +180,10 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @param mixed $action Action name.
 		 * @since 1.0.6
 		 */
-		static public function render_tab_menu( $action = '' ) {
+		public function render_tab_menu( $action = '' ) {
 			?>
 			<div id="astra-sites-menu-page">
-				<?php self::render( $action ); ?>
+				<?php $this->render( $action ); ?>
 			</div>
 			<?php
 		}
@@ -164,17 +193,17 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 *
 		 * @since 1.0.11
 		 */
-		static public function get_view_actions() {
+		public function get_view_actions() {
 
-			if ( empty( self::$view_actions ) ) {
+			if ( empty( $this->view_actions ) ) {
 
-				self::$view_actions = apply_filters(
+				$this->view_actions = apply_filters(
 					'astra_sites_menu_item',
 					array()
 				);
 			}
 
-			return self::$view_actions;
+			return $this->view_actions;
 		}
 
 		/**
@@ -183,35 +212,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @param mixed $action Action name.
 		 * @since 1.0.6
 		 */
-		static public function render( $action ) {
+		public function render( $action ) {
 
-			$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
-
-			?>
-			<div class="nav-tab-wrapper">
-				<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
-				<?php
-				$view_actions = self::get_view_actions();
-
-				foreach ( $view_actions as $slug => $data ) {
-
-					if ( ! $data['show'] ) {
-						continue;
-					}
-
-					$url = self::get_page_url( $slug );
-
-					if ( $slug == self::$parent_page_slug ) {
-						update_option( 'astra_parent_page_url', $url );
-					}
-
-					$active = ( $slug == $action ) ? 'nav-tab-active' : '';
-					?>
-						<a class='nav-tab <?php echo esc_attr( $active ); ?>' href='<?php echo esc_url( $url ); ?>'> <?php echo esc_html( $data['label'] ); ?> </a>
-				<?php } ?>
-			</div><!-- .nav-tab-wrapper -->
-
-			<?php
 			// Settings update message.
 			if ( isset( $_REQUEST['message'] ) && ( 'saved' == $_REQUEST['message'] || 'saved_ext' == $_REQUEST['message'] ) ) {
 				?>
@@ -219,6 +221,59 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				<?php
 			}
 
+			$default_page_builder = $this->get_setting( 'page_builder' );
+
+			if ( empty( $default_page_builder ) || isset( $_GET['reset-page-builder'] ) ) {
+				?>
+				<div class="astra-sites-welcome">
+					<div class="inner">
+						<form id="astra-sites-welcome-form" enctype="multipart/form-data" method="post">
+							<h1>Select Page Builder</h1>
+							<p class="description">Select your favorite page builder to import sites or individual pages.</p>
+							<div class="fields">
+								<select name="page_builder" required="required">
+									<option value="">Select</option>
+									<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>>Elementor</option>
+									<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>>Beaver Builder</option>
+									<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>>Brizy</option>
+									<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>>Gutenberg</option>
+								</select>					
+								<?php submit_button(); ?>
+							</div>
+							<input type="hidden" name="message" value="saved" />
+							<?php wp_nonce_field( 'astra-sites-welcome-screen', 'astra-sites-page-builder' ); ?>
+						</form>
+					</div>
+				</div>
+			<?php } else { ?>
+				<?php
+				$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
+				?>
+				<a style="float: right;margin-right: 15px;" href="<?php echo admin_url( 'themes.php?page=astra-sites&reset-page-builder' ); ?>">Reset Page Builder</a>
+				<div class="nav-tab-wrapper">
+					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
+					<?php
+					$view_actions = $this->get_view_actions();
+
+					foreach ( $view_actions as $slug => $data ) {
+
+						if ( ! $data['show'] ) {
+							continue;
+						}
+
+						$url = $this->get_page_url( $slug );
+
+						if ( 'general' == $slug ) {
+							update_option( 'astra_parent_page_url', $url );
+						}
+
+						$active = ( $slug == $action ) ? 'nav-tab-active' : '';
+						?>
+							<a class='nav-tab <?php echo esc_attr( $active ); ?>' href='<?php echo esc_url( $url ); ?>'> <?php echo esc_html( $data['label'] ); ?> </a>
+					<?php } ?>
+				</div><!-- .nav-tab-wrapper -->
+				<?php
+			}
 		}
 
 		/**
@@ -228,14 +283,14 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @since 1.0.6
 		 * @return  string page url
 		 */
-		static public function get_page_url( $menu_slug ) {
+		public function get_page_url( $menu_slug ) {
 
-			$parent_page = self::$default_menu_position;
+			$parent_page = 'themes.php';
 
 			if ( strpos( $parent_page, '?' ) !== false ) {
-				$query_var = '&page=' . self::$plugin_slug;
+				$query_var = '&page=astra-sites';
 			} else {
-				$query_var = '?page=' . self::$plugin_slug;
+				$query_var = '?page=astra-sites';
 			}
 
 			$parent_page_url = admin_url( $parent_page . $query_var );
@@ -250,15 +305,10 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 *
 		 * @since 1.0.6
 		 */
-		static public function add_admin_menu() {
+		public function add_admin_menu() {
+			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
 
-			$parent_page    = self::$default_menu_position;
-			$page_title     = self::$menu_page_title;
-			$capability     = 'manage_options';
-			$page_menu_slug = self::$plugin_slug;
-			$page_menu_func = __CLASS__ . '::menu_callback';
-
-			add_theme_page( $page_title, $page_title, $capability, $page_menu_slug, $page_menu_func );
+			add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
 		}
 
 		/**
@@ -266,16 +316,16 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 *
 		 * @since 1.0.6
 		 */
-		static public function menu_callback() {
+		public function menu_callback() {
 
-			$current_slug = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : self::$current_slug;
+			$current_slug = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : 'general';
 
 			$active_tab   = str_replace( '_', '-', $current_slug );
 			$current_slug = str_replace( '-', '_', $current_slug );
 
 			?>
 			<div class="astra-sites-menu-page-wrapper">
-				<?php self::init_nav_menu( $active_tab ); ?>
+				<?php $this->init_nav_menu( $active_tab ); ?>
 				<?php do_action( 'astra_sites_menu_' . esc_attr( $current_slug ) . '_action' ); ?>
 			</div>
 			<?php
@@ -286,11 +336,15 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 *
 		 * @since 1.0.6
 		 */
-		static public function general_page() {
+		public function general_page() {
+			$default_page_builder = $this->get_setting( 'page_builder' );
+			if ( empty( $default_page_builder ) || isset( $_GET['reset-page-builder'] ) ) {
+				return;
+			}
 			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
 		}
 	}
 
-	new Astra_Sites_Page;
+	Astra_Sites_Page::get_instance();
 
 }// End if.

@@ -198,10 +198,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$data = apply_filters(
 				'astra_sites_render_localize_vars',
 				array(
-					'sites'         => $request_params,
-					'page-builders' => array(),
-					'categories'    => array(),
-					'settings'      => array(),
+					'sites'                => $request_params,
+					'page-builders'        => array(),
+					'categories'           => array(),
+					'settings'             => array(),
+					'default_page_builder' => Astra_Sites_Page::get_instance()->get_setting( 'page_builder' ),
 				)
 			);
 
