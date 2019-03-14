@@ -587,6 +587,14 @@ body.loading-content .select-page-builder {
 }
 
 /**
+ * Screen
+ */
+#astra-sites-menu-page .back {
+    float: left;
+    margin: 8px 10px;
+}
+
+/**
  * Screen: Get Started
  */
 .previous-theme,
@@ -607,6 +615,17 @@ body.loading-content .select-page-builder {
 .screen-get-started #astra-get-started-large,
 .screen-get-started #astra-get-started {
     display: block;
+    text-align: center;
+}
+
+.screen-get-started .screen-get-started-actions {
+    display: block;
+}
+
+#astra-sites-menu-page .next-theme,
+#astra-sites-menu-page .previous-theme,
+.screen-get-started-actions {
+    display: none;
 }
 
 /**
@@ -619,4 +638,13 @@ body.loading-content .select-page-builder {
 .screen-required-plugins #astra-demo-import-large,
 .screen-required-plugins #astra-demo-import {
     display: block;
+    text-align: center;
+}
+
+.screen-required-plugins .screen-required-plugins-actions {
+    display: block;
+}
+
+.screen-required-plugins-actions {
+    display: none;
 }

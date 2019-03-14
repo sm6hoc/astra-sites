@@ -182,6 +182,11 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('click'                     , '#astra-sites > .site-single', AstraSitesAdmin._screen_site_details );
 			$( document ).on('click'                     , '#astra-get-started', AstraSitesAdmin._screen_required_plugins);
 
+			// Back & Skip
+			$( document ).on('click'                     , '.screen-required-plugins-actions .back', AstraSitesAdmin._screen_required_plugins);
+			$( document ).on('click'                     , '.screen-required-plugins-actions .skip', AstraSitesAdmin._screen_required_plugins);
+			
+
 			// v2 first UI.
 			$( document ).on('click'                     , '.astra-sites-site-details .backup-options', AstraSitesAdmin._backup_options);
 			$( document ).on('click'                     , '.astra-sites-site-details .import-options', AstraSitesAdmin._import_options);
@@ -200,7 +205,7 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('click'                     , '.next-theme', AstraSitesAdmin._nextTheme);
 			$( document ).on('click'                     , '.previous-theme', AstraSitesAdmin._previousTheme);
 			$( document ).on('click'                     , '.collapse-sidebar', AstraSitesAdmin._collapse);
-			$( document ).on('click'                     , '#astra-demo-import', AstraSitesAdmin._importDemo);
+			// $( document ).on('click'                     , '#astra-demo-import', AstraSitesAdmin._importDemo);
 			$( document ).on('click'                     , '.install-now', AstraSitesAdmin._installNow);
 			$( document ).on('click'                     , '.close-full-overlay', AstraSitesAdmin._fullOverlay);
 			$( document ).on('click'                     , '.activate-now', AstraSitesAdmin._activateNow);
@@ -2100,13 +2105,13 @@ var AstraSitesAjaxQueue = (function() {
 									$('#astra-demo-import')
 										.removeClass('installing updating-message')
 										.addClass('disabled')
-										.text( astraSitesAdmin.strings.importDemo );	
+										.text( 'Install Plugins' );	
 								} else {
 									$('#astra-demo-import')
 										.removeAttr('data-import')
 										.removeClass('installing updating-message')
 										.addClass('button-primary')
-										.text( astraSitesAdmin.strings.importDemo );
+										.text( 'Install Plugins' );
 								}
 							}
 

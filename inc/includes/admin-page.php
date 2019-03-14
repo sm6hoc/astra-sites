@@ -357,8 +357,15 @@ defined( 'ABSPATH' ) or exit;
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
-				<a id="astra-get-started" class="button button-primary hide-if-no-customize" href="#"><?php esc_html_e( 'Get Started', 'astra-sites' ); ?></a>
-				<a id="astra-demo-import" class="button hide-if-no-customize" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
+
+				<span class="screen-get-started-actions">
+					<a id="astra-get-started" class="button button-primary hide-if-no-customize" href="#"><?php esc_html_e( 'Get Started', 'astra-sites' ); ?></a>
+				</span>
+				<span class="screen-required-plugins-actions">
+					<button class="button back"><?php _e( 'Back', 'astra-sites' ); ?></button>
+					<a id="astra-demo-import" class="button hide-if-no-customize" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
+					<button class="button skip"><?php _e( 'Skip', 'astra-sites' ); ?></button>
+				</span>
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
 				<div class="install-theme-info">
@@ -370,13 +377,8 @@ defined( 'ABSPATH' ) or exit;
 						<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
 					<# } #>
 
-
 					<!-- Append each screen here.. -->
 					<div class="astra-screen-wrap">
-						<div class="theme-details">
-							{{{data.content}}}
-						</div>
-						<a href="#" class="theme-details-read-more"><?php _e( 'Read more', 'astra-sites' ); ?> &hellip;</a>
 					</div>
 
 				</div>
@@ -416,6 +418,17 @@ defined( 'ABSPATH' ) or exit;
 		<div class="wp-full-overlay-main">
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
 		</div>
+	</div>
+</script>
+
+<?php
+/**
+ * TMPL - Screen - Site Details
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-step-site-details">
+	<div class="theme-details">
+		{{{data.content}}}
 	</div>
 </script>
 
