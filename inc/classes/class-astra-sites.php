@@ -468,7 +468,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				wp_send_json_error( $response );
 			}
 
-			$required_plugins = ( isset( $_POST['required_plugins'] ) ) ? json_decode( stripslashes( $_POST['required_plugins'] ), true ) : array();
+			$required_plugins = isset( $_POST['required_plugins'] ) ? $_POST['required_plugins'] : array();
 
 			if ( count( $required_plugins ) > 0 ) {
 				foreach ( $required_plugins as $key => $plugin ) {

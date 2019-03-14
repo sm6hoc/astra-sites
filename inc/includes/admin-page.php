@@ -248,39 +248,45 @@ defined( 'ABSPATH' ) or exit;
 	<# console.log( data.data ); #>
 
 	<# if( data.data.notinstalled.length ) { #>
-		<h4>Not Installed Plugins</h4>
-		<p>Below plugins are not installed yet! We'll install and activate them in import process.</p>
-		<# for ( key in data.data.notinstalled ) { #>
-			<# console.log( data.data.notinstalled[ key ] ) #>
-			<div data-slug="{{data.data.notinstalled[ key ].slug}}" data-init="{{data.data.notinstalled[ key ].init}}">
-				<span class="notinstalled dashicons dashicons-arrow-right"></span>
-				{{data.data.notinstalled[ key ].name}}
-			</div>
-		<# } #>
+		<div class="plugin-list">
+			<h4>Not Installed Plugins</h4>
+			<!-- <p>Below plugins are not installed yet! We'll install and activate them in import process.</p> -->
+			<# for ( key in data.data.notinstalled ) { #>
+				<# console.log( data.data.notinstalled[ key ] ) #>
+				<div data-slug="{{data.data.notinstalled[ key ].slug}}" data-init="{{data.data.notinstalled[ key ].init}}">
+					<span class="notinstalled dashicons dashicons-arrow-right"></span>
+					{{data.data.notinstalled[ key ].name}}
+				</div>
+			<# } #>
+		</div>
 	<# } #>
 
 	<# if( data.data.inactive.length ) { #>
-		<h4>Inactive Plugins</h4>
-		<p>Below plugins are inactivate. We'll activate them in import process.</p>
-		<# for ( key in data.data.inactive ) { #>
-			<# console.log( data.data.inactive[ key ] ) #>
-			<div data-slug="{{data.data.inactive[ key ].slug}}" data-init="{{data.data.inactive[ key ].init}}">
-				<span class="inactive dashicons dashicons-arrow-right"></span>
-				{{data.data.inactive[ key ].name}}
-			</div>
-		<# } #>
+		<div class="plugin-list">
+			<h4>Inactive Plugins</h4>
+			<!-- <p>Below plugins are inactivate. We'll activate them in import process.</p> -->
+			<# for ( key in data.data.inactive ) { #>
+				<# console.log( data.data.inactive[ key ] ) #>
+				<div data-slug="{{data.data.inactive[ key ].slug}}" data-init="{{data.data.inactive[ key ].init}}">
+					<span class="inactive dashicons dashicons-arrow-right"></span>
+					{{data.data.inactive[ key ].name}}
+				</div>
+			<# } #>
+		</div>
 	<# } #>
 
 	<# if( data.data.active.length ) { #>
-		<h4>Active Plugins</h4>
-		<p>Below plugins are activate.</p>
-		<# for ( key in data.data.active ) { #>
-			<# console.log( data.data.active[ key ] ) #>
-			<div data-slug="{{data.data.active[ key ].slug}}" data-init="{{data.data.active[ key ].init}}">
-				<span class="active dashicons dashicons-arrow-right"></span>
-				{{data.data.active[ key ].name}}
-			</div>
-		<# } #>
+		<div class="plugin-list">
+			<h4>Active Plugins</h4>
+			<!-- <p>Below plugins are activate.</p> -->
+			<# for ( key in data.data.active ) { #>
+				<# console.log( data.data.active[ key ] ) #>
+				<div data-slug="{{data.data.active[ key ].slug}}" data-init="{{data.data.active[ key ].init}}">
+					<span class="active dashicons dashicons-arrow-right"></span>
+					{{data.data.active[ key ].name}}
+				</div>
+			<# } #>
+		</div>
 	<# } #>
 
 </script>
@@ -310,23 +316,12 @@ defined( 'ABSPATH' ) or exit;
 <script type="text/template" id="tmpl-astra-site-preview">
 	<div class="astra-sites-preview theme-install-overlay wp-full-overlay expanded">
 		<div class="wp-full-overlay-sidebar">
-			<div class="wp-full-overlay-header"
-					data-demo-id="{{{data.id}}}"
-					data-demo-type="{{{data.astra_demo_type}}}"
-					data-demo-url="{{{data.astra_demo_url}}}"
-					data-demo-api="{{{data.demo_api}}}"
-					data-demo-name="{{{data.demo_name}}}"
-					data-demo-slug="{{{data.slug}}}"
-					data-screenshot="{{{data.screenshot}}}"
-					data-content="{{{data.content}}}"
-					data-required-plugins="{{data.required_plugins}}">
-				<input type="hidden" class="astra-site-options" value="{{data.astra_site_options}}" >
-				<input type="hidden" class="astra-enabled-extensions" value="{{data.astra_enabled_extensions}}" >
+			<div class="wp-full-overlay-header" data-demo-id="{{{data.id}}}">
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
-				<a class="button hide-if-no-customize astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
-
+				<a id="astra-get-started" class="button button-primary hide-if-no-customize" href="#"><?php esc_html_e( 'Get Started', 'astra-sites' ); ?></a>
+				<a id="astra-demo-import" class="button hide-if-no-customize" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
 				<div class="install-theme-info">
@@ -338,21 +333,24 @@ defined( 'ABSPATH' ) or exit;
 						<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
 					<# } #>
 
-					<div class="theme-details">
-						{{{data.content}}}
-					</div>
-					<a href="#" class="theme-details-read-more"><?php _e( 'Read more', 'astra-sites' ); ?> &hellip;</a>
 
-					<div class="required-plugins-wrap">
-						<h4><?php _e( 'Required Plugins', 'astra-sites' ); ?> </h4>
-						<div class="required-plugins"></div>
+					<!-- Append each screen here.. -->
+					<div class="astra-screen-wrap">
+						<div class="theme-details">
+							{{{data.content}}}
+						</div>
+						<a href="#" class="theme-details-read-more"><?php _e( 'Read more', 'astra-sites' ); ?> &hellip;</a>
 					</div>
+
 				</div>
 			</div>
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
-					<a class="button button-hero hide-if-no-customize astra-demo-import" href="#" data-import="disabled">
+					<a id="astra-get-started-large" class="button button-primary button-hero hide-if-no-customize" href="#">
+						<?php esc_html_e( 'Get Started', 'astra-sites' ); ?>
+					</a>
+					<a id="astra-demo-import-large" class="button button-hero hide-if-no-customize" href="#" data-import="disabled">
 						<?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?>
 					</a>
 				</div>
@@ -381,6 +379,19 @@ defined( 'ABSPATH' ) or exit;
 		<div class="wp-full-overlay-main">
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
 		</div>
+	</div>
+</script>
+
+<?php
+/**
+ * TMPL - Screen - Required Plugins
+ */
+?>
+<script type="text/template" id="tmpl-astra-site-step-required-plugins">
+	<# console.log( data ); #>
+	<div class="required-plugins-wrap">
+		<h2><?php _e( 'Required Plugins', 'astra-sites' ); ?> </h2>
+		<div class="required-plugins-list"><span class="spinner is-active"></span></div>
 	</div>
 </script>
 

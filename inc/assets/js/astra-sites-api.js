@@ -3,7 +3,12 @@
 
 	AstraSitesAPI = {
 
-		_api_url  : astraSitesApi.ApiURL,
+		_api_url      : astraSitesApi.ApiURL,
+		_stored_data  : {
+			'astra-site-category' : [],
+			'astra-site-page-builder': [],
+			'astra-sites' : [],
+		},
 
 		/**
 		 * API Request
@@ -23,6 +28,10 @@
 			.done(function( items, status, XHR ) {
 
 				if( 'success' === status && XHR.getResponseHeader('x-wp-total') ) {
+
+					if( args.id ) {
+						AstraSitesAPI._stored_data[ args.id ] = $.merge( AstraSitesAPI._stored_data[ args.id ], items );
+					}
 
 					var data = {
 						args 		: args,

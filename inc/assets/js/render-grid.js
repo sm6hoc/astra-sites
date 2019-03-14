@@ -279,6 +279,7 @@
 
 			// API Request.
 			var api_post = {
+				id    : 'astra-sites',
 				slug: 'astra-sites?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
 				trigger: trigger,
 			};
@@ -434,10 +435,11 @@
 				var template = wp.template('astra-site-filters');
 				$('#' + data.args.id).html(template( data ));
 
-				if( 1 === parseInt( data.items_count ) ) {
+				// @TESTING
+				// if( 1 === parseInt( data.items_count ) ) {
 					$('body').attr( 'data-default-page-builder-selected', true );
 					$('#' + data.args.id).find('li:first a').addClass('current');
-				}
+				// }
 			}
 
 			/**
