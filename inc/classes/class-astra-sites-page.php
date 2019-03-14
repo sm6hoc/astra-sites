@@ -59,6 +59,23 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			add_action( 'admin_init', array( $this, 'save_page_builder' ) );
 		}
 
+		function help_tabs()
+		{
+		    $screen = get_current_screen();
+
+		    $screen->add_help_tab( array(
+				'id'      => 'astra_sites_change_page_builder',
+				'title'   => __('Change Page Builder'),
+				'content' => '<p>' . sprintf( __( 'Do you want to change selected page builder? Then click on <a href="%s">Set Another Page Builder</a>.', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites&change-page-builder' ) )  . '</p>',
+			) );
+
+		    $screen->add_help_tab( array(
+				'id'      => 'astra_sites_reset_data',
+				'title'   => __('Reset Data'),
+				'content' => '<p>' . sprintf( __( 'Do you want to reset recently imported data? Then click on <a href="%s">Set Data</a>.', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites&change-page-builder' ) )  . '</p>',
+			) );
+		}
+
 		/**
 		 * Save Page Builder
 		 *
@@ -223,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 			$default_page_builder = $this->get_setting( 'page_builder' );
 
-			if ( empty( $default_page_builder ) || isset( $_GET['reset-page-builder'] ) ) {
+			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 				?>
 				<div class="astra-sites-welcome">
 					<div class="inner">
@@ -249,7 +266,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				<?php
 				$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
 				?>
-				<a style="float: right;margin-right: 15px;" href="<?php echo admin_url( 'themes.php?page=astra-sites&reset-page-builder' ); ?>">Reset Page Builder</a>
 				<div class="nav-tab-wrapper">
 					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
 					<?php
@@ -308,7 +324,9 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		public function add_admin_menu() {
 			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
 
-			add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
+			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
+
+			add_action( 'load-' . $page, array( $this, 'help_tabs' ) );
 		}
 
 		/**
@@ -338,7 +356,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		public function general_page() {
 			$default_page_builder = $this->get_setting( 'page_builder' );
-			if ( empty( $default_page_builder ) || isset( $_GET['reset-page-builder'] ) ) {
+			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 				return;
 			}
 			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
