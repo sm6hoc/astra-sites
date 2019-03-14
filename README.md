@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.1  
-**Stable tag:** 1.2.14  
+**Stable tag:** 1.2.15  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -116,6 +116,10 @@ We are open to suggestions and would love to work on topics that our users are l
 3. Import the demo.
 
 ## Changelog ##
+
+v1.2.15 - 14-March-2019
+- Improvement: Admin page UI improvements.
+- Improvement: Added filter `astra_sites_page_title` to change the page title.
 
 v1.2.14 - 13-March-2019
 - Improvement: Added support for the WPForms plugin.

@@ -185,9 +185,11 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		static public function render( $action ) {
 
+			$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
+
 			?>
 			<div class="nav-tab-wrapper">
-				<h1 class='astra-sites-title'> <?php echo esc_html( self::$menu_page_title ); ?> </h1>
+				<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
 				<?php
 				$view_actions = self::get_view_actions();
 
