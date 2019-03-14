@@ -496,6 +496,7 @@ body.loading-content .select-page-builder {
     padding: 1em 2em;
     margin-top: 1em;
 }
+<<<<<<< HEAD
 .astra-sites-site-details {
     display: flex;
     background: #fff;
@@ -575,6 +576,14 @@ body.loading-content .select-page-builder {
 
 .astra-sites-site-details .title {
     padding: 1em 0;
+}
+
+#astra-sites-menu-page .nav-tab-wrapper {
+    border: none;
+}
+
+#astra-sites-filters .wp-filter {
+    margin-top: 0;
 }
 
 /**

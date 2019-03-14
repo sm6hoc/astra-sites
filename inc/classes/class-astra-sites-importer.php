@@ -53,6 +53,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			// Import AJAX.
 			add_action( 'wp_ajax_astra-sites-import-set-site-data', array( $this, 'import_start' ) );
+			add_action( 'wp_ajax_astra-sites-import-wpforms', array( $this, 'import_wpforms' ) );
 			add_action( 'wp_ajax_astra-sites-import-customizer-settings', array( $this, 'import_customizer_settings' ) );
 			add_action( 'wp_ajax_astra-sites-import-prepare-xml', array( $this, 'prepare_xml_data' ) );
 			add_action( 'wp_ajax_astra-sites-import-options', array( $this, 'import_options' ) );
@@ -99,8 +100,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 					wp_send_json_error( $demo_data->get_error_message() );
 				} else {
 					$log_file = Astra_Sites_Importer_Log::add_log_file_url();
-					if ( isset( $log_file['abs_url'] ) && ! empty( $log_file['abs_url'] ) ) {
-						$demo_data['log_file'] = $log_file['abs_url'];
+					if ( isset( $log_file['url'] ) && ! empty( $log_file['url'] ) ) {
+						$demo_data['log_file'] = $log_file['url'];
 					}
 					do_action( 'astra_sites_import_start', $demo_data, $demo_api_uri );
 				}
@@ -111,6 +112,75 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				wp_send_json_error( __( 'Request site API URL is empty. Try again!', 'astra-sites' ) );
 			}
 
+		}
+
+		/**
+		 * Import WP Forms
+		 *
+		 * @since 1.2.14
+		 *
+		 * @return void
+		 */
+		function import_wpforms() {
+
+			$wpforms_url = ( isset( $_REQUEST['wpforms_url'] ) ) ? urldecode( $_REQUEST['wpforms_url'] ) : '';
+			$ids_mapping = array();
+
+			if ( ! empty( $wpforms_url ) ) {
+
+				// Download XML file.
+				$xml_path = Astra_Sites_Helper::download_file( $wpforms_url );
+
+				if ( $xml_path['success'] ) {
+					if ( isset( $xml_path['data']['file'] ) ) {
+
+						$ext = strtolower( pathinfo( $xml_path['data']['file'], PATHINFO_EXTENSION ) );
+
+						if ( 'json' === $ext ) {
+							$forms = json_decode( file_get_contents( $xml_path['data']['file'] ), true );
+
+							if ( ! empty( $forms ) ) {
+
+								foreach ( $forms as $form ) {
+									$title = ! empty( $form['settings']['form_title'] ) ? $form['settings']['form_title'] : '';
+									$desc  = ! empty( $form['settings']['form_desc'] ) ? $form['settings']['form_desc'] : '';
+
+									$new_id = post_exists( $title );
+
+									if ( ! $new_id ) {
+										$new_id = wp_insert_post(
+											array(
+												'post_title'   => $title,
+												'post_status'  => 'publish',
+												'post_type'    => 'wpforms',
+												'post_excerpt' => $desc,
+											)
+										);
+									}
+
+									if ( $new_id ) {
+
+										// ID mapping.
+										$ids_mapping[ $form['id'] ] = $new_id;
+
+										$form['id'] = $new_id;
+										wp_update_post(
+											array(
+												'ID' => $new_id,
+												'post_content' => wpforms_encode( $form ),
+											)
+										);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			update_option( 'astra_sites_wpforms_ids_mapping', $ids_mapping );
+
+			wp_send_json_success( $ids_mapping );
 		}
 
 		/**
@@ -228,6 +298,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			do_action( 'astra_sites_import_complete' );
 		}
 
+
 		/**
 		 * Get single demo.
 		 *
@@ -248,6 +319,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				'astra-site-options-data'    => '',
 				'astra-post-data-mapping'    => '',
 				'astra-site-wxr-path'        => '',
+				'astra-site-wpforms-path'    => '',
 				'astra-enabled-extensions'   => '',
 				'astra-custom-404'           => '',
 				'required-plugins'           => '',
@@ -293,6 +365,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				$remote_args['astra-site-options-data']    = $data['astra-site-options-data'];
 				$remote_args['astra-post-data-mapping']    = $data['astra-post-data-mapping'];
 				$remote_args['astra-site-wxr-path']        = $data['astra-site-wxr-path'];
+				$remote_args['astra-site-wpforms-path']    = $data['astra-site-wpforms-path'];
 				$remote_args['astra-enabled-extensions']   = $data['astra-enabled-extensions'];
 				$remote_args['astra-custom-404']           = $data['astra-custom-404'];
 				$remote_args['required-plugins']           = $data['required-plugins'];

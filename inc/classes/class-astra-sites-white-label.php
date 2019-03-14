@@ -66,13 +66,11 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 * @since 1.0.12
 		 */
 		public function __construct() {
-
-			$this->set_white_labels();
-
 			add_filter( 'all_plugins', array( $this, 'plugins_page' ) );
 			add_filter( 'astra_addon_branding_options', __CLASS__ . '::settings' );
 			add_action( 'astra_pro_white_label_add_form', __CLASS__ . '::add_white_lavel_form' );
 			add_filter( 'astra_sites_menu_page_title', array( $this, 'page_title' ) );
+			add_filter( 'astra_sites_page_title', array( $this, 'page_title' ) );
 
 			// Display the link with the plugin meta.
 			if ( is_admin() ) {
@@ -90,7 +88,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 */
 		function plugins_page( $plugins ) {
 
-			if ( ! is_callable( 'Astra_Ext_White_Label_Markup::get_white_label' ) ) {
+			if ( ! is_callable( 'Astra_Ext_White_Label_Markup::get_whitelabel_string' ) ) {
 				return $plugins;
 			}
 
@@ -99,10 +97,10 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 			}
 
 			// Set White Labels.
-			$name        = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
-			$description = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'description' );
-			$author      = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author' );
-			$author_uri  = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author_url' );
+			$name        = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
+			$description = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'description' );
+			$author      = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-agency', 'author' );
+			$author_uri  = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-agency', 'author_url' );
 
 			if ( ! empty( $name ) ) {
 				$plugins[ ASTRA_SITES_BASE ]['Name'] = $name;
@@ -138,15 +136,15 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 */
 		public function plugin_links( $plugin_meta, $plugin_file, $plugin_data ) {
 
-			if ( ! is_callable( 'Astra_Ext_White_Label_Markup::get_white_label' ) ) {
+			if ( ! is_callable( 'Astra_Ext_White_Label_Markup::get_whitelabel_string' ) ) {
 				return $plugin_meta;
 			}
 
 			// Set White Labels.
 			if ( ASTRA_SITES_BASE == $plugin_file ) {
 
-				$name        = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
-				$description = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'description' );
+				$name        = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
+				$description = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'description' );
 
 				// Remove Plugin URI if Agency White Label name is set.
 				if ( ! empty( $name ) ) {
@@ -200,11 +198,11 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 * @return string        Filtered Page Title.
 		 */
 		function page_title( $title ) {
-			$get_white_labels = 'Astra_Ext_White_Label_Markup::get_white_labels';
-			if ( is_callable( $get_white_labels ) ) {
-				$astra_sites_name = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
+
+			if ( is_callable( 'Astra_Ext_White_Label_Markup::get_whitelabel_string' ) ) {
+				$astra_sites_name = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
 				if ( ! empty( $astra_sites_name ) ) {
-					$title = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
+					$title = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
 				}
 			}
 
@@ -212,73 +210,25 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		}
 
 		/**
-		 * Set White Labels
+		 * Is Astra sites White labeled
 		 *
-		 * @since 1.2.11
+		 * @since 1.2.13
 		 *
-		 * @return void
+		 * @return string
 		 */
-		function set_white_labels() {
-
-			$name = $description = $support_link = $author = '';
-			if ( is_callable( 'Astra_Ext_White_Label_Markup::get_white_label' ) ) {
-				$name         = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'name' );
-				$description  = Astra_Ext_White_Label_Markup::get_white_label( 'astra-sites', 'description' );
-				$support_link = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author_url' );
-				$author       = Astra_Ext_White_Label_Markup::get_white_label( 'astra-agency', 'author' );
+		function is_white_labeled() {
+			if ( ! is_callable( 'Astra_Ext_White_Label_Markup::get_whitelabel_string' ) ) {
+				return false;
 			}
 
-			$this->settings = array(
-				'name'         => ( ! empty( $name ) ) ? $name : __( 'Astra Sites', 'astra-sites' ),
-				'author'       => ( ! empty( $author ) ) ? $author : __( 'Brainstorm Force', 'astra-sites' ),
-				'description'  => ( ! empty( $description ) ) ? $description : __( 'Import free sites build with Astra theme.', 'astra-sites' ),
-				'support-link' => ( ! empty( $support_link ) ) ? $support_link : 'mailto:support@bsf.io',
-			);
+			$astra_sites_name = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
+			if ( empty( $astra_sites_name ) ) {
+				return false;
+			}
+
+			return true;
 		}
 
-		/**
-		 * Get Name
-		 *
-		 * @since 1.2.11
-		 *
-		 * @return string
-		 */
-		function get_name() {
-			return $this->settings['name'];
-		}
-
-		/**
-		 * Get Description
-		 *
-		 * @since 1.2.11
-		 *
-		 * @return string
-		 */
-		function get_description() {
-			return $this->settings['description'];
-		}
-
-		/**
-		 * Get Author
-		 *
-		 * @since 1.2.11
-		 *
-		 * @return string
-		 */
-		function get_author() {
-			return $this->settings['author'];
-		}
-
-		/**
-		 * Get Support Link
-		 *
-		 * @since 1.2.11
-		 *
-		 * @return string
-		 */
-		function get_support_link() {
-			return $this->settings['support-link'];
-		}
 	}
 
 	/**

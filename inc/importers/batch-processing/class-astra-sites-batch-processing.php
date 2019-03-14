@@ -73,11 +73,9 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 
 			// Prepare Page Builders.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-beaver-builder.php';
-
-			// Elementor.
-			if ( class_exists( '\Elementor\Plugin' ) ) {
-				require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php';
-			}
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-elementor.php';
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-gutenberg.php';
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-brizy.php';
 
 			// Prepare Misc.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-misc.php';
@@ -149,22 +147,26 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 				self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Widgets::get_instance() );
 			}
 
+			// Add "gutenberg" in import [queue].
+			self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Gutenberg::get_instance() );
+
+			// Add "brizy" in import [queue].
+			if ( is_plugin_active( 'brizy/brizy.php' ) ) {
+				self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Brizy::get_instance() );
+			}
+
 			// Add "bb-plugin" in import [queue].
 			// Add "beaver-builder-lite-version" in import [queue].
 			if ( is_plugin_active( 'beaver-builder-lite-version/fl-builder.php' ) || is_plugin_active( 'bb-plugin/fl-builder.php' ) ) {
-				if ( class_exists( 'Astra_Sites_Batch_Processing_Beaver_Builder' ) ) {
-					self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Beaver_Builder::get_instance() );
-				}
+				self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Beaver_Builder::get_instance() );
 			}
 
 			// Add "elementor" in import [queue].
 			// @todo Remove required `allow_url_fopen` support.
 			if ( ini_get( 'allow_url_fopen' ) ) {
 				if ( is_plugin_active( 'elementor/elementor.php' ) ) {
-					if ( class_exists( '\Elementor\TemplateLibrary\Astra_Sites_Batch_Processing_Elementor' ) ) {
-						$import = new \Elementor\TemplateLibrary\Astra_Sites_Batch_Processing_Elementor();
-						self::$process_all->push_to_queue( $import );
-					}
+					$import = new \Elementor\TemplateLibrary\Astra_Sites_Batch_Processing_Elementor();
+					self::$process_all->push_to_queue( $import );
 				}
 			} else {
 				Astra_Sites_Image_Importer::log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
@@ -178,9 +180,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			}
 
 			// Add "misc" in import [queue].
-			if ( class_exists( 'Astra_Sites_Batch_Processing_Misc' ) ) {
-				self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Misc::get_instance() );
-			}
+			self::$process_all->push_to_queue( Astra_Sites_Batch_Processing_Misc::get_instance() );
 
 			// Dispatch Queue.
 			self::$process_all->save()->dispatch();
@@ -191,27 +191,32 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 *
 		 * @since 1.0.14
 		 *
+		 * @param  array $post_types Post types.
 		 * @return array
 		 */
-		public static function get_pages() {
+		public static function get_pages( $post_types = array() ) {
 
-			$args = array(
-				'post_type'     => 'any',
+			if ( $post_types ) {
+				$args = array(
+					'post_type'      => $post_types,
 
-				// Query performance optimization.
-				'fields'        => 'ids',
-				'no_found_rows' => true,
-				'post_status'   => 'publish',
-			);
+					// Query performance optimization.
+					'fields'         => 'ids',
+					'no_found_rows'  => true,
+					'post_status'    => 'publish',
+					'posts_per_page' => -1,
+				);
 
-			$query = new WP_Query( $args );
+				$query = new WP_Query( $args );
 
-			// Have posts?
-			if ( $query->have_posts() ) :
+				// Have posts?
+				if ( $query->have_posts() ) :
 
-				return $query->posts;
+					return $query->posts;
 
-			endif;
+				endif;
+			}
+
 			return null;
 		}
 

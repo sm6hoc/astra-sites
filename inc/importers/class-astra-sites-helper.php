@@ -204,7 +204,8 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 				'test_upload' => true,
 
 				'mimes'       => array(
-					'xml' => 'text/xml',
+					'xml'  => 'text/xml',
+					'json' => 'text/plain',
 				),
 			);
 
