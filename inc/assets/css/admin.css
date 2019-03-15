@@ -543,6 +543,12 @@ body.loading-content .select-page-builder {
     margin-left: 2em;
     margin-top: .5em;
     margin-bottom: .5em;
+    list-style-type: disc;
+}
+
+.required-plugins-list .spinner {
+    float: none;
+    margin: 0;
 }
 
 #astra-site-import-process-wrap {

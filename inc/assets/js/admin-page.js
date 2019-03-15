@@ -232,60 +232,40 @@ var AstraSitesAjaxQueue = (function() {
 		_backupOptions: function( event ) {
 			event.preventDefault();
 
-			$( '.astra-sites-backup-customizer-settings' ).find('.dashicons').remove();
-			$( '.astra-sites-backup-customizer-settings' ).find('label').prepend( '<span class="spinner is-active" style="float: none;margin: 0;vertical-align: bottom;"></span>' );
-			$( '.astra-sites-backup-customizer-settings' ).find('.checkbox').hide();
+			if ( $( '.astra-sites-backup-customizer-settings' ).find('.checkbox').is(':checked') ) {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action      : 'astra-sites-backup-settings',
+					},
+					beforeSend: function() {
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWPForms );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.backupCustomizer );
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+			    })
+				.done(function ( data ) {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action      : 'astra-sites-backup-settings',
-				},
-				beforeSend: function() {
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWPForms );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.backupCustomizer );
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-		    })
-			.done(function ( data ) {
+					console.log( data );
 
-				console.log( data );
+					// $( '.astra-sites-backup-customizer-settings' ).find('.spinner').remove();
 
-				$( '.astra-sites-backup-customizer-settings' ).find('.spinner').remove();
+					download( data, 'backup-settings.json', 'application/json' );
+					// $( '.astra-sites-backup-customizer-settings' ).find('label').prepend( '<i class="dashicons dashicons-yes""></i>' );
 
-				download( data, 'backup-settings.json', 'application/json' );
-				$( '.astra-sites-backup-customizer-settings' ).find('label').prepend( '<i class="dashicons dashicons-yes""></i>' );
+					// 1. Pass - Import Customizer Options.
+					AstraSitesAdmin._log( astraSitesAdmin.log.backupCustomizerSuccess );
 
-				// 1. Pass - Import Customizer Options.
-				AstraSitesAdmin._log( astraSitesAdmin.log.backupCustomizerSuccess );
-
+					$(document).trigger( 'astra-sites-backup-settings-done' );
+				});
+			} else {
 				$(document).trigger( 'astra-sites-backup-settings-done' );
-			});
-
-
-			// $.ajax({
-			// 	url: astraSitesAdmin.ajaxurl,
-			// 	type: 'POST',
-			// 	data: {
-			// 		'action' : 'astra-sites-backup-settings',
-			// 	},
-			// })
-			// .done(function (data) {
-			// 	download( data, 'backup-settings.json', 'application/json' );
-
-			// 	btn.removeClass( 'updating-message' );
-			// 	setTimeout( function() {
-			// 		btn.text( 'Import Settings' );
-			// 		btn.removeClass( 'astra-site-import' );
-			// 		btn.addClass( 'astra-import-settings' );
-			// 	}, 500 );
-			// });
-
+			}
 		},
 
 		_import_settings: function( event ) {
@@ -377,38 +357,41 @@ var AstraSitesAjaxQueue = (function() {
 		 * 4. Import Widgets.
 		 */
 		_importWidgets: function( event ) {
+			if ( AstraSitesAdmin._is_process_widgets() ) {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action       : 'astra-sites-import-widgets',
+						widgets_data : AstraSitesAdmin.widgets_data,
+					},
+					beforeSend: function() {
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWidgets );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWidgets );
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+			    })
+				.done(function ( widgets_data ) {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action       : 'astra-sites-import-widgets',
-					widgets_data : AstraSitesAdmin.widgets_data,
-				},
-				beforeSend: function() {
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWidgets );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWidgets );
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-		    })
-			.done(function ( widgets_data ) {
+					// 4. Fail - Import Widgets.
+					if( false === widgets_data.success ) {
+						AstraSitesAdmin._importFailMessage( widgets_data.data );
+						AstraSitesAdmin._log( widgets_data.data );
 
-				// 4. Fail - Import Widgets.
-				if( false === widgets_data.success ) {
-					AstraSitesAdmin._importFailMessage( widgets_data.data );
-					AstraSitesAdmin._log( widgets_data.data );
-
-				} else {
-					
-					// 4. Pass - Import Widgets.
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWidgetsSuccess );
-					$(document).trigger( 'astra-sites-import-widgets-done' );					
-				}
-			});
+					} else {
+						
+						// 4. Pass - Import Widgets.
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWidgetsSuccess );
+						$(document).trigger( 'astra-sites-import-widgets-done' );					
+					}
+				});
+			} else {
+				$(document).trigger( 'astra-sites-import-widgets-done' );
+			}
 		},
 
 		/**
@@ -416,39 +399,43 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_importSiteOptions: function( event ) {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action       : 'astra-sites-import-options',
-					options_data : AstraSitesAdmin.options_data,
-				},
-				beforeSend: function() {
-					AstraSitesAdmin._log( astraSitesAdmin.log.importOptions );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingOptions );
-					$('.astra-demo-import .percent').html('');
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-		    })
-			.done(function ( options_data ) {
+			if ( AstraSitesAdmin._is_process_xml() ) {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action       : 'astra-sites-import-options',
+						options_data : AstraSitesAdmin.options_data,
+					},
+					beforeSend: function() {
+						AstraSitesAdmin._log( astraSitesAdmin.log.importOptions );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingOptions );
+						$('.astra-demo-import .percent').html('');
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+			    })
+				.done(function ( options_data ) {
 
-				// 3. Fail - Import Site Options.
-				if( false === options_data.success ) {
-					AstraSitesAdmin._log( options_data );
-					AstraSitesAdmin._importFailMessage( options_data.data );
-					AstraSitesAdmin._log( options_data.data );
+					// 3. Fail - Import Site Options.
+					if( false === options_data.success ) {
+						AstraSitesAdmin._log( options_data );
+						AstraSitesAdmin._importFailMessage( options_data.data );
+						AstraSitesAdmin._log( options_data.data );
 
-				} else {
+					} else {
 
-					// 3. Pass - Import Site Options.
-					AstraSitesAdmin._log( astraSitesAdmin.log.importOptionsSuccess );
-					$(document).trigger( 'astra-sites-import-options-done' );
-				}
-			});
+						// 3. Pass - Import Site Options.
+						AstraSitesAdmin._log( astraSitesAdmin.log.importOptionsSuccess );
+						$(document).trigger( 'astra-sites-import-options-done' );
+					}
+				});
+			} else {
+				$(document).trigger( 'astra-sites-import-options-done' );				
+			}
 		},
 
 		/**
@@ -456,156 +443,190 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_importXML: function() {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action  : 'astra-sites-import-prepare-xml',
-					wxr_url : AstraSitesAdmin.current_site['astra-site-wxr-path'],
-				},
-				beforeSend: function() {
-					// $('#astra-site-import-process-wrap').show();
-					AstraSitesAdmin._log( astraSitesAdmin.log.importXMLPrepare );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importXMLPreparing );
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-		    })
-			.done(function ( xml_data ) {
+			if ( AstraSitesAdmin._is_process_xml() ) {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action  : 'astra-sites-import-prepare-xml',
+						wxr_url : AstraSitesAdmin.current_site['astra-site-wxr-path'],
+					},
+					beforeSend: function() {
+						// $('#astra-site-import-process-wrap').show();
+						AstraSitesAdmin._log( astraSitesAdmin.log.importXMLPrepare );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importXMLPreparing );
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+			    })
+				.done(function ( xml_data ) {
 
 
-				// 2. Fail - Prepare XML Data.
-				if( false === xml_data.success ) {
-					AstraSitesAdmin._log( xml_data );
-					var error_msg = xml_data.data.error || xml_data.data;
-					AstraSitesAdmin._importFailMessage( error_msg );
-					AstraSitesAdmin._log( error_msg );
+					// 2. Fail - Prepare XML Data.
+					if( false === xml_data.success ) {
+						AstraSitesAdmin._log( xml_data );
+						var error_msg = xml_data.data.error || xml_data.data;
+						AstraSitesAdmin._importFailMessage( error_msg );
+						AstraSitesAdmin._log( error_msg );
 
-				} else {
+					} else {
 
-					// 2. Pass - Prepare XML Data.
-					AstraSitesAdmin._log( astraSitesAdmin.log.importXMLPrepareSuccess );
+						// 2. Pass - Prepare XML Data.
+						AstraSitesAdmin._log( astraSitesAdmin.log.importXMLPrepareSuccess );
 
-					// Import XML though Event Source.
-					AstraSSEImport.data = xml_data.data;
-					AstraSSEImport.render();
+						// Import XML though Event Source.
+						AstraSSEImport.data = xml_data.data;
+						AstraSSEImport.render();
 
-					AstraSitesAdmin._log( astraSitesAdmin.log.importXML );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML );
-					
-					var evtSource = new EventSource( AstraSSEImport.data.url );
-					evtSource.onmessage = function ( message ) {
-						var data = JSON.parse( message.data );
-						switch ( data.action ) {
-							case 'updateDelta':
-									AstraSSEImport.updateDelta( data.type, data.delta );
-								break;
+						AstraSitesAdmin._log( astraSitesAdmin.log.importXML );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML );
+						
+						var evtSource = new EventSource( AstraSSEImport.data.url );
+						evtSource.onmessage = function ( message ) {
+							var data = JSON.parse( message.data );
+							switch ( data.action ) {
+								case 'updateDelta':
+										AstraSSEImport.updateDelta( data.type, data.delta );
+									break;
 
-							case 'complete':
-								evtSource.close();
+								case 'complete':
+									evtSource.close();
 
-								// 2. Pass - Import XML though "Source Event".
-								AstraSitesAdmin._log( astraSitesAdmin.log.importXMLSuccess );
-								AstraSitesAdmin._log( '----- SSE - XML import Complete -----' );
+									// 2. Pass - Import XML though "Source Event".
+									AstraSitesAdmin._log( astraSitesAdmin.log.importXMLSuccess );
+									AstraSitesAdmin._log( '----- SSE - XML import Complete -----' );
 
-								// document.getElementById( 'astra-site-import-process-text' ).innerHTML = '100%';
-								// document.getElementById( 'astra-site-import-process' ).value          = 100;
+									// document.getElementById( 'astra-site-import-process-text' ).innerHTML = '100%';
+									// document.getElementById( 'astra-site-import-process' ).value          = 100;
 
-								
-								$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML + ' (100%)' );
+									
+									$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML + ' (100%)' );
 
-								// $('#astra-site-import-process-wrap').hide();
+									// $('#astra-site-import-process-wrap').hide();
 
-								$(document).trigger( 'astra-sites-import-xml-done' );
+									$(document).trigger( 'astra-sites-import-xml-done' );
 
-								break;
-						}
-					};
-					evtSource.addEventListener( 'log', function ( message ) {
-						var data = JSON.parse( message.data );
-						AstraSitesAdmin._log( data.level + ' ' + data.message );
-					});
-				}
-			});
+									break;
+							}
+						};
+						evtSource.addEventListener( 'log', function ( message ) {
+							var data = JSON.parse( message.data );
+							AstraSitesAdmin._log( data.level + ' ' + data.message );
+						});
+					}
+				});
+			} else {
+				$(document).trigger( 'astra-sites-import-xml-done' );
+			}
+
+			
+		},
+
+		_is_process_xml: function() {
+			if ( $( '.astra-sites-import-xml' ).find('.checkbox').is(':checked') ) {
+				return true;
+			}
+			return false;
+		},
+
+		_is_process_customizer: function() {
+			if ( $( '.astra-sites-import-customizer' ).find('.checkbox').is(':checked') ) {
+				return true;
+			}
+			return false;
+		},
+
+		_is_process_widgets: function() {
+			if ( $( '.astra-sites-import-widgets' ).find('.checkbox').is(':checked') ) {
+				return true;
+			}
+			return false;
 		},
 
 		/**
 		 * 1. Import WPForms Options.
 		 */
 		_importWPForms: function( event ) {
+			if ( AstraSitesAdmin._is_process_customizer() ) {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action      : 'astra-sites-import-wpforms',
+						wpforms_url : AstraSitesAdmin.wpforms_url,
+					},
+					beforeSend: function() {
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWPForms );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWPForms );
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+			    })
+				.done(function ( forms ) {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action      : 'astra-sites-import-wpforms',
-					wpforms_url : AstraSitesAdmin.wpforms_url,
-				},
-				beforeSend: function() {
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWPForms );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWPForms );
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-		    })
-			.done(function ( forms ) {
+					// 1. Fail - Import WPForms Options.
+					if( false === forms.success ) {
+						AstraSitesAdmin._importFailMessage( forms.data );
+						AstraSitesAdmin._log( forms.data );
+					} else {
 
-				// 1. Fail - Import WPForms Options.
-				if( false === forms.success ) {
-					AstraSitesAdmin._importFailMessage( forms.data );
-					AstraSitesAdmin._log( forms.data );
-				} else {
+						// 1. Pass - Import Customizer Options.
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWPFormsSuccess );
 
-					// 1. Pass - Import Customizer Options.
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWPFormsSuccess );
-
-					$(document).trigger( 'astra-sites-import-wpforms-done' );
-				}
-			});
+						$(document).trigger( 'astra-sites-import-wpforms-done' );
+					}
+				});
+			} else {
+				$(document).trigger( 'astra-sites-import-wpforms-done' );				
+			}
 		},
 
 		/**
 		 * 1. Import Customizer Options.
 		 */
 		_importCustomizerSettings: function( event ) {
+			if ( AstraSitesAdmin._is_process_customizer() ) {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action          : 'astra-sites-import-customizer-settings',
+						customizer_data : AstraSitesAdmin.customizer_data,
+					},
+					beforeSend: function() {
+						AstraSitesAdmin._log( astraSitesAdmin.log.importCustomizer );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingCustomizer );
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+			    })
+				.done(function ( customizer_data ) {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action          : 'astra-sites-import-customizer-settings',
-					customizer_data : AstraSitesAdmin.customizer_data,
-				},
-				beforeSend: function() {
-					AstraSitesAdmin._log( astraSitesAdmin.log.importCustomizer );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingCustomizer );
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-		    })
-			.done(function ( customizer_data ) {
+					// 1. Fail - Import Customizer Options.
+					if( false === customizer_data.success ) {
+						AstraSitesAdmin._importFailMessage( customizer_data.data );
+						AstraSitesAdmin._log( customizer_data.data );
+					} else {
 
-				// 1. Fail - Import Customizer Options.
-				if( false === customizer_data.success ) {
-					AstraSitesAdmin._importFailMessage( customizer_data.data );
-					AstraSitesAdmin._log( customizer_data.data );
-				} else {
+						// 1. Pass - Import Customizer Options.
+						AstraSitesAdmin._log( astraSitesAdmin.log.importCustomizerSuccess );
 
-					// 1. Pass - Import Customizer Options.
-					AstraSitesAdmin._log( astraSitesAdmin.log.importCustomizerSuccess );
+						$(document).trigger( 'astra-sites-import-customizer-settings-done' );
+					}
+				});
+			} else {
+				$(document).trigger( 'astra-sites-import-customizer-settings-done' );
+			}
 
-					$(document).trigger( 'astra-sites-import-customizer-settings-done' );
-				}
-			});
 		},
 
 		/**
@@ -1488,7 +1509,8 @@ var AstraSitesAjaxQueue = (function() {
 
 							// $('.required-plugins').append(output);
 
-							$('.required-plugins-list').append('<li><input type="checkbox" checked="checked" disabled="disabled"> '+plugin.name+'</li>');
+							$('.required-plugins-list').append('<li>'+plugin.name+'</li>');
+							// $('.required-plugins-list').append('<li><input type="checkbox" checked="checked" disabled="disabled"> '+plugin.name+'</li>');
 
 						});
 					}
@@ -1521,7 +1543,8 @@ var AstraSitesAjaxQueue = (function() {
 
 							// $('.required-plugins').append(output);
 
-							$('.required-plugins-list').append('<li><input type="checkbox" checked="checked" disabled="disabled"> '+plugin.name+'</li>');
+							$('.required-plugins-list').append('<li>'+plugin.name+'</li>');
+							// $('.required-plugins-list').append('<li><input type="checkbox" checked="checked" disabled="disabled"> '+plugin.name+'</li>');
 
 						});
 					}
@@ -1550,7 +1573,8 @@ var AstraSitesAjaxQueue = (function() {
 
 							// $('.required-plugins').append(output);
 
-							$('.required-plugins-list').append('<li><input type="checkbox" checked="checked" disabled="disabled"> '+plugin.name+'</li>');
+							$('.required-plugins-list').append('<li>'+plugin.name+'</li>');
+							// $('.required-plugins-list').append('<li><input type="checkbox" checked="checked" disabled="disabled"> '+plugin.name+'</li>');
 
 						});
 					}

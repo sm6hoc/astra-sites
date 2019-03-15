@@ -160,6 +160,11 @@ defined( 'ABSPATH' ) or exit;
 
 					<div class="astra-sites-advanced-options-wrap">
 
+						<h4>Install Plugins (required)</h4>
+						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+
+						<hr style="border-top: 1px solid #eee;border-bottom: none;margin-top: 1em;">
+
 						<ul>
 							<li class="astra-sites-backup-customizer-settings">
 								<label>
@@ -175,31 +180,21 @@ defined( 'ABSPATH' ) or exit;
 							<hr style="border-top: 1px solid #eee;border-bottom: none;">
 
 							<ul class="astra-site-contents">
-								<li>
-									<input type="checkbox" checked="checked" disabled="">
-										<strong>Install Plugins</strong> (required)
-										<!-- <div class="required-plugins"></div> -->
-										<ul class="required-plugins-list">
-											<!-- <li><input type="checkbox" checked="checked" disabled=""> Astra Widgets</li>
-											<li><input type="checkbox" checked="checked" disabled=""> Elementor</li>
-											<li><input type="checkbox" checked="checked" disabled=""> WPForms Lite</li> -->
-										</ul>
-								</li>
-								<li>
+								<li class="astra-sites-import-customizer">
 									<label>
-										<input type="checkbox" name="xml" checked="checked">
-										<strong>Import XML Data</strong> (pages, posts, images, menus, etc...)
-									</label>
-								</li>
-								<li>
-									<label>
-										<input type="checkbox" name="settings" checked="checked">
+										<input type="checkbox" name="customizer" checked="checked" class="checkbox">
 										<strong>Import Customizer Settings</strong>
 									</label>
 								</li>
-								<li>
+								<li class="astra-sites-import-xml">
 									<label>
-										<input type="checkbox" name="widgets" checked="checked">
+										<input type="checkbox" name="xml" checked="checked" class="checkbox">
+										<strong>Import XML Data</strong> (pages, posts, images, menus, etc...)
+									</label>
+								</li>
+								<li class="astra-sites-import-widgets">
+									<label>
+										<input type="checkbox" name="widgets" checked="checked" class="checkbox">
 										<strong>Import Widgets</strong>
 									</label>
 								</li>
