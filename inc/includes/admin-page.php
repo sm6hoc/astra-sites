@@ -139,8 +139,8 @@ defined( 'ABSPATH' ) or exit;
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
-				<a class="button hide-if-no-customize astra-backup-settings" href="#" data-import="disabled"><?php esc_html_e( 'Backup Settings', 'astra-sites' ); ?></a>
-				<a class="button hide-if-no-customize astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
+				<!-- <a class="button hide-if-no-customize astra-site-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a> -->
+				<a class="button hide-if-no-customize astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
 
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
@@ -158,21 +158,75 @@ defined( 'ABSPATH' ) or exit;
 					</div>
 					<a href="#" class="theme-details-read-more"><?php _e( 'Read more', 'astra-sites' ); ?> &hellip;</a>
 
-					<div class="required-plugins-wrap">
+					<div class="astra-sites-advanced-options-wrap">
+
+						<ul>
+							<li class="astra-sites-backup-customizer-settings">
+								<label>
+									<input type="checkbox" name="xml" checked="checked" class="checkbox">
+									<strong>Backup Customizer Settings</strong>
+								</label>
+							</li>
+						</ul>
+	
+						<p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p>
+
+						<div class="astra-sites-advanced-options" style="display: none;">
+							<hr style="border-top: 1px solid #eee;border-bottom: none;">
+
+							<ul class="astra-site-contents">
+								<li>
+									<input type="checkbox" checked="checked" disabled="">
+										<strong>Install Plugins</strong> (required)
+										<!-- <div class="required-plugins"></div> -->
+										<ul class="required-plugins-list">
+											<!-- <li><input type="checkbox" checked="checked" disabled=""> Astra Widgets</li>
+											<li><input type="checkbox" checked="checked" disabled=""> Elementor</li>
+											<li><input type="checkbox" checked="checked" disabled=""> WPForms Lite</li> -->
+										</ul>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="xml" checked="checked">
+										<strong>Import XML Data</strong> (pages, posts, images, menus, etc...)
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="settings" checked="checked">
+										<strong>Import Customizer Settings</strong>
+									</label>
+								</li>
+								<li>
+									<label>
+										<input type="checkbox" name="widgets" checked="checked">
+										<strong>Import Widgets</strong>
+									</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<!-- <div class="astra-sites-advanced-options">
 						<h4><?php _e( 'Required Plugins', 'astra-sites' ); ?> </h4>
 						<div class="required-plugins"></div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
+					<div id="astra-site-import-process-wrap" style="display: none;">
+						<progress id="astra-site-import-process" max="100" value="0"></progress>
+						<span id="astra-site-import-process-text"></span>
+					</div>
 					<a class="button button-hero hide-if-no-customize astra-demo-import" href="#" data-import="disabled">
-						<?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?>
+						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+						<span class="percent"></span>
 					</a>
-					<a class="button button-hero hide-if-no-customize astra-backup-settings" href="#">
-						<?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?>
-					</a>
+					<!-- <a class="button button-hero hide-if-no-customize astra-site-import" href="#">
+						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+					</a> -->
 				</div>
 				<button type="button" class="collapse-sidebar button" aria-expanded="true"
 						aria-label="Collapse Sidebar">

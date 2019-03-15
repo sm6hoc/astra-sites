@@ -99,7 +99,7 @@
     vertical-align: text-bottom;
 }
 
-.required-plugins-wrap h4 {
+.astra-sites-advanced-options-wrap h4 {
     margin: 1em 0 0.5em 0;
     padding: 0.5em 0;
     transition: all ease 0.3s;
@@ -537,4 +537,31 @@ body.loading-content .select-page-builder {
 .astra-site-page-builder {
     opacity: 0;
     visibility: hidden;
+}
+
+.required-plugins-list {
+    margin-left: 2em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}
+
+#astra-site-import-process-wrap {
+    display: flex;
+    align-items: center;
+}
+#astra-site-import-process-wrap progress {
+    padding: 0px;
+    border: 0 none;
+    background: #ffffff;
+    border-radius: 5px;
+    height: 4px;
+    margin-right: 8px;
+    flex: 1;
+}
+
+#astra-site-import-process-wrap progress::-webkit-progress-value {
+  background: #0073ad;
+}
+#astra-site-import-process-wrap progress::-webkit-progress-bar {
+    background: transparent;
 }
