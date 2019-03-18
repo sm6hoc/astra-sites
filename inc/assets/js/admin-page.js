@@ -146,9 +146,9 @@ var AstraSitesAjaxQueue = (function() {
 
 	AstraSitesAdmin = {
 
-		reset_remaining_posts: '',
-		reset_remaining_wp_forms: '',
-		reset_remaining_terms: '',
+		reset_remaining_posts: 0,
+		reset_remaining_wp_forms: 0,
+		reset_remaining_terms: 0,
 
 		current_site: [],
 		current_screen: '',
@@ -328,7 +328,7 @@ var AstraSitesAjaxQueue = (function() {
 		},
 
 		_reset_posts: function() {
-			if( ! $.isArray( astraSitesAdmin.reset_posts ) ) {
+			if( astraSitesAdmin.reset_posts.length ) {
 				// console.log( 'Posts' );
 				// console.log( astraSitesAdmin.reset_posts );
 				// console.log( astraSitesAdmin.reset_posts.length );
@@ -355,7 +355,7 @@ var AstraSitesAjaxQueue = (function() {
 							// console.log( result );
 							$('.button-hero.astra-demo-import').text( 'Deleted Post ' + AstraSitesAdmin.reset_remaining_posts + ' of ' + astraSitesAdmin.reset_posts.length );
 							AstraSitesAdmin.reset_remaining_posts-=1;
-							// console.log( AstraSitesAdmin.reset_remaining_posts );
+							console.log( AstraSitesAdmin.reset_remaining_posts );
 							if( 0 == AstraSitesAdmin.reset_remaining_posts ) {
 								// console.log( 'Complete..' );
 								$(document).trigger( 'astra-sites-reset-posts-done' );
@@ -371,7 +371,7 @@ var AstraSitesAjaxQueue = (function() {
 
 		_reset_wp_forms: function() {
 
-			if( ! $.isArray( astraSitesAdmin.reset_wp_forms ) ) {
+			if( astraSitesAdmin.reset_wp_forms.length ) {
 				// console.log( 'WP Forms' );
 				// console.log( astraSitesAdmin.reset_wp_forms );
 				// console.log( astraSitesAdmin.reset_wp_forms.length );
@@ -398,7 +398,7 @@ var AstraSitesAjaxQueue = (function() {
 							$('.button-hero.astra-demo-import').text( 'Deleted Form ' + AstraSitesAdmin.reset_remaining_wp_forms + ' of ' + astraSitesAdmin.reset_wp_forms.length );
 							// console.log( result );
 							AstraSitesAdmin.reset_remaining_wp_forms-=1;
-							// console.log( AstraSitesAdmin.reset_remaining_wp_forms );
+							console.log( AstraSitesAdmin.reset_remaining_wp_forms );
 							if( 0 == AstraSitesAdmin.reset_remaining_wp_forms ) {
 								// console.log( 'Complete All WP Forms..' );
 								$(document).trigger( 'astra-sites-reset-wp-forms-done' );
@@ -415,7 +415,7 @@ var AstraSitesAjaxQueue = (function() {
 		
 		_reset_terms: function() {
 
-			if( ! $.isArray( astraSitesAdmin.reset_terms ) ) {
+			if( astraSitesAdmin.reset_terms.length ) {
 				// console.log( 'WP Forms' );
 				// console.log( astraSitesAdmin.reset_terms );
 				// console.log( astraSitesAdmin.reset_terms.length );
@@ -442,7 +442,7 @@ var AstraSitesAjaxQueue = (function() {
 							$('.button-hero.astra-demo-import').text( 'Deleted Term ' + AstraSitesAdmin.reset_remaining_terms + ' of ' + astraSitesAdmin.reset_terms.length );
 							// console.log( result );
 							AstraSitesAdmin.reset_remaining_terms-=1;
-							// console.log( AstraSitesAdmin.reset_remaining_terms );
+							console.log( AstraSitesAdmin.reset_remaining_terms );
 							if( 0 == AstraSitesAdmin.reset_remaining_terms ) {
 								// console.log( 'Complete Terms..' );
 								$(document).trigger( 'astra-sites-reset-data-done' );
