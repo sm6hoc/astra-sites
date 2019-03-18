@@ -172,6 +172,12 @@ defined( 'ABSPATH' ) or exit;
 									<strong>Backup Customizer Settings</strong>
 								</label>
 							</li>
+							<li class="astra-sites-reset-data">
+								<label>
+									<input type="checkbox" name="reset" checked="checked" class="checkbox">
+									<strong>Reset Old Data</strong>
+								</label>
+							</li>
 						</ul>
 	
 						<p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p>
