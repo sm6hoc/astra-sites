@@ -236,7 +236,6 @@ var AstraSitesAjaxQueue = (function() {
 				$.ajax({
 					url  : astraSitesAdmin.ajaxurl,
 					type : 'POST',
-					dataType: 'json',
 					data : {
 						action      : 'astra-sites-backup-settings',
 					},
