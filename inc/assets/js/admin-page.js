@@ -224,9 +224,10 @@ var AstraSitesAjaxQueue = (function() {
 			$(document).on( 'astra-sites-reset-data', 					AstraSitesAdmin._reset_customizer_data );
 			$(document).on( 'astra-sites-reset-customizer-data-done', 	AstraSitesAdmin._reset_site_options );
 			$(document).on( 'astra-sites-reset-site-options-done', 		AstraSitesAdmin._reset_widgets_data );
-			$(document).on( 'astra-sites-reset-widgets-data-done', 		AstraSitesAdmin._reset_posts );
-			$(document).on( 'astra-sites-reset-posts-done', 			AstraSitesAdmin._reset_wp_forms );
-			$(document).on( 'astra-sites-reset-wp-forms-done', 			AstraSitesAdmin._reset_terms );
+			$(document).on( 'astra-sites-reset-widgets-data-done', 		AstraSitesAdmin._reset_terms );
+			$(document).on( 'astra-sites-reset-terms-done', 				AstraSitesAdmin._reset_wp_forms );
+			$(document).on( 'astra-sites-reset-wp-forms-done', 			AstraSitesAdmin._reset_posts );
+
 
 			$( document ).on('astra-sites-reset-data-done'       		   , AstraSitesAdmin._backupOptions );
 			$( document ).on('astra-sites-backup-settings-done'      	   , AstraSitesAdmin._importWPForms );
@@ -359,6 +360,7 @@ var AstraSitesAjaxQueue = (function() {
 							if( 0 == AstraSitesAdmin.reset_remaining_posts ) {
 								console.log( 'Complete..' );
 								$(document).trigger( 'astra-sites-reset-posts-done' );
+								$(document).trigger( 'astra-sites-reset-data-done' );
 							}
 						}
 					});
@@ -366,6 +368,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			} else {
 				$(document).trigger( 'astra-sites-reset-posts-done' );
+				$(document).trigger( 'astra-sites-reset-data-done' );
 			}
 		},
 
@@ -441,14 +444,14 @@ var AstraSitesAjaxQueue = (function() {
 							console.log( AstraSitesAdmin.reset_remaining_terms );
 							if( 0 == AstraSitesAdmin.reset_remaining_terms ) {
 								console.log( 'Complete Terms..' );
-								$(document).trigger( 'astra-sites-reset-data-done' );
+								$(document).trigger( 'astra-sites-reset-terms-done' );
 							}
 						}
 					});
 				});
 
 			} else {
-				$(document).trigger( 'astra-sites-reset-data-done' );
+				$(document).trigger( 'astra-sites-reset-terms-done' );
 			}
 
 		},
