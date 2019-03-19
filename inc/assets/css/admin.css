@@ -554,19 +554,23 @@ body.loading-content .select-page-builder {
 #astra-site-import-process-wrap {
     display: flex;
     align-items: center;
+    margin-top: -5px;
+    z-index: 999999;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
 }
 #astra-site-import-process-wrap progress {
     padding: 0px;
     border: 0 none;
-    background: #ffffff;
+    background: #0085bd;
     border-radius: 5px;
     height: 4px;
-    margin-right: 8px;
     flex: 1;
 }
 
 #astra-site-import-process-wrap progress::-webkit-progress-value {
-  background: #0073ad;
+  background: #00679b;
 }
 #astra-site-import-process-wrap progress::-webkit-progress-bar {
     background: transparent;

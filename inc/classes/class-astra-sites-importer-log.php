@@ -100,31 +100,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 		}
 
-		function reset_customizer_data( $data ) {
-			Astra_Sites_Importer_Log::log( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
-		}
-
-		function reset_site_options( $data ) {
-			Astra_Sites_Importer_Log::log( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
-		}
-		
-		function reset_widgets_data( $old_widgets ) {
-			Astra_Sites_Importer_Log::log( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
-		}
-
-		function reset_imported_posts( $post_id ) {
-			Astra_Sites_Importer_Log::log( '==== DELETED - POST ID ' . $post_id );
-		}
-
-		function reset_imported_wp_forms( $post_id ) {
-			Astra_Sites_Importer_Log::log( '==== DELETED - FORM ID ' . $post_id );
-		}
-
-		function reset_imported_terms( $term_id ) {
-			Astra_Sites_Importer_Log::log( '==== DELETED - TERM ID ' . $term_id );
-		}
-
-
 		/**
 		 * Add log file URL in UI response.
 		 *
@@ -153,7 +128,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function xml_log( $level = '', $message = '', $context = '' ) {
-			Astra_Sites_Importer_Log::add( $message );
+			// Astra_Sites_Importer_Log::add( $message );
 		}
 
 		/**
@@ -175,6 +150,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function start( $data = array(), $demo_api_uri = '' ) {
+
+			Astra_Sites_Importer_Log::add( '==== Started ====' );
 
 			Astra_Sites_Importer_Log::add( '# System Details: ' );
 			Astra_Sites_Importer_Log::add( "Debug Mode \t\t: " . self::get_debug_mode() );
@@ -201,11 +178,35 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		function track_post( $post_id ) {
-			Astra_Sites_Importer_Log::log( '==== INSERTED - Post ' . $post_id );
+			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id );
 		}
 
 		function track_term( $term_id ) {
-			Astra_Sites_Importer_Log::log( '==== INSERTED - Term ' . $term_id );
+			Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id );
+		}
+
+		function reset_customizer_data( $data ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+		}
+
+		function reset_site_options( $data ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
+		}
+		
+		function reset_widgets_data( $old_widgets ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
+		}
+
+		function reset_imported_posts( $post_id ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id );
+		}
+
+		function reset_imported_wp_forms( $form_id ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id );
+		}
+
+		function reset_imported_terms( $term_id ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id );
 		}
 
 		/**
@@ -214,9 +215,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @since 1.1.0
 		 * @return void
 		 */
-		function start_customizer() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '1. Imported "Customizer Settings"  - ' . self::current_time() );
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
+		function start_customizer( $data ) {
+			Astra_Sites_Importer_Log::add( '==== IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
 		}
 
 		/**
@@ -225,8 +225,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @since 1.1.0
 		 * @return void
 		 */
-		function start_xml() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '2. Importing "XML"  - ' . self::current_time() );
+		function start_xml( $xml ) {
+			Astra_Sites_Importer_Log::add( '==== IMPORTED - XML ' . $xml );
 		}
 
 		/**
@@ -235,10 +235,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @since 1.1.0
 		 * @return void
 		 */
-		function start_options() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
-			Astra_Sites_Importer_Log::add( PHP_EOL . '3. Imported "Site Options"  - ' . self::current_time() );
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
+		function start_options( $data ) {
+			Astra_Sites_Importer_Log::add( '==== IMPORTED - SITE OPTIONS ' . json_encode( $data ) );
 		}
 
 		/**
@@ -247,8 +245,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @since 1.1.0
 		 * @return void
 		 */
-		function start_widgets() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '4. Importing "Widgets"  - ' . self::current_time() );
+		function start_widgets( $old_widgets ) {
+			Astra_Sites_Importer_Log::add( '==== IMPORTED - WIDGETS ' . json_encode( $old_widgets ) );
 		}
 
 		/**
@@ -258,11 +256,10 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function start_end() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
-			Astra_Sites_Importer_Log::add( PHP_EOL . 'Import Complete!  - ' . self::current_time() );
+			Astra_Sites_Importer_Log::add( '==== Complete ====' );
 
-			// // Delete Log file.
-			// delete_option( 'astra_sites_recent_import_log_file' );
+			// Delete Log file.
+			delete_option( 'astra_sites_recent_import_log_file' );
 		}
 
 		/**
@@ -274,16 +271,16 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 */
 		function widgets_data( $results = array() ) {
 
-			if ( is_array( $results ) ) {
-				foreach ( $results as $sidebar_key => $widgets ) {
-					Astra_Sites_Importer_Log::add( 'Sidebar: ' . $sidebar_key );
-					foreach ( $widgets['widgets'] as $widget_key => $widget ) {
-						if ( isset( $widget['name'] ) && isset( $widget['message'] ) ) {
-							Astra_Sites_Importer_Log::add( 'Widget: "' . $widget['name'] . '" - ' . $widget['message'] );
-						}
-					}
-				}
-			}
+			// if ( is_array( $results ) ) {
+			// 	foreach ( $results as $sidebar_key => $widgets ) {
+			// 		Astra_Sites_Importer_Log::add( 'Sidebar: ' . $sidebar_key );
+			// 		foreach ( $widgets['widgets'] as $widget_key => $widget ) {
+			// 			if ( isset( $widget['name'] ) && isset( $widget['message'] ) ) {
+			// 				Astra_Sites_Importer_Log::add( 'Widget: "' . $widget['name'] . '" - ' . $widget['message'] );
+			// 			}
+			// 		}
+			// 	}
+			// }
 		}
 
 		/**

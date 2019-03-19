@@ -117,6 +117,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Changelog ==
 
+v1.2.15 - 19-March-2019
+- Improvement: Added backward compatibility for filter `wp_check_filetype_and_ext` which accepts 5 parameter after WordPress version 5.1.
+
 v1.2.15 - 14-March-2019
 - Improvement: Admin page UI improvements.
 - Improvement: Added filter `astra_sites_page_title` to change the page title.

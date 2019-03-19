@@ -217,14 +217,14 @@ defined( 'ABSPATH' ) or exit;
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
-					<div id="astra-site-import-process-wrap" style="display: none;">
-						<progress id="astra-site-import-process" max="100" value="0"></progress>
-						<span id="astra-site-import-process-text"></span>
-					</div>
 					<a class="button button-hero hide-if-no-customize astra-demo-import" href="#" data-import="disabled">
 						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
 						<span class="percent"></span>
 					</a>
+					<div id="astra-site-import-process-wrap" style="display: none;">
+						<progress id="astra-site-import-process" max="100" value="0"></progress>
+						<!-- <span id="astra-site-import-process-text"></span> -->
+					</div>
 					<!-- <a class="button button-hero hide-if-no-customize astra-site-import" href="#">
 						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
 					</a> -->
