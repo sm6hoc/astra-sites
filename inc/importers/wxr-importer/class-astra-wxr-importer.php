@@ -60,13 +60,11 @@ class Astra_WXR_Importer {
 	// Set meta for tracking the post.
 	function track_post( $post_id ) {
 		update_post_meta( $post_id, '_astra_sites_imported_post', true );
-		Astra_Sites_Image_Importer::log( '==== INSERTED - Post ' . $post_id );
 	}
 	
 	// Set meta for tracking the term.
 	function track_term( $term_id ) {
 		update_term_meta( $term_id, '_astra_sites_imported_term', true );
-		Astra_Sites_Image_Importer::log( '==== INSERTED - Term ' . $term_id );
 	}
 	
 	// // Set meta for tracking the comment.

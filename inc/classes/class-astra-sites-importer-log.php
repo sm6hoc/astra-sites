@@ -83,10 +83,47 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			add_action( 'astra_sites_import_widgets', array( $this, 'start_widgets' ) );
 			add_action( 'astra_sites_import_complete', array( $this, 'start_end' ) );
 
+			add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
+			add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
+			
+			// Delete..
+			add_action( 'astra_sites_reset_customizer_data', array( $this, 'reset_customizer_data' ) );
+			add_action( 'astra_sites_reset_site_options', array( $this, 'reset_site_options' ) );
+			add_action( 'astra_sites_reset_widgets_data', array( $this, 'reset_widgets_data' ) );
+			add_action( 'astra_sites_reset_imported_posts', array( $this, 'reset_imported_posts' ) );
+			add_action( 'astra_sites_reset_imported_wp_forms', array( $this, 'reset_imported_wp_forms' ) );
+			add_action( 'astra_sites_reset_imported_terms', array( $this, 'reset_imported_terms' ) );
+
 			// Hooks in between the process of import.
 			add_filter( 'wie_import_results', array( $this, 'widgets_data' ) );
 			add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
+
 		}
+
+		function reset_customizer_data( $data ) {
+			Astra_Sites_Importer_Log::log( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+		}
+
+		function reset_site_options( $data ) {
+			Astra_Sites_Importer_Log::log( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
+		}
+		
+		function reset_widgets_data( $old_widgets ) {
+			Astra_Sites_Importer_Log::log( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
+		}
+
+		function reset_imported_posts( $post_id ) {
+			Astra_Sites_Importer_Log::log( '==== DELETED - POST ID ' . $post_id );
+		}
+
+		function reset_imported_wp_forms( $post_id ) {
+			Astra_Sites_Importer_Log::log( '==== DELETED - FORM ID ' . $post_id );
+		}
+
+		function reset_imported_terms( $term_id ) {
+			Astra_Sites_Importer_Log::log( '==== DELETED - TERM ID ' . $term_id );
+		}
+
 
 		/**
 		 * Add log file URL in UI response.
@@ -163,6 +200,14 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 		}
 
+		function track_post( $post_id ) {
+			Astra_Sites_Importer_Log::log( '==== INSERTED - Post ' . $post_id );
+		}
+
+		function track_term( $term_id ) {
+			Astra_Sites_Importer_Log::log( '==== INSERTED - Term ' . $term_id );
+		}
+
 		/**
 		 * Start Customizer Import
 		 *
@@ -216,8 +261,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
 			Astra_Sites_Importer_Log::add( PHP_EOL . 'Import Complete!  - ' . self::current_time() );
 
-			// Delete Log file.
-			delete_option( 'astra_sites_recent_import_log_file' );
+			// // Delete Log file.
+			// delete_option( 'astra_sites_recent_import_log_file' );
 		}
 
 		/**

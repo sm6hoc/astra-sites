@@ -435,8 +435,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		}
 
 		function reset_customizer_data() {
+			do_action( 'astra_sites_reset_customizer_data', get_option( 'astra-settings', array() ) );
+
 			delete_option( 'astra-settings' );
-			Astra_Sites_Image_Importer::log( '==== DELETE - Customizer Settings ==== ' );
+			
 			wp_send_json_success( );
 			// vl( '-----------------------------------------------' );
 			// $customizer_data = get_option( '_astra_sites_old_customizer_data', array() );
@@ -448,12 +450,14 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			// vl( '-----------------------------------------------' );
 			$options = get_option( '_astra_sites_old_site_options', array() );
+
+			do_action( 'astra_sites_reset_site_options', $options );
+
 			// vl( 'Site Options' );
 			// vl( $options );
 
 			if( $options ) {
 				foreach ($options as $option_key => $option_value) {
-					Astra_Sites_Image_Importer::log( '==== DELETE - Site Option ' . $option_key );
 					delete_option( $option_key );
 				}
 			}
@@ -464,6 +468,9 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		function reset_widgets_data() {
 			// vl( '-----------------------------------------------' );
 			$old_widgets = get_option( '_astra_sites_old_widgets_data', array() );
+
+			do_action( 'astra_sites_reset_widgets_data', $old_widgets );
+
 			// vl( 'Widgets Data' );
 			// vl( $old_widgets );
 			// wp_die( );
@@ -532,7 +539,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if( $post_id ) {
 				$deleted = wp_delete_post( $post_id, true );
 				if( $deleted ) {
-					Astra_Sites_Image_Importer::log( '==== DELETED - Post ' . $post_id );
+					do_action( 'astra_sites_reset_imported_posts', $post_id );
 					wp_send_json_success( __( 'Post ID ' . $post_id . ' deleted!' ) );
 				}
 			}
@@ -557,7 +564,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if( $post_id ) {
 				$deleted = wp_delete_post( $post_id, true );
 				if( $deleted ) {
-					Astra_Sites_Image_Importer::log( '==== DELETED - FORM ' . $post_id );
+					do_action( 'astra_sites_reset_imported_wp_forms', $post_id );
 					wp_send_json_success( __( 'Post ID ' . $post_id . ' deleted!' ) );
 				}
 			}
@@ -587,7 +594,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if( $term_id ) {
 				$deleted = wp_delete_term( $term_id, true );
 				if( $deleted ) {
-					Astra_Sites_Image_Importer::log( '==== DELETED - Term ' . $term_id );
+					do_action( 'astra_sites_reset_imported_terms', $term_id );
 					wp_send_json_success( __( 'Term ID ' . $term_id . ' deleted!' ) );
 				}
 			}
