@@ -140,7 +140,7 @@ defined( 'ABSPATH' ) or exit;
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
 				<!-- <a class="button hide-if-no-customize astra-site-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a> -->
-				<a class="button hide-if-no-customize astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
+				<a class="button hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
 
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
@@ -217,7 +217,7 @@ defined( 'ABSPATH' ) or exit;
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
-					<a class="button button-hero hide-if-no-customize astra-demo-import" href="#" data-import="disabled">
+					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled">
 						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
 						<span class="percent"></span>
 					</a>

@@ -138,7 +138,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			$wpforms_url = ( isset( $_REQUEST['wpforms_url'] ) ) ? urldecode( $_REQUEST['wpforms_url'] ) : '';
 			$ids_mapping = array();
 
-			if ( ! empty( $wpforms_url ) ) {
+			if ( ! empty( $wpforms_url ) && function_exists( 'wpforms_encode' ) ) {
 
 				// Download XML file.
 				$xml_path = Astra_Sites_Helper::download_file( $wpforms_url );

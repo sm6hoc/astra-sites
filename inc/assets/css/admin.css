@@ -546,6 +546,14 @@ body.loading-content .select-page-builder {
     list-style-type: disc;
 }
 
+.required-plugins-list .plugin-card {
+    background: transparent;
+    border: none;
+    margin: 0;
+    line-height: 2;
+    float: none;
+}
+
 .required-plugins-list .spinner {
     float: none;
     margin: 0;
@@ -554,7 +562,7 @@ body.loading-content .select-page-builder {
 #astra-site-import-process-wrap {
     display: flex;
     align-items: center;
-    margin-top: -5px;
+    margin-top: -2px;
     z-index: 999999;
     position: relative;
     border-radius: 3px;
