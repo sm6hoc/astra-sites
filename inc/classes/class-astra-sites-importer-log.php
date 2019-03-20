@@ -85,7 +85,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 			add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
 			add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
-			
+
 			// Delete..
 			add_action( 'astra_sites_reset_customizer_data', array( $this, 'reset_customizer_data' ) );
 			add_action( 'astra_sites_reset_site_options', array( $this, 'reset_site_options' ) );
@@ -178,7 +178,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		function track_post( $post_id ) {
-			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id );
+			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id . ' - ' . get_the_title( $post_id ) );
 		}
 
 		function track_term( $term_id ) {
@@ -198,7 +198,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		function reset_imported_posts( $post_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id );
+			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id . ' - ' . get_the_title( $post_id ) );
 		}
 
 		function reset_imported_wp_forms( $form_id ) {

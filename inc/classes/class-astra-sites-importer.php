@@ -540,9 +540,9 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
 
 			if( $post_id ) {
+				do_action( 'astra_sites_reset_imported_posts', $post_id );
 				$deleted = wp_delete_post( $post_id, true );
 				if( $deleted ) {
-					do_action( 'astra_sites_reset_imported_posts', $post_id );
 				}
 
 				wp_send_json_success( __( 'Post ID ' . $post_id . ' deleted!' ) );
