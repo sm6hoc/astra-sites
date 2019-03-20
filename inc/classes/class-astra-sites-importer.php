@@ -548,18 +548,6 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				wp_send_json_success( __( 'Post ID ' . $post_id . ' deleted!' ) );
 			}
 			wp_send_json_success( __( 'Post ID ' . $post_id . ' deleted!' ) );
-			// // vl( '-----------------------------------------------' );
-			// global $wpdb;
-
-			// // // Posts.
-			// $post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
-
-			// // foreach ($post_ids as $key => $post_id) {
-			// // 	vl( get_post_type( $post_id ) );
-			// // }
-			// // vl( $post_ids );
-			// // wp_die();
-
 		}
 
 		function reset_imported_wp_forms() {

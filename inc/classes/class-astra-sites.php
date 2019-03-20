@@ -225,6 +225,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			global $wpdb;
 
+
 			$post_ids    = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
 			$form_ids    = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
 			$term_ids    = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );

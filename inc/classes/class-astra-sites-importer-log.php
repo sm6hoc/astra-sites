@@ -178,11 +178,12 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		function track_post( $post_id ) {
-			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id . ' - ' . get_the_title( $post_id ) );
+			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
 		}
 
 		function track_term( $term_id ) {
-			Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id );
+			$term = get_term( $term_id );
+			Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id . ' - ' . json_encode( $term ) );
 		}
 
 		function reset_customizer_data( $data ) {
@@ -198,15 +199,16 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		function reset_imported_posts( $post_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id . ' - ' . get_the_title( $post_id ) );
+			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
 		}
 
 		function reset_imported_wp_forms( $form_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id );
+			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
 		}
 
 		function reset_imported_terms( $term_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id );
+			$term = get_term( $term_id );
+			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
 		}
 
 		/**
