@@ -127,7 +127,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function xml_log( $level = '', $message = '', $context = '' ) {
-			Astra_Sites_Importer_Log::add( $message );
+			// Astra_Sites_Importer_Log::add( $message );
 		}
 
 		/**

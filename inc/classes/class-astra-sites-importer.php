@@ -554,9 +554,12 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			$term_id = isset( $_REQUEST['term_id'] ) ? absint( $_REQUEST['term_id'] ) : '';
 
 			if ( $term_id ) {
-				$deleted = wp_delete_term( $term_id, true );
-				if ( $deleted ) {
-					do_action( 'astra_sites_delete_imported_terms', $term_id );
+				$term = get_term( $term_id );
+				if( $term ) {
+					$deleted = wp_delete_term( $term_id, $term->taxonomy );
+					if ( $deleted ) {
+						do_action( 'astra_sites_delete_imported_terms', $term_id );
+					}
 				}
 			}
 

@@ -212,18 +212,16 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('wp-plugin-install-error'   , AstraSitesAdmin._installError);
 			$( document ).on('wp-plugin-install-success' , AstraSitesAdmin._installSuccess);
 
-			$( document ).on('astra-sites-import-set-site-data-done'       , AstraSitesAdmin._resetData );
-			
-			$(document).on( 'astra-sites-reset-data', 					AstraSitesAdmin._reset_customizer_data );
-			$(document).on( 'astra-sites-reset-customizer-data-done', 	AstraSitesAdmin._reset_site_options );
-			$(document).on( 'astra-sites-reset-site-options-done', 		AstraSitesAdmin._reset_widgets_data );
-			$(document).on( 'astra-sites-reset-widgets-data-done', 		AstraSitesAdmin._reset_terms );
-			$(document).on( 'astra-sites-delete-terms-done', 				AstraSitesAdmin._reset_wp_forms );
-			$(document).on( 'astra-sites-delete-wp-forms-done', 			AstraSitesAdmin._reset_posts );
+			$( document ).on('astra-sites-import-set-site-data-done'    , AstraSitesAdmin._resetData );
+			$( document ).on( 'astra-sites-reset-data'					, AstraSitesAdmin._backupOptions );
+			$( document ).on( 'astra-sites-backup-settings-done'			, AstraSitesAdmin._reset_customizer_data );
+			$( document ).on( 'astra-sites-reset-customizer-data-done'	, AstraSitesAdmin._reset_site_options );
+			$( document ).on( 'astra-sites-reset-site-options-done'		, AstraSitesAdmin._reset_widgets_data );
+			$( document ).on( 'astra-sites-reset-widgets-data-done'		, AstraSitesAdmin._reset_terms );
+			$( document ).on( 'astra-sites-delete-terms-done'				, AstraSitesAdmin._reset_wp_forms );
+			$( document ).on( 'astra-sites-delete-wp-forms-done'			, AstraSitesAdmin._reset_posts );
 
-
-			$( document ).on('astra-sites-reset-data-done'       		   , AstraSitesAdmin._backupOptions );
-			$( document ).on('astra-sites-backup-settings-done'      	   , AstraSitesAdmin._importWPForms );
+			$( document ).on('astra-sites-reset-data-done'       		   , AstraSitesAdmin._importWPForms );
 			$( document ).on('astra-sites-import-wpforms-done'       	   , AstraSitesAdmin._importCustomizerSettings );
 			$( document ).on('astra-sites-import-customizer-settings-done' , AstraSitesAdmin._importXML );
 			$( document ).on('astra-sites-import-xml-done'                 , AstraSitesAdmin._importSiteOptions );
@@ -409,6 +407,7 @@ var AstraSitesAjaxQueue = (function() {
 							console.log( result );
 							$('.button-hero.astra-demo-import').text( 'Deleting Term ' + AstraSitesAdmin.reset_processed_terms + ' of ' + astraSitesAdmin.reset_terms.length );
 							AstraSitesAdmin.reset_remaining_terms-=1;
+							console.log( AstraSitesAdmin.reset_remaining_terms );
 							if( 0 == AstraSitesAdmin.reset_remaining_terms ) {
 								$(document).trigger( 'astra-sites-delete-terms-done' );
 							}
