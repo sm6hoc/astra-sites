@@ -1176,8 +1176,9 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bulkPluginInstallActivate: function()
 		{
-			console.log( 'Required Plugins' );
-			console.log( astraSitesAdmin.requiredPlugins );
+			// console.log( 'Required Plugins' );
+			// console.log( astraSitesAdmin.requiredPlugins );
+			// console.log( astraSitesAdmin.requiredPlugins.length );
 			if( 0 === astraSitesAdmin.requiredPlugins.length ) {
 				return;
 			}
@@ -1195,7 +1196,9 @@ var AstraSitesAjaxQueue = (function() {
 			// 	.html( astraSitesAdmin.strings.btnActivating );
 
 			var not_installed 	 = astraSitesAdmin.requiredPlugins.notinstalled || '';
+			console.log( not_installed );
 			var activate_plugins = astraSitesAdmin.requiredPlugins.inactive || '';
+			console.log( activate_plugins );
 
 			// First Install Bulk.
 			if( not_installed.length > 0 ) {
@@ -1205,6 +1208,10 @@ var AstraSitesAjaxQueue = (function() {
 			// Second Activate Bulk.
 			if( activate_plugins.length > 0 ) {
 				AstraSitesAdmin._activateAllPlugins( activate_plugins );
+			}
+
+			if( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
+				AstraSitesAdmin._enable_demo_import_button();
 			}
 
 		},
@@ -1626,10 +1633,10 @@ var AstraSitesAjaxQueue = (function() {
 			// return;
 
 			// delete any earlier fullscreen preview before we render new one.
-			jQuery('.theme-install-overlay').remove();
+			$('.theme-install-overlay').remove();
 
-			jQuery('#astra-sites-menu-page').append(template(templateData[0]));
-			jQuery('.theme-install-overlay').css('display', 'block');
+			$('#astra-sites-menu-page').append(template(templateData[0]));
+			$('.theme-install-overlay').css('display', 'block');
 			AstraSitesAdmin._checkNextPrevButtons();
 
 			var desc       = jQuery('.theme-details');
@@ -1637,6 +1644,9 @@ var AstraSitesAjaxQueue = (function() {
 			var descBtn    = jQuery('.theme-details-read-more');
 
 			if( $.isArray( requiredPlugins ) ) {
+
+				// console.log( 'other' );
+				// console.log( requiredPlugins );
 
 				if( descHeight >= 55 ) {
 
@@ -1690,7 +1700,7 @@ var AstraSitesAjaxQueue = (function() {
 				.fail(function( jqXHR ){
 
 					// Remove loader.
-					jQuery('.required-plugins').removeClass('loading').html('');
+					$('.required-plugins').removeClass('loading').html('');
 
 					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText, 'plugins' );
 					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
@@ -1817,7 +1827,7 @@ var AstraSitesAjaxQueue = (function() {
 					 * @type number
 					 */
 					astraSitesAdmin.requiredPlugins = response.data;
-					AstraSitesAdmin._enable_demo_import_button();
+					// AstraSitesAdmin._enable_demo_import_button();
 
 				});
 
@@ -1889,9 +1899,9 @@ var AstraSitesAjaxQueue = (function() {
 					break;
 
 				case 'upgrade':
-							var demo_slug = jQuery('.wp-full-overlay-header').attr('data-demo-slug');
+							var demo_slug = $('.wp-full-overlay-header').attr('data-demo-slug');
 
-							jQuery('.astra-demo-import')
+							$('.astra-demo-import')
 									.addClass('go-pro button-primary')
 									.removeClass('astra-demo-import')
 									.attr('target', '_blank')
@@ -1902,9 +1912,9 @@ var AstraSitesAjaxQueue = (function() {
 					break;
 
 				default:
-							var demo_slug = jQuery('.wp-full-overlay-header').attr('data-demo-slug');
+							var demo_slug = $('.wp-full-overlay-header').attr('data-demo-slug');
 
-							jQuery('.astra-demo-import')
+							$('.astra-demo-import')
 									.addClass('go-pro button-primary')
 									.removeClass('astra-demo-import')
 									.attr('target', '_blank')

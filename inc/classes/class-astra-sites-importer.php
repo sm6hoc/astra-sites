@@ -435,6 +435,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if ( is_callable( 'Astra_Minify::refresh_assets' ) ) {
 				Astra_Minify::refresh_assets();
 			}
+
 		}
 
 		function reset_customizer_data() {

@@ -552,6 +552,7 @@ body.loading-content .select-page-builder {
     margin: 0;
     line-height: 2;
     float: none;
+    width: 100%;
 }
 
 .required-plugins-list .spinner {

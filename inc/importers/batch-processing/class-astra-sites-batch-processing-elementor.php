@@ -97,7 +97,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 					$data = json_decode( $data, true );
 
 					// Import the data.
-					$content = $this->process_export_import_content( $content, 'on_import' );
+					$data = $this->process_export_import_content( $data, 'on_import' );
 
 					// Update processed meta.
 					update_metadata( 'post', $post_id, '_elementor_data', $data );
