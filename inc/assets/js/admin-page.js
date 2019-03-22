@@ -113,7 +113,9 @@ var AstraSitesAjaxQueue = (function() {
 					// document.getElementById( 'astra-site-import-process' ).value          = 100;
 				// } else {
 					// document.getElementById( 'astra-site-import-process-text' ).innerHTML = progress;
-					document.getElementById( 'astra-site-import-process' ).value          = progress_bar;
+					if( progress_bar <= 100 ) {
+						document.getElementById( 'astra-site-import-process' ).value          = progress_bar;
+					}
 				// }
 
 				$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML + ' '+progress );

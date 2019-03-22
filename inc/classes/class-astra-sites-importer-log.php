@@ -203,7 +203,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		function reset_imported_wp_forms( $form_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
+			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $form_id ) . ' - ' . get_the_title( $form_id ) );
 		}
 
 		function reset_imported_terms( $term_id ) {
@@ -228,7 +228,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function start_xml( $xml ) {
-			Astra_Sites_Importer_Log::add( '==== IMPORTED - XML ' . $xml );
+			Astra_Sites_Importer_Log::add( '==== IMPORTING from XML ' . $xml );
 		}
 
 		/**
