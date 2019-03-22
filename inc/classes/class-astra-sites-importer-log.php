@@ -92,7 +92,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			add_action( 'astra_sites_reset_widgets_data', array( $this, 'reset_widgets_data' ) );
 			add_action( 'astra_sites_delete_imported_posts', array( $this, 'delete_imported_posts' ) );
 			add_action( 'astra_sites_delete_imported_wp_forms', array( $this, 'delete_imported_wp_forms' ) );
-			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ) );
+			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ), 10, 2 );
 
 			// Hooks in between the process of import.
 			// add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
@@ -275,13 +275,11 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @since  x.x.x
 		 *
 		 * @param  int $term_id Term ID.
+		 * @param  array $term Term array.
 		 * @return void
 		 */
-		function delete_imported_terms( $term_id ) {
-			$term = get_term( $term_id );
-			if ( $term ) {
-				Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
-			}
+		function delete_imported_terms( $term_id, $term ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
 		}
 
 		/**

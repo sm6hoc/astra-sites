@@ -500,3 +500,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 	Astra_Sites::get_instance();
 
 endif;
+
+// add_action( 'admin_head', function() {
+// 	global $wpdb;
+// 	$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
+// 	vl( $post_ids );
+// 	wp_die();
+// });

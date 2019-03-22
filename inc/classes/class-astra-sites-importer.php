@@ -512,11 +512,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		function delete_imported_posts() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
 
+			do_action( 'astra_sites_delete_imported_posts', $post_id );
+
 			if ( $post_id ) {
-				$deleted = wp_delete_post( $post_id, true );
-				if ( $deleted ) {
-					do_action( 'astra_sites_delete_imported_posts', $post_id );
-				}
+				wp_delete_post( $post_id, true );
 			}
 
 			/* translators: %s is the post ID */
@@ -532,11 +531,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		function delete_imported_wp_forms() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
 
+			do_action( 'astra_sites_delete_imported_wp_forms', $post_id );
+
 			if ( $post_id ) {
-				$deleted = wp_delete_post( $post_id, true );
-				if ( $deleted ) {
-					do_action( 'astra_sites_delete_imported_wp_forms', $post_id );
-				}
+				wp_delete_post( $post_id, true );
 			}
 
 			/* translators: %s is the form ID */
@@ -556,10 +554,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if ( $term_id ) {
 				$term = get_term( $term_id );
 				if( $term ) {
-					$deleted = wp_delete_term( $term_id, $term->taxonomy );
-					if ( $deleted ) {
-						do_action( 'astra_sites_delete_imported_terms', $term_id );
-					}
+					do_action( 'astra_sites_delete_imported_terms', $term_id, $term );
+					wp_delete_term( $term_id, $term->taxonomy );
 				}
 			}
 
