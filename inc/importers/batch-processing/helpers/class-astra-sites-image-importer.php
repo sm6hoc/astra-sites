@@ -107,7 +107,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 		private function get_saved_image( $attachment ) {
 
 			if ( apply_filters( 'astra_sites_image_importer_skip_image', false, $attachment ) ) {
-				Astra_Sites_Importer_Log::add( 'BATCH - SKIP Image - {from filter} - ' . $attachment['url'] . ' - Filter name `astra_sites_image_importer_skip_image`.' );
+				Astra_Sites_Image_Importer::log( 'BATCH - SKIP Image - {from filter} - ' . $attachment['url'] . ' - Filter name `astra_sites_image_importer_skip_image`.' );
 				return $attachment;
 			}
 
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 
 			// Already imported? Then return!
 			if ( isset( $this->already_imported_ids[ $attachment['id'] ] ) ) {
-				Astra_Sites_Importer_Log::add( 'BATCH - SKIP Image {already imported from batch process} - ' . $attachment['url'] . ' - already imported.' );
+				Astra_Sites_Image_Importer::log( 'BATCH - SKIP Image {already imported from batch process} - ' . $attachment['url'] . ' - already imported.' );
 				return $this->already_imported_ids[ $attachment['id'] ];
 			}
 
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 					)
 				);
 
-				Astra_Sites_Importer_Log::add( 'BATCH - SKIP Image {already imported from xml} - ' . $attachment['url'] );
+				Astra_Sites_Image_Importer::log( 'BATCH - SKIP Image {already imported from xml} - ' . $attachment['url'] );
 			}
 
 			if ( $post_id ) {
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 
 			// Empty file content?
 			if ( empty( $file_content ) ) {
-				Astra_Sites_Importer_Log::add( 'BATCH - FAIL Image {Error: Failed wp_remote_retrieve_body} - ' . $attachment['url'] );
+				Astra_Sites_Image_Importer::log( 'BATCH - FAIL Image {Error: Failed wp_remote_retrieve_body} - ' . $attachment['url'] );
 				return $attachment;
 			}
 
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 				'url' => $upload['url'],
 			);
 
-			Astra_Sites_Importer_Log::add( 'BATCH - SUCCESS Image {Imported Successfully} - ' . $new_attachment['url'] );
+			Astra_Sites_Image_Importer::log( 'BATCH - SUCCESS Image {Imported Successfully} - ' . $new_attachment['url'] );
 
 			$this->already_imported_ids[ $attachment['id'] ] = $new_attachment;
 

@@ -259,6 +259,9 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 */
 		function start_end() {
 			Astra_Sites_Importer_Log::add( '==== Complete ====' );
+
+			// Delete Log file.
+			delete_option( 'astra_sites_recent_import_log_file' );
 		}
 
 		/**
