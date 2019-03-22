@@ -57,8 +57,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		 * @return void
 		 */
 		public function import() {
-			// Astra_Sites_Image_Importer::log( '---- Processing Mapping - for Astra Pro ----' );
-
+			Astra_Sites_Image_Importer::log( '---- Processing Mapping - for Astra Pro ----' );
 			self::start_post_mapping();
 		}
 
@@ -172,8 +171,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		 * @return void
 		 */
 		public static function update_header_mapping( $post_id = '', $meta_key = '', $mapping = array() ) {
-			// Astra_Sites_Image_Importer::log( 'Mapping "' . $meta_key . '" for ' . $post_id );
-
+			Astra_Sites_Image_Importer::log( 'Mapping "' . $meta_key . '" for ' . $post_id );
 			$headers_old = get_post_meta( $post_id, $meta_key, true );
 			$headers_new = self::get_header_mapping( $headers_old, $mapping );
 			update_post_meta( $post_id, $meta_key, $headers_new );
@@ -190,8 +188,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 		 * @return void
 		 */
 		public static function update_location_rules( $post_id = '', $meta_key = '', $mapping = array() ) {
-			// Astra_Sites_Image_Importer::log( 'Mapping "' . $meta_key . '" for ' . $post_id );
-
+			Astra_Sites_Image_Importer::log( 'Mapping "' . $meta_key . '" for ' . $post_id );
 			$location_new = self::get_location_mappings( $mapping );
 			update_post_meta( $post_id, $meta_key, $location_new );
 		}

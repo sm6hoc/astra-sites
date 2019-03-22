@@ -53,8 +53,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Misc' ) ) :
 		 */
 		public function import() {
 
-			// Astra_Sites_Image_Importer::log( '---- Processing MISC ----' );
-
+			Astra_Sites_Image_Importer::log( '---- Processing MISC ----' );
 			self::fix_nav_menus();
 		}
 
@@ -88,8 +87,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Misc' ) ) :
 			$post_ids = self::get_menu_post_ids();
 			if ( is_array( $post_ids ) ) {
 				foreach ( $post_ids as $post_id ) {
-					// Astra_Sites_Image_Importer::log( 'Post ID: ' . $post_id );
-
+					Astra_Sites_Image_Importer::log( 'Post ID: ' . $post_id );
 					$menu_url = get_post_meta( $post_id, '_menu_item_url', true );
 
 					if ( $menu_url ) {

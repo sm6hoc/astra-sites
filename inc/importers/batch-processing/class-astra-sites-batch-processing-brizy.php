@@ -53,8 +53,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		 */
 		public function import() {
 
-			// Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for "Brizy" ----' );
-
+			Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for "Brizy" ----' );
 			if ( ! is_callable( 'Brizy_Editor_Storage_Common::instance' ) ) {
 				return;
 			}

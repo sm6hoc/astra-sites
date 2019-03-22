@@ -172,7 +172,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// API.
 			wp_register_script( 'astra-sites-api', ASTRA_SITES_URI . 'inc/assets/js/astra-sites-api.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 
-			// Download.js
+			// Download.js.
 			wp_register_script( 'astra-sites-download-js', ASTRA_SITES_URI . 'inc/assets/js/download.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 
 			// Admin Page.
@@ -225,13 +225,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			global $wpdb;
 
-
-			$post_ids    = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
-			$form_ids    = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
-			$term_ids    = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
+			$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
+			$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
+			$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
 			// $comment_ids = $wpdb->get_col( "SELECT comment_id FROM {$wpdb->commentmeta} WHERE meta_key='_astra_sites_imported_comment'" );
 			// $user_ids    = $wpdb->get_col( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='_astra_sites_imported_user'" );
-
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
@@ -308,9 +306,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'importLogText'           => __( 'See Error Log &rarr;', 'astra-sites' ),
 					),
 
-					'reset_posts'    => $post_ids,
-					'reset_wp_forms' => $form_ids,
-					'reset_terms'    => $term_ids,
+					'reset_posts'       => $post_ids,
+					'reset_wp_forms'    => $form_ids,
+					'reset_terms'       => $term_ids,
 					// 'reset_comments' => $comment_ids,
 					// 'reset_users'    => $user_ids,
 				)
@@ -332,8 +330,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/class-astra-sites-compatibility.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-white-label.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-importer.php';
-			// require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-reset.php';
-
 		}
 
 		/**

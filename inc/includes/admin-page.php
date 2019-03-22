@@ -179,7 +179,7 @@ defined( 'ABSPATH' ) or exit;
 								</label>
 							</li>
 						</ul>
-	
+
 						<p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p>
 
 						<div class="astra-sites-advanced-options" style="display: none;">

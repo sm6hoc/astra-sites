@@ -90,12 +90,11 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			add_action( 'astra_sites_reset_customizer_data', array( $this, 'reset_customizer_data' ) );
 			add_action( 'astra_sites_reset_site_options', array( $this, 'reset_site_options' ) );
 			add_action( 'astra_sites_reset_widgets_data', array( $this, 'reset_widgets_data' ) );
-			add_action( 'astra_sites_reset_imported_posts', array( $this, 'reset_imported_posts' ) );
-			add_action( 'astra_sites_reset_imported_wp_forms', array( $this, 'reset_imported_wp_forms' ) );
-			add_action( 'astra_sites_reset_imported_terms', array( $this, 'reset_imported_terms' ) );
+			add_action( 'astra_sites_delete_imported_posts', array( $this, 'delete_imported_posts' ) );
+			add_action( 'astra_sites_delete_imported_wp_forms', array( $this, 'delete_imported_wp_forms' ) );
+			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ) );
 
 			// Hooks in between the process of import.
-			add_filter( 'wie_import_results', array( $this, 'widgets_data' ) );
 			add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
 
 		}
@@ -128,7 +127,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function xml_log( $level = '', $message = '', $context = '' ) {
-			// Astra_Sites_Importer_Log::add( $message );
+			Astra_Sites_Importer_Log::add( $message );
 		}
 
 		/**
@@ -177,54 +176,133 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 		}
 
+		/**
+		 * Track Post
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  int $post_id Post ID.
+		 * @return void
+		 */
 		function track_post( $post_id ) {
 			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
 		}
 
+		/**
+		 * Track Term
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  int $term_id Term ID.
+		 * @return void
+		 */
 		function track_term( $term_id ) {
 			$term = get_term( $term_id );
-			Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id . ' - ' . json_encode( $term ) );
+			if ( $term ) {
+				Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id . ' - ' . json_encode( $term ) );
+			}
 		}
 
+		/**
+		 * Reset Customizer Data
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  array $data Customizer Data.
+		 * @return void
+		 */
 		function reset_customizer_data( $data ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+			}
 		}
 
+		/**
+		 * Reset Site Options
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  array $data Site options.
+		 * @return void
+		 */
 		function reset_site_options( $data ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
-		}
-		
-		function reset_widgets_data( $old_widgets ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
+			}
 		}
 
-		function reset_imported_posts( $post_id ) {
+		/**
+		 * Reset Widgets Data
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  array $old_widgets Old Widgets.
+		 * @return void
+		 */
+		function reset_widgets_data( $old_widgets ) {
+			if ( $old_widgets ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
+			}
+		}
+
+		/**
+		 * Delete Imported Posts
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  int $post_id Post ID.
+		 * @return void
+		 */
+		function delete_imported_posts( $post_id ) {
 			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
 		}
 
-		function reset_imported_wp_forms( $form_id ) {
+		/**
+		 * Delete Imported WP Forms
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  int $form_id Form ID.
+		 * @return void
+		 */
+		function delete_imported_wp_forms( $form_id ) {
 			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $form_id ) . ' - ' . get_the_title( $form_id ) );
 		}
 
-		function reset_imported_terms( $term_id ) {
+		/**
+		 * Delete Imported Terms
+		 *
+		 * @since  x.x.x
+		 *
+		 * @param  int $term_id Term ID.
+		 * @return void
+		 */
+		function delete_imported_terms( $term_id ) {
 			$term = get_term( $term_id );
-			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
+			if ( $term ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
+			}
 		}
 
 		/**
 		 * Start Customizer Import
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
+		 * @param  array $data Customizer Data.
 		 * @return void
 		 */
 		function start_customizer( $data ) {
-			Astra_Sites_Importer_Log::add( '==== IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+			}
 		}
 
 		/**
 		 * Start XML Import
 		 *
-		 * @since 1.1.0
+		 * @param  string $xml XML file URL.
+		 * @since x.x.x
 		 * @return void
 		 */
 		function start_xml( $xml ) {
@@ -234,27 +312,36 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Start Options Import
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
+		 * @param  array $data Site options.
 		 * @return void
 		 */
 		function start_options( $data ) {
-			Astra_Sites_Importer_Log::add( '==== IMPORTED - SITE OPTIONS ' . json_encode( $data ) );
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== IMPORTED - SITE OPTIONS ' . json_encode( $data ) );
+			}
 		}
 
 		/**
 		 * Start Widgets Import
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
+		 * @param  array $old_widgets Widgets Data.
 		 * @return void
 		 */
 		function start_widgets( $old_widgets ) {
-			Astra_Sites_Importer_Log::add( '==== IMPORTED - WIDGETS ' . json_encode( $old_widgets ) );
+			if ( $old_widgets ) {
+				Astra_Sites_Importer_Log::add( '==== IMPORTED - WIDGETS ' . json_encode( $old_widgets ) );
+			}
 		}
 
 		/**
 		 * End Import Process
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
 		 * @return void
 		 */
 		function start_end() {
@@ -262,27 +349,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 			// Delete Log file.
 			delete_option( 'astra_sites_recent_import_log_file' );
-		}
-
-		/**
-		 * Log Widget Import Data.
-		 *
-		 * @since 1.1.0
-		 * @param  array $results Widget import info in array.
-		 * @return void
-		 */
-		function widgets_data( $results = array() ) {
-
-			// if ( is_array( $results ) ) {
-			// 	foreach ( $results as $sidebar_key => $widgets ) {
-			// 		Astra_Sites_Importer_Log::add( 'Sidebar: ' . $sidebar_key );
-			// 		foreach ( $widgets['widgets'] as $widget_key => $widget ) {
-			// 			if ( isset( $widget['name'] ) && isset( $widget['message'] ) ) {
-			// 				Astra_Sites_Importer_Log::add( 'Widget: "' . $widget['name'] . '" - ' . $widget['message'] );
-			// 			}
-			// 		}
-			// 	}
-			// }
 		}
 
 		/**

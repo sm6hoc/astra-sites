@@ -63,29 +63,25 @@ class Astra_WXR_Importer {
 
 	}
 
-	// Set meta for tracking the post.
+	/**
+	 * Track Imported Post
+	 *
+	 * @param  int $post_id Post ID.
+	 * @return void
+	 */
 	function track_post( $post_id ) {
 		update_post_meta( $post_id, '_astra_sites_imported_post', true );
 	}
-	
-	// Set meta for tracking the term.
+
+	/**
+	 * Track Imported Term
+	 *
+	 * @param  int $term_id Term ID.
+	 * @return void
+	 */
 	function track_term( $term_id ) {
 		update_term_meta( $term_id, '_astra_sites_imported_term', true );
 	}
-	
-	// // Set meta for tracking the comment.
-	// function track_comment( $comment_id ) {
-	// 	update_comment_meta( $comment_id, '_astra_sites_imported_comment', true );
-	// 	error_log('Comment ID ' . $comment_id );
-	// 	Astra_Sites_Image_Importer::log( '==== INSERTED - Comment ' . $comment_id );
-	// }
-	
-	// // Set meta for tracking the user.
-	// function track_user( $user_id ) {
-	// 	update_user_meta( $user_id, '_astra_sites_imported_user', true );
-	// 	error_log('User ID ' . $user_id );
-	// 	Astra_Sites_Image_Importer::log( '==== INSERTED - User ' . $user_id );
-	// }
 
 	/**
 	 * Gutenberg Content Data Fix
@@ -233,7 +229,6 @@ class Astra_WXR_Importer {
 		add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
 		// add_action( 'wxr_importer.processed.user', array( $this, 'track_user' ) );
 		// add_action( 'wxr_importer.processed.comment', array( $this, 'track_comment' ) );
-
 		// Flush once more.
 		flush();
 
