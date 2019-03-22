@@ -95,7 +95,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ) );
 
 			// Hooks in between the process of import.
-			add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
+			// add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
 
 		}
 
@@ -127,7 +127,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function xml_log( $level = '', $message = '', $context = '' ) {
-			// Astra_Sites_Importer_Log::add( $message );
+			// Astra_Sites_Image_Importer::add( $message );
 		}
 
 		/**

@@ -129,7 +129,7 @@ if( ! class_exists( 'WP_Importer_Logger' ) ) :
 		public function log( $level, $message, array $context = array() ) {
 
 			// Log
-			do_action( 'astra_sites_import_xml_log', $level, $message, $context );
+			// do_action( 'astra_sites_import_xml_log', $level, $message, $context );
 
 			$this->messages[] = array(
 				'timestamp' => time(),
