@@ -175,9 +175,9 @@ defined( 'ABSPATH' ) or exit;
 								<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-backup-customizer"><span class="dashicons dashicons-editor-help"></span></span>
 								<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-backup-customizer" style="display: none;"><p><?php _e( 'Backup of customizer settings will be downloaded in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
 							</li>
-							<li class="astra-sites-reset-data">
+							<li class="astra-sites-reset-data" style="display: none;">
 								<label>
-									<input type="checkbox" name="reset" checked="checked" class="checkbox">
+									<input type="checkbox" name="reset" class="checkbox">
 									<strong>Reset Old Data</strong>
 								</label>
 							</li>
@@ -354,17 +354,8 @@ defined( 'ABSPATH' ) or exit;
 
 				<div class="inner">
 					<span class="site-preview" data-href="{{ data.items[ key ]['astra-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}">
-						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured-image-url'] }}');">
-						<?php
-						/*
-						<# if( '' !== data.items[ key ]['featured-image-url'] ) { #>
-							<img src="{{ data.items[ key ]['featured-image-url'] }}" />
-						<# } #>
-						*/
-						?>
-						</div>
+						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured-image-url'] }}');"></div>
 					</span>
-					<?php /* <span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span> */ ?>
 					<# if ( data.items[ key ]['astra-site-type'] ) { #>
 						<# var type = ( data.items[ key ]['astra-site-type'] !== 'premium' ) ? ( data.items[ key ]['astra-site-type'] ) : 'agency'; #>
 						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{ type }}</span>

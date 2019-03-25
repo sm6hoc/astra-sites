@@ -66,6 +66,30 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'wp_ajax_astra-required-plugins', array( $this, 'required_plugin' ) );
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
 			add_action( 'wp_ajax_astra-sites-backup-settings', array( $this, 'backup_settings' ) );
+			add_action( 'wp_ajax_astra-sites-set-reset-data', array( $this, 'set_reset_data' ) );
+		}
+
+		/**
+		 * Set reset data
+		 */
+		function set_reset_data() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			global $wpdb;
+
+			$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
+			$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
+			$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
+
+			wp_send_json_success(
+				array(
+					'reset_posts'    => $post_ids,
+					'reset_wp_forms' => $form_ids,
+					'reset_terms'    => $term_ids,
+				)
+			);
 		}
 
 		/**
@@ -76,16 +100,15 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				return;
 			}
 
-			$old_settings = get_option( 'astra-settings', array() ); 
-			$file_name    = 'backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
+			$file_name    = 'astra-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
+			$old_settings = get_option( 'astra-settings', array() );
 			$upload_dir   = Astra_Sites_Importer_Log::get_instance()->log_dir();
 			$upload_path  = trailingslashit( $upload_dir['path'] );
 			$log_file     = $upload_path . $file_name;
-
-			$file_system = Astra_Sites_Importer_Log::get_instance()->get_filesystem();
+			$file_system  = Astra_Sites_Importer_Log::get_instance()->get_filesystem();
 
 			// If file system fails? Then take a backup in site option.
-			if( false == $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+			if ( false == $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
 				update_option( 'astra_sites_' . $file_name, $old_settings );
 			}
 
@@ -233,13 +256,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			wp_localize_script( 'astra-sites-render-grid', 'astraRenderGrid', $data );
 
-			global $wpdb;
-
-			$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
-			$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
-			$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
-			// $comment_ids = $wpdb->get_col( "SELECT comment_id FROM {$wpdb->commentmeta} WHERE meta_key='_astra_sites_imported_comment'" );
-			// $user_ids    = $wpdb->get_col( "SELECT user_id FROM {$wpdb->usermeta} WHERE meta_key='_astra_sites_imported_user'" );
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
@@ -287,8 +303,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'api'                     => __( 'Site API ', 'astra-sites' ),
 						'importing'               => __( 'Importing..', 'astra-sites' ),
 						'processingRequest'       => __( 'Processing requests...', 'astra-sites' ),
-						// 'backupCustomizer'        => __( '1) Backup "Customizer Settings"...', 'astra-sites' ),
-						// 'backupCustomizerSuccess' => __( 'Successfully backup customizer settings!', 'astra-sites' ),
+						'backupCustomizerSuccess' => __( 'Successfully backup customizer settings!', 'astra-sites' ),
 						'importCustomizer'        => __( '2) Importing "Customizer Settings"...', 'astra-sites' ),
 						'importCustomizerSuccess' => __( 'Successfully imported customizer settings!', 'astra-sites' ),
 						'importWPForms'           => __( '3) Importing "Contact Forms"...', 'astra-sites' ),
@@ -315,12 +330,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'preview'                 => __( 'Previewing ', 'astra-sites' ),
 						'importLogText'           => __( 'See Error Log &rarr;', 'astra-sites' ),
 					),
-
-					'reset_posts'       => $post_ids,
-					'reset_wp_forms'    => $form_ids,
-					'reset_terms'       => $term_ids,
-					// 'reset_comments' => $comment_ids,
-					// 'reset_users'    => $user_ids,
 				)
 			);
 
