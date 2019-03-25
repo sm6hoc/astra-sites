@@ -192,6 +192,8 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
+			$( document ).on('change'                    , '#astra-sites-welcome-form-inline select', AstraSitesAdmin._change_page_builder);
+			$( document ).on('click'                     , '.astra-sites-tooltip-icon', AstraSitesAdmin._toggle_tooltip);
 			$( document ).on('click'                     , '.astra-sites-advanced-options-button', AstraSitesAdmin._toggle_advanced_options);
 
 			$( document ).on('click'                     , '.astra-import-settings', AstraSitesAdmin._import_settings);
@@ -228,6 +230,18 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('astra-sites-import-options-done'             , AstraSitesAdmin._importWidgets );
 			$( document ).on('astra-sites-import-widgets-done'             , AstraSitesAdmin._importEnd );
 
+		},
+
+		_change_page_builder: function() {
+		    $(this).closest('form').submit();
+		},
+
+		_toggle_tooltip: function( event ) {
+			event.preventDefault();
+			var tip_id = $( this ).data('tip-id') || '';
+			if( tip_id && $( '#' + tip_id ).length ) {
+				$( '#' + tip_id ).toggle();
+			}
 		},
 
 		_toggle_advanced_options: function( event ) {

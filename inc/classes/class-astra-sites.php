@@ -298,7 +298,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'backupCustomizer'        => __( 'Backup Customizer Settings..', 'astra-sites' ),
 						'importingWPForms'        => __( 'Importing Contact Forms..', 'astra-sites' ),
 						'importXMLPreparing'      => __( 'Setting up import data..', 'astra-sites' ),
-						'importingXML'            => __( 'Importing Pages, Posts & Media..', 'astra-sites' ),
+						'importingXML'            => __( 'Importing Content..', 'astra-sites' ),
 						'importingOptions'        => __( 'Importing Site Options..', 'astra-sites' ),
 						'importingWidgets'        => __( 'Importing Widgets..', 'astra-sites' ),
 						'importComplete'          => __( 'Import Complete..', 'astra-sites' ),
@@ -500,10 +500,3 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 	Astra_Sites::get_instance();
 
 endif;
-
-// add_action( 'admin_head', function() {
-// 	global $wpdb;
-// 	$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
-// 	vl( $post_ids );
-// 	wp_die();
-// });

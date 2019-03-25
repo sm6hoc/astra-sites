@@ -93,10 +93,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			add_action( 'astra_sites_delete_imported_posts', array( $this, 'delete_imported_posts' ) );
 			add_action( 'astra_sites_delete_imported_wp_forms', array( $this, 'delete_imported_wp_forms' ) );
 			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ), 10, 2 );
-
-			// Hooks in between the process of import.
-			// add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
-
 		}
 
 		/**
@@ -115,19 +111,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 				'abs_url' => $file_abs_url,
 				'url'     => $file_url,
 			);
-		}
-
-		/**
-		 * XML Log.
-		 *
-		 * @since 1.1.0
-		 * @param  string $level   Level (Debug, Info etc.).
-		 * @param  string $message Message.
-		 * @param  string $context Context.
-		 * @return void
-		 */
-		function xml_log( $level = '', $message = '', $context = '' ) {
-			// Astra_Sites_Image_Importer::add( $message );
 		}
 
 		/**
@@ -274,7 +257,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 *
 		 * @since  x.x.x
 		 *
-		 * @param  int $term_id Term ID.
+		 * @param  int   $term_id Term ID.
 		 * @param  array $term Term array.
 		 * @return void
 		 */

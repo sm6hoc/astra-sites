@@ -584,3 +584,32 @@ body.loading-content .select-page-builder {
 #astra-site-import-process-wrap progress::-webkit-progress-bar {
     background: transparent;
 }
+
+.theme-browser .theme .site-preview > .theme-screenshot {
+    transition: all linear .7s;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.theme-browser .theme .site-preview > .theme-screenshot:hover {
+    background-position: center bottom;
+    background-size: cover;
+}
+
+.astra-sites-tooltip-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+}
+
+#astra-sites-welcome-form-inline {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+#astra-sites-menu-page .wp-full-overlay-main:before {
+    content: '';
+    display: none;
+}

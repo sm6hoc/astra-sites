@@ -553,7 +553,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			if ( $term_id ) {
 				$term = get_term( $term_id );
-				if( $term ) {
+				if ( $term ) {
 					do_action( 'astra_sites_delete_imported_terms', $term_id, $term );
 					wp_delete_term( $term_id, $term->taxonomy );
 				}

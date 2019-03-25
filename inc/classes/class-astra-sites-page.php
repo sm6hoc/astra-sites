@@ -59,23 +59,22 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			add_action( 'admin_init', array( $this, 'save_page_builder' ) );
 		}
 
-		/**
-		 * Help Tabs
-		 *
-		 * @return void
-		 */
-		function help_tabs() {
-			$screen = get_current_screen();
-
-			$screen->add_help_tab(
-				array(
-					'id'      => 'astra_sites_change_page_builder',
-					'title'   => __( 'Change Page Builder' ),
-					/* translators: %s is change page builder link */
-					'content' => '<p>' . sprintf( __( 'Do you want to change selected page builder? Then click on <a href="%s">Set Another Page Builder</a>.', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites&change-page-builder' ) ) . '</p>',
-				)
-			);
-		}
+		// /**
+		// * Help Tabs
+		// *
+		// * @return void
+		// */
+		// function help_tabs() {
+		// $screen = get_current_screen();
+		// $screen->add_help_tab(
+		// array(
+		// 'id'      => 'astra_sites_change_page_builder',
+		// 'title'   => __( 'Change Page Builder' ),
+		// translators: %s is change page builder link
+		// 'content' => '<p>' . sprintf( __( 'Do you want to change selected page builder? Then click on <a href="%s">Set Another Page Builder</a>.', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites&change-page-builder' ) ) . '</p>',
+		// )
+		// );
+		// }
 
 		/**
 		 * Save Page Builder
@@ -241,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 			$default_page_builder = $this->get_setting( 'page_builder' );
 
-			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
+			if ( empty( $default_page_builder ) ) {
 				?>
 				<div class="astra-sites-welcome">
 					<div class="inner">
@@ -255,7 +254,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 									<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>>Beaver Builder</option>
 									<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>>Brizy</option>
 									<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>>Gutenberg</option>
-								</select>					
+								</select>
 								<?php submit_button(); ?>
 							</div>
 							<input type="hidden" name="message" value="saved" />
@@ -269,6 +268,20 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				?>
 				<div class="nav-tab-wrapper">
 					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
+					<form id="astra-sites-welcome-form-inline" enctype="multipart/form-data" method="post">
+						<div class="fields">
+							<label><strong>Current Page Builder</strong></label>
+							<select name="page_builder" required="required">
+								<option value="">Select</option>
+								<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>>Elementor</option>
+								<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>>Beaver Builder</option>
+								<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>>Brizy</option>
+								<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>>Gutenberg</option>
+							</select>
+						</div>
+						<input type="hidden" name="message" value="saved" />
+						<?php wp_nonce_field( 'astra-sites-welcome-screen', 'astra-sites-page-builder' ); ?>
+					</form>
 					<?php
 					$view_actions = $this->get_view_actions();
 
@@ -326,8 +339,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
 
 			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
-
-			add_action( 'load-' . $page, array( $this, 'help_tabs' ) );
 		}
 
 		/**

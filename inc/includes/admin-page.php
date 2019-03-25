@@ -160,8 +160,9 @@ defined( 'ABSPATH' ) or exit;
 
 					<div class="astra-sites-advanced-options-wrap">
 
-						<h4>Install Plugins (required)</h4>
+						<h4><?php _e( 'Plugins Used in This Starter Site', 'astra-sites' ); ?></h4>
 						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+						<p><?php _e( 'These plugins will be installed when you import this site.', 'astra-sites' ); ?></p>
 
 						<hr style="border-top: 1px solid #eee;border-bottom: none;margin-top: 1em;">
 
@@ -171,6 +172,8 @@ defined( 'ABSPATH' ) or exit;
 									<input type="checkbox" name="xml" checked="checked" class="checkbox">
 									<strong>Backup Customizer Settings</strong>
 								</label>
+								<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-backup-customizer"><span class="dashicons dashicons-editor-help"></span></span>
+								<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-backup-customizer" style="display: none;"><p><?php _e( 'Backup of customizer settings will be downloaded in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
 							</li>
 							<li class="astra-sites-reset-data">
 								<label>
@@ -195,8 +198,10 @@ defined( 'ABSPATH' ) or exit;
 								<li class="astra-sites-import-xml">
 									<label>
 										<input type="checkbox" name="xml" checked="checked" class="checkbox">
-										<strong>Import XML Data</strong> (pages, posts, images, menus, etc...)
+										<strong>Import Content</strong>
 									</label>
+									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-site-content" style="display: none;"><p><?php _e( 'Pages, Posts, Images, Menus, etc.', 'astra-sites' ); ?></p></div>
 								</li>
 								<li class="astra-sites-import-widgets">
 									<label>
@@ -349,13 +354,17 @@ defined( 'ABSPATH' ) or exit;
 
 				<div class="inner">
 					<span class="site-preview" data-href="{{ data.items[ key ]['astra-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}">
-						<div class="theme-screenshot">
+						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured-image-url'] }}');">
+						<?php
+						/*
 						<# if( '' !== data.items[ key ]['featured-image-url'] ) { #>
 							<img src="{{ data.items[ key ]['featured-image-url'] }}" />
 						<# } #>
+						*/
+						?>
 						</div>
 					</span>
-					<span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span>
+					<?php /* <span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span> */ ?>
 					<# if ( data.items[ key ]['astra-site-type'] ) { #>
 						<# var type = ( data.items[ key ]['astra-site-type'] !== 'premium' ) ? ( data.items[ key ]['astra-site-type'] ) : 'agency'; #>
 						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{ type }}</span>
