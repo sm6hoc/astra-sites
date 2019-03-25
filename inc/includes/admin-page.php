@@ -183,9 +183,9 @@ defined( 'ABSPATH' ) or exit;
 							</li>
 						</ul>
 
-						<p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p>
+						<!-- <p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p> -->
 
-						<div class="astra-sites-advanced-options" style="display: none;">
+						<div class="astra-sites-advanced-options">
 							<hr style="border-top: 1px solid #eee;border-bottom: none;">
 
 							<ul class="astra-site-contents">
