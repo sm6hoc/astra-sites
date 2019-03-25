@@ -75,8 +75,21 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
-			echo json_encode( get_option( 'astra-settings', array() ) );
-			die();
+
+			$old_settings = get_option( 'astra-settings', array() ); 
+			$file_name    = 'backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
+			$upload_dir   = Astra_Sites_Importer_Log::get_instance()->log_dir();
+			$upload_path  = trailingslashit( $upload_dir['path'] );
+			$log_file     = $upload_path . $file_name;
+
+			$file_system = Astra_Sites_Importer_Log::get_instance()->get_filesystem();
+
+			// If file system fails? Then take a backup in site option.
+			if( false == $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+				update_option( 'astra_sites_' . $file_name, $old_settings );
+			}
+
+			wp_send_json_success();
 		}
 
 		/**
@@ -172,12 +185,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// API.
 			wp_register_script( 'astra-sites-api', ASTRA_SITES_URI . 'inc/assets/js/astra-sites-api.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 
-			// Download.js.
-			wp_register_script( 'astra-sites-download-js', ASTRA_SITES_URI . 'inc/assets/js/download.js', array( 'jquery' ), ASTRA_SITES_VER, true );
-
 			// Admin Page.
 			wp_enqueue_style( 'astra-sites-admin', ASTRA_SITES_URI . 'inc/assets/css/admin.css', ASTRA_SITES_VER, true );
-			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates', 'astra-sites-download-js' ), ASTRA_SITES_VER, true );
+			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
 
 			$data = apply_filters(

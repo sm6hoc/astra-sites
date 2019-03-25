@@ -480,8 +480,6 @@ var AstraSitesAjaxQueue = (function() {
 			    })
 				.done(function ( data ) {
 
-					download( data, 'backup-settings.json', 'application/json' );
-
 					// 1. Pass - Import Customizer Options.
 					AstraSitesAdmin._log( astraSitesAdmin.log.backupCustomizerSuccess );
 
