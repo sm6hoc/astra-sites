@@ -111,9 +111,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Screenshots ==
 
-1. Select the demo you want to import.
-2. Install and activate the required plugins.
-3. Import the demo.
+1. Select the page builder of your choice.
+2. Browse through categories and select a site that you like.
+3. Click import site button to start the import process.
 
 == Changelog ==
 
