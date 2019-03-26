@@ -195,14 +195,6 @@ defined( 'ABSPATH' ) or exit;
 						</div>
 
 						<ul>
-							<li class="astra-sites-backup-customizer-settings">
-								<label>
-									<input type="checkbox" name="xml" checked="checked" class="checkbox">
-									<strong>Backup Customizer Settings</strong>
-								</label>
-								<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-backup-customizer"><span class="dashicons dashicons-editor-help"></span></span>
-								<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-backup-customizer" style="display: none;"><p><?php _e( 'Backup of customizer settings will be downloaded in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
-							</li>
 							<li class="astra-sites-reset-data">
 								<label>
 									<input type="checkbox" name="reset" class="checkbox">
