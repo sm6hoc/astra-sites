@@ -111,15 +111,17 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Screenshots ##
 
-1. Select the demo you want to import.
-2. Install and activate the required plugins.
-3. Import the demo.
+1. Select the page builder of your choice.
+2. Browse through categories and select a site that you like.
+3. Click import site button to start the import process.
 
 ## Changelog ##
 
 v1.3.0 - 26-March-2019
-- New: Added page builder selection screen before showing the Demo Sites.
-- New: Added check boxes for import customizer settings, site content and widgets. So, We can import only selected contents.
+- New: Improve the user experience by removing unnecessary steps required in importing a site. Now an Astra site can be imported with just one click.
+- New: Display page builder selection only once on the first load of Astra Sites.
+- New: Take a backup of customizer options before importing new settings.
+- New: Allow to reset the previously imported site when importing multiple Astra sites.
 
 v1.2.15 - 14-March-2019
 - Improvement: Admin page UI improvements.
