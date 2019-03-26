@@ -115,7 +115,7 @@ msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:235
 #: inc/classes/class-astra-sites-page.php:256
-msgid "No Page Builder"
+msgid "Block Editor (Gutenberg)"
 msgstr ""
 
 #: inc/classes/class-astra-sites-page.php:236

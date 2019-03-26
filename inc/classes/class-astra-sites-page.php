@@ -232,7 +232,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 							<p class="description">Select your favorite page builder to import sites or individual pages.</p>
 							<div class="fields">
 								<select name="page_builder" required="required">
-									<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>><?php _e( 'No Page Builder (Gutenberg)', 'astra-sites' ); ?></option>
+									<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>><?php _e( 'Block Editor (Gutenberg)', 'astra-sites' ); ?></option>
 									<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>><?php _e( 'Elementor', 'astra-sites' ); ?></option>
 									<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>><?php _e( 'Beaver Builder', 'astra-sites' ); ?></option>
 									<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>><?php _e( 'Brizy', 'astra-sites' ); ?></option>
@@ -253,7 +253,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 					<form id="astra-sites-welcome-form-inline" enctype="multipart/form-data" method="post">
 						<div class="fields">
 							<select name="page_builder" required="required">
-								<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>><?php _e( 'No Page Builder (Gutenberg)', 'astra-sites' ); ?></option>
+								<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>><?php _e( 'Block Editor (Gutenberg)', 'astra-sites' ); ?></option>
 								<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>><?php _e( 'Elementor', 'astra-sites' ); ?></option>
 								<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>><?php _e( 'Beaver Builder', 'astra-sites' ); ?></option>
 								<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>><?php _e( 'Brizy', 'astra-sites' ); ?></option>
