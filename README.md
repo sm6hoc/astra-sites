@@ -5,7 +5,7 @@
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
 **Tested up to:** 5.1  
-**Stable tag:** 1.2.15  
+**Stable tag:** 1.3.0  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -117,8 +117,9 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
-v1.2.15 - 19-March-2019
-- Improvement: Added backward compatibility for filter `wp_check_filetype_and_ext` which accepts 5 parameter after WordPress version 5.1.
+v1.3.0 - 26-March-2019
+- New: Added page builder selection screen before showing the Demo Sites.
+- New: Added check boxes for import customizer settings, site content and widgets. So, We can import only selected contents.
 
 v1.2.15 - 14-March-2019
 - Improvement: Admin page UI improvements.

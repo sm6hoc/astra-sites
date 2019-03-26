@@ -118,7 +118,8 @@ We are open to suggestions and would love to work on topics that our users are l
 == Changelog ==
 
 v1.3.0 - 26-March-2019
-- 
+- New: Added page builder selection screen before showing the Demo Sites.
+- New: Added check boxes for import customizer settings, site content and widgets. So, We can import only selected contents.
 
 v1.2.15 - 14-March-2019
 - Improvement: Admin page UI improvements.
