@@ -193,6 +193,7 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
+			$( document ).on( 'click'					 , '.astra-sites-reset-data .checkbox', AstraSitesAdmin._toggle_reset_notice );
 			$( document ).on('change'                    , '#astra-sites-welcome-form-inline select', AstraSitesAdmin._change_page_builder);
 			$( document ).on('click'                     , '.astra-sites-tooltip-icon', AstraSitesAdmin._toggle_tooltip);
 			$( document ).on('click'                     , '.astra-sites-advanced-options-button', AstraSitesAdmin._toggle_advanced_options);
@@ -448,6 +449,14 @@ var AstraSitesAjaxQueue = (function() {
 				$(document).trigger( 'astra-sites-delete-terms-done' );
 			}
 
+		},
+
+		_toggle_reset_notice: function() {
+			if ( $( this ).is(':checked') ) {
+				$('#astra-sites-tooltip-reset-data').show();
+			} else {
+				$('#astra-sites-tooltip-reset-data').hide();
+			}
 		},
 
 		_backup_before_rest_options: function() {
@@ -1254,11 +1263,6 @@ var AstraSitesAjaxQueue = (function() {
 		_importDemo: function(event) {
 			event.preventDefault();
 
-			// Proceed?
-			if( ! confirm( astraSitesAdmin.strings.importWarning ) ) {
-				return;
-			}
-
 			// Activate ALl Plugins.
 			// AstraSitesAjaxQueue.stop();
 			// AstraSitesAjaxQueue.run();
@@ -1564,27 +1568,19 @@ var AstraSitesAjaxQueue = (function() {
 			var descBtn    = $('.theme-details-read-more');
 
 			// Check is site imported recently and set flag.
-			if( AstraSitesAdmin.site_imported_data ) {
-				$('.astra-sites-reset-data').show();
-				console.log( 'already processed' );
-			} else {
-				console.log( 'newly processed' );
-
-				// Required Required.
-				$.ajax({
-					url  : astraSitesAdmin.ajaxurl,
-					type : 'POST',
-					data : {
-						action : 'astra-sites-set-reset-data',
-					},
-				})
-				.done(function ( response ) {
-					console.log( response );
-					if( response.success ) {
-						AstraSitesAdmin.site_imported_data = response.data;
-					}
-				});
-			}
+			$.ajax({
+				url  : astraSitesAdmin.ajaxurl,
+				type : 'POST',
+				data : {
+					action : 'astra-sites-set-reset-data',
+				},
+			})
+			.done(function ( response ) {
+				console.log( response );
+				if( response.success ) {
+					AstraSitesAdmin.site_imported_data = response.data;
+				}
+			});
 
 			if( $.isArray( requiredPlugins ) ) {
 

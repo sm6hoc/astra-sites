@@ -166,33 +166,15 @@ defined( 'ABSPATH' ) or exit;
 
 						<hr style="border-top: 1px solid #eee;border-bottom: none;margin-top: 1em;">
 
-						<ul>
-							<li class="astra-sites-backup-customizer-settings">
-								<label>
-									<input type="checkbox" name="xml" checked="checked" class="checkbox">
-									<strong>Backup Customizer Settings</strong>
-								</label>
-								<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-backup-customizer"><span class="dashicons dashicons-editor-help"></span></span>
-								<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-backup-customizer" style="display: none;"><p><?php _e( 'Backup of customizer settings will be downloaded in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
-							</li>
-							<li class="astra-sites-reset-data" style="display: none;">
-								<label>
-									<input type="checkbox" name="reset" class="checkbox">
-									<strong>Reset Old Data</strong>
-								</label>
-							</li>
-						</ul>
-
-						<!-- <p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p> -->
-
 						<div class="astra-sites-advanced-options">
-							<hr style="border-top: 1px solid #eee;border-bottom: none;">
 
 							<ul class="astra-site-contents">
 								<li class="astra-sites-import-customizer">
 									<label>
 										<input type="checkbox" name="customizer" checked="checked" class="checkbox">
 										<strong>Import Customizer Settings</strong>
+										<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
+										<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-customizer-settings" style="display: none;"><p><?php _e( 'Customizer is what gives a design to the website; and selecting this option replaces your current design with a new one. <br/>Backup of current customizer settings will be stored in "wp-content/astra-sites" directory, just in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
 									</label>
 								</li>
 								<li class="astra-sites-import-xml">
@@ -201,7 +183,7 @@ defined( 'ABSPATH' ) or exit;
 										<strong>Import Content</strong>
 									</label>
 									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
-									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-site-content" style="display: none;"><p><?php _e( 'Pages, Posts, Images, Menus, etc.', 'astra-sites' ); ?></p></div>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-site-content" style="display: none;"><p><?php _e( 'Selecting this option will import dummy pages, posts, images and menus. If you do not want to import dummy content, please uncheck this option.', 'astra-sites' ); ?></p></div>
 								</li>
 								<li class="astra-sites-import-widgets">
 									<label>
@@ -211,6 +193,27 @@ defined( 'ABSPATH' ) or exit;
 								</li>
 							</ul>
 						</div>
+
+						<ul>
+							<li class="astra-sites-backup-customizer-settings">
+								<label>
+									<input type="checkbox" name="xml" checked="checked" class="checkbox">
+									<strong>Backup Customizer Settings</strong>
+								</label>
+								<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-backup-customizer"><span class="dashicons dashicons-editor-help"></span></span>
+								<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-backup-customizer" style="display: none;"><p><?php _e( 'Backup of customizer settings will be downloaded in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
+							</li>
+							<li class="astra-sites-reset-data">
+								<label>
+									<input type="checkbox" name="reset" class="checkbox">
+									<strong>Delete Previously Imported Site</strong>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-reset-data" style="display: none;"><p><?php _e( 'WARNING: Selecting this option will delete data from your current website. Choose this option only if this is intended.', 'astra-sites' ); ?></p></div>
+								</label>
+							</li>
+						</ul>
+
+						<!-- <p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p> -->
+
 					</div>
 
 					<!-- <div class="astra-sites-advanced-options">
@@ -366,7 +369,7 @@ defined( 'ABSPATH' ) or exit;
 					<div class="theme-id-container">
 						<h3 class="theme-name" id="astra-theme-name"> {{{ data.items[ key ].title.rendered }}} </h3>
 						<div class="theme-actions">
-							<button class="button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
+							<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
 						</div>
 					</div>
 				</div>

@@ -289,7 +289,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'DescCollapse'             => __( 'Hide', 'astra-sites' ),
 						'responseError'            => __( 'There was a problem receiving a response from server.', 'astra-sites' ),
 						'searchNoFound'            => __( 'No Demos found, Try a different search.', 'astra-sites' ),
-						'importWarning'            => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
 					),
 					'log'               => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
