@@ -490,12 +490,12 @@
 		 */
 		_loadPageBuilders: function() {
 
-			console.log( astraRenderGrid['page-builders-cache'] );
+			console.log( astraRenderGrid['cached']['page-builders'] );
 			
-			if( astraRenderGrid['page-builders-cache'] ) {
+			if( astraRenderGrid['cached']['page-builders'] ) {
 				console.log( 'cached' );
-				console.log( astraRenderGrid['page-builders-cache'] );
-				AstraRender._addPageBuilders( astraRenderGrid['page-builders-cache'] );
+				console.log( astraRenderGrid['cached']['page-builders'] );
+				AstraRender._addPageBuilders( astraRenderGrid['cached']['page-builders'] );
 			} else {
 				console.log( 'un cached' );
 				// Page Builder.
@@ -561,12 +561,12 @@
 
 
 
-			console.log( astraRenderGrid['categories-cache'] );
+			console.log( astraRenderGrid['cached']['categories'] );
 			
-			if( astraRenderGrid['categories-cache'] ) {
+			if( astraRenderGrid['cached']['categories'] ) {
 				console.log( 'cached' );
-				console.log( astraRenderGrid['categories-cache'] );
-				AstraRender._loadFirstGrid( astraRenderGrid['categories-cache'] );
+				console.log( astraRenderGrid['cached']['categories'] );
+				AstraRender._loadFirstGrid( astraRenderGrid['cached']['categories'] );
 			} else {
 				console.log( 'un cached' );
 

@@ -246,6 +246,14 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				)
 			);
 
+			global $wpdb;
+			$transients_vars = array();
+			$transients = $wpdb->get_results( "SELECT option_name, option_value FROM {$wpdb->options} WHERE option_name LIKE '_transient_astra-sites-cache-%'", ARRAY_A );
+			foreach ($transients as $key => $transient) {
+				$transient_name = str_replace('_transient_astra-sites-cache-', '', $transient['option_name'] );
+				$transients_vars[ $transient_name ] = unserialize( $transient['option_value'] );
+			}
+
 			$data = apply_filters(
 				'astra_sites_render_localize_vars',
 				array(
@@ -254,8 +262,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'categories'           => array(),
 					'settings'             => array(),
 					'default_page_builder' => Astra_Sites_Page::get_instance()->get_setting( 'page_builder' ),
-					'page-builders-cache'  => get_transient( 'astra-sites-cache-page-builders' ),
-					'categories-cache'     => get_transient( 'astra-sites-cache-categories' ),
+					'cached'               => $transients_vars,
 				)
 			);
 
