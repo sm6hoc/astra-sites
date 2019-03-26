@@ -109,7 +109,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				if ( is_wp_error( $demo_data ) ) {
 					wp_send_json_error( $demo_data->get_error_message() );
 				} else {
-					$log_file = Astra_Sites_Importer_Log::add_log_file_url( );
+					$log_file = Astra_Sites_Importer_Log::add_log_file_url();
 					if ( isset( $log_file['url'] ) && ! empty( $log_file['url'] ) ) {
 						$demo_data['log_file'] = $log_file['url'];
 					}
