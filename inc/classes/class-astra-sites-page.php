@@ -249,13 +249,12 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 							<p class="description">Select your favorite page builder to import sites or individual pages.</p>
 							<div class="fields">
 								<select name="page_builder" required="required">
-									<option value="">Select</option>
-									<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>>Elementor</option>
-									<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>>Beaver Builder</option>
-									<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>>Brizy</option>
-									<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>>Gutenberg</option>
+									<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>><?php _e( 'No Page Builder', 'astra-sites' ); ?></option>
+									<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>><?php _e( 'Elementor', 'astra-sites' ); ?></option>
+									<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>><?php _e( 'Beaver Builder', 'astra-sites' ); ?></option>
+									<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>><?php _e( 'Brizy', 'astra-sites' ); ?></option>
 								</select>
-								<?php submit_button(); ?>
+								<?php submit_button( __( 'Next', 'astra-sites' ) ); ?>
 							</div>
 							<input type="hidden" name="message" value="saved" />
 							<?php wp_nonce_field( 'astra-sites-welcome-screen', 'astra-sites-page-builder' ); ?>
@@ -270,13 +269,11 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
 					<form id="astra-sites-welcome-form-inline" enctype="multipart/form-data" method="post">
 						<div class="fields">
-							<label><strong>Current Page Builder</strong></label>
 							<select name="page_builder" required="required">
-								<option value="">Select</option>
-								<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>>Elementor</option>
-								<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>>Beaver Builder</option>
-								<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>>Brizy</option>
-								<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>>Gutenberg</option>
+								<option value="gutenberg" <?php selected( $default_page_builder, 'gutenberg' ); ?>><?php _e( 'No Page Builder', 'astra-sites' ); ?></option>
+								<option value="elementor" <?php selected( $default_page_builder, 'elementor' ); ?>><?php _e( 'Elementor', 'astra-sites' ); ?></option>
+								<option value="beaver-builder" <?php selected( $default_page_builder, 'beaver-builder' ); ?>><?php _e( 'Beaver Builder', 'astra-sites' ); ?></option>
+								<option value="brizy" <?php selected( $default_page_builder, 'brizy' ); ?>><?php _e( 'Brizy', 'astra-sites' ); ?></option>
 							</select>
 						</div>
 						<input type="hidden" name="message" value="saved" />
