@@ -53,8 +53,34 @@ class Astra_WXR_Importer {
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
-		add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_type_for_xml' ), 10, 5 );
 		add_filter( 'wxr_importer.pre_process.post', array( $this, 'gutenberg_content_fix' ), 10, 4 );
+
+		if ( version_compare( get_bloginfo( 'version' ), '5.1.0', '>=' ) ) {
+			add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_types_5_1_0' ), 10, 5 );
+		} else {
+			add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_types' ), 10, 4 );
+		}
+
+	}
+
+	/**
+	 * Track Imported Post
+	 *
+	 * @param  int $post_id Post ID.
+	 * @return void
+	 */
+	function track_post( $post_id ) {
+		update_post_meta( $post_id, '_astra_sites_imported_post', true );
+	}
+
+	/**
+	 * Track Imported Term
+	 *
+	 * @param  int $term_id Term ID.
+	 * @return void
+	 */
+	function track_term( $term_id ) {
+		update_term_meta( $term_id, '_astra_sites_imported_term', true );
 	}
 
 	/**
@@ -95,7 +121,39 @@ class Astra_WXR_Importer {
 	 * @param array  $mimes                     Key is the file extension with value as the mime type.
 	 * @param string $real_mime                Real MIME type of the uploaded file.
 	 */
-	function real_mime_type_for_xml( $defaults, $file, $filename, $mimes, $real_mime ) {
+	function real_mime_types_5_1_0( $defaults, $file, $filename, $mimes, $real_mime ) {
+		return $this->real_mimes( $defaults, $filename );
+	}
+
+	/**
+	 * Different MIME type of different PHP version
+	 *
+	 * Filters the "real" file type of the given file.
+	 *
+	 * @since 1.2.9
+	 *
+	 * @param array  $defaults File data array containing 'ext', 'type', and
+	 *                                          'proper_filename' keys.
+	 * @param string $file                      Full path to the file.
+	 * @param string $filename                  The name of the file (may differ from $file due to
+	 *                                          $file being in a tmp directory).
+	 * @param array  $mimes                     Key is the file extension with value as the mime type.
+	 */
+	function real_mime_types( $defaults, $file, $filename, $mimes ) {
+		return $this->real_mimes( $defaults, $filename );
+	}
+
+	/**
+	 * Real Mime Type
+	 *
+	 * @since 1.2.15
+	 *
+	 * @param array  $defaults File data array containing 'ext', 'type', and
+	 *                                          'proper_filename' keys.
+	 * @param string $filename                  The name of the file (may differ from $file due to
+	 *                                          $file being in a tmp directory).
+	 */
+	function real_mimes( $defaults, $filename ) {
 
 		// Set EXT and real MIME type only for the file name `wxr.xml`.
 		if ( 'wxr.xml' == $filename ) {
@@ -165,6 +223,11 @@ class Astra_WXR_Importer {
 		add_action( 'wxr_importer.process_already_imported.term', array( $this, 'imported_term' ) );
 		add_action( 'wxr_importer.processed.user', array( $this, 'imported_user' ) );
 		add_action( 'wxr_importer.process_failed.user', array( $this, 'imported_user' ) );
+
+		// Keep track of our progress.
+		add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
+		add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
+
 		// Flush once more.
 		flush();
 

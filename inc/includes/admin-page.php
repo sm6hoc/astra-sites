@@ -26,17 +26,16 @@ defined( 'ABSPATH' ) or exit;
 					<div class="filter-count">
 						<span class="count"></span>
 					</div>
-					<div class="filters-wrap">
+					<div class="filters-wrap" style="display: none;">
 						<div id="astra-site-page-builder"></div>
 					</div>				
+					<div class="filters-wrap">
+						<div id="astra-site-category"></div>
+					</div>
 
 				</div>
 
 				<div class="section-right">
-
-					<div class="filters-wrap">
-						<div id="astra-site-category"></div>
-					</div>
 
 					<div class="search-form">
 						<label class="screen-reader-text" for="wp-filter-search-input"><?php _e( 'Search Sites', 'astra-sites' ); ?> </label>
@@ -140,7 +139,8 @@ defined( 'ABSPATH' ) or exit;
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
-				<a class="button hide-if-no-customize astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?></a>
+				<!-- <a class="button hide-if-no-customize astra-site-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a> -->
+				<a class="button hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
 
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
@@ -158,18 +158,76 @@ defined( 'ABSPATH' ) or exit;
 					</div>
 					<a href="#" class="theme-details-read-more"><?php _e( 'Read more', 'astra-sites' ); ?> &hellip;</a>
 
-					<div class="required-plugins-wrap">
+					<div class="astra-sites-advanced-options-wrap">
+
+						<h4><?php _e( 'Plugins Used in This Starter Site', 'astra-sites' ); ?></h4>
+						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+						<p><?php _e( 'These plugins will be installed when you import this site.', 'astra-sites' ); ?></p>
+
+						<hr style="border-top: 1px solid #eee;border-bottom: none;margin-top: 1em;">
+
+						<div class="astra-sites-advanced-options">
+
+							<ul class="astra-site-contents">
+								<li class="astra-sites-import-customizer">
+									<label>
+										<input type="checkbox" name="customizer" checked="checked" class="checkbox">
+										<strong>Import Customizer Settings</strong>
+										<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
+										<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-customizer-settings" style="display: none;"><p><?php _e( 'Customizer is what gives a design to the website; and selecting this option replaces your current design with a new one. <br/>Backup of current customizer settings will be stored in "wp-content/astra-sites" directory, just in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
+									</label>
+								</li>
+								<li class="astra-sites-import-xml">
+									<label>
+										<input type="checkbox" name="xml" checked="checked" class="checkbox">
+										<strong>Import Content</strong>
+									</label>
+									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-site-content"><span class="dashicons dashicons-editor-help"></span></span>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-site-content" style="display: none;"><p><?php _e( 'Selecting this option will import dummy pages, posts, images and menus. If you do not want to import dummy content, please uncheck this option.', 'astra-sites' ); ?></p></div>
+								</li>
+								<li class="astra-sites-import-widgets">
+									<label>
+										<input type="checkbox" name="widgets" checked="checked" class="checkbox">
+										<strong>Import Widgets</strong>
+									</label>
+								</li>
+							</ul>
+						</div>
+
+						<ul>
+							<li class="astra-sites-reset-data">
+								<label>
+									<input type="checkbox" name="reset" class="checkbox">
+									<strong>Delete Previously Imported Site</strong>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-reset-data" style="display: none;"><p><?php _e( 'WARNING: Selecting this option will delete data from your current website. Choose this option only if this is intended.', 'astra-sites' ); ?></p></div>
+								</label>
+							</li>
+						</ul>
+
+						<!-- <p><a href="#" class="astra-sites-advanced-options-button"><?php _e( 'Advanced Options', 'astra-sites' ); ?></a></p> -->
+
+					</div>
+
+					<!-- <div class="astra-sites-advanced-options">
 						<h4><?php _e( 'Required Plugins', 'astra-sites' ); ?> </h4>
 						<div class="required-plugins"></div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
-					<a class="button button-hero hide-if-no-customize astra-demo-import" href="#" data-import="disabled">
-						<?php esc_html_e( 'Install Plugins', 'astra-sites' ); ?>
+					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled">
+						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+						<span class="percent"></span>
 					</a>
+					<div id="astra-site-import-process-wrap" style="display: none;">
+						<progress id="astra-site-import-process" max="100" value="0"></progress>
+						<!-- <span id="astra-site-import-process-text"></span> -->
+					</div>
+					<!-- <a class="button button-hero hide-if-no-customize astra-site-import" href="#">
+						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+					</a> -->
 				</div>
 				<button type="button" class="collapse-sidebar button" aria-expanded="true"
 						aria-label="Collapse Sidebar">
@@ -291,13 +349,8 @@ defined( 'ABSPATH' ) or exit;
 
 				<div class="inner">
 					<span class="site-preview" data-href="{{ data.items[ key ]['astra-site-url'] }}?TB_iframe=true&width=600&height=550" data-title="{{ data.items[ key ].title.rendered }}">
-						<div class="theme-screenshot">
-						<# if( '' !== data.items[ key ]['featured-image-url'] ) { #>
-							<img src="{{ data.items[ key ]['featured-image-url'] }}" />
-						<# } #>
-						</div>
+						<div class="theme-screenshot" style="background-image: url('{{ data.items[ key ]['featured-image-url'] }}');"></div>
 					</span>
-					<span class="more-details"> <?php esc_html_e( 'Details &amp; Preview', 'astra-sites' ); ?> </span>
 					<# if ( data.items[ key ]['astra-site-type'] ) { #>
 						<# var type = ( data.items[ key ]['astra-site-type'] !== 'premium' ) ? ( data.items[ key ]['astra-site-type'] ) : 'agency'; #>
 						<span class="site-type {{data.items[ key ]['astra-site-type']}}">{{ type }}</span>
@@ -308,7 +361,7 @@ defined( 'ABSPATH' ) or exit;
 					<div class="theme-id-container">
 						<h3 class="theme-name" id="astra-theme-name"> {{{ data.items[ key ].title.rendered }}} </h3>
 						<div class="theme-actions">
-							<button class="button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
+							<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
 						</div>
 					</div>
 				</div>

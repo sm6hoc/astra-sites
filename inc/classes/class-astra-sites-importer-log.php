@@ -83,9 +83,16 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			add_action( 'astra_sites_import_widgets', array( $this, 'start_widgets' ) );
 			add_action( 'astra_sites_import_complete', array( $this, 'start_end' ) );
 
-			// Hooks in between the process of import.
-			add_filter( 'wie_import_results', array( $this, 'widgets_data' ) );
-			add_action( 'astra_sites_import_xml_log', array( $this, 'xml_log' ), 10, 3 );
+			add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
+			add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
+
+			// Delete..
+			add_action( 'astra_sites_reset_customizer_data', array( $this, 'reset_customizer_data' ) );
+			add_action( 'astra_sites_reset_site_options', array( $this, 'reset_site_options' ) );
+			add_action( 'astra_sites_reset_widgets_data', array( $this, 'reset_widgets_data' ) );
+			add_action( 'astra_sites_delete_imported_posts', array( $this, 'delete_imported_posts' ) );
+			add_action( 'astra_sites_delete_imported_wp_forms', array( $this, 'delete_imported_wp_forms' ) );
+			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ), 10, 2 );
 		}
 
 		/**
@@ -107,19 +114,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		/**
-		 * XML Log.
-		 *
-		 * @since 1.1.0
-		 * @param  string $level   Level (Debug, Info etc.).
-		 * @param  string $message Message.
-		 * @param  string $context Context.
-		 * @return void
-		 */
-		function xml_log( $level = '', $message = '', $context = '' ) {
-			Astra_Sites_Importer_Log::add( $message );
-		}
-
-		/**
 		 * Current Time for log.
 		 *
 		 * @since 1.1.0
@@ -138,6 +132,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * @return void
 		 */
 		function start( $data = array(), $demo_api_uri = '' ) {
+
+			Astra_Sites_Importer_Log::add( '==== Started ====' );
 
 			Astra_Sites_Importer_Log::add( '# System Details: ' );
 			Astra_Sites_Importer_Log::add( "Debug Mode \t\t: " . self::get_debug_mode() );
@@ -164,81 +160,176 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		}
 
 		/**
-		 * Start Customizer Import
+		 * Track Post
 		 *
-		 * @since 1.1.0
+		 * @since  1.3.0
+		 *
+		 * @param  int $post_id Post ID.
 		 * @return void
 		 */
-		function start_customizer() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '1. Imported "Customizer Settings"  - ' . self::current_time() );
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
+		function track_post( $post_id ) {
+			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
+		}
+
+		/**
+		 * Track Term
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  int $term_id Term ID.
+		 * @return void
+		 */
+		function track_term( $term_id ) {
+			$term = get_term( $term_id );
+			if ( $term ) {
+				Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id . ' - ' . json_encode( $term ) );
+			}
+		}
+
+		/**
+		 * Reset Customizer Data
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  array $data Customizer Data.
+		 * @return void
+		 */
+		function reset_customizer_data( $data ) {
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+			}
+		}
+
+		/**
+		 * Reset Site Options
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  array $data Site options.
+		 * @return void
+		 */
+		function reset_site_options( $data ) {
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
+			}
+		}
+
+		/**
+		 * Reset Widgets Data
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  array $old_widgets Old Widgets.
+		 * @return void
+		 */
+		function reset_widgets_data( $old_widgets ) {
+			if ( $old_widgets ) {
+				Astra_Sites_Importer_Log::add( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
+			}
+		}
+
+		/**
+		 * Delete Imported Posts
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  int $post_id Post ID.
+		 * @return void
+		 */
+		function delete_imported_posts( $post_id ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
+		}
+
+		/**
+		 * Delete Imported WP Forms
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  int $form_id Form ID.
+		 * @return void
+		 */
+		function delete_imported_wp_forms( $form_id ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $form_id ) . ' - ' . get_the_title( $form_id ) );
+		}
+
+		/**
+		 * Delete Imported Terms
+		 *
+		 * @since  1.3.0
+		 *
+		 * @param  int   $term_id Term ID.
+		 * @param  array $term Term array.
+		 * @return void
+		 */
+		function delete_imported_terms( $term_id, $term ) {
+			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
+		}
+
+		/**
+		 * Start Customizer Import
+		 *
+		 * @since x.x.x
+		 *
+		 * @param  array $data Customizer Data.
+		 * @return void
+		 */
+		function start_customizer( $data ) {
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
+			}
 		}
 
 		/**
 		 * Start XML Import
 		 *
-		 * @since 1.1.0
+		 * @param  string $xml XML file URL.
+		 * @since x.x.x
 		 * @return void
 		 */
-		function start_xml() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '2. Importing "XML"  - ' . self::current_time() );
+		function start_xml( $xml ) {
+			Astra_Sites_Importer_Log::add( '==== IMPORTING from XML ' . $xml );
 		}
 
 		/**
 		 * Start Options Import
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
+		 * @param  array $data Site options.
 		 * @return void
 		 */
-		function start_options() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
-			Astra_Sites_Importer_Log::add( PHP_EOL . '3. Imported "Site Options"  - ' . self::current_time() );
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
+		function start_options( $data ) {
+			if ( $data ) {
+				Astra_Sites_Importer_Log::add( '==== IMPORTED - SITE OPTIONS ' . json_encode( $data ) );
+			}
 		}
 
 		/**
 		 * Start Widgets Import
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
+		 * @param  array $old_widgets Widgets Data.
 		 * @return void
 		 */
-		function start_widgets() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '4. Importing "Widgets"  - ' . self::current_time() );
+		function start_widgets( $old_widgets ) {
+			if ( $old_widgets ) {
+				Astra_Sites_Importer_Log::add( '==== IMPORTED - WIDGETS ' . json_encode( $old_widgets ) );
+			}
 		}
 
 		/**
 		 * End Import Process
 		 *
-		 * @since 1.1.0
+		 * @since x.x.x
+		 *
 		 * @return void
 		 */
 		function start_end() {
-			Astra_Sites_Importer_Log::add( PHP_EOL . '---' );
-			Astra_Sites_Importer_Log::add( PHP_EOL . 'Import Complete!  - ' . self::current_time() );
+			Astra_Sites_Importer_Log::add( '==== Complete ====' );
 
 			// Delete Log file.
 			delete_option( 'astra_sites_recent_import_log_file' );
-		}
-
-		/**
-		 * Log Widget Import Data.
-		 *
-		 * @since 1.1.0
-		 * @param  array $results Widget import info in array.
-		 * @return void
-		 */
-		function widgets_data( $results = array() ) {
-
-			if ( is_array( $results ) ) {
-				foreach ( $results as $sidebar_key => $widgets ) {
-					Astra_Sites_Importer_Log::add( 'Sidebar: ' . $sidebar_key );
-					foreach ( $widgets['widgets'] as $widget_key => $widget ) {
-						if ( isset( $widget['name'] ) && isset( $widget['message'] ) ) {
-							Astra_Sites_Importer_Log::add( 'Widget: "' . $widget['name'] . '" - ' . $widget['message'] );
-						}
-					}
-				}
-			}
 		}
 
 		/**
