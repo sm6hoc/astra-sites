@@ -415,10 +415,6 @@ var AstraSitesAjaxQueue = (function() {
 			if( AstraSitesAdmin.site_imported_data['reset_terms'].length ) {
 				AstraSitesAdmin.reset_remaining_terms = AstraSitesAdmin.site_imported_data['reset_terms'].length;
 
-				// // Delete all posts.
-				// AstraSitesAjaxQueue.stop();
-				// AstraSitesAjaxQueue.run();
-
 				$.each( AstraSitesAdmin.site_imported_data['reset_terms'], function(index, term_id) {
 					AstraSitesAjaxQueue.add({
 						url: astraSitesAdmin.ajaxurl,
@@ -1178,10 +1174,6 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_activateAllPlugins: function( activate_plugins ) {
 
-			// Activate ALl Plugins.
-			// AstraSitesAjaxQueue.stop();
-			// AstraSitesAjaxQueue.run();
-
 			AstraSitesAdmin._log( astraSitesAdmin.log.bulkActivation );
 
 			$.each( activate_plugins, function(index, single_plugin) {
@@ -1255,10 +1247,6 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_importDemo: function(event) {
 			event.preventDefault();
-
-			// Activate ALl Plugins.
-			// AstraSitesAjaxQueue.stop();
-			// AstraSitesAjaxQueue.run();
 
 			var disabled = $(this).attr('data-import');
 

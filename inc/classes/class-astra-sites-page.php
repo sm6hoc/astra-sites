@@ -59,23 +59,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			add_action( 'admin_init', array( $this, 'save_page_builder' ) );
 		}
 
-		// /**
-		// * Help Tabs
-		// *
-		// * @return void
-		// */
-		// function help_tabs() {
-		// $screen = get_current_screen();
-		// $screen->add_help_tab(
-		// array(
-		// 'id'      => 'astra_sites_change_page_builder',
-		// 'title'   => __( 'Change Page Builder' ),
-		// translators: %s is change page builder link
-		// 'content' => '<p>' . sprintf( __( 'Do you want to change selected page builder? Then click on <a href="%s">Set Another Page Builder</a>.', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites&change-page-builder' ) ) . '</p>',
-		// )
-		// );
-		// }
-
 		/**
 		 * Save Page Builder
 		 *

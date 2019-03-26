@@ -47,9 +47,6 @@ class Astra_Customizer_Import {
 	 */
 	public function import( $options ) {
 
-		// // vl( $options['astra-settings'] );
-		// vl( stripslashes( $options ) );
-		// wp_die();
 		// Update Astra Theme customizer settings.
 		if ( isset( $options['astra-settings'] ) ) {
 			self::_import_settings( $options['astra-settings'] );

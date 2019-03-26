@@ -162,7 +162,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Track Post
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  int $post_id Post ID.
 		 * @return void
@@ -174,7 +174,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Track Term
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  int $term_id Term ID.
 		 * @return void
@@ -189,7 +189,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Reset Customizer Data
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  array $data Customizer Data.
 		 * @return void
@@ -203,7 +203,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Reset Site Options
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  array $data Site options.
 		 * @return void
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Reset Widgets Data
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  array $old_widgets Old Widgets.
 		 * @return void
@@ -231,7 +231,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Delete Imported Posts
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  int $post_id Post ID.
 		 * @return void
@@ -243,7 +243,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Delete Imported WP Forms
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  int $form_id Form ID.
 		 * @return void
@@ -255,7 +255,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Delete Imported Terms
 		 *
-		 * @since  x.x.x
+		 * @since  1.3.0
 		 *
 		 * @param  int   $term_id Term ID.
 		 * @param  array $term Term array.

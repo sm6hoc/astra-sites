@@ -227,8 +227,7 @@ class Astra_WXR_Importer {
 		// Keep track of our progress.
 		add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
 		add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
-		// add_action( 'wxr_importer.processed.user', array( $this, 'track_user' ) );
-		// add_action( 'wxr_importer.processed.comment', array( $this, 'track_comment' ) );
+
 		// Flush once more.
 		flush();
 
