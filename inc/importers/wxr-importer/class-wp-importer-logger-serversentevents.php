@@ -14,9 +14,6 @@ if ( ! class_exists( 'WP_Importer_Logger_ServerSentEvents' ) && class_exists( 'W
 		 */
 		public function log( $level, $message, array $context = array() ) {
 
-			// Log
-			do_action( 'astra_sites_import_xml_log', $level, $message, $context );
-
 			$data = compact( 'level', 'message' );
 
 			switch ( $level ) {

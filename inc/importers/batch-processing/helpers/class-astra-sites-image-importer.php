@@ -107,9 +107,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 		private function get_saved_image( $attachment ) {
 
 			if ( apply_filters( 'astra_sites_image_importer_skip_image', false, $attachment ) ) {
-
-				Astra_Sites_Image_Importer::log( 'Download (✕) Replace (✕) - ' . $attachment['url'] );
-
+				Astra_Sites_Image_Importer::log( 'BATCH - SKIP Image - {from filter} - ' . $attachment['url'] . ' - Filter name `astra_sites_image_importer_skip_image`.' );
 				return $attachment;
 			}
 
@@ -117,9 +115,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 
 			// Already imported? Then return!
 			if ( isset( $this->already_imported_ids[ $attachment['id'] ] ) ) {
-
-				Astra_Sites_Image_Importer::log( 'Download (✓) Replace (✓) - ' . $attachment['url'] );
-
+				Astra_Sites_Image_Importer::log( 'BATCH - SKIP Image {already imported from batch process} - ' . $attachment['url'] . ' - already imported.' );
 				return $this->already_imported_ids[ $attachment['id'] ];
 			}
 
@@ -143,16 +139,6 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 
 				$post_id = $wpdb->get_var(
 					$wpdb->prepare(
-						'SELECT `post_id` FROM `' . $wpdb->postmeta . '`
-							WHERE `meta_key` = \'_wp_attached_file\'
-							AND `meta_value` LIKE %s
-						;',
-						'%' . $filename . '%'
-					)
-				);
-
-				$post_id = $wpdb->get_var(
-					$wpdb->prepare(
 						"SELECT post_id FROM {$wpdb->postmeta}
 						WHERE meta_key = '_wp_attached_file'
 						AND meta_value LIKE %s",
@@ -160,7 +146,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 					)
 				);
 
-				Astra_Sites_Image_Importer::log( 'Download (✓) Replace (✓) - ' . $attachment['url'] );
+				Astra_Sites_Image_Importer::log( 'BATCH - SKIP Image {already imported from xml} - ' . $attachment['url'] );
 			}
 
 			if ( $post_id ) {
@@ -202,10 +188,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 
 			// Empty file content?
 			if ( empty( $file_content ) ) {
-
-				Astra_Sites_Image_Importer::log( 'Download (✕) Replace (✕) - ' . $attachment['url'] );
-				Astra_Sites_Image_Importer::log( 'Error: Failed wp_remote_retrieve_body().' );
-
+				Astra_Sites_Image_Importer::log( 'BATCH - FAIL Image {Error: Failed wp_remote_retrieve_body} - ' . $attachment['url'] );
 				return $attachment;
 			}
 
@@ -243,7 +226,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 				'url' => $upload['url'],
 			);
 
-			Astra_Sites_Image_Importer::log( 'Download (✓) Replace (✓) - ' . $attachment['url'] );
+			Astra_Sites_Image_Importer::log( 'BATCH - SUCCESS Image {Imported Successfully} - ' . $new_attachment['url'] );
 
 			$this->already_imported_ids[ $attachment['id'] ] = $new_attachment;
 

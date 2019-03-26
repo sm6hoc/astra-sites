@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.1
-Stable tag: 1.2.15
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,14 +111,21 @@ We are open to suggestions and would love to work on topics that our users are l
 
 == Screenshots ==
 
-1. Select the demo you want to import.
-2. Install and activate the required plugins.
-3. Import the demo.
+1. Select the page builder of your choice.
+2. Browse through categories and select a site that you like.
+3. Click import site button to start the import process.
 
 == Changelog ==
 
-v1.2.15 - 19-March-2019
-- Improvement: Added backward compatibility for filter `wp_check_filetype_and_ext` which accepts 5 parameter after WordPress version 5.1.
+v1.3.0 - 26-March-2019
+- New: Improve the user experience by removing unnecessary steps required in importing a site. Now an Astra site can be imported with just one click.
+- New: Display page builder selection only once on the first load of Astra Sites.
+- New: Take a backup of customizer options before importing new settings.
+- New: Allow to reset the previously imported site when importing multiple Astra sites.
+
+v1.2.15 - 14-March-2019
+- Improvement: Admin page UI improvements.
+- Improvement: Added filter `astra_sites_page_title` to change the page title.
 
 v1.2.14 - 13-March-2019
 - Improvement: Added support for the WPForms plugin.

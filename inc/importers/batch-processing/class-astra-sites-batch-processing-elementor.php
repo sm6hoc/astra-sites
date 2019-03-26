@@ -45,8 +45,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 	 */
 	public function import() {
 
-		\Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for Elementor ----' );
-
+		// \Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for Elementor ----' );
 		$post_types = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
 		if ( empty( $post_types ) && ! is_array( $post_types ) ) {
 			return;
@@ -73,8 +72,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 	 */
 	public function import_single_post( $post_id = 0 ) {
 
-		\Astra_Sites_Image_Importer::log( 'Post ID: ' . $post_id );
-
+		// \Astra_Sites_Image_Importer::log( 'Post ID: ' . $post_id );
 		if ( ! empty( $post_id ) ) {
 
 			$hotlink_imported = get_post_meta( $post_id, '_astra_sites_hotlink_imported', true );
@@ -97,7 +95,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 					$data = json_decode( $data, true );
 
 					// Import the data.
-					$content = $this->process_export_import_content( $content, 'on_import' );
+					$data = $this->process_export_import_content( $data, 'on_import' );
 
 					// Update processed meta.
 					update_metadata( 'post', $post_id, '_elementor_data', $data );

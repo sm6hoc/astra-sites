@@ -64,6 +64,26 @@ class Astra_WXR_Importer {
 	}
 
 	/**
+	 * Track Imported Post
+	 *
+	 * @param  int $post_id Post ID.
+	 * @return void
+	 */
+	function track_post( $post_id ) {
+		update_post_meta( $post_id, '_astra_sites_imported_post', true );
+	}
+
+	/**
+	 * Track Imported Term
+	 *
+	 * @param  int $term_id Term ID.
+	 * @return void
+	 */
+	function track_term( $term_id ) {
+		update_term_meta( $term_id, '_astra_sites_imported_term', true );
+	}
+
+	/**
 	 * Gutenberg Content Data Fix
 	 *
 	 * Gutenberg encode the page content. In import process the encoded characterless e.g. <, > are
@@ -203,6 +223,11 @@ class Astra_WXR_Importer {
 		add_action( 'wxr_importer.process_already_imported.term', array( $this, 'imported_term' ) );
 		add_action( 'wxr_importer.processed.user', array( $this, 'imported_user' ) );
 		add_action( 'wxr_importer.process_failed.user', array( $this, 'imported_user' ) );
+
+		// Keep track of our progress.
+		add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
+		add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
+
 		// Flush once more.
 		flush();
 

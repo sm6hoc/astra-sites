@@ -279,6 +279,7 @@
 
 			// API Request.
 			var api_post = {
+				id: 'astra-sites',
 				slug: 'astra-sites?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
 				trigger: trigger,
 			};
@@ -297,6 +298,10 @@
 		_getPageBuilderParams: function()
 		{
 			var _params = {};
+
+			if( astraRenderGrid.default_page_builder ) {
+				_params['search'] = astraRenderGrid.default_page_builder;
+			}
 
 			if( astraRenderGrid.sites && astraRenderGrid.sites.purchase_key ) {
 				_params['purchase_key'] = astraRenderGrid.sites.purchase_key;

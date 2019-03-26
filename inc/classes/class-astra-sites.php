@@ -65,6 +65,54 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// AJAX.
 			add_action( 'wp_ajax_astra-required-plugins', array( $this, 'required_plugin' ) );
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
+			add_action( 'wp_ajax_astra-sites-backup-settings', array( $this, 'backup_settings' ) );
+			add_action( 'wp_ajax_astra-sites-set-reset-data', array( $this, 'set_reset_data' ) );
+		}
+
+		/**
+		 * Set reset data
+		 */
+		function set_reset_data() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			global $wpdb;
+
+			$post_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_post'" );
+			$form_ids = $wpdb->get_col( "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key='_astra_sites_imported_wp_forms'" );
+			$term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->termmeta} WHERE meta_key='_astra_sites_imported_term'" );
+
+			wp_send_json_success(
+				array(
+					'reset_posts'    => $post_ids,
+					'reset_wp_forms' => $form_ids,
+					'reset_terms'    => $term_ids,
+				)
+			);
+		}
+
+		/**
+		 * Backup our existing settings.
+		 */
+		function backup_settings() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			$file_name    = 'astra-sites-backup-' . date( 'd-M-Y-h-i-s' ) . '.json';
+			$old_settings = get_option( 'astra-settings', array() );
+			$upload_dir   = Astra_Sites_Importer_Log::get_instance()->log_dir();
+			$upload_path  = trailingslashit( $upload_dir['path'] );
+			$log_file     = $upload_path . $file_name;
+			$file_system  = Astra_Sites_Importer_Log::get_instance()->get_filesystem();
+
+			// If file system fails? Then take a backup in site option.
+			if ( false == $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+				update_option( 'astra_sites_' . $file_name, $old_settings );
+			}
+
+			wp_send_json_success();
 		}
 
 		/**
@@ -198,10 +246,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$data = apply_filters(
 				'astra_sites_render_localize_vars',
 				array(
-					'sites'         => $request_params,
-					'page-builders' => array(),
-					'categories'    => array(),
-					'settings'      => array(),
+					'sites'                => $request_params,
+					'page-builders'        => array(),
+					'categories'           => array(),
+					'settings'             => array(),
+					'default_page_builder' => Astra_Sites_Page::get_instance()->get_setting( 'page_builder' ),
 				)
 			);
 
@@ -240,7 +289,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'DescCollapse'             => __( 'Hide', 'astra-sites' ),
 						'responseError'            => __( 'There was a problem receiving a response from server.', 'astra-sites' ),
 						'searchNoFound'            => __( 'No Demos found, Try a different search.', 'astra-sites' ),
-						'importWarning'            => __( "Executing Demo Import will make your site similar as ours. Please bear in mind -\n\n1. It is recommended to run import on a fresh WordPress installation.\n\n2. Importing site does not delete any pages or posts. However, it can overwrite your existing content.\n\n3. Copyrighted media will not be imported. Instead it will be replaced with placeholders.", 'astra-sites' ),
 					),
 					'log'               => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
@@ -254,25 +302,25 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'api'                     => __( 'Site API ', 'astra-sites' ),
 						'importing'               => __( 'Importing..', 'astra-sites' ),
 						'processingRequest'       => __( 'Processing requests...', 'astra-sites' ),
-						'importCustomizer'        => __( '1) Importing "Customizer Settings"...', 'astra-sites' ),
+						'importCustomizer'        => __( '2) Importing "Customizer Settings"...', 'astra-sites' ),
 						'importCustomizerSuccess' => __( 'Successfully imported customizer settings!', 'astra-sites' ),
-						'importWPForms'           => __( '2) Importing "WPForms"...', 'astra-sites' ),
-						'importWPFormsSuccess'    => __( 'Successfully imported WPForms!', 'astra-sites' ),
-						'importXMLPrepare'        => __( '3) Preparing "XML" Data...', 'astra-sites' ),
+						'importWPForms'           => __( '3) Importing "Contact Forms"...', 'astra-sites' ),
+						'importWPFormsSuccess'    => __( 'Successfully imported Contact Forms!', 'astra-sites' ),
+						'importXMLPrepare'        => __( '4) Preparing "XML" Data...', 'astra-sites' ),
 						'importXMLPrepareSuccess' => __( 'Successfully set XML data!', 'astra-sites' ),
-						'importXML'               => __( '4) Importing "XML"...', 'astra-sites' ),
+						'importXML'               => __( '5) Importing "XML"...', 'astra-sites' ),
 						'importXMLSuccess'        => __( 'Successfully imported XML!', 'astra-sites' ),
-						'importOptions'           => __( '5) Importing "Options"...', 'astra-sites' ),
+						'importOptions'           => __( '6) Importing "Options"...', 'astra-sites' ),
 						'importOptionsSuccess'    => __( 'Successfully imported Options!', 'astra-sites' ),
-						'importWidgets'           => __( '6) Importing "Widgets"...', 'astra-sites' ),
+						'importWidgets'           => __( '7) Importing "Widgets"...', 'astra-sites' ),
 						'importWidgetsSuccess'    => __( 'Successfully imported Widgets!', 'astra-sites' ),
 						'serverConfiguration'     => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=import-error&utm_medium=wp-dashboard' ),
 						'success'                 => __( 'Site imported successfully! visit : ', 'astra-sites' ),
 						'gettingData'             => __( 'Getting Site Information..', 'astra-sites' ),
 						'importingCustomizer'     => __( 'Importing Customizer Settings..', 'astra-sites' ),
-						'importingWPForms'        => __( 'Importing WP Forms..', 'astra-sites' ),
+						'importingWPForms'        => __( 'Importing Contact Forms..', 'astra-sites' ),
 						'importXMLPreparing'      => __( 'Setting up import data..', 'astra-sites' ),
-						'importingXML'            => __( 'Importing Pages, Posts & Media..', 'astra-sites' ),
+						'importingXML'            => __( 'Importing Content..', 'astra-sites' ),
 						'importingOptions'        => __( 'Importing Site Options..', 'astra-sites' ),
 						'importingWidgets'        => __( 'Importing Widgets..', 'astra-sites' ),
 						'importComplete'          => __( 'Import Complete..', 'astra-sites' ),
@@ -298,7 +346,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/class-astra-sites-compatibility.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-white-label.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-importer.php';
-
 		}
 
 		/**

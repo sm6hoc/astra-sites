@@ -99,7 +99,7 @@
     vertical-align: text-bottom;
 }
 
-.required-plugins-wrap h4 {
+.astra-sites-advanced-options-wrap h4 {
     margin: 1em 0 0.5em 0;
     padding: 0.5em 0;
     transition: all ease 0.3s;
@@ -473,4 +473,166 @@ body.loading-content .select-page-builder {
 .astra-site-down {
     padding: 1em 2em;
     margin-top: 1em;
+}
+
+#astra-sites-menu-page .nav-tab-wrapper {
+    border: none;
+}
+
+#astra-sites-filters .wp-filter {
+    margin-top: 0;
+}
+
+/**
+ * Welcome Screen
+ */
+.astra-sites-welcome {
+    padding: 10em 0;
+    text-align: center;
+}
+.astra-sites-welcome .inner {
+    margin: 0 auto;
+    display: inline-block;
+    max-width: 700px;
+    background: #fff;
+    padding: 3em;
+}
+
+.astra-sites-welcome h1 {
+    font-size: 2.5em;
+    margin-bottom: 1em;
+}
+
+.astra-sites-welcome p.description {
+    font-size: 1rem;
+    margin-bottom: 2em;
+}
+
+.astra-sites-welcome select {
+    padding: 5px;
+    height: 100%;
+}
+
+.astra-sites-welcome p.submit {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    margin-left: .5em;
+}
+
+.astra-sites-welcome .fields {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+}
+
+.astra-sites-welcome #submit {
+    line-height: 1;
+    padding: .5rem 1rem;
+    height: auto;
+}
+
+.astra-site-page-builder {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.required-plugins-list {
+    margin-left: 2em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    list-style-type: disc;
+}
+
+.required-plugins-list .plugin-card {
+    background: transparent;
+    border: none;
+    margin: 0;
+    line-height: 2;
+    float: none;
+    width: 100%;
+}
+
+.required-plugins-list .spinner {
+    float: none;
+    margin: 0;
+}
+
+#astra-site-import-process-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: -2px;
+    z-index: 999999;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+}
+#astra-site-import-process-wrap progress {
+    padding: 0px;
+    border: 0 none;
+    background: #0085bd;
+    border-radius: 5px;
+    height: 4px;
+    flex: 1;
+}
+
+#astra-site-import-process-wrap progress::-webkit-progress-value {
+  background: #00679b;
+}
+#astra-site-import-process-wrap progress::-webkit-progress-bar {
+    background: transparent;
+}
+
+.theme-browser .theme .site-preview > .theme-screenshot {
+    transition: all linear .7s;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.theme-browser .theme .site-preview > .theme-screenshot:hover {
+    background-position: center bottom;
+    background-size: cover;
+}
+
+.astra-sites-tooltip-icon {
+    cursor: pointer;
+}
+
+.astra-sites-tooltip-icon .dashicons {
+    color: #5d5d5d;
+    font-size: 18px;
+}
+
+#astra-sites-welcome-form-inline {
+    position: absolute;
+    right: 1em;
+    top: 0;
+    border-radius: 0;
+    line-height: 1.7;
+    padding: 0px 5px 2px 5px;
+    outline: 2px solid transparent;
+    outline-offset: 0;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    color: #72777c;
+    font-weight: normal;
+    font-size: 10px;
+    font-size: 13px;
+    line-height: 26px;
+    height: 28px;
+    cursor: pointer;
+}
+
+#astra-sites-welcome-form-inline select,
+#astra-sites-welcome-form-inline select:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: #72777c;
+}
+
+#astra-sites-menu-page .wp-full-overlay-main:before {
+    content: '';
+    display: none;
 }
