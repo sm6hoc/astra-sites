@@ -35,7 +35,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		/**
 		 * Initiator
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 */
 		public static function get_instance() {
 			if ( ! isset( self::$instance ) ) {
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		/**
 		 * Constructor
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 */
 		public function __construct() {
 

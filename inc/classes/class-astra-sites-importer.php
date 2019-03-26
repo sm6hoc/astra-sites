@@ -436,7 +436,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Reset customizer data
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function reset_customizer_data() {
@@ -450,7 +450,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Reset site options
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function reset_site_options() {
@@ -471,7 +471,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Reset widgets data
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function reset_widgets_data() {
@@ -506,7 +506,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Delete imported posts
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function delete_imported_posts() {
@@ -525,7 +525,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Delete imported WP forms
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function delete_imported_wp_forms() {
@@ -544,7 +544,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		/**
 		 * Delete imported terms
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function delete_imported_terms() {
