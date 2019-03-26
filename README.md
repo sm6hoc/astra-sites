@@ -112,8 +112,8 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Screenshots ##
 
 1. Select the page builder of your choice.
-2. Browse through categories and select a site that you like.
-3. Click import site button to start the import process.
+2. Browse through available Astra sites and select the site that you like.
+3. Click the import site button to start the import process.
 
 ## Changelog ##
 
