@@ -268,7 +268,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Start Customizer Import
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 *
 		 * @param  array $data Customizer Data.
 		 * @return void
@@ -283,7 +283,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 * Start XML Import
 		 *
 		 * @param  string $xml XML file URL.
-		 * @since x.x.x
+		 * @since 1.3.0
 		 * @return void
 		 */
 		function start_xml( $xml ) {
@@ -293,7 +293,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Start Options Import
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 *
 		 * @param  array $data Site options.
 		 * @return void
@@ -307,7 +307,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * Start Widgets Import
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 *
 		 * @param  array $old_widgets Widgets Data.
 		 * @return void
@@ -321,7 +321,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		/**
 		 * End Import Process
 		 *
-		 * @since x.x.x
+		 * @since 1.3.0
 		 *
 		 * @return void
 		 */
