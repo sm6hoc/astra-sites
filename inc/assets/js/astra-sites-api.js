@@ -12,7 +12,7 @@
 		/**
 		 * API Request
 		 */
-		_api_request: function( args ) {
+		_api_request: function( args, callback ) {
 
 			// Set API Request Data.
 			var data = {
@@ -36,11 +36,18 @@
 						args 		: args,
 						items 		: items,
 						items_count	: XHR.getResponseHeader('x-wp-total') || 0,
+						page_count	: XHR.getResponseHeader('x-wp-totalpages') || 0,
 					};
+
+					console.log( data );
 
 					if( 'undefined' !== args.trigger && '' !== args.trigger ) {
 						$(document).trigger( args.trigger, [data] );
 					}
+
+					if( callback && typeof callback == "function"){
+						callback( data );
+				    }
 
 				} else {
 					$(document).trigger( 'astra-sites-api-request-error' );

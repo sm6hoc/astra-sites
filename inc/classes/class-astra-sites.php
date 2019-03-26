@@ -208,9 +208,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// API.
 			wp_register_script( 'astra-sites-api', ASTRA_SITES_URI . 'inc/assets/js/astra-sites-api.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 
+			// shuffle.min.js
+			wp_register_script( 'astra-sites-shuffle', ASTRA_SITES_URI . 'inc/assets/js/shuffle.min.js', array( 'jquery' ), ASTRA_SITES_VER, true );
+
 			// Admin Page.
 			wp_enqueue_style( 'astra-sites-admin', ASTRA_SITES_URI . 'inc/assets/css/admin.css', ASTRA_SITES_VER, true );
-			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
+			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'astra-sites-shuffle', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
 
 			$data = apply_filters(
@@ -251,6 +254,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'categories'           => array(),
 					'settings'             => array(),
 					'default_page_builder' => Astra_Sites_Page::get_instance()->get_setting( 'page_builder' ),
+					'page-builders-cache'  => get_transient( 'astra-sites-cache-page-builders' ),
+					'categories-cache'     => get_transient( 'astra-sites-cache-categories' ),
 				)
 			);
 

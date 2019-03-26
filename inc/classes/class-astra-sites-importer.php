@@ -77,6 +77,177 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			add_action( 'wp_ajax_astra-sites-delete-posts', array( $this, 'delete_imported_posts' ) );
 			add_action( 'wp_ajax_astra-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ) );
 			add_action( 'wp_ajax_astra-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
+
+			add_action( 'wp_ajax_astra-sites-set-all-sites', array( $this, 'set_all_sites' ) );
+
+			// Cache.
+			add_action( 'wp_ajax_astra-sites-cache-page-builders', array( $this, 'save_cache_page_builders' ) );
+			add_action( 'wp_ajax_astra-sites-cache-categories', array( $this, 'save_cache_categories' ) );
+			// add_action( 'wp_ajax_astra-sites-cache-sites', array( $this, 'save_cache_sites' ) );
+		}
+
+		// function save_cache_sites() {
+		// 	$data = isset( $_POST['data'] ) ? $_POST['data'] : ''; 
+		// 	$page = isset( $_POST['page'] ) ? $_POST['page'] : 1;
+
+		// 	if( $data ) {
+
+		// 		$stored = get_transient( 'astra-sites-cache-sites-draft' );
+		// 		if( false == $stored ) {
+		// 			$stored = array(
+		// 				'items'       => $data['items'],
+		// 				'items_count' => $data['items_count'],
+		// 				'page'    => $page,
+		// 			);
+		// 		}
+
+		// 		$new = array(
+		// 			'items'       => $data['items'],
+		// 			'items_count' => $data['items_count'],
+		// 			'items_count' => $page,
+		// 		);
+
+		// 		$new = wp_parse_args( $new, $stored );
+
+		// 		set_transient( 'astra-sites-cache-sites-draft', $new, WEEK_IN_SECONDS );
+
+		// 		if( $data['items_count'] !== count( $new['items'] ) ) {
+		// 			wp_send_json_success( array( 'procuess_again' => true, 'data' => $new, 'page' => $page + 1 ) );
+		// 		}
+		// 		// set_transient( 'astra-sites-cache-sites', $data, WEEK_IN_SECONDS );
+		// 	}
+		// 	wp_send_json_success();
+		// }
+
+		function save_cache_categories() {
+			$data = isset( $_POST['data'] ) ? $_POST['data'] : ''; 
+			if( $data ) {
+				set_transient( 'astra-sites-cache-categories', $data, WEEK_IN_SECONDS );
+			}
+			wp_send_json_success();
+		}
+
+		function save_cache_page_builders() {
+			$data = isset( $_POST['data'] ) ? $_POST['data'] : ''; 
+			if( $data ) {
+				set_transient( 'astra-sites-cache-page-builders', $data, WEEK_IN_SECONDS );
+			}
+			wp_send_json_success();
+		}
+
+		function set_all_sites() {
+			$total_requests = $this->get_total_requests();
+
+			$sites = array();
+			if ( $total_requests ) {
+				for ( $page = 1; $page <= $total_requests; $page++ ) {
+					$response = $this->get_sites( array( 'page' => $page ) );
+					if( isset( $response['sites'] ) ) {
+						$sites = wp_parse_args( $response['sites'], $sites );
+					}
+				}
+			}
+
+			wp_send_json_success( $sites );
+		}
+
+		/**
+		 * Get Total Requests
+		 *
+		 * @return integer
+		 */
+		function get_total_requests() {
+			$response = $this->get_sites( array( 'per_page' => '1' ) );
+
+			if ( isset( $response['x-wp-totalpages'] ) ) {
+				return absint( $response['x-wp-totalpages'] );
+			}
+
+			$this->get_total_requests();
+		}
+
+ 		/**
+		 * Get Astra portfolios.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param  array $args For selecting the demos (Search terms, pagination etc).
+		 * @return array        Astra Portfolio list.
+		 */
+		 function get_sites($args = array() ) {
+		
+			// Default values.
+			$defaults = apply_filters( 'astra_sites_api_params', array(
+				'page'         => '1',
+				'per_page'     => '100',
+
+				// Use this for premium demos.
+				'purchase_key' => '',
+				'site_url'     => '',
+			) );
+
+			$request_params = apply_filters( 'astra_portfolio_api_params', wp_parse_args( $args, $defaults ) );
+
+			$url = add_query_arg( $request_params, 'https://websitedemos.net/wp-json/wp/v2/astra-sites' );
+
+			$astra_demos = array(
+				'sites'        => array(),
+				'sites_count'  => 0,
+				'api_response' => '',
+			);
+
+			$api_args = apply_filters(
+				'astra_sites_api_args',
+				array(
+					'timeout' => 15,
+				)
+			);
+
+			$response                    = wp_remote_get( $url, $api_args );
+			$astra_demos['api_response'] = $response;
+
+			if ( ! is_wp_error( $response ) || wp_remote_retrieve_response_code( $response ) === 200 ) {
+
+				$astra_demos['sites_count']     = wp_remote_retrieve_header( $response, 'x-wp-total' );
+				$astra_demos['x-wp-total']      = wp_remote_retrieve_header( $response, 'x-wp-total' );
+				$astra_demos['x-wp-totalpages'] = wp_remote_retrieve_header( $response, 'x-wp-totalpages' );
+
+				$result = json_decode( wp_remote_retrieve_body( $response ), true );
+
+				// If is array then proceed
+				// Else skip it.
+				if ( is_array( $result ) ) {
+
+					foreach ( $result as $key => $demo ) {
+
+						if ( ! isset( $demo['id'] ) ) {
+							continue;
+						}
+
+						$astra_demos['sites'][ $key ]['id']                      = isset( $demo['id'] ) ? esc_attr( $demo['id'] ) : '';
+						$astra_demos['sites'][ $key ]['slug']                    = isset( $demo['slug'] ) ? esc_attr( $demo['slug'] ) : '';
+						$astra_demos['sites'][ $key ]['astra_demo_type']         = isset( $demo['astra-site-type'] ) ? sanitize_key( $demo['astra-site-type'] ) : '';
+						$astra_demos['sites'][ $key ]['title']                   = isset( $demo['title']['rendered'] ) ? esc_attr( $demo['title']['rendered'] ) : '';
+						$astra_demos['sites'][ $key ]['featured_image_url']      = isset( $demo['featured-image-url'] ) ? esc_url( $demo['featured-image-url'] ) : '';
+						$astra_demos['sites'][ $key ]['demo_api']                = isset( $demo['_links']['self'][0]['href'] ) ? esc_url( $demo['_links']['self'][0]['href'] ) : self::get_sites_api_url( new stdClass() ) . $demo['id'];
+						$astra_demos['sites'][ $key ]['astra-site-category']     = isset( $demo['astra-site-category'] ) ? (array) $demo['astra-site-category'] : '';
+						$astra_demos['sites'][ $key ]['astra-site-page-builder'] = isset( $demo['astra-site-page-builder'] ) ? (array) $demo['astra-site-page-builder'] : '';
+
+						$site_url = '';
+						if ( isset( $demo['astra-site-url'] ) ) {
+							$site_url = set_url_scheme( '' . esc_url( $demo['astra-site-url'] ), 'https' );
+						}
+						$astra_demos['sites'][ $key ]['astra_demo_url'] = $site_url;
+					}
+
+					// Free up memory by un setting variables that are not required.
+					unset( $result );
+					unset( $response );
+				}
+			}
+
+			return $astra_demos;
+
 		}
 
 		/**
