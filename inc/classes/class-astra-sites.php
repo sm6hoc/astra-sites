@@ -240,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				array(
 					'purchase_key' => '',
 					'site_url'     => '',
-					'par-page'     => 15,
+					'par-page'     => 100,
 				)
 			);
 

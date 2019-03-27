@@ -68,6 +68,9 @@
      * @param {Response} response
      */
     function cacheResponse(cacheKey, storage, hourstl, response) {
+
+        console.log( 'original response' );
+        console.log( response );
         var cres = response.clone(),
             dataType = (response.headers.get('Content-Type') || 'text/plain').toLowerCase();
 
