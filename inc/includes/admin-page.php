@@ -331,6 +331,7 @@ defined( 'ABSPATH' ) or exit;
 <script type="text/template" id="tmpl-astra-sites-list">
 
 	<# if ( data.items.length ) { #>
+	<# console.log(data.items); #>
 		<# for ( key in data.items ) { #>
 
 			<div class="theme astra-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="astra-theme-action astra-theme-name"
