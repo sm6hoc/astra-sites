@@ -206,7 +206,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			// API.
-			wp_register_script( 'astra-fetch-cache', ASTRA_SITES_URI . 'inc/assets/js/fetchCache.js', array( 'jquery' ), ASTRA_SITES_VER, true );
+			wp_register_script( 'astra-fetch-cache', ASTRA_SITES_URI . 'inc/assets/js/fetch.umd.js', array( 'jquery' ), ASTRA_SITES_VER, true );
 			wp_register_script( 'astra-sites-api', ASTRA_SITES_URI . 'inc/assets/js/astra-sites-api.js', array( 'jquery', 'astra-fetch-cache' ), ASTRA_SITES_VER, true );
 
 			// Admin Page.

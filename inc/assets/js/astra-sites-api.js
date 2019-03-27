@@ -15,12 +15,14 @@
 		_api_request: function( args ) {
 
 			console.log( args.id );
+			// fetch.umd.js
 
 			fetch( AstraSitesAPI._api_url + args.slug, {
 	            method: 'GET',
 	            // credentials: 'include',
 	            // localCache: true,
 	            // cacheKey: 'astraJsonCache' + args.id,
+	            cache: "force-cache",
 	        }).then((response) => {
 	        	console.log( response.headers );
 	            return response.json();
