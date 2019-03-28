@@ -599,6 +599,10 @@ body.loading-content .select-page-builder {
     cursor: pointer;
 }
 
+.astra-sites-preview .disabled {
+    pointer-events: none;
+}
+
 .astra-sites-tooltip-icon .dashicons {
     color: #5d5d5d;
     font-size: 18px;

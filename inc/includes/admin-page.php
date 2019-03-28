@@ -160,15 +160,19 @@ defined( 'ABSPATH' ) or exit;
 
 					<div class="astra-sites-advanced-options-wrap">
 
-						<h4><?php _e( 'Plugins Used in This Starter Site', 'astra-sites' ); ?></h4>
-						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
-						<p><?php _e( 'These plugins will be installed when you import this site.', 'astra-sites' ); ?></p>
-
-						<hr style="border-top: 1px solid #eee;border-bottom: none;margin-top: 1em;">
-
 						<div class="astra-sites-advanced-options">
 
 							<ul class="astra-site-contents">
+								<li class="astra-sites-import-plugins">
+									<input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
+									<strong><?php _e( 'Install Required Plugins', 'astra-sites' ); ?></strong>
+									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-plugins-settings" style="display: none;">
+										<p><?php _e( 'Plugins below are used to build this website:', 'astra-sites' ); ?></p>
+										<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+										<p><?php _e( 'These are required for this website to work.', 'astra-sites' ); ?></p>
+									</div>
+								</li>
 								<li class="astra-sites-import-customizer">
 									<label>
 										<input type="checkbox" name="customizer" checked="checked" class="checkbox">
