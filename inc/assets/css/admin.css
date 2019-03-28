@@ -640,3 +640,16 @@ body.loading-content .select-page-builder {
     content: '';
     display: none;
 }
+
+.theme-screenshot-wrap {
+    overflow: hidden;
+    max-height: 300px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+}
+
+.astra-sites-preview .install-theme-info .theme-screenshot {
+    width: 100%;
+    border: none;
+    margin: 0;
+} 
