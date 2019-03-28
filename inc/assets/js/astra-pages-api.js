@@ -1,9 +1,13 @@
 (function($){
 
-	AstraSitesAPI = {
+	AstraPagesAPI = {
 
 		_api_url      : astraSitesApi.ApiURL,
-		_stored_data  : astraSitesApi._stored_data,
+		_stored_data  : {
+			'site-pages-category' : [],
+			'site-pages-page-builder': [],
+			'site-pages' : [],
+		},
 
 		/**
 		 * API Request
@@ -12,7 +16,7 @@
 
 			// Set API Request Data.
 			var data = {
-				url: AstraSitesAPI._api_url + args.slug,
+				url: AstraPagesAPI._api_url + args.slug,
 			};
 
 			if( astraRenderGrid.headers ) {
@@ -25,7 +29,7 @@
 				if( 'success' === status && XHR.getResponseHeader('x-wp-total') ) {
 
 					if( args.id ) {
-						AstraSitesAPI._stored_data[ args.id ] = $.merge( AstraSitesAPI._stored_data[ args.id ], items );
+						AstraPagesAPI._stored_data[ args.id ] = $.merge( AstraPagesAPI._stored_data[ args.id ], items );
 					}
 
 					var data = {

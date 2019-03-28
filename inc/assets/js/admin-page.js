@@ -162,17 +162,17 @@ var AstraSitesAjaxQueue = (function() {
 
 		/**
 		 * Debugging.
-		 * 
+		 *
 		 * @param  {mixed} data Mixed data.
 		 */
 		_log: function( data ) {
-			
+
 			if( astraSitesAdmin.debug ) {
 
 				var date = new Date();
 				var time = date.toLocaleTimeString();
 
-				if (typeof data == 'object') { 
+				if (typeof data == 'object') {
 					console.log('%c ' + JSON.stringify( data ) + ' ' + time, 'background: #ededed; color: #444');
 				} else {
 					console.log('%c ' + data + ' ' + time, 'background: #ededed; color: #444');
@@ -203,7 +203,7 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('click'                     , '.previous-theme', AstraSitesAdmin._previousTheme);
 			$( document ).on('click'                     , '.collapse-sidebar', AstraSitesAdmin._collapse);
 			$( document ).on('click'                     , '.astra-demo-import', AstraSitesAdmin._importDemo);
-			
+
 			$( document ).on('astra-sites-install-and-activate-required-plugins-done'       , AstraSitesAdmin._process_import );
 
 			$( document ).on('click'                     , '.install-now', AstraSitesAdmin._installNow);
@@ -301,7 +301,7 @@ var AstraSitesAjaxQueue = (function() {
 
 
 				$(document).trigger( 'astra-sites-reset-site-options-done' );
-			});			
+			});
 		},
 
 		_reset_widgets_data: function() {
@@ -349,7 +349,7 @@ var AstraSitesAjaxQueue = (function() {
 							if( AstraSitesAdmin.reset_processed_posts < AstraSitesAdmin.site_imported_data['reset_posts'].length ) {
 								AstraSitesAdmin.reset_processed_posts+=1;
 							}
-				
+
 							$('.button-hero.astra-demo-import').text( 'Deleting Item ' + AstraSitesAdmin.reset_processed_posts + ' of ' + AstraSitesAdmin.site_imported_data['reset_posts'].length );
 							AstraSitesAdmin.reset_remaining_posts-=1;
 							if( 0 == AstraSitesAdmin.reset_remaining_posts ) {
@@ -406,7 +406,7 @@ var AstraSitesAjaxQueue = (function() {
 			}
 		},
 
-		
+
 		_reset_terms: function() {
 
 			AstraSitesAdmin._log( AstraSitesAdmin.site_imported_data['reset_terms'] );
@@ -600,10 +600,10 @@ var AstraSitesAjaxQueue = (function() {
 						AstraSitesAdmin._log( widgets_data.data );
 
 					} else {
-						
+
 						// 4. Pass - Import Widgets.
 						AstraSitesAdmin._log( astraSitesAdmin.log.importWidgetsSuccess );
-						$(document).trigger( 'astra-sites-import-widgets-done' );					
+						$(document).trigger( 'astra-sites-import-widgets-done' );
 					}
 				});
 			} else {
@@ -651,7 +651,7 @@ var AstraSitesAjaxQueue = (function() {
 					}
 				});
 			} else {
-				$(document).trigger( 'astra-sites-import-options-done' );				
+				$(document).trigger( 'astra-sites-import-options-done' );
 			}
 		},
 
@@ -700,7 +700,7 @@ var AstraSitesAjaxQueue = (function() {
 
 						AstraSitesAdmin._log( astraSitesAdmin.log.importXML );
 						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML );
-						
+
 						var evtSource = new EventSource( AstraSSEImport.data.url );
 						evtSource.onmessage = function ( message ) {
 							var data = JSON.parse( message.data );
@@ -718,7 +718,7 @@ var AstraSitesAjaxQueue = (function() {
 
 									document.getElementById( 'astra-site-import-process' ).value = 100;
 
-									
+
 									$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML + ' (100%)' );
 
 									$('#astra-site-import-process-wrap').hide();
@@ -738,7 +738,7 @@ var AstraSitesAjaxQueue = (function() {
 				$(document).trigger( 'astra-sites-import-xml-done' );
 			}
 
-			
+
 		},
 
 		_is_process_xml: function() {
@@ -799,7 +799,7 @@ var AstraSitesAjaxQueue = (function() {
 					}
 				});
 			} else {
-				$(document).trigger( 'astra-sites-import-wpforms-done' );				
+				$(document).trigger( 'astra-sites-import-wpforms-done' );
 			}
 		},
 
@@ -847,7 +847,7 @@ var AstraSitesAjaxQueue = (function() {
 
 		/**
 		 * Import Success Button.
-		 * 
+		 *
 		 * @param  {string} data Error message.
 		 */
 		_importSuccessMessage: function() {
@@ -893,7 +893,7 @@ var AstraSitesAjaxQueue = (function() {
 
 		/**
 		 * Import Error Button.
-		 * 
+		 *
 		 * @param  {string} data Error message.
 		 */
 		_importFailMessage: function( message, from ) {
@@ -915,10 +915,10 @@ var AstraSitesAjaxQueue = (function() {
 
 			// Add the import log file link.
 			} else {
-				
+
 				$('.wp-full-overlay-header .go-pro').text( astraSitesAdmin.strings.importFailBtn );
 				$('.wp-full-overlay-footer .go-pro').text( astraSitesAdmin.strings.importFailBtnLarge )
-				
+
 				// Add the import log file link.
 				if( 'undefined' !== AstraSitesAdmin.log_file_url ) {
 					$('.go-pro').attr('href', AstraSitesAdmin.log_file_url );
@@ -936,7 +936,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			// Fail Notice.
 			$('.install-theme-info').append( output );
-			
+
 
 			// !important to add trigger.
 			// Which reinitialize the dismiss error message events.
@@ -1219,7 +1219,7 @@ var AstraSitesAjaxQueue = (function() {
 		_installAllPlugins: function( not_installed ) {
 
 			AstraSitesAdmin._log( astraSitesAdmin.log.bulkInstall );
-			
+
 			$.each( not_installed, function(index, single_plugin) {
 
 				var $card = $( '.plugin-card-' + single_plugin.slug );
@@ -1276,7 +1276,7 @@ var AstraSitesAjaxQueue = (function() {
 			$('.astra-demo-import').attr('data-import', 'disabled')
 				.addClass('updating-message installing')
 				.text( astraSitesAdmin.strings.importingDemo );
-		
+
 			// Site Import by API URL.
 			if( apiURL ) {
 				AstraSitesAdmin._importSite( apiURL );
@@ -1286,7 +1286,7 @@ var AstraSitesAjaxQueue = (function() {
 
 		/**
 		 * Start Import Process by API URL.
-		 * 
+		 *
 		 * @param  {string} apiURL Site API URL.
 		 */
 		_importSite: function( apiURL ) {
@@ -1335,7 +1335,7 @@ var AstraSitesAjaxQueue = (function() {
 
 					$(document).trigger( 'astra-sites-import-set-site-data-done' );
 				}
-			
+
 			});
 
 		},
@@ -1725,7 +1725,7 @@ var AstraSitesAjaxQueue = (function() {
 									$('.astra-demo-import')
 										.removeClass('installing updating-message')
 										.addClass('disabled')
-										.text( astraSitesAdmin.strings.importDemo );	
+										.text( astraSitesAdmin.strings.importDemo );
 								} else {
 									$(document).trigger( 'astra-sites-install-and-activate-required-plugins-done' );
 								}

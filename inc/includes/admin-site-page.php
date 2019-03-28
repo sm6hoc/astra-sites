@@ -27,10 +27,10 @@ defined( 'ABSPATH' ) or exit;
 						<span class="count"></span>
 					</div>
 					<div class="filters-wrap" style="display: none;">
-						<div id="astra-site-page-builder"></div>
-					</div>				
+						<div class="filters-slug" data-id="astra-site-page-builder"></div>
+					</div>
 					<div class="filters-wrap">
-						<div id="astra-site-category"></div>
+						<div class="filters-slug" data-id="astra-site-category"></div>
 					</div>
 
 				</div>
@@ -301,7 +301,7 @@ defined( 'ABSPATH' ) or exit;
 
 	<# if ( data ) { #>
 
-		<ul class="{{ data.args.wrapper_class }} {{ data.args.class }}">
+		<ul class="{{ data.args.wrapper_class }}" data-category="{{ data.args.class }}">
 
 			<# if ( data.args.show_all ) { #>
 				<li>

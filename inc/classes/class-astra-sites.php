@@ -179,7 +179,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://localhost/projects/ast-starter/wp-json/wp/v2/' );
 
 		}
 
@@ -195,9 +195,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public function admin_enqueue( $hook = '' ) {
 
-			if ( 'appearance_page_astra-sites' !== $hook ) {
+			if ( 'appearance_page_astra-sites' !== $hook && 'appearance_page_site-pages' !== $hook ) {
 				return;
 			}
+
+			$_stored_data = array();
 
 			global $is_IE, $is_edge;
 
@@ -211,13 +213,41 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			// Admin Page.
 			wp_enqueue_style( 'astra-sites-admin', ASTRA_SITES_URI . 'inc/assets/css/admin.css', ASTRA_SITES_VER, true );
 			wp_enqueue_script( 'astra-sites-admin-page', ASTRA_SITES_URI . 'inc/assets/js/admin-page.js', array( 'jquery', 'wp-util', 'updates' ), ASTRA_SITES_VER, true );
-			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
+
+			if ( 'appearance_page_astra-sites' == $hook ) {
+
+				wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
+
+				$_stored_data = array(
+					'astra-site-category'     => array(),
+					'astra-site-page-builder' => array(),
+					'astra-sites'             => array(),
+				);
+
+				$category_slug = 'astra-site-category';
+
+				$page_builder = 'astra-site-page-builder';
+
+			} elseif ( 'appearance_page_site-pages' == $hook ) {
+
+				wp_enqueue_script( 'astra-pages-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid-pages.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
+
+				$_stored_data = array(
+					'site-pages-category'     => array(),
+					'site-pages-page-builder' => array(),
+					'site-pages'              => array(),
+				);
+
+				$category_slug = 'site-pages-category';
+
+				$page_builder = 'site-pages-page-builder';
+			}
 
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
-					'ApiURL'  => self::$api_url,
-					'filters' => array(
+					'ApiURL'        => self::$api_url,
+					'filters'       => array(
 						'page_builder' => array(
 							'title'   => __( 'Page Builder', 'astra-sites' ),
 							'slug'    => 'astra-site-page-builder',
@@ -229,6 +259,9 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 							'trigger' => 'astra-api-category-loaded',
 						),
 					),
+					'_stored_data'  => $_stored_data,
+					'category_slug' => $category_slug,
+					'page_builder'  => $page_builder,
 				)
 			);
 			wp_localize_script( 'astra-sites-api', 'astraSitesApi', $data );
@@ -239,7 +272,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				array(
 					'purchase_key' => '',
 					'site_url'     => '',
-					'par-page'     => 15,
+					'per-page'     => 15,
 				)
 			);
 
@@ -255,6 +288,19 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			);
 
 			wp_localize_script( 'astra-sites-render-grid', 'astraRenderGrid', $data );
+
+			$data = apply_filters(
+				'astra_pages_render_localize_vars',
+				array(
+					'sites'                => $request_params,
+					'page-builders'        => array(),
+					'categories'           => array(),
+					'settings'             => array(),
+					'default_page_builder' => Astra_Sites_Page::get_instance()->get_setting( 'page_builder' ),
+				)
+			);
+
+			wp_localize_script( 'astra-pages-render-grid', 'astraRenderGrid', $data );
 
 			$data = apply_filters(
 				'astra_sites_localize_vars',

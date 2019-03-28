@@ -8,12 +8,12 @@
 		 * _api_params = {
 		 * 		'search'                  : '',
 		 * 		'per_page'                : '',
-		 * 		'astra-site-category'     : '',
+		 * 		'site-pages-category'     : '',
 		 * 		'astra-site-page-builder' : '',
 		 * 		'page'                    : '',
 		 *   };
 		 *
-		 * E.g. per_page=<page-id>&astra-site-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
+		 * E.g. per_page=<page-id>&site-pages-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
 		 */
 		_api_params		: {},
 		_breakpoint		: 768,
@@ -88,7 +88,7 @@
 			$('.astra-sites-suggestions').remove();
 
 			// Empty the search input only click on category filter not on page builder filter.
-			if( $( this ).parents( '.filter-links[data-category="' + astraSitesApi.category_slug + '"]' ).length > 0 ) {
+			if( $(this).parents('.filter-links[data-category="' + astraSitesApi.category_slug + '"]').length > 0 ) {
 				$('#wp-filter-search-input').val('');
 			}
 			$('#astra-sites').hide().css('height', '');
@@ -246,7 +246,7 @@
 		/**
 		 * Show Sites
 		 *
-		 * 	Params E.g. per_page=<page-id>&astra-site-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
+		 * 	Params E.g. per_page=<page-id>&site-pages-category=<category-ids>&astra-site-page-builder=<page-builder-ids>&page=<page>
 		 *
 		 * @param  {Boolean} resetPagedCount Reset Paged Count.
 		 * @param  {String}  trigger         Filtered Trigger.
@@ -279,8 +279,8 @@
 
 			// API Request.
 			var api_post = {
-				id: 'astra-sites',
-				slug: 'astra-sites?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
+				id: 'site-pages',
+				slug: 'site-pages?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
 				trigger: trigger,
 			};
 
@@ -383,7 +383,7 @@
 			/**
 			 * Page Builder
 			 */
-			var category_slug = 'astra-site-page-builder';
+			var category_slug = 'site-pages-page-builder';
 			var category = {
 				slug          : category_slug + AstraRender._getPageBuilderParams(),
 				id            : category_slug,
@@ -448,7 +448,7 @@
 			/**
 			 * Categories
 			 */
-			var category_slug = 'astra-site-category';
+			var category_slug = 'site-pages-category';
 			var category = {
 				slug          : category_slug + AstraRender._getCategoryParams( category_slug ),
 				id            : category_slug,

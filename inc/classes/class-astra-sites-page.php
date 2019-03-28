@@ -137,6 +137,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			add_action( 'admin_menu', array( $this, 'add_admin_menu' ), 100 );
 			add_action( 'admin_notices', array( $this, 'notices' ) );
 			add_action( 'astra_sites_menu_general_action', array( $this, 'general_page' ) );
+			add_action( 'astra_pages_menu_general_action', array( $this, 'general_page_for_astra_pages' ) );
 		}
 
 		/**
@@ -319,6 +320,30 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
 
 			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
+
+			$page_title = apply_filters( 'astra_pages_menu_page_title', __( 'Astra Pages', 'astra-sites' ) );
+
+			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'site-pages', array( $this, 'page_menu_callback' ) );
+		}
+
+		/**
+		 * Site Pages Menu callback
+		 *
+		 * @since x.x.x
+		 */
+		public function page_menu_callback() {
+
+			$current_slug = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : 'general';
+
+			$active_tab   = str_replace( '_', '-', $current_slug );
+			$current_slug = str_replace( '-', '_', $current_slug );
+
+			?>
+			<div class="astra-sites-menu-page-wrapper">
+				<?php $this->init_nav_menu( $active_tab ); ?>
+				<?php do_action( 'astra_pages_menu_' . esc_attr( $current_slug ) . '_action' ); ?>
+			</div>
+			<?php
 		}
 
 		/**
@@ -351,7 +376,21 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 				return;
 			}
-			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
+			require_once ASTRA_SITES_DIR . 'inc/includes/admin-site-page.php';
+		}
+
+		/**
+		 * Include general page
+		 *
+		 * @since x.x.x
+		 */
+		public function general_page_for_astra_pages() {
+			$default_page_builder = $this->get_setting( 'page_builder' );
+
+			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
+				return;
+			}
+			require_once ASTRA_SITES_DIR . 'inc/includes/admin-pages-page.php';
 		}
 	}
 
