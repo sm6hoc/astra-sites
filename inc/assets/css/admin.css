@@ -585,7 +585,7 @@ body.loading-content .select-page-builder {
 }
 
 .theme-browser .theme .site-preview > .theme-screenshot {
-    transition: all linear .7s;
+    transition: all linear 5s;
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
