@@ -174,7 +174,10 @@ defined( 'ABSPATH' ) or exit;
 										<input type="checkbox" name="customizer" checked="checked" class="checkbox">
 										<strong>Import Customizer Settings</strong>
 										<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
-										<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-customizer-settings" style="display: none;"><p><?php _e( 'Customizer is what gives a design to the website; and selecting this option replaces your current design with a new one. <br/>Backup of current customizer settings will be stored in "wp-content/astra-sites" directory, just in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
+										<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-customizer-settings" style="display: none;">
+											<p><?php _e( 'Customizer is what gives a design to the website; and selecting this option replaces your current design with a new one.', 'astra-sites' ); ?></p>
+											<p><?php _e( 'Backup of current customizer settings will be stored in "wp-content/astra-sites" directory, just in case if you want to restore it later.', 'astra-sites' ); ?></p>
+										</div>
 									</label>
 								</li>
 								<li class="astra-sites-import-xml">
