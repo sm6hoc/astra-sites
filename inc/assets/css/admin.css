@@ -585,7 +585,7 @@ body.loading-content .select-page-builder {
 }
 
 .theme-browser .theme .site-preview > .theme-screenshot {
-    transition: all linear .7s;
+    transition: all ease-in-out 3s;
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -636,3 +636,16 @@ body.loading-content .select-page-builder {
     content: '';
     display: none;
 }
+
+.theme-screenshot-wrap {
+    overflow: hidden;
+    max-height: 300px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+}
+
+.astra-sites-preview .install-theme-info .theme-screenshot {
+    width: 100%;
+    border: none;
+    margin: 0;
+} 

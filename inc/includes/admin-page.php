@@ -150,7 +150,9 @@ defined( 'ABSPATH' ) or exit;
 					<h3 class="theme-name">{{{data.demo_name}}}</h3>
 
 					<# if ( data.screenshot.length ) { #>
-						<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+						<div class="theme-screenshot-wrap">
+							<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+						</div>
 					<# } #>
 
 					<div class="theme-details">
