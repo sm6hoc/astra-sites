@@ -1458,7 +1458,7 @@ var AstraSitesAjaxQueue = (function() {
 		},
 
 		_get_site_details: function( site_id ) {
-			var all_sites = AstraSitesAPI._stored_data['astra-sites'] || [];
+			var all_sites = AstraSitesAPI._stored_data[astraSitesApi.cpt_slug] || [];
 
 			if( ! all_sites ) {
 				return false;
