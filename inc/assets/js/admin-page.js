@@ -1504,6 +1504,8 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_renderDemoPreview: function(anchor) {
 
+			console.log(AstraSitesAdmin.current_site);
+
 			var demoId             	   = anchor.data('demo-id') || '',
 				apiURL                 = anchor.data('demo-api') || '',
 				demoType               = anchor.data('demo-type') || '',

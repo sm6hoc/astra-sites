@@ -199,7 +199,7 @@
 
 		_apiAddParam_astra_site_category: function() {
 			// Add 'astra-site-category'
-			var selected_category_id = jQuery( '.filter-links.' + astraSitesApi.category_slug ).find('.current').data('group') || '';
+			var selected_category_id = jQuery( '.filter-links[data-category="' + astraSitesApi.category_slug + '"]' ).find('.current').data('group') || '';
 			if( '' !== selected_category_id && 'all' !== selected_category_id ) {
 				AstraRender._api_params[astraSitesApi.category_slug] =  selected_category_id;
 			} else if( astraRenderGrid.sites && astraRenderGrid['categories'].include ) {
@@ -213,7 +213,7 @@
 
 		_apiAddParam_astra_site_page_builder: function() {
 			// Add 'astra-site-page-builder'
-			var selected_page_builder_id = jQuery( '.filter-links.' + astraSitesApi.page_builder ).find('.current').data('group') || '';
+			var selected_page_builder_id = jQuery( '.filter-links[data-category="' + astraSitesApi.page_builder + '"]' ).find('.current').data('group') || '';
 			if( '' !== selected_page_builder_id && 'all' !== selected_page_builder_id ) {
 				AstraRender._api_params[astraSitesApi.page_builder] =  selected_page_builder_id;
 			} else if( astraRenderGrid.sites && astraRenderGrid['page-builders'].include ) {
@@ -279,8 +279,8 @@
 
 			// API Request.
 			var api_post = {
-				id: 'astra-sites',
-				slug: 'astra-sites?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
+				id: astraSitesApi.cpt_slug,
+				slug: astraSitesApi.cpt_slug + '?' + decodeURIComponent( $.param( AstraRender._api_params ) ),
 				trigger: trigger,
 			};
 
@@ -383,11 +383,10 @@
 			/**
 			 * Page Builder
 			 */
-			var category_slug = 'astra-site-page-builder';
 			var category = {
-				slug          : category_slug + AstraRender._getPageBuilderParams(),
-				id            : category_slug,
-				class         : category_slug,
+				slug          : astraSitesApi.page_builder + AstraRender._getPageBuilderParams(),
+				id            : astraSitesApi.page_builder,
+				class         : astraSitesApi.page_builder,
 				trigger       : 'astra-api-page-builder-loaded',
 				wrapper_class : 'filter-links',
 				show_all      : false,
@@ -448,14 +447,13 @@
 			/**
 			 * Categories
 			 */
-			var category_slug = 'astra-site-category';
 			var category = {
-				slug          : category_slug + AstraRender._getCategoryParams( category_slug ),
-				id            : category_slug,
-				class         : category_slug,
+				slug          : astraSitesApi.category_slug + AstraRender._getCategoryParams( astraSitesApi.category_slug ),
+				id            : astraSitesApi.category_slug,
+				class         : astraSitesApi.category_slug,
 				trigger       : 'astra-api-category-loaded',
 				wrapper_class : 'filter-links',
-				show_all      : AstraRender._getCategoryAllSelectStatus( category_slug ),
+				show_all      : AstraRender._getCategoryAllSelectStatus( astraSitesApi.category_slug ),
 			};
 
 			AstraSitesAPI._api_request( category );

@@ -357,7 +357,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 			$active_tab   = str_replace( '_', '-', $current_slug );
 			$current_slug = str_replace( '-', '_', $current_slug );
-
 			?>
 			<div class="astra-sites-menu-page-wrapper">
 				<?php $this->init_nav_menu( $active_tab ); ?>
@@ -376,7 +375,14 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 				return;
 			}
-			require_once ASTRA_SITES_DIR . 'inc/includes/admin-site-page.php';
+
+			$global_cpt_meta = array(
+				'category_slug' => 'astra-site-category',
+				'cpt_slug'      => 'astra-sites',
+				'page_builder'  => 'astra-site-page-builder',
+			);
+
+			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
 		}
 
 		/**
@@ -390,7 +396,14 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 				return;
 			}
-			require_once ASTRA_SITES_DIR . 'inc/includes/admin-pages-page.php';
+
+			$global_cpt_meta = array(
+				'category_slug' => 'site-pages-category',
+				'cpt_slug'      => 'site-pages',
+				'page_builder'  => 'site-pages-page-builder',
+			);
+
+			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
 		}
 	}
 

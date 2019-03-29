@@ -27,10 +27,10 @@ defined( 'ABSPATH' ) or exit;
 						<span class="count"></span>
 					</div>
 					<div class="filters-wrap" style="display: none;">
-						<div class="filters-slug" data-id="astra-site-page-builder"></div>
+						<div class="filters-slug" data-id="<?php echo $global_cpt_meta['page_builder']; ?>"></div>
 					</div>
 					<div class="filters-wrap">
-						<div class="filters-slug" data-id="astra-site-category"></div>
+						<div class="filters-slug" data-id="<?php echo $global_cpt_meta['category_slug']; ?>"></div>
 					</div>
 
 				</div>
