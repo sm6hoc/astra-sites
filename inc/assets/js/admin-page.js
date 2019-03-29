@@ -1505,18 +1505,39 @@ var AstraSitesAjaxQueue = (function() {
 		_renderDemoPreview: function(anchor) {
 
 			console.log(AstraSitesAdmin.current_site);
+			console.log(AstraSitesAdmin.current_site['site-pages-required-plugins']);
 
-			var demoId             	   = anchor.data('demo-id') || '',
-				apiURL                 = anchor.data('demo-api') || '',
-				demoType               = anchor.data('demo-type') || '',
-				demoURL                = anchor.data('demo-url') || '',
-				screenshot             = anchor.data('screenshot') || '',
-				demo_name              = anchor.data('demo-name') || '',
-				demo_slug              = anchor.data('demo-slug') || '',
-				content                = anchor.data('content') || '',
-				requiredPlugins        = anchor.data('required-plugins') || '',
-				astraSiteOptions       = anchor.find('.astra-site-options').val() || '';
-				astraEnabledExtensions = anchor.find('.astra-enabled-extensions').val() || '';
+			if ( 'site-pages' == AstraSitesAdmin.current_site.type ) {
+
+				var demoId             	   = AstraSitesAdmin.current_site['id'] || '',
+					apiURL                 = AstraSitesAdmin.current_site['_links']['self'][0]['href'] || '',
+					demoType               = AstraSitesAdmin.current_site['astra-site-type'] || '',
+					demoURL                = AstraSitesAdmin.current_site['astra-page-url'] || '',
+					screenshot             = AstraSitesAdmin.current_site['featured-image-url'] || '',
+					demo_name              = AstraSitesAdmin.current_site.title.rendered || '',
+					demo_slug              = AstraSitesAdmin.current_site.slug || '',
+					content                = AstraSitesAdmin.current_site.content.rendered || '',
+					requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'],
+					astraSiteOptions       = '';
+					astraEnabledExtensions = '';
+
+			} else {
+
+				var demoId             	   = anchor.data('demo-id') || '',
+					apiURL                 = anchor.data('demo-api') || '',
+					demoType               = anchor.data('demo-type') || '',
+					demoURL                = anchor.data('demo-url') || '',
+					screenshot             = anchor.data('screenshot') || '',
+					demo_name              = anchor.data('demo-name') || '',
+					demo_slug              = anchor.data('demo-slug') || '',
+					content                = anchor.data('content') || '',
+					requiredPlugins        = JSON.stringify( anchor.data('required-plugins') ) || '',
+					astraSiteOptions       = anchor.find('.astra-site-options').val() || '';
+					astraEnabledExtensions = anchor.find('.astra-enabled-extensions').val() || '';
+
+			}
+
+			console.log(requiredPlugins);
 
 			AstraSitesAdmin._log( astraSitesAdmin.log.preview + ' "' + demo_name + '" URL : ' + demoURL );
 
@@ -1532,10 +1553,12 @@ var AstraSitesAjaxQueue = (function() {
 				demo_name                : demo_name,
 				slug                     : demo_slug,
 				content                  : content,
-				required_plugins         : JSON.stringify(requiredPlugins),
+				required_plugins         : requiredPlugins,
 				astra_site_options       : astraSiteOptions,
 				astra_enabled_extensions : astraEnabledExtensions,
 			}];
+
+			console.log(templateData);
 
 			// return;
 
