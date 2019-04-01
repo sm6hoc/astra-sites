@@ -34,6 +34,15 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		public static $process_all;
 
 		/**
+		 * Process Single Page
+		 *
+		 * @since x.x.x
+		 * @var object Class object.
+		 * @access public
+		 */
+		public static $process_single;
+
+		/**
 		 * Initiator
 		 *
 		 * @since 1.0.14
@@ -65,6 +74,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-async-request.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-background-process.php';
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-background-process-astra.php';
+			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/helpers/class-wp-background-process-astra-single.php';
 
 			// Prepare Widgets.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-widgets.php';
@@ -78,11 +88,87 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			// Prepare Misc.
 			require_once ASTRA_SITES_DIR . 'inc/importers/batch-processing/class-astra-sites-batch-processing-misc.php';
 
-			self::$process_all = new WP_Background_Process_Astra();
+			self::$process_all    = new WP_Background_Process_Astra();
+			self::$process_single = new WP_Background_Process_Astra_Single();
 
 			// Start image importing after site import complete.
 			add_filter( 'astra_sites_image_importer_skip_image', array( $this, 'skip_image' ), 10, 2 );
 			add_action( 'astra_sites_import_complete', array( $this, 'start_process' ) );
+			add_action( 'astra_sites_process_single', array( $this, 'start_process_single' ) );
+		}
+
+		/**
+		 * Start Single Page Import
+		 *
+		 * @param  int $page_id Page ID .
+		 * @since x.x.x
+		 * @return void
+		 */
+		public function start_process_single( $page_id ) {
+
+			error_log( '=================== ' . Astra_Sites_White_Label::get_instance()->page_title( ASTRA_SITES_NAME ) . ' - Single Page - Importing Images for Blog name \'' . get_the_title( $page_id ) . '\' (' . $page_id . ') ===================' );
+
+			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+
+			if ( 'gutenberg' == $default_page_builder ) {
+
+				// Add "gutenberg" in import [queue].
+				self::$process_single->push_to_queue(
+					array(
+						'page_id'  => $page_id,
+						'instance' => Astra_Sites_Batch_Processing_Gutenberg::get_instance(),
+					)
+				);
+			}
+
+			// Add "brizy" in import [queue].
+			if ( 'brizy' == $default_page_builder && is_plugin_active( 'brizy/brizy.php' ) ) {
+
+				// Add "gutenberg" in import [queue].
+				self::$process_single->push_to_queue(
+					array(
+						'page_id'  => $page_id,
+						'instance' => Astra_Sites_Batch_Processing_Brizy::get_instance(),
+					)
+				);
+			}
+
+			// Add "bb-plugin" in import [queue].
+			if (
+				'beaver-builder' == $default_page_builder &&
+				( is_plugin_active( 'beaver-builder-lite-version/fl-builder.php' ) || is_plugin_active( 'bb-plugin/fl-builder.php' ) )
+			) {
+
+				// Add "gutenberg" in import [queue].
+				self::$process_single->push_to_queue(
+					array(
+						'page_id'  => $page_id,
+						'instance' => Astra_Sites_Batch_Processing_Beaver_Builder::get_instance(),
+					)
+				);
+			}
+
+			// Add "elementor" in import [queue].
+			if ( 'elementor' == $default_page_builder ) {
+
+				// @todo Remove required `allow_url_fopen` support.
+				if ( ini_get( 'allow_url_fopen' ) ) {
+					if ( is_plugin_active( 'elementor/elementor.php' ) ) {
+						$import = new \Elementor\TemplateLibrary\Astra_Sites_Batch_Processing_Elementor();
+						self::$process_single->push_to_queue(
+							array(
+								'page_id'  => $page_id,
+								'instance' => $import,
+							)
+						);
+					}
+				} else {
+					Astra_Sites_Image_Importer::log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
+				}
+			}
+
+			// Dispatch Queue.
+			self::$process_single->save()->dispatch();
 		}
 
 		/**

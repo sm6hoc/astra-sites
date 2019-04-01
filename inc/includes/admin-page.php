@@ -12,6 +12,8 @@
  */
 
 defined( 'ABSPATH' ) or exit;
+
+$import_text = ( 'site-pages' == $global_cpt_meta['cpt_slug'] ) ? __( 'Import Page', 'astra-sites' ) : __( 'Import Site', 'astra-sites' );
 ?>
 
 <div class="wrap" id="astra-sites-admin">
@@ -139,8 +141,7 @@ defined( 'ABSPATH' ) or exit;
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
-				<!-- <a class="button hide-if-no-customize astra-site-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a> -->
-				<a class="button hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
+				<a class="button hide-if-no-customize button-primary astra-demo-import" data-import-slug="<?php echo $global_cpt_meta['cpt_slug']; ?>" href="#" data-import="disabled"><?php echo $import_text; ?></a>
 
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
@@ -226,8 +227,8 @@ defined( 'ABSPATH' ) or exit;
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
-					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled">
-						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" data-import-slug="<?php echo $global_cpt_meta['cpt_slug']; ?>" href="#" data-import="disabled">
+						<?php echo $import_text; ?>
 						<span class="percent"></span>
 					</a>
 					<div id="astra-site-import-process-wrap" style="display: none;">
@@ -289,8 +290,7 @@ defined( 'ABSPATH' ) or exit;
 				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
 				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
 				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
-				<!-- <a class="button hide-if-no-customize astra-site-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a> -->
-				<a class="button hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
+				<a class="button hide-if-no-customize button-primary astra-demo-import" data-import-slug="<?php echo $global_cpt_meta['cpt_slug']; ?>" href="#" data-import="disabled"><?php echo $import_text; ?></a>
 
 			</div>
 			<div class="wp-full-overlay-sidebar-content">
@@ -322,8 +322,8 @@ defined( 'ABSPATH' ) or exit;
 
 			<div class="wp-full-overlay-footer">
 				<div class="footer-import-button-wrap">
-					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled">
-						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" data-import-slug="<?php echo $global_cpt_meta['cpt_slug']; ?>" href="#" data-import="disabled">
+						<?php echo $import_text; ?>
 						<span class="percent"></span>
 					</a>
 					<div id="astra-site-import-process-wrap" style="display: none;">

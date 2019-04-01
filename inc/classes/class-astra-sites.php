@@ -67,6 +67,52 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
 			add_action( 'wp_ajax_astra-sites-backup-settings', array( $this, 'backup_settings' ) );
 			add_action( 'wp_ajax_astra-sites-set-reset-data', array( $this, 'set_reset_data' ) );
+			add_action( 'wp_ajax_astra-sites-create-page', array( $this, 'create_page' ) );
+		}
+
+		/**
+		 * Import Page.
+		 */
+		function create_page() {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+
+			if ( 'gutenberg' == $default_page_builder ) {
+				$content = isset( $_POST['data']['original_content'] ) ? $_POST['data']['original_content'] : '';
+			} else {
+				$content = isset( $_POST['data']['content']['rendered'] ) ? $_POST['data']['content']['rendered'] : '';
+			}
+
+			$data = isset( $_POST['data'] ) ? $_POST['data'] : array();
+			if ( empty( $data ) ) {
+				wp_send_json_error( 'Empty page data.' );
+			}
+			$page_id   = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
+			$title     = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
+			$excerpt   = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
+			$post_args = array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'   => $title,
+				'post_content' => $content,
+				'post_excerpt' => $excerpt,
+			);
+			$post_meta = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
+			if ( ! empty( $post_meta ) ) {
+				$post_args['meta_input'] = $post_meta;
+			}
+			$new_page_id = wp_insert_post( $post_args );
+			// do_action( 'astra_sites_process_single', $new_page_id );.
+			wp_send_json_success(
+				array(
+					'remove-page-id' => $page_id,
+					'id'             => $new_page_id,
+					'link'           => get_permalink( $new_page_id ),
+				)
+			);
 		}
 
 		/**
