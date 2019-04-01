@@ -83,7 +83,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_send_json_success(
 				array(
 					'success' => true,
-					'message' => __( 'Theme Successfully Activated', 'astra' ),
+					'message' => __( 'Theme Successfully Activated', 'astra-sites' ),
 				)
 			);
 		}
