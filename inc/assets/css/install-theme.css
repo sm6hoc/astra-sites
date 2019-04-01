@@ -15,7 +15,7 @@
     -moz-osx-font-smoothing: grayscale;
     vertical-align: top;
 }
-.astra-notice a {
+#astra-theme-activation-nag a {
 	box-shadow: none;
 	outline: none;
 }
