@@ -162,21 +162,28 @@ defined( 'ABSPATH' ) or exit;
 
 					<div class="astra-sites-advanced-options-wrap">
 
-						<h4><?php _e( 'Plugins Used in This Starter Site', 'astra-sites' ); ?></h4>
-						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
-						<p><?php _e( 'These plugins will be installed when you import this site.', 'astra-sites' ); ?></p>
-
-						<hr style="border-top: 1px solid #eee;border-bottom: none;margin-top: 1em;">
-
 						<div class="astra-sites-advanced-options">
 
 							<ul class="astra-site-contents">
+								<li class="astra-sites-import-plugins">
+									<input type="checkbox" name="plugins" checked="checked" class="disabled checkbox" readonly>
+									<strong><?php _e( 'Install Required Plugins', 'astra-sites' ); ?></strong>
+									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
+									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-plugins-settings" style="display: none;">
+										<p><?php _e( 'Plugins below are used to build this website:', 'astra-sites' ); ?></p>
+										<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+										<p><?php _e( 'These are required for this website to work.', 'astra-sites' ); ?></p>
+									</div>
+								</li>
 								<li class="astra-sites-import-customizer">
 									<label>
 										<input type="checkbox" name="customizer" checked="checked" class="checkbox">
 										<strong>Import Customizer Settings</strong>
 										<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-customizer-settings"><span class="dashicons dashicons-editor-help"></span></span>
-										<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-customizer-settings" style="display: none;"><p><?php _e( 'Customizer is what gives a design to the website; and selecting this option replaces your current design with a new one. <br/>Backup of current customizer settings will be stored in "wp-content/astra-sites" directory, just in case if you want to restore it later.', 'astra-sites' ); ?></p></div>
+										<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-customizer-settings" style="display: none;">
+											<p><?php _e( 'Customizer is what gives a design to the website; and selecting this option replaces your current design with a new one.', 'astra-sites' ); ?></p>
+											<p><?php _e( 'Backup of current customizer settings will be stored in "wp-content/astra-sites" directory, just in case if you want to restore it later.', 'astra-sites' ); ?></p>
+										</div>
 									</label>
 								</li>
 								<li class="astra-sites-import-xml">

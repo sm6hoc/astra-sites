@@ -1759,7 +1759,6 @@ var AstraSitesAjaxQueue = (function() {
 									$(document).trigger( 'astra-sites-install-and-activate-required-plugins-done' );
 								}
 							}
-
 					break;
 
 				case 'upgrade':
@@ -1772,7 +1771,6 @@ var AstraSitesAjaxQueue = (function() {
 									.attr('href', astraSitesAdmin.getUpgradeURL + demo_slug )
 									.text( astraSitesAdmin.getUpgradeText )
 									.append('<i class="dashicons dashicons-external"></i>');
-
 					break;
 
 				default:
@@ -1785,6 +1783,8 @@ var AstraSitesAjaxQueue = (function() {
 									.attr('href', astraSitesAdmin.getProURL )
 									.text( astraSitesAdmin.getProText )
 									.append('<i class="dashicons dashicons-external"></i>');
+
+							$('.wp-full-overlay-header').find('.go-pro').remove();
 
 							if( false == astraSitesAdmin.isWhiteLabeled ) {
 								if( astraSitesAdmin.isPro ) {
