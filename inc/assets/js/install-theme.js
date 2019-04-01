@@ -12,7 +12,7 @@
 		/**
 		 * Binds events for the Astra Sites.
 		 *
-		 * @since 1.4.0
+		 * @since 1.3.2
 		 * 
 		 * @access private
 		 * @method _bind
@@ -27,7 +27,7 @@
 		/**
 		 * Activate Theme
 		 *
-		 * @since 1.4.0
+		 * @since 1.3.2
 		 */
 		_activateTheme: function( event, response ) {
 			event.preventDefault();
@@ -68,7 +68,7 @@
 		/**
 		 * Install and activate
 		 *
-		 * @since 1.4.0
+		 * @since 1.3.2
 		 * 
 		 * @param  {object} event Current event.
 		 * @return void

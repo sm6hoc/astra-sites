@@ -73,7 +73,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Activate theme
 		 *
-		 * @since 1.4.0
+		 * @since 1.3.2
 		 * @return void
 		 */
 		function activate_theme() {
@@ -158,7 +158,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Get theme install, active or inactive status.
 		 *
-		 * @since 1.4.0
+		 * @since 1.3.2
 		 *
 		 * @return string Theme status
 		 */
@@ -233,7 +233,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Enqueue admin scripts.
 		 *
-		 * @since  1.4.0    Added 'install-theme.js' to install and activate theme.
+		 * @since  1.3.2    Added 'install-theme.js' to install and activate theme.
 		 * @since  1.0.5    Added 'getUpgradeText' and 'getUpgradeURL' localize variables.
 		 *
 		 * @since  1.0.0
