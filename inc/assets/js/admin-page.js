@@ -1163,6 +1163,9 @@ var AstraSitesAjaxQueue = (function() {
 				AstraSitesAdmin._activateAllPlugins( activate_plugins );
 			}
 
+			console.log(activate_plugins);
+			console.log(not_installed);
+
 			if( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
 				AstraSitesAdmin._enable_demo_import_button();
 			}
@@ -1520,6 +1523,7 @@ var AstraSitesAjaxQueue = (function() {
 					requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'],
 					astraSiteOptions       = '';
 					astraEnabledExtensions = '';
+					preview_template	   = 'astra-page-preview';
 
 			} else {
 
@@ -1534,7 +1538,7 @@ var AstraSitesAjaxQueue = (function() {
 					requiredPlugins        = JSON.stringify( anchor.data('required-plugins') ) || '',
 					astraSiteOptions       = anchor.find('.astra-site-options').val() || '';
 					astraEnabledExtensions = anchor.find('.astra-enabled-extensions').val() || '';
-
+					preview_template	   = 'astra-site-preview';
 			}
 
 			console.log(requiredPlugins);
@@ -1542,7 +1546,7 @@ var AstraSitesAjaxQueue = (function() {
 			AstraSitesAdmin._log( astraSitesAdmin.log.preview + ' "' + demo_name + '" URL : ' + demoURL );
 
 
-			var template = wp.template('astra-site-preview');
+			var template = wp.template( preview_template );
 
 			templateData = [{
 				id                       : demoId,

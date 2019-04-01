@@ -261,6 +261,102 @@ defined( 'ABSPATH' ) or exit;
 
 <?php
 /**
+ * TMPL - Single Page Demo Preview
+ */
+?>
+<script type="text/template" id="tmpl-astra-page-preview">
+	<div class="astra-sites-preview theme-install-overlay wp-full-overlay expanded">
+		<div class="wp-full-overlay-sidebar">
+			<div class="wp-full-overlay-header"
+					data-demo-id="{{{data.id}}}"
+					data-demo-type="{{{data.astra_demo_type}}}"
+					data-demo-url="{{{data.astra_demo_url}}}"
+					data-demo-api="{{{data.demo_api}}}"
+					data-demo-name="{{{data.demo_name}}}"
+					data-demo-slug="{{{data.slug}}}"
+					data-screenshot="{{{data.screenshot}}}"
+					data-content="{{{data.content}}}"
+					data-required-plugins="{{data.required_plugins}}">
+				<input type="hidden" class="astra-site-options" value="{{data.astra_site_options}}" >
+				<input type="hidden" class="astra-enabled-extensions" value="{{data.astra_enabled_extensions}}" >
+				<button class="close-full-overlay"><span class="screen-reader-text"><?php esc_html_e( 'Close', 'astra-sites' ); ?></span></button>
+				<button class="previous-theme"><span class="screen-reader-text"><?php esc_html_e( 'Previous', 'astra-sites' ); ?></span></button>
+				<button class="next-theme"><span class="screen-reader-text"><?php esc_html_e( 'Next', 'astra-sites' ); ?></span></button>
+				<!-- <a class="button hide-if-no-customize astra-site-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a> -->
+				<a class="button hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled"><?php esc_html_e( 'Import Site', 'astra-sites' ); ?></a>
+
+			</div>
+			<div class="wp-full-overlay-sidebar-content">
+				<div class="install-theme-info">
+
+					<span class="site-type {{{data.astra_demo_type}}}">{{{data.astra_demo_type}}}</span>
+					<h3 class="theme-name">{{{data.demo_name}}}</h3>
+
+					<# if ( data.screenshot.length ) { #>
+						<div class="theme-screenshot-wrap">
+							<img class="theme-screenshot" src="{{{data.screenshot}}}" alt="">
+						</div>
+					<# } #>
+
+					<div class="theme-details">
+						{{{data.content}}}
+					</div>
+					<a href="#" class="theme-details-read-more"><?php _e( 'Read more', 'astra-sites' ); ?> &hellip;</a>
+
+					<div class="astra-sites-advanced-options-wrap">
+
+						<h4><?php _e( 'Plugins Used in This Starter Site', 'astra-sites' ); ?></h4>
+						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
+						<p><?php _e( 'These plugins will be installed when you import this site.', 'astra-sites' ); ?></p>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wp-full-overlay-footer">
+				<div class="footer-import-button-wrap">
+					<a class="button button-hero hide-if-no-customize button-primary astra-demo-import" href="#" data-import="disabled">
+						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+						<span class="percent"></span>
+					</a>
+					<div id="astra-site-import-process-wrap" style="display: none;">
+						<progress id="astra-site-import-process" max="100" value="0"></progress>
+						<!-- <span id="astra-site-import-process-text"></span> -->
+					</div>
+					<!-- <a class="button button-hero hide-if-no-customize astra-site-import" href="#">
+						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
+					</a> -->
+				</div>
+				<button type="button" class="collapse-sidebar button" aria-expanded="true"
+						aria-label="Collapse Sidebar">
+					<span class="collapse-sidebar-arrow"></span>
+					<span class="collapse-sidebar-label"><?php esc_html_e( 'Collapse', 'astra-sites' ); ?></span>
+				</button>
+
+				<div class="devices-wrapper">
+					<div class="devices">
+						<button type="button" class="preview-desktop active" aria-pressed="true" data-device="desktop">
+							<span class="screen-reader-text"><?php _e( 'Enter desktop preview mode', 'astra-sites' ); ?></span>
+						</button>
+						<button type="button" class="preview-tablet" aria-pressed="false" data-device="tablet">
+							<span class="screen-reader-text"><?php _e( 'Enter tablet preview mode', 'astra-sites' ); ?></span>
+						</button>
+						<button type="button" class="preview-mobile" aria-pressed="false" data-device="mobile">
+							<span class="screen-reader-text"><?php _e( 'Enter mobile preview mode', 'astra-sites' ); ?></span>
+						</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="wp-full-overlay-main">
+			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
+		</div>
+	</div>
+</script>
+
+<?php
+/**
  * TMPL - No more demos
  */
 ?>
