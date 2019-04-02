@@ -205,7 +205,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 */
 		function import_customizer_settings() {
 
-			$customizer_data = ( isset( $_POST['customizer_data'] ) ) ? (array) json_decode( stripcslashes( $_POST['customizer_data'] ), 1 ) : '';
+			$customizer_data = ( isset( $_POST['customizer_data'] ) ) ? (array) json_decode( stripcslashes( $_POST['customizer_data'] ), 1 ) : array();
 
 			do_action( 'astra_sites_import_customizer_settings', $customizer_data );
 
