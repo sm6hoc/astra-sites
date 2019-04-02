@@ -556,6 +556,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'init' => 'bb-ultimate-addon/bb-ultimate-addon.php',
 						'name' => 'Ultimate Addon for Beaver Builder',
 					),
+					'wpforms-lite/wpforms.php' => array(
+						'slug' => 'wpforms',
+						'init' => 'wpforms/wpforms.php',
+						'name' => 'WPForms',
+					),
 				),
 				$lite_version
 			);
