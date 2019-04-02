@@ -91,22 +91,22 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( empty( $data ) ) {
 				wp_send_json_error( 'Empty page data.' );
 			}
-			$page_id   = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
-			$title     = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
-			$excerpt   = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
-			$post_args = array(
+			$page_id     = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
+			$title       = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
+			$excerpt     = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
+			$post_args   = array(
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
 				'post_title'   => $title,
 				'post_content' => $content,
 				'post_excerpt' => $excerpt,
 			);
-			$post_meta = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
-			if ( ! empty( $post_meta ) ) {
-				$post_args['meta_input'] = $post_meta;
-			}
 			$new_page_id = wp_insert_post( $post_args );
-			// do_action( 'astra_sites_process_single', $new_page_id );.
+			$post_meta   = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
+			if ( ! empty( $post_meta ) ) {
+				self::import_post_meta( $new_page_id, $post_meta );
+			}
+			// do_action( 'astra_sites_process_single', $new_page_id );
 			wp_send_json_success(
 				array(
 					'remove-page-id' => $page_id,
@@ -114,6 +114,49 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'link'           => get_permalink( $new_page_id ),
 				)
 			);
+		}
+
+		/**
+		 * Import Post Meta
+		 *
+		 * @since x.x.x
+		 *
+		 * @param  integer $post_id  Post ID.
+		 * @param  array   $response  Post meta.
+		 * @return void
+		 */
+		public static function import_post_meta( $post_id, $metadata ) {
+
+			$metadata = (array) $metadata;
+
+			foreach ( $metadata as $meta_key => $meta_value ) {
+
+				if ( $meta_value ) {
+
+					if ( is_serialized( $meta_value, true ) ) {
+						$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
+					} elseif ( is_array( $meta_value ) ) {
+						$raw_data = json_decode( stripslashes( $meta_value ), true );
+					} else {
+						$raw_data = $meta_value;
+					}
+
+					if ( '_elementor_data' === $meta_key ) {
+						if ( is_array( $raw_data ) ) {
+							$raw_data = ( json_encode( $raw_data ) );
+						} else {
+							$raw_data = ( $raw_data );
+						}
+					}
+					if ( '_elementor_data' !== $meta_key && '_elementor_draft' !== $meta_key && '_fl_builder_data' !== $meta_key && '_fl_builder_draft' !== $meta_key && 'brizy' !== $meta_key && 'brizy-migrations' !== $meta_key ) {
+						if ( is_array( $raw_data ) ) {
+							$raw_data = json_encode( $raw_data );
+						}
+					}
+
+					update_post_meta( $post_id, $meta_key, $raw_data );
+				}
+			}
 		}
 
 		/**
