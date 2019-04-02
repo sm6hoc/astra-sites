@@ -1163,9 +1163,6 @@ var AstraSitesAjaxQueue = (function() {
 				AstraSitesAdmin._activateAllPlugins( activate_plugins );
 			}
 
-			console.log(activate_plugins);
-			console.log(not_installed);
-
 			if( activate_plugins.length <= 0 && not_installed.length <= 0 ) {
 				AstraSitesAdmin._enable_demo_import_button();
 			}
@@ -1251,25 +1248,17 @@ var AstraSitesAjaxQueue = (function() {
 		_importDemo: function(event) {
 			event.preventDefault();
 
-			var disabled = $(this).attr('data-import'),
-				import_slug = $(this).data( 'import-slug' );
+			var disabled = $(this).attr('data-import');
 
-			if ( 'site-pages' == import_slug ) {
+			if ( typeof disabled !== 'undefined' && disabled === 'disabled' || $this.hasClass('disabled') ) {
 
-				AstraSitesAdmin._importPage();
+				$('.astra-demo-import').addClass('updating-message installing')
+					.text( wp.updates.l10n.installing );
 
-			} else {
-
-				if ( typeof disabled !== 'undefined' && disabled === 'disabled' || $this.hasClass('disabled') ) {
-
-					$('.astra-demo-import').addClass('updating-message installing')
-						.text( wp.updates.l10n.installing );
-
-					/**
-					 * Process Bulk Plugin Install & Activate
-					 */
-					AstraSitesAdmin._bulkPluginInstallActivate();
-				}
+				/**
+				 * Process Bulk Plugin Install & Activate
+				 */
+				AstraSitesAdmin._bulkPluginInstallActivate();
 			}
 		},
 
@@ -1278,18 +1267,12 @@ var AstraSitesAjaxQueue = (function() {
 			if ( null == AstraSitesAdmin.templateData ) {
 				return;
 			}
-			console.log( AstraSitesAdmin.templateData );
-
-			console.log(AstraSitesAdmin.templateData.demo_api);
-			//return;
 
 			fetch( AstraSitesAdmin.templateData.demo_api ).then(response => {
 				return response.json();
 			}).then(data => {
 
 				// Work with JSON page here
-				console.log(data);
-				console.log(astraSitesAdmin.ajaxurl);
 
 				$.ajax({
 					url: astraSitesAdmin.ajaxurl,
@@ -1303,26 +1286,19 @@ var AstraSitesAjaxQueue = (function() {
 				.fail(function( jqXHR ){
 					console.log( jqXHR );
 				})
-				.done(function ( demo_data ) {
+				.done(function ( data ) {
 
-					var remote_page_id = data.data['remove-page-id'];
-						console.log( data );
-						console.log( data.data['id'] );
-						console.log( data.data['link'] );
-						console.log( data.data['remove-page-id'] );
+					if( data.success ) {
 
-						if( data.success ) {
-							if( $('.page[data-page-id="'+remote_page_id+'"]').length ) {
-								$('.page[data-page-id="'+remote_page_id+'"]').find('.actions .spinner').remove();
-								$('.page[data-page-id="'+remote_page_id+'"]').find('.actions').prepend( '<span class="page-imported" style="text-align: left;"><i class="dashicons dashicons-yes"></i> Created!</span>' );
-
-								setTimeout(function() {
-									$('.page[data-page-id="'+remote_page_id+'"]').find('.actions .page-imported').remove();
-									$('.page[data-page-id="'+remote_page_id+'"]').find('.actions').prepend( '<a href="'+data.data['link']+'" target="_blank">See <i class="dashicons dashicons-external"></i></a>' );
-								}, 1000);
-							}
-
-						}
+						$('.astra-demo-import').removeClass('updating-message installing')
+							.removeAttr('data-import')
+							.addClass('view-site')
+							.removeClass('astra-demo-import')
+							.text( 'Done! View Page' )
+							.attr('target', '_blank')
+							.append('<i class="dashicons dashicons-external"></i>')
+							.attr('href', data.data['link'] );
+					}
 
 				});
 
@@ -1336,6 +1312,8 @@ var AstraSitesAjaxQueue = (function() {
 
 			var $theme  = $('.astra-sites-preview').find('.wp-full-overlay-header'),
 				apiURL  = $theme.data('demo-api') || '';
+				import_slug = $theme.data( 'import-slug' );
+
 
 			$('body').addClass('importing-site');
 			$('.previous-theme, .next-theme').addClass('disabled');
@@ -1347,9 +1325,13 @@ var AstraSitesAjaxQueue = (function() {
 				.addClass('updating-message installing')
 				.text( astraSitesAdmin.strings.importingDemo );
 
-			// Site Import by API URL.
-			if( apiURL ) {
-				AstraSitesAdmin._importSite( apiURL );
+			if ( 'site-pages' == import_slug ) {
+				AstraSitesAdmin._importPage();
+			} else {
+				// Site Import by API URL.
+				if( apiURL ) {
+					AstraSitesAdmin._importSite( apiURL );
+				}
 			}
 
 		},
@@ -1442,11 +1424,10 @@ var AstraSitesAjaxQueue = (function() {
 			prevDemo = currentDemo.prev('.theme');
 			prevDemo.addClass('theme-preview-on');
 
-			var site_id = $(this).parents('.wp-full-overlay-header').data('demo-id') || '';
+			var site_id = prevDemo.data('demo-id') || '';
 
 			if( AstraSitesAPI._stored_data ) {
 				var site_data = AstraSitesAdmin._get_site_details( site_id );
-
 
 				if( site_data ) {
 					// Set current site details.
@@ -1462,17 +1443,16 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_nextTheme: function (event) {
 			event.preventDefault();
+
 			currentDemo = jQuery('.theme-preview-on')
 			currentDemo.removeClass('theme-preview-on');
 			nextDemo = currentDemo.next('.theme');
 			nextDemo.addClass('theme-preview-on');
 
-			var site_id = $(this).parents('.wp-full-overlay-header').data('demo-id') || '';
+			var site_id = nextDemo.data('demo-id') || '';
 
 			if( AstraSitesAPI._stored_data ) {
 				var site_data = AstraSitesAdmin._get_site_details( site_id );
-
-
 
 				if( site_data ) {
 					// Set current site details.
@@ -1574,46 +1554,24 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_renderDemoPreview: function(anchor) {
 
-			console.log(AstraSitesAdmin.current_site);
-			console.log(AstraSitesAdmin.current_site['site-pages-required-plugins']);
-
-			if ( 'site-pages' == AstraSitesAdmin.current_site.type ) {
-
-				var demoId             	   = AstraSitesAdmin.current_site['id'] || '',
-					apiURL                 = AstraSitesAdmin.current_site['astra-page-api-url'] || '',
-					demoType               = AstraSitesAdmin.current_site['astra-site-type'] || '',
-					demoURL                = AstraSitesAdmin.current_site['astra-page-url'] || '',
-					screenshot             = AstraSitesAdmin.current_site['featured-image-url'] || '',
-					demo_name              = AstraSitesAdmin.current_site.title.rendered || '',
-					demo_slug              = AstraSitesAdmin.current_site.slug || '',
-					content                = AstraSitesAdmin.current_site.content.rendered || '',
-					requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'],
-					astraSiteOptions       = '';
-					astraEnabledExtensions = '';
-					preview_template	   = 'astra-page-preview';
-
-			} else {
-
-				var demoId             	   = anchor.data('demo-id') || '',
-					apiURL                 = anchor.data('demo-api') || '',
-					demoType               = anchor.data('demo-type') || '',
-					demoURL                = anchor.data('demo-url') || '',
-					screenshot             = anchor.data('screenshot') || '',
-					demo_name              = anchor.data('demo-name') || '',
-					demo_slug              = anchor.data('demo-slug') || '',
-					content                = anchor.data('content') || '',
-					requiredPlugins        = anchor.data('required-plugins') || '',
-					astraSiteOptions       = anchor.find('.astra-site-options').val() || '';
-					astraEnabledExtensions = anchor.find('.astra-enabled-extensions').val() || '';
-					preview_template	   = 'astra-site-preview';
-			}
-
-			console.log(requiredPlugins);
+			var demoId             	   = AstraSitesAdmin.current_site['id'] || '',
+				apiURL                 = AstraSitesAdmin.current_site['astra-page-api-url'] || '',
+				demoType               = AstraSitesAdmin.current_site['astra-site-type'] || '',
+				demoURL                = AstraSitesAdmin.current_site['astra-page-url'] || '',
+				screenshot             = AstraSitesAdmin.current_site['featured-image-url'] || '',
+				demo_name              = AstraSitesAdmin.current_site.title.rendered || '',
+				demo_slug              = AstraSitesAdmin.current_site.slug || '',
+				content                = AstraSitesAdmin.current_site.content.rendered || '',
+				requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'],
+				astraSiteOptions       = AstraSitesAdmin.current_site['astra-site-options-data'],
+				astraEnabledExtensions = AstraSitesAdmin.current_site['astra-enabled-extensions'],
+				preview_template	   = ( 'site-pages' == AstraSitesAdmin.current_site.type ) ? 'astra-page-preview' : 'astra-site-preview';
 
 			AstraSitesAdmin._log( astraSitesAdmin.log.preview + ' "' + demo_name + '" URL : ' + demoURL );
 
 
 			var template = wp.template( preview_template );
+
 
 			templateData = [{
 				id                       : demoId,
@@ -1629,11 +1587,8 @@ var AstraSitesAjaxQueue = (function() {
 				astra_enabled_extensions : astraEnabledExtensions,
 			}];
 
+			console.log(templateData);
 			AstraSitesAdmin.templateData = templateData[0];
-
-			console.log(templateData[0]);
-
-			// return;
 
 			// delete any earlier fullscreen preview before we render new one.
 			$('.theme-install-overlay').remove();
