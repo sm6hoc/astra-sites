@@ -3,9 +3,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Astra Starter Sites – Elementor, Beaver Builder & "
-"Gutenberg Templates 1.3.1\n"
+"Gutenberg Templates 1.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2019-03-28 07:55:18+00:00\n"
+"POT-Creation-Date: 2019-04-01 08:04:16+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -146,34 +146,55 @@ msgstr ""
 msgid "%1$s Branding"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:129
+#: inc/classes/class-astra-sites.php:86
+msgid "Theme Successfully Activated"
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:150
 #. translators: 1: theme.php file
 msgid ""
 "Astra Theme needs to be active for you to use currently installed \"%1$s\" "
-"plugin. <a href=\"%2$s\">Install & Activate Now</a>"
+"plugin. <a href=\"#\" class=\"%3$s\" data-theme-slug=\"astra\">Install & "
+"Activate Now</a>"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:169
+#: inc/classes/class-astra-sites.php:216
 msgid "See Library"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:222
+#: inc/classes/class-astra-sites.php:252
+msgid "Installed! Activating.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:253
+msgid "Activating.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:254
+msgid "Activated! Reloading.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:255
+msgid "Installing.."
+msgstr ""
+
+#: inc/classes/class-astra-sites.php:285
 msgid "Page Builder"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:227
+#: inc/classes/class-astra-sites.php:290
 msgid "Categories"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:267
+#: inc/classes/class-astra-sites.php:330
 msgid "Get Agency Bundle"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:269
+#: inc/classes/class-astra-sites.php:332
 msgid "Upgrade"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:276
+#: inc/classes/class-astra-sites.php:339
 #. translators: %s are HTML tags.
 msgid ""
 "%1$sRequired XMLReader PHP extension is missing on your server!%2$sAstra "
@@ -182,201 +203,201 @@ msgid ""
 "XMLReader PHP extension."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:277
+#: inc/classes/class-astra-sites.php:340
 msgid ""
 "Warning! Astra Site Import process is not complete. Don't close the window "
 "until import process complete. Do you still want to leave the window?"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:278
+#: inc/classes/class-astra-sites.php:341
 msgid "Error!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:279
+#: inc/classes/class-astra-sites.php:342
 msgid "Error! Read Possibilities."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:281
+#: inc/classes/class-astra-sites.php:344
 msgid "Done! View Site"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:282
+#: inc/classes/class-astra-sites.php:345
 msgid "Activating"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:283
+#: inc/classes/class-astra-sites.php:346
 msgid "Active"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:284
+#: inc/classes/class-astra-sites.php:347
 msgid "Import failed."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:285
+#: inc/classes/class-astra-sites.php:348
 msgid "Import failed. See error log."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:286
+#: inc/classes/class-astra-sites.php:349
 msgid "Import This Site"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:287 inc/classes/class-astra-sites.php:303
+#: inc/classes/class-astra-sites.php:350 inc/classes/class-astra-sites.php:366
 msgid "Importing.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:288 inc/includes/admin-page.php:161
+#: inc/classes/class-astra-sites.php:351 inc/includes/admin-page.php:161
 msgid "Read more"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:289
+#: inc/classes/class-astra-sites.php:352
 msgid "Hide"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:290
+#: inc/classes/class-astra-sites.php:353
 msgid "There was a problem receiving a response from server."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:291 inc/includes/admin-page.php:374
+#: inc/classes/class-astra-sites.php:354 inc/includes/admin-page.php:374
 msgid "No Demos found, Try a different search."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:294
+#: inc/classes/class-astra-sites.php:357
 msgid "Installing plugin "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:295
+#: inc/classes/class-astra-sites.php:358
 msgid "Successfully plugin installed!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:296
+#: inc/classes/class-astra-sites.php:359
 msgid "Activating plugin "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:297
+#: inc/classes/class-astra-sites.php:360
 msgid "Successfully plugin activated "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:298
+#: inc/classes/class-astra-sites.php:361
 msgid "Bulk plugin activation..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:299
+#: inc/classes/class-astra-sites.php:362
 msgid "Successfully plugin activate - "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:300
+#: inc/classes/class-astra-sites.php:363
 msgid "Error! While activating plugin  - "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:301
+#: inc/classes/class-astra-sites.php:364
 msgid "Bulk plugin installation..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:302
+#: inc/classes/class-astra-sites.php:365
 msgid "Site API "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:304
+#: inc/classes/class-astra-sites.php:367
 msgid "Processing requests..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:305
+#: inc/classes/class-astra-sites.php:368
 msgid "2) Importing \"Customizer Settings\"..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:306
+#: inc/classes/class-astra-sites.php:369
 msgid "Successfully imported customizer settings!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:307
+#: inc/classes/class-astra-sites.php:370
 msgid "3) Importing \"Contact Forms\"..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:308
+#: inc/classes/class-astra-sites.php:371
 msgid "Successfully imported Contact Forms!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:309
+#: inc/classes/class-astra-sites.php:372
 msgid "4) Preparing \"XML\" Data..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:310
+#: inc/classes/class-astra-sites.php:373
 msgid "Successfully set XML data!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:311
+#: inc/classes/class-astra-sites.php:374
 msgid "5) Importing \"XML\"..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:312
+#: inc/classes/class-astra-sites.php:375
 msgid "Successfully imported XML!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:313
+#: inc/classes/class-astra-sites.php:376
 msgid "6) Importing \"Options\"..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:314
+#: inc/classes/class-astra-sites.php:377
 msgid "Successfully imported Options!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:315
+#: inc/classes/class-astra-sites.php:378
 msgid "7) Importing \"Widgets\"..."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:316
+#: inc/classes/class-astra-sites.php:379
 msgid "Successfully imported Widgets!"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:318
+#: inc/classes/class-astra-sites.php:381
 msgid "Site imported successfully! visit : "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:319
+#: inc/classes/class-astra-sites.php:382
 msgid "Getting Site Information.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:320
+#: inc/classes/class-astra-sites.php:383
 msgid "Importing Customizer Settings.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:321
+#: inc/classes/class-astra-sites.php:384
 msgid "Importing Contact Forms.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:322
+#: inc/classes/class-astra-sites.php:385
 msgid "Setting up import data.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:323
+#: inc/classes/class-astra-sites.php:386
 msgid "Importing Content.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:324
+#: inc/classes/class-astra-sites.php:387
 msgid "Importing Site Options.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:325
+#: inc/classes/class-astra-sites.php:388
 msgid "Importing Widgets.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:326
+#: inc/classes/class-astra-sites.php:389
 msgid "Import Complete.."
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:327
+#: inc/classes/class-astra-sites.php:390
 msgid "Previewing "
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:328
+#: inc/classes/class-astra-sites.php:391
 msgid "See Error Log &rarr;"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:362
+#: inc/classes/class-astra-sites.php:425
 msgid "No plugin specified"
 msgstr ""
 
-#: inc/classes/class-astra-sites.php:391
+#: inc/classes/class-astra-sites.php:454
 msgid "Plugin Successfully Activated"
 msgstr ""
 

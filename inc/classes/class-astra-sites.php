@@ -67,6 +67,25 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'wp_ajax_astra-required-plugin-activate', array( $this, 'required_plugin_activate' ) );
 			add_action( 'wp_ajax_astra-sites-backup-settings', array( $this, 'backup_settings' ) );
 			add_action( 'wp_ajax_astra-sites-set-reset-data', array( $this, 'set_reset_data' ) );
+			add_action( 'wp_ajax_astra-sites-activate-theme', array( $this, 'activate_theme' ) );
+		}
+
+		/**
+		 * Activate theme
+		 *
+		 * @since 1.3.2
+		 * @return void
+		 */
+		function activate_theme() {
+
+			switch_theme( 'astra' );
+
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => __( 'Theme Successfully Activated', 'astra-sites' ),
+				)
+			);
 		}
 
 		/**
@@ -120,18 +139,46 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		function add_notice() {
 
+			$theme_status = 'astra-sites-theme-' . $this->get_theme_status();
+
 			Astra_Sites_Notices::add_notice(
 				array(
 					'id'               => 'astra-theme-activation-nag',
 					'type'             => 'error',
 					'show_if'          => ( ! defined( 'ASTRA_THEME_SETTINGS' ) ) ? true : false,
 					/* translators: 1: theme.php file*/
-					'message'          => sprintf( __( 'Astra Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="%2$s">Install & Activate Now</a>', 'astra-sites' ), ASTRA_SITES_NAME, esc_url( admin_url( 'themes.php?theme=astra' ) ) ),
+					'message'          => sprintf( __( 'Astra Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="astra">Install & Activate Now</a>', 'astra-sites' ), ASTRA_SITES_NAME, esc_url( admin_url( 'themes.php?theme=astra' ) ), $theme_status ),
 					'dismissible'      => true,
 					'dismissible-time' => WEEK_IN_SECONDS,
 				)
 			);
 
+		}
+
+		/**
+		 * Get theme install, active or inactive status.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @return string Theme status
+		 */
+		function get_theme_status() {
+
+			$theme = wp_get_theme();
+
+			// Theme installed and activate.
+			if ( 'Astra' == $theme->name || 'Astra' == $theme->parent_theme ) {
+				return 'installed-and-active';
+			}
+
+			// Theme installed but not activate.
+			foreach ( (array) wp_get_themes() as $theme_dir => $theme ) {
+				if ( 'Astra' == $theme->name || 'Astra' == $theme->parent_theme ) {
+					return 'installed-but-inactive';
+				}
+			}
+
+			return 'not-installed';
 		}
 
 		/**
@@ -186,6 +233,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Enqueue admin scripts.
 		 *
+		 * @since  1.3.2    Added 'install-theme.js' to install and activate theme.
 		 * @since  1.0.5    Added 'getUpgradeText' and 'getUpgradeURL' localize variables.
 		 *
 		 * @since  1.0.0
@@ -194,6 +242,21 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @return void
 		 */
 		public function admin_enqueue( $hook = '' ) {
+
+			wp_enqueue_script( 'astra-sites-install-theme', ASTRA_SITES_URI . 'inc/assets/js/install-theme.js', array( 'jquery', 'updates' ), ASTRA_SITES_VER, true );
+			wp_enqueue_style( 'astra-sites-install-theme', ASTRA_SITES_URI . 'inc/assets/css/install-theme.css', null, ASTRA_SITES_VER, 'all' );
+
+			$data = apply_filters(
+				'astra_sites_install_theme_localize_vars',
+				array(
+					'installed'  => __( 'Installed! Activating..', 'astra-sites' ),
+					'activating' => __( 'Activating..', 'astra-sites' ),
+					'activated'  => __( 'Activated! Reloading..', 'astra-sites' ),
+					'installing' => __( 'Installing..', 'astra-sites' ),
+					'ajaxurl'    => esc_url( admin_url( 'admin-ajax.php' ) ),
+				)
+			);
+			wp_localize_script( 'astra-sites-install-theme', 'AstraSitesInstallThemeVars', $data );
 
 			if ( 'appearance_page_astra-sites' !== $hook ) {
 				return;
