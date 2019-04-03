@@ -585,7 +585,7 @@ body.loading-content .select-page-builder {
 }
 
 .theme-browser .theme .site-preview > .theme-screenshot {
-    transition: all ease-in-out 3s;
+    transition: all linear 5s;
     background-position: center top;
     background-size: cover;
     background-repeat: no-repeat;
@@ -597,6 +597,10 @@ body.loading-content .select-page-builder {
 
 .astra-sites-tooltip-icon {
     cursor: pointer;
+}
+
+.astra-sites-preview .disabled {
+    pointer-events: none;
 }
 
 .astra-sites-tooltip-icon .dashicons {
