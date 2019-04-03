@@ -239,6 +239,32 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 								</select>
 								<?php submit_button( __( 'Next', 'astra-sites' ) ); ?>
 							</div>
+
+							<ul class="page-builders">
+								<li>
+									<label>
+										<input type="radio" name="page_builder" value="gutenberg">
+									  	<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/gutenberg.jpg' ); ?>" />
+									</label>
+								</li>
+								<li>
+									<label>
+						  				<input type="radio" name="page_builder" value="elementor">
+										<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/elementor.png' ); ?>" />
+									</label>
+								</li>
+								<li>
+									<label>
+									  <input type="radio" name="page_builder" value="beaver-builder">
+										<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/beaver-builder.png' ); ?>" />
+									</li>
+								<li>
+									<label>
+						  				<input type="radio" name="page_builder" value="brizy">
+										<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/brizy.jpg' ); ?>" />
+									</label>
+								</li>
+							</ul>
 							<input type="hidden" name="message" value="saved" />
 							<?php wp_nonce_field( 'astra-sites-welcome-screen', 'astra-sites-page-builder' ); ?>
 						</form>
