@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Astra Starter Sites – Elementor, Beaver Builder & "
 "Gutenberg Templates 1.3.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/astra-sites\n"
-"POT-Creation-Date: 2019-04-01 08:04:16+00:00\n"
+"POT-Creation-Date: 2019-04-03 09:58:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,7 +25,7 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n1.0.0\n"
 
-#: astra-sites.php:18 inc/classes/class-astra-sites-page.php:319
+#: astra-sites.php:18 inc/classes/class-astra-sites-page.php:342
 msgid "Astra Sites"
 msgstr ""
 
@@ -113,32 +113,40 @@ msgstr ""
 msgid "Settings saved successfully."
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:235
-#: inc/classes/class-astra-sites-page.php:256
-msgid "Block Editor (Gutenberg)"
+#: inc/classes/class-astra-sites-page.php:231
+msgid "Select Page Builder"
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:236
-#: inc/classes/class-astra-sites-page.php:257
-msgid "Elementor"
+#: inc/classes/class-astra-sites-page.php:232
+msgid "Select your favorite page builder to import sites or individual pages."
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:237
-#: inc/classes/class-astra-sites-page.php:258
-msgid "Beaver Builder"
+#: inc/classes/class-astra-sites-page.php:260
+msgid "Please select your favorite page builder to continue.."
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:238
-#: inc/classes/class-astra-sites-page.php:259
-msgid "Brizy"
-msgstr ""
-
-#: inc/classes/class-astra-sites-page.php:240 inc/includes/admin-page.php:141
+#: inc/classes/class-astra-sites-page.php:262 inc/includes/admin-page.php:141
 msgid "Next"
 msgstr ""
 
-#: inc/classes/class-astra-sites-page.php:249
+#: inc/classes/class-astra-sites-page.php:272
 msgid "Astra Starter Sites - Your Library of 100+ Ready Templates!"
+msgstr ""
+
+#: inc/classes/class-astra-sites-page.php:279
+msgid "Block Editor (Gutenberg)"
+msgstr ""
+
+#: inc/classes/class-astra-sites-page.php:280
+msgid "Elementor"
+msgstr ""
+
+#: inc/classes/class-astra-sites-page.php:281
+msgid "Beaver Builder"
+msgstr ""
+
+#: inc/classes/class-astra-sites-page.php:282
+msgid "Brizy"
 msgstr ""
 
 #: inc/classes/class-astra-sites-white-label.php:187
