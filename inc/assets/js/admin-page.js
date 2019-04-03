@@ -1499,12 +1499,12 @@ var AstraSitesAjaxQueue = (function() {
 				}
 			}
 
-			var self = $(this).parents('.theme');
-			self.addClass('theme-preview-on');
+			var previewDemo = $(this).parents('.theme');
+			previewDemo.addClass('theme-preview-on');
 
 			$('html').addClass('astra-site-preview-on');
 
-			AstraSitesAdmin._renderDemoPreview( self );
+			AstraSitesAdmin._renderDemoPreview( previewDemo );
 		},
 
 		_get_site_details: function( site_id ) {
@@ -1555,17 +1555,31 @@ var AstraSitesAjaxQueue = (function() {
 		_renderDemoPreview: function(anchor) {
 
 			var demoId             	   = AstraSitesAdmin.current_site['id'] || '',
-				apiURL                 = AstraSitesAdmin.current_site['astra-page-api-url'] || '',
 				demoType               = AstraSitesAdmin.current_site['astra-site-type'] || '',
-				demoURL                = AstraSitesAdmin.current_site['astra-page-url'] || '',
+				demoURL                = '',
 				screenshot             = AstraSitesAdmin.current_site['featured-image-url'] || '',
 				demo_name              = AstraSitesAdmin.current_site.title.rendered || '',
 				demo_slug              = AstraSitesAdmin.current_site.slug || '',
 				content                = AstraSitesAdmin.current_site.content.rendered || '',
-				requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'],
-				astraSiteOptions       = AstraSitesAdmin.current_site['astra-site-options-data'],
-				astraEnabledExtensions = AstraSitesAdmin.current_site['astra-enabled-extensions'],
-				preview_template	   = ( 'site-pages' == AstraSitesAdmin.current_site.type ) ? 'astra-page-preview' : 'astra-site-preview';
+				apiURL                 = '',
+				requiredPlugins        = '',
+				astraEnabledExtensions = '',
+				astraSiteOptions       = '',
+				preview_template	   = '';
+
+			if ( 'site-pages' == AstraSitesAdmin.current_site.type ) {
+				preview_template = 'astra-page-preview';
+				demoURL                = AstraSitesAdmin.current_site['astra-page-url'] || '',
+				apiURL = AstraSitesAdmin.current_site['astra-page-api-url'] || '';
+				requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'];
+			} else {
+				preview_template = 'astra-site-preview';
+				demoURL                = AstraSitesAdmin.current_site['astra-site-url'] || '',
+				apiURL = AstraSitesAdmin.current_site['_links']['self'][0]['href'];
+				requiredPlugins        = AstraSitesAdmin.current_site['required-plugins'];
+				astraEnabledExtensions = AstraSitesAdmin.current_site['astra-enabled-extensions'];
+				astraSiteOptions = AstraSitesAdmin.current_site['astra-site-options-data'];
+			}
 
 			AstraSitesAdmin._log( astraSitesAdmin.log.preview + ' "' + demo_name + '" URL : ' + demoURL );
 
@@ -1587,7 +1601,6 @@ var AstraSitesAjaxQueue = (function() {
 				astra_enabled_extensions : astraEnabledExtensions,
 			}];
 
-			console.log(templateData);
 			AstraSitesAdmin.templateData = templateData[0];
 
 			// delete any earlier fullscreen preview before we render new one.

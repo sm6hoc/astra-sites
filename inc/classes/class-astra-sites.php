@@ -106,7 +106,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( ! empty( $post_meta ) ) {
 				self::import_post_meta( $new_page_id, $post_meta );
 			}
-			// do_action( 'astra_sites_process_single', $new_page_id );
+			do_action( 'astra_sites_process_single', $new_page_id );
 			wp_send_json_success(
 				array(
 					'remove-page-id' => $page_id,
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 * @since x.x.x
 		 *
 		 * @param  integer $post_id  Post ID.
-		 * @param  array   $response  Post meta.
+		 * @param  array   $metadata  Post meta.
 		 * @return void
 		 */
 		public static function import_post_meta( $post_id, $metadata ) {

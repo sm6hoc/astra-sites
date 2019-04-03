@@ -76,6 +76,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 				// Stored Settings.
 				$stored_data = $this->get_settings();
+				$slug        = ( isset( $_REQUEST['redirect_page'] ) ) ? $_REQUEST['redirect_page'] : 'astra-sites';
 
 				// New settings.
 				$new_data = array(
@@ -88,7 +89,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				// Update settings.
 				update_option( 'astra_sites_settings', $data );
 
-				wp_redirect( admin_url( '/themes.php?page=astra-sites' ) );
+				wp_redirect( admin_url( '/themes.php?page=' . $slug ) );
 			}
 		}
 
@@ -247,7 +248,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				</div>
 			<?php } else { ?>
 				<?php
-				$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
+				$page_title   = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
+				$current_slug = isset( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'astra-sites';
 				?>
 				<div class="nav-tab-wrapper">
 					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
@@ -261,6 +263,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 							</select>
 						</div>
 						<input type="hidden" name="message" value="saved" />
+						<input type="hidden" name="redirect_page" value="<?php echo $current_slug; ?>">
 						<?php wp_nonce_field( 'astra-sites-welcome-screen', 'astra-sites-page-builder' ); ?>
 					</form>
 					<?php
@@ -296,12 +299,13 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 */
 		public function get_page_url( $menu_slug ) {
 
-			$parent_page = 'themes.php';
+			$current_slug = isset( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'astra-sites';
+			$parent_page  = 'themes.php';
 
 			if ( strpos( $parent_page, '?' ) !== false ) {
-				$query_var = '&page=astra-sites';
+				$query_var = '&page=' . $current_slug;
 			} else {
-				$query_var = '?page=astra-sites';
+				$query_var = '?page=' . $current_slug;
 			}
 
 			$parent_page_url = admin_url( $parent_page . $query_var );
