@@ -205,14 +205,14 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 */
 		function import_customizer_settings() {
 
-			$customizer_data = ( isset( $_POST['customizer_data'] ) ) ? (array) json_decode( stripcslashes( $_POST['customizer_data'] ), 1 ) : '';
+			$customizer_data = ( isset( $_POST['customizer_data'] ) ) ? (array) json_decode( stripcslashes( $_POST['customizer_data'] ), 1 ) : array();
 
 			do_action( 'astra_sites_import_customizer_settings', $customizer_data );
 
 			if ( ! empty( $customizer_data ) ) {
 
 				// Set meta for tracking the post.
-				Astra_Sites_Image_Importer::log( 'Customizer Data ' . $customizer_data );
+				Astra_Sites_Image_Importer::log( 'Customizer Data ' . json_encode( $customizer_data ) );
 				update_option( '_astra_sites_old_customizer_data', $customizer_data );
 
 				Astra_Customizer_Import::instance()->import( $customizer_data );
