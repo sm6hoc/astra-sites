@@ -593,9 +593,19 @@ body.loading-content .select-page-builder {
     pointer-events: none;
 }
 
+.astra-sites-preview input[type="checkbox"].disabled {
+    background: #eeeeee;
+    opacity: 1;
+    color: #fff;
+    box-shadow: none;
+    border-color: #b4b9be;
+}
+
 .astra-sites-tooltip-icon .dashicons {
-    color: #5d5d5d;
-    font-size: 18px;
+    color: #757575;
+    font-size: 15px;
+    vertical-align: middle;
+    height: auto;
 }
 
 #astra-sites-welcome-form-inline {
