@@ -511,6 +511,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 */
 		function delete_imported_posts() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
+			$message = '==== DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
 
 			do_action( 'astra_sites_delete_imported_posts', $post_id );
 
@@ -519,7 +520,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			}
 
 			/* translators: %s is the post ID */
-			wp_send_json_success( sprintf( __( 'Post ID %s deleted!', 'astra-sites' ), $post_id ) );
+			wp_send_json_success( $message );
 		}
 
 		/**
@@ -530,6 +531,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 */
 		function delete_imported_wp_forms() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
+			$message = '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $form_id ) . ' - ' . get_the_title( $form_id );
 
 			do_action( 'astra_sites_delete_imported_wp_forms', $post_id );
 
@@ -538,7 +540,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			}
 
 			/* translators: %s is the form ID */
-			wp_send_json_success( sprintf( __( 'Form ID %s deleted!', 'astra-sites' ), $post_id ) );
+			wp_send_json_success( $message );
 		}
 
 		/**
@@ -551,8 +553,11 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			$term_id = isset( $_REQUEST['term_id'] ) ? absint( $_REQUEST['term_id'] ) : '';
 
+			$message = '';
+
 			if ( $term_id ) {
 				$term = get_term( $term_id );
+				$message = '==== DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
 				if ( $term ) {
 					do_action( 'astra_sites_delete_imported_terms', $term_id, $term );
 					wp_delete_term( $term_id, $term->taxonomy );
@@ -560,7 +565,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			}
 
 			/* translators: %s is the term ID */
-			wp_send_json_success( sprintf( __( 'Term ID %s deleted!', 'astra-sites' ), $term_id ) );
+			wp_send_json_success( $message );
 		}
 
 	}
