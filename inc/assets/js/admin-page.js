@@ -810,13 +810,13 @@ var AstraSitesAjaxQueue = (function() {
 			if ( 'site-pages' == AstraSitesAdmin.action_slug ) {
 
 				$(document).trigger( 'astra-sites-import-wpforms' );
-				$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
+				//$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
 
 			} else {
 				if ( AstraSitesAdmin._is_process_customizer() ) {
 
 					$(document).trigger( 'astra-sites-import-wpforms' );
-					$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
+					//$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
 				}
 			}
 		},
@@ -1307,6 +1307,8 @@ var AstraSitesAjaxQueue = (function() {
 				.done(function ( data ) {
 
 					if( data.success ) {
+
+						$('body').removeClass('importing-site');
 
 						$('.astra-demo-import').removeClass('updating-message installing')
 							.removeAttr('data-import')
