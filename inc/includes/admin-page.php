@@ -170,9 +170,7 @@ defined( 'ABSPATH' ) or exit;
 									<strong><?php _e( 'Install Required Plugins', 'astra-sites' ); ?></strong>
 									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
 									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-plugins-settings" style="display: none;">
-										<p><?php _e( 'Plugins below are used to build this website:', 'astra-sites' ); ?></p>
 										<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
-										<p><?php _e( 'These are required for this website to work.', 'astra-sites' ); ?></p>
 									</div>
 								</li>
 								<li class="astra-sites-import-customizer">

@@ -236,23 +236,27 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 										<label>
 											<input type="radio" name="page_builder" value="gutenberg">
 											  <img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/gutenberg.jpg' ); ?>" />
+											  <div class="title"><?php _e( 'Gutenberg', 'astra-sites' ); ?></div>
 										</label>
 									</li>
 									<li>
 										<label>
 											  <input type="radio" name="page_builder" value="elementor">
 											<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/elementor.png' ); ?>" />
+											<div class="title"><?php _e( 'Elementor', 'astra-sites' ); ?></div>
 										</label>
 									</li>
 									<li>
 										<label>
 										  <input type="radio" name="page_builder" value="beaver-builder">
 											<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/beaver-builder.png' ); ?>" />
+											<div class="title"><?php _e( 'Beaver Builder', 'astra-sites' ); ?></div>
 										</li>
 									<li>
 										<label>
 											  <input type="radio" name="page_builder" value="brizy">
 											<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/brizy.jpg' ); ?>" />
+											<div class="title"><?php _e( 'Brizy', 'astra-sites' ); ?></div>
 										</label>
 									</li>
 								</ul>

@@ -654,6 +654,10 @@ body.loading-content .select-page-builder {
     margin: 0;
 } 
 
+#astra-sites-welcome-form #submit {
+    padding: 0em 4rem;
+}
+
 .page-builders li {
     cursor: pointer;
     display: inline-block;
@@ -669,7 +673,7 @@ body.loading-content .select-page-builder {
 
 .page-builders [type=radio] + img {
     cursor: pointer;
-    opacity: .5;
+    opacity: .9;
     border: 3px solid transparent;
     border-radius: 10px;
     transition: all linear 0.2s;
@@ -677,7 +681,6 @@ body.loading-content .select-page-builder {
 
 .page-builders [type=radio]:hover + img,
 .page-builders [type=radio]:checked + img {
-    border-color: #32373b;
     opacity: 1;
 }
 
