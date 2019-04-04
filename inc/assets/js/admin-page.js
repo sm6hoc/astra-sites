@@ -177,8 +177,10 @@ var AstraSitesAjaxQueue = (function() {
 
 				if (typeof data == 'object') { 
 					console.log('%c ' + JSON.stringify( data ) + ' ' + time, 'background: #ededed; color: #444');
+					$('.astra-sites-import-complete-message-extra').html( '<p>'  + JSON.stringify( data ) + ' ' + time + '</p>' );
 				} else {
 					console.log('%c ' + data + ' ' + time, 'background: #ededed; color: #444');
+					$('.astra-sites-import-complete-message-extra').html( '<p>' +  data + ' ' + time + '</p>' );
 				}
 
 
@@ -599,16 +601,48 @@ var AstraSitesAjaxQueue = (function() {
 
 					var date = new Date();
 
-					AstraSitesAdmin.import_end_time = date.toLocaleTimeString();
+					AstraSitesAdmin.import_end_time = new Date();// date.toLocaleTimeString();
 
 
-					$('.astra-sites-import-complete-message').show();
-					$('.astra-sites-import-complete-message').append( '<p>Import Start Time ' + AstraSitesAdmin.import_start_time + '</p>' );
-					$('.astra-sites-import-complete-message').append( '<p>Import End Time ' + AstraSitesAdmin.import_end_time + '</p>' );
+					// var startDate = new Date(0, 0, 0, start[0], start[1], 0);
+					// var endDate = new Date(0, 0, 0, end[0], end[1], 0);
+					// var diff = endDate.getTime() - startDate.getTime();
+					var diff    = ( AstraSitesAdmin.import_end_time.getTime() - AstraSitesAdmin.import_start_time.getTime() );
+
+					var time    = '';
+					var seconds = Math.floor( diff / 1000 );
+					var minutes = Math.floor( seconds / 60 );
+					var hours   = Math.floor( minutes / 60 );
+
+					minutes = minutes - ( hours * 60 );
+					seconds = seconds - ( minutes * 60 );
+
+					if( hours ) {
+						time += hours + ' Hours ';
+					}
+					if( minutes ) {
+						time += minutes + ' Minutes ';
+					}
+					if( seconds ) {
+						time += seconds + ' Seconds';
+					}
+
+					// var	output  = '<p>Import End Time ' + AstraSitesAdmin.import_end_time.toLocaleTimeString() + '</p>';
+					// 	output += '<p>Done!</p>';
+					var	output  = '<p>Done!</p>';
+						output += '<p>Your new website is ready 😍 and it took just <span class="import-time">'+time+'</span>!</p>';
+						output += '<div class="astra-sites-tweet-box">';
+						output += '<p>I just built my ❤ website using @AstraWP in just '+time+'!</p>';
+						output += '<div class="action"><a href="https://twitter.com/share" target="_blank" class="twitter-share-button" data-url="'+astraSitesAdmin.siteURL+'" data-text="I just built my ❤ website using @AstraWP in just '+time+'!" data-hashtags="wpastra" data-count="none">Click to Tweet</a></div>';
+						output += '<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>';
+						output += '</div>';
+				
+					$('.rotating,.current-importing-status-wrap,.notice-warning').remove();
+					$('.astra-sites-import-complete-message').show().html(output);
 
 					// 5. Pass - Import Complete.
 					AstraSitesAdmin._importSuccessMessage();
-					AstraSitesAdmin._log( astraSitesAdmin.log.success + ' ' + astraSitesAdmin.siteURL );
+					AstraSitesAdmin._log( astraSitesAdmin.log.success + '<a href="'+astraSitesAdmin.siteURL+'" target="_blank">'+astraSitesAdmin.siteURL+'</a>' );
 				}
 			});
 		},
@@ -1300,6 +1334,24 @@ var AstraSitesAjaxQueue = (function() {
 			wp.updates.queueChecker();
 		},
 
+		startTimer: function() {
+			var duration = 60 * 10;
+		    var timer = duration, minutes, seconds;
+		    setInterval(function () {
+		        minutes = parseInt(timer / 60, 10)
+		        seconds = parseInt(timer % 60, 10);
+
+		        minutes = minutes < 10 ? "0" + minutes : minutes;
+		        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		        $('.countdown').text(minutes + ":" + seconds);
+
+		        if (--timer < 0) {
+		            timer = duration;
+		        }
+		    }, 1000);
+		},
+
 		/**
 		 * Fires when a nav item is clicked.
 		 *
@@ -1312,7 +1364,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			var date = new Date();
 
-			AstraSitesAdmin.import_start_time = date.toLocaleTimeString();
+			AstraSitesAdmin.import_start_time = new Date();
 
 			var disabled = $(this).attr('data-import');
 
@@ -1322,9 +1374,13 @@ var AstraSitesAjaxQueue = (function() {
 					.text( wp.updates.l10n.installing );
 
 				$('.astra-sites-result-preview').show();
+				$('.astra-sites-import-complete-message-extra').show();
 				// var output  = '<div class="current-importing-status-title">Plugins Used in This Starter Site</div>';
 				var output = '<div class="current-importing-status-message"></div>';
 				$('.current-importing-status').html( output );
+				$('.current-importing-status-wrap').prepend( '<div style="display: flex;"><span class="dashicons dashicons-admin-generic rotating"></span><span style="margin-left: 5px;">The estimate time to import the site is <span class="countdown">10:00</span> Minutes!</span></div><hr/>' );
+				// $('.current-importing-status-wrap').prepend( '<p>Import process started at time ' + AstraSitesAdmin.import_start_time.toLocaleTimeString() + '</p>' );
+				AstraSitesAdmin.startTimer();
 
 				/**
 				 * Process Bulk Plugin Install & Activate

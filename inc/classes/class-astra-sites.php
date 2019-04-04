@@ -327,6 +327,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'isWhiteLabeled'    => Astra_Sites_White_Label::get_instance()->is_white_labeled(),
 					'ajaxurl'           => esc_url( admin_url( 'admin-ajax.php' ) ),
 					'siteURL'           => site_url(),
+					'docUrl'            => 'https://wpastra.com/',
 					'getProText'        => __( 'Get Agency Bundle', 'astra-sites' ),
 					'getProURL'         => esc_url( 'https://wpastra.com/agency/?utm_source=demo-import-panel&utm_campaign=astra-sites&utm_medium=wp-dashboard' ),
 					'getUpgradeText'    => __( 'Upgrade', 'astra-sites' ),
