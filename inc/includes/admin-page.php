@@ -260,6 +260,23 @@ defined( 'ABSPATH' ) or exit;
 		</div>
 		<div class="wp-full-overlay-main">
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
+			<div class="astra-sites-result-preview" style="display: none;">
+				<div class="inner">
+					<h2>Tweet / Email</h2>
+					<p>We're importing your website!</p>
+					<p>The process usually takes anywhere between 60 seconds to 10 minutes depending on the size of the website and speed of connection.</p>
+					<p>Please do not close this browser window until the site is imported completely.</p>
+					<div class="current-importing-status">
+						<div class="current-importing-status-title"></div>
+						<div class="current-importing-status-message"></div>
+					</div>
+					<div class="astra-sites-import-complete-message" style="display: none;">
+						<p>Done!</p>
+						<p>Your new website is ready and it took just 1:56 minutes!</p>
+						<p>Tweet: I just built my website using @AstraWP in just 1:56 minutes! Learn how: </p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </script>

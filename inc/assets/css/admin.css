@@ -689,3 +689,34 @@ body.loading-content .select-page-builder {
     margin-bottom: 2em;
     padding: .5em 1.5em;
 }
+
+.astra-sites-result-preview {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    overflow-y: auto;
+}
+
+.astra-sites-result-preview .inner {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 5em 0;
+}
+
+.astra-sites-result-preview h2 {
+    font-size: 2rem;
+}
+
+.astra-sites-result-preview p {
+    font-size: 1rem;
+}
+
+.current-importing-status {
+    padding: 1em 0;
+    font-size: 1rem;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
