@@ -105,11 +105,13 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
+			error_log( 'imported single gutenberg page - ' . $post_id );
+
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
 			// Empty mapping? Then return.
 			if ( empty( $ids_mapping ) ) {
-				return;
+				// return;
 			}
 
 			// Post content.
@@ -125,8 +127,8 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			// expects as 'u0026amp;'. So, Converted '&amp;' with 'u0026amp;'.
 			//
 			// @todo This affect for normal page content too. Detect only Gutenberg pages and process only on it.
-			$content = str_replace( '&amp;', 'u0026amp;', $content );
-
+			$content = str_replace( '&amp;', "\u0026amp;", $content );
+			$content = $this->get_content( $content );
 			// Update content.
 			wp_update_post(
 				array(
@@ -134,6 +136,48 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 					'post_content' => $content,
 				)
 			);
+		}
+
+		/**
+		 * Download and Replace hotlink images
+		 *
+		 * @since x.x.x
+		 *
+		 * @param  string $content Mixed post content.
+		 * @return array           Hotlink image array.
+		 */
+		function get_content( $content = '' ) {
+			$all_links   = wp_extract_urls( $content );
+			$image_links = array();
+			$image_map   = array();
+			// Not have any link.
+			if ( empty( $all_links ) ) {
+				return $content;
+			}
+			foreach ( $all_links as $key => $link ) {
+				if ( preg_match( '/\.(jpg|jpeg|png|gif)/i', $link ) ) {
+					$image_links[] = $link;
+				}
+			}
+			// Not have any image link.
+			if ( empty( $image_links ) ) {
+				return $content;
+			}
+			foreach ( $image_links as $key => $image_url ) {
+				// Download remote image.
+				$image            = array(
+					'url' => $image_url,
+					'id'  => rand( 000, 999 ),
+				);
+				$downloaded_image = Astra_Sites_Image_Importer::get_instance()->import( $image );
+				// Old and New image mapping links.
+				$image_map[ $image_url ] = $downloaded_image['url'];
+			}
+			// Replace old image links with new image links.
+			foreach ( $image_map as $old_url => $new_url ) {
+				$content = str_replace( $old_url, $new_url, $content );
+			}
+			return $content;
 		}
 
 	}

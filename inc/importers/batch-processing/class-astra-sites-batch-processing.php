@@ -163,7 +163,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 						);
 					}
 				} else {
-					Astra_Sites_Image_Importer::log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
+					error_log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
 				}
 			}
 

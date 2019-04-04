@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) or exit;
 $import_text = ( 'site-pages' == $global_cpt_meta['cpt_slug'] ) ? __( 'Import Page', 'astra-sites' ) : __( 'Import Site', 'astra-sites' );
 ?>
 
-<div class="wrap" id="astra-sites-admin">
+<div class="wrap" id="astra-sites-admin" data-slug="<?php echo $global_cpt_meta['cpt_slug']; ?>">
 
 	<div id="astra-sites-filters">
 
@@ -314,9 +314,9 @@ $import_text = ( 'site-pages' == $global_cpt_meta['cpt_slug'] ) ? __( 'Import Pa
 
 					<div class="astra-sites-advanced-options-wrap">
 
-						<h4><?php _e( 'Plugins Used in This Starter Site', 'astra-sites' ); ?></h4>
+						<h4><?php _e( 'Plugins Used in this Page', 'astra-sites' ); ?></h4>
 						<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
-						<p><?php _e( 'These plugins will be installed when you import this site.', 'astra-sites' ); ?></p>
+						<p><?php _e( 'These plugins will be installed when you import this page.', 'astra-sites' ); ?></p>
 
 					</div>
 				</div>
@@ -330,11 +330,7 @@ $import_text = ( 'site-pages' == $global_cpt_meta['cpt_slug'] ) ? __( 'Import Pa
 					</a>
 					<div id="astra-site-import-process-wrap" style="display: none;">
 						<progress id="astra-site-import-process" max="100" value="0"></progress>
-						<!-- <span id="astra-site-import-process-text"></span> -->
 					</div>
-					<!-- <a class="button button-hero hide-if-no-customize astra-site-import" href="#">
-						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
-					</a> -->
 				</div>
 				<button type="button" class="collapse-sidebar button" aria-expanded="true"
 						aria-label="Collapse Sidebar">

@@ -91,22 +91,27 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			if ( empty( $data ) ) {
 				wp_send_json_error( 'Empty page data.' );
 			}
-			$page_id     = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
-			$title       = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
-			$excerpt     = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
-			$post_args   = array(
+			$page_id = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
+			$title   = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
+			$excerpt = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
+
+			$post_args = array(
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
 				'post_title'   => $title,
 				'post_content' => $content,
 				'post_excerpt' => $excerpt,
 			);
+
 			$new_page_id = wp_insert_post( $post_args );
 			$post_meta   = isset( $_POST['data']['post-meta'] ) ? $_POST['data']['post-meta'] : array();
+
 			if ( ! empty( $post_meta ) ) {
 				self::import_post_meta( $new_page_id, $post_meta );
 			}
+
 			do_action( 'astra_sites_process_single', $new_page_id );
+
 			wp_send_json_success(
 				array(
 					'remove-page-id' => $page_id,
@@ -129,6 +134,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$metadata = (array) $metadata;
 
+			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
+
+			if ( 'gutenberg' == $default_page_builder ) {
+				return;
+			}
+
 			foreach ( $metadata as $meta_key => $meta_value ) {
 
 				if ( $meta_value ) {
@@ -141,13 +152,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						$raw_data = $meta_value;
 					}
 
-					if ( '_elementor_data' === $meta_key ) {
-						if ( is_array( $raw_data ) ) {
-							$raw_data = ( json_encode( $raw_data ) );
-						} else {
-							$raw_data = ( $raw_data );
+					if ( 'elementor' == $default_page_builder ) {
+
+						if ( '_elementor_data' === $meta_key ) {
+							if ( is_array( $raw_data ) ) {
+								$raw_data = ( json_encode( $raw_data ) );
+							} else {
+								$raw_data = ( $raw_data );
+							}
 						}
 					}
+
 					if ( '_elementor_data' !== $meta_key && '_elementor_draft' !== $meta_key && '_fl_builder_data' !== $meta_key && '_fl_builder_draft' !== $meta_key && 'brizy' !== $meta_key && 'brizy-migrations' !== $meta_key ) {
 						if ( is_array( $raw_data ) ) {
 							$raw_data = json_encode( $raw_data );
@@ -438,6 +453,8 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			);
 
 			wp_localize_script( 'astra-sites-render-grid', 'astraRenderGrid', $data );
+
+			$site_or_page = ( 'appearance_page_astra-sites' === $hook ) ? 'Site' : 'Page';
 
 			$data = apply_filters(
 				'astra_sites_localize_vars',
