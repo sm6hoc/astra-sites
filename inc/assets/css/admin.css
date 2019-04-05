@@ -726,6 +726,7 @@ body.loading-content .select-page-builder {
     font-size: 1rem;
     background: #eeeeee;
     padding: 1em;
+    margin-bottom: 4em;
 }
 
 .rotating {
@@ -748,7 +749,7 @@ body.loading-content .select-page-builder {
     background: #0185ba;
     color: #fff;
     padding: 2px 10px;
-    border-radius: 5px;
+    border-radius: 3px;
     animation: astra-scale 0.5s alternate infinite ease-in;
 }
 
@@ -773,4 +774,8 @@ body.loading-content .select-page-builder {
 
 .astra-sites-import-complete-message-extra {
     font-size: 1rem;
+}
+
+.current-importing-status p {
+    margin: 0;
 }
