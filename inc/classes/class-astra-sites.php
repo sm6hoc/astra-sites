@@ -68,6 +68,18 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			add_action( 'wp_ajax_astra-sites-backup-settings', array( $this, 'backup_settings' ) );
 			add_action( 'wp_ajax_astra-sites-set-reset-data', array( $this, 'set_reset_data' ) );
 			add_action( 'wp_ajax_astra-sites-activate-theme', array( $this, 'activate_theme' ) );
+			add_action( 'wp_ajax_astra-sites-getting-started-notice', array( $this, 'getting_started_notice' ) );
+		}
+
+		/**
+		 * Close getting started notice for current user
+		 *
+		 * @since x.x.x
+		 * @return void
+		 */
+		function getting_started_notice() {
+			update_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
+			wp_send_json_success();
 		}
 
 		/**
@@ -141,18 +153,17 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$theme_status = 'astra-sites-theme-' . $this->get_theme_status();
 
-			Astra_Sites_Notices::add_notice(
+			Astra_Notices::add_notice(
 				array(
 					'id'               => 'astra-theme-activation-nag',
 					'type'             => 'error',
 					'show_if'          => ( ! defined( 'ASTRA_THEME_SETTINGS' ) ) ? true : false,
 					/* translators: 1: theme.php file*/
-					'message'          => sprintf( __( 'Astra Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="astra">Install & Activate Now</a>', 'astra-sites' ), ASTRA_SITES_NAME, esc_url( admin_url( 'themes.php?theme=astra' ) ), $theme_status ),
+					'message'          => sprintf( __( '<p>Astra Theme needs to be active for you to use currently installed "%1$s" plugin. <a href="#" class="%3$s" data-theme-slug="astra">Install & Activate Now</a></p>', 'astra-sites' ), ASTRA_SITES_NAME, esc_url( admin_url( 'themes.php?theme=astra' ) ), $theme_status ),
 					'dismissible'      => true,
 					'dismissible-time' => WEEK_IN_SECONDS,
 				)
 			);
-
 		}
 
 		/**
@@ -405,7 +416,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		private function includes() {
 
-			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-notices.php';
+			require_once ASTRA_SITES_DIR . 'inc/lib/astra-notices/class-astra-notices.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-page.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/class-astra-sites-compatibility.php';
 			require_once ASTRA_SITES_DIR . 'inc/classes/class-astra-sites-white-label.php';
