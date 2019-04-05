@@ -149,6 +149,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 						if ( 'json' === $ext ) {
 							$forms = json_decode( file_get_contents( $xml_path['data']['file'] ), true );
 
+							vl( $forms );
+
 							if ( ! empty( $forms ) ) {
 
 								foreach ( $forms as $form ) {
@@ -191,7 +193,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 					}
 				}
 			}
-
+			vl( $ids_mapping );
 			update_option( 'astra_sites_wpforms_ids_mapping', $ids_mapping );
 
 			wp_send_json_success( $ids_mapping );

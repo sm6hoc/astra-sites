@@ -145,21 +145,18 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				if ( $meta_value ) {
 
 					if ( is_serialized( $meta_value, true ) ) {
-						$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
+						$raw_data = maybe_unserialize( ( $meta_value ) );
 					} elseif ( is_array( $meta_value ) ) {
-						$raw_data = json_decode( stripslashes( $meta_value ), true );
+						$raw_data = json_decode( ( $meta_value ), true );
 					} else {
 						$raw_data = $meta_value;
 					}
 
-					if ( 'elementor' == $default_page_builder ) {
-
-						if ( '_elementor_data' === $meta_key ) {
-							if ( is_array( $raw_data ) ) {
-								$raw_data = ( json_encode( $raw_data ) );
-							} else {
-								$raw_data = ( $raw_data );
-							}
+					if ( '_elementor_data' === $meta_key ) {
+						if ( is_array( $raw_data ) ) {
+							$raw_data = ( json_encode( $raw_data ) );
+						} else {
+							$raw_data = ( $raw_data );
 						}
 					}
 

@@ -111,7 +111,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 
 			// Empty mapping? Then return.
 			if ( empty( $ids_mapping ) ) {
-				// return;
+				return;
 			}
 
 			// Post content.

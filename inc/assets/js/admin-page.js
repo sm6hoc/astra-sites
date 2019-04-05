@@ -1583,7 +1583,6 @@ var AstraSitesAjaxQueue = (function() {
 		 * Render Demo Preview
 		 */
 		_renderDemoPreview: function(anchor) {
-			console.log(AstraSitesAdmin);
 
 			var demoId             	   = AstraSitesAdmin.current_site['id'] || '',
 				demoType               = AstraSitesAdmin.current_site['astra-site-type'] || '',
@@ -1612,10 +1611,13 @@ var AstraSitesAjaxQueue = (function() {
 				astraSiteOptions = AstraSitesAdmin.current_site['astra-site-options-data'];
 			}
 
+			AstraSitesAdmin.wpforms_url = AstraSitesAdmin.current_site['astra-site-wpforms-path'];
+
 			AstraSitesAdmin._log( astraSitesAdmin.log.preview + ' "' + demo_name + '" URL : ' + demoURL );
 
 
 			var template = wp.template( preview_template );
+			console.log(AstraSitesAdmin);
 
 
 			templateData = [{

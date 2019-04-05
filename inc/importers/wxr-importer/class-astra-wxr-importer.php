@@ -53,7 +53,7 @@ class Astra_WXR_Importer {
 		add_filter( 'upload_mimes', array( $this, 'custom_upload_mimes' ) );
 		add_action( 'wp_ajax_astra-wxr-import', array( $this, 'sse_import' ) );
 		add_filter( 'wxr_importer.pre_process.user', '__return_null' );
-		// add_filter( 'wxr_importer.pre_process.post', array( $this, 'gutenberg_content_fix' ), 10, 4 );
+		add_filter( 'wxr_importer.pre_process.post', array( $this, 'gutenberg_content_fix' ), 10, 4 );
 		if ( version_compare( get_bloginfo( 'version' ), '5.1.0', '>=' ) ) {
 			add_filter( 'wp_check_filetype_and_ext', array( $this, 'real_mime_types_5_1_0' ), 10, 5 );
 		} else {
