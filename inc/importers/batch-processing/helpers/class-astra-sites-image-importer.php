@@ -171,8 +171,6 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 		 */
 		public function import( $attachment ) {
 
-				error_log( 'Mahesh said message' . $attachment['url'] );
-
 			$saved_image = $this->get_saved_image( $attachment );
 			if ( $saved_image ) {
 				return $saved_image;

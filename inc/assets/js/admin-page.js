@@ -1617,8 +1617,6 @@ var AstraSitesAjaxQueue = (function() {
 
 
 			var template = wp.template( preview_template );
-			console.log(AstraSitesAdmin);
-
 
 			templateData = [{
 				id                       : demoId,

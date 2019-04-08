@@ -45,7 +45,8 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 	 */
 	public function import() {
 
-		// \Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for Elementor ----' );
+		error_log( '---- Processing WordPress Posts / Pages - for Elementor ----' );
+
 		$post_types = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
 		if ( empty( $post_types ) && ! is_array( $post_types ) ) {
 			return;
@@ -72,7 +73,8 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 	 */
 	public function import_single_post( $post_id = 0 ) {
 
-		// \Astra_Sites_Image_Importer::log( 'Post ID: ' . $post_id );
+		error_log( '---- Processing WordPress Page - for Elementor ---- "' . $post_id . '"' );
+
 		if ( ! empty( $post_id ) ) {
 
 			$hotlink_imported = get_post_meta( $post_id, '_astra_sites_hotlink_imported', true );

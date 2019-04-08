@@ -149,8 +149,6 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 						if ( 'json' === $ext ) {
 							$forms = json_decode( file_get_contents( $xml_path['data']['file'] ), true );
 
-							vl( $forms );
-
 							if ( ! empty( $forms ) ) {
 
 								foreach ( $forms as $form ) {
@@ -171,7 +169,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 										// Set meta for tracking the post.
 										update_post_meta( $new_id, '_astra_sites_imported_wp_forms', true );
-										Astra_Sites_Image_Importer::log( '==== INSERTED - WP Form ' . $new_id );
+										error_log( '==== INSERTED - WP Form ' . $new_id );
 									}
 
 									if ( $new_id ) {
@@ -193,7 +191,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 					}
 				}
 			}
-			vl( $ids_mapping );
+
 			update_option( 'astra_sites_wpforms_ids_mapping', $ids_mapping );
 
 			wp_send_json_success( $ids_mapping );
@@ -214,7 +212,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if ( ! empty( $customizer_data ) ) {
 
 				// Set meta for tracking the post.
-				Astra_Sites_Image_Importer::log( 'Customizer Data ' . json_encode( $customizer_data ) );
+				error_log( 'Customizer Data ' . json_encode( $customizer_data ) );
 				update_option( '_astra_sites_old_customizer_data', $customizer_data );
 
 				Astra_Customizer_Import::instance()->import( $customizer_data );
@@ -281,7 +279,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 				// Set meta for tracking the post.
 				if ( is_array( $options_data ) ) {
-					Astra_Sites_Image_Importer::log( 'Site Options Data ' . json_encode( $options_data ) );
+					error_log( 'Site Options Data ' . json_encode( $options_data ) );
 					update_option( '_astra_sites_old_site_options', $options_data );
 				}
 
@@ -314,7 +312,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				// Set meta for tracking the post.
 				if ( is_object( $widgets_data ) ) {
 					$widgets_data = (array) $widgets_data;
-					Astra_Sites_Image_Importer::log( 'Widget Data ' . json_encode( $widgets_data ) );
+					error_log( 'Widget Data ' . json_encode( $widgets_data ) );
 					update_option( '_astra_sites_old_widgets_data', $widgets_data );
 				}
 
@@ -491,7 +489,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 							if ( isset( $sidebars_widgets['wp_inactive_widgets'] ) ) {
 								if ( ! in_array( $widget_key, $sidebars_widgets['wp_inactive_widgets'] ) ) {
-									Astra_Sites_Image_Importer::log( '==== IN ACTIVATE - Widget ' . $widget_key );
+									error_log( '==== IN ACTIVATE - Widget ' . $widget_key );
 									$sidebars_widgets['wp_inactive_widgets'][] = $widget_key;
 								}
 							}

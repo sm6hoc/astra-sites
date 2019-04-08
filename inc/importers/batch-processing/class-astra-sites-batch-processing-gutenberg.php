@@ -85,7 +85,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			// Allow the SVG tags in batch update process.
 			add_filter( 'wp_kses_allowed_html', array( $this, 'allowed_tags_and_attributes' ), 10, 2 );
 
-			Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for "Gutenberg" ----' );
+			error_log( '---- Processing WordPress Posts / Pages - for "Gutenberg" ----' );
 
 			$post_ids = Astra_Sites_Batch_Processing::get_pages( array( 'page' ) );
 			if ( empty( $post_ids ) && ! is_array( $post_ids ) ) {
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
-			error_log( 'imported single gutenberg page - ' . $post_id );
+			error_log( '---- Processing WordPress Page - for gutenberg ---- "' . $post_id . '"' );
 
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
@@ -129,6 +129,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			// @todo This affect for normal page content too. Detect only Gutenberg pages and process only on it.
 			$content = str_replace( '&amp;', "\u0026amp;", $content );
 			$content = $this->get_content( $content );
+
 			// Update content.
 			wp_update_post(
 				array(
@@ -147,13 +148,16 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		 * @return array           Hotlink image array.
 		 */
 		function get_content( $content = '' ) {
+
 			$all_links   = wp_extract_urls( $content );
 			$image_links = array();
 			$image_map   = array();
+
 			// Not have any link.
 			if ( empty( $all_links ) ) {
 				return $content;
 			}
+
 			foreach ( $all_links as $key => $link ) {
 				if ( preg_match( '/\.(jpg|jpeg|png|gif)/i', $link ) ) {
 					$image_links[] = $link;
@@ -163,6 +167,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			if ( empty( $image_links ) ) {
 				return $content;
 			}
+
 			foreach ( $image_links as $key => $image_url ) {
 				// Download remote image.
 				$image            = array(
@@ -173,10 +178,12 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 				// Old and New image mapping links.
 				$image_map[ $image_url ] = $downloaded_image['url'];
 			}
+
 			// Replace old image links with new image links.
 			foreach ( $image_map as $old_url => $new_url ) {
 				$content = str_replace( $old_url, $new_url, $content );
 			}
+
 			return $content;
 		}
 

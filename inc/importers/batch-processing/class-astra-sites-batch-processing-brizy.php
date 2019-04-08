@@ -53,7 +53,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		 */
 		public function import() {
 
-			Astra_Sites_Image_Importer::log( '---- Processing WordPress Posts / Pages - for "Brizy" ----' );
+			error_log( '---- Processing WordPress Posts / Pages - for "Brizy" ----' );
 			if ( ! is_callable( 'Brizy_Editor_Storage_Common::instance' ) ) {
 				return;
 			}
@@ -83,6 +83,8 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 		 * @return void
 		 */
 		public function import_single_post( $post_id = 0 ) {
+
+			error_log( '---- Processing WordPress Page - for "Brizy" ---- "' . $post_id . '"' );
 
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
