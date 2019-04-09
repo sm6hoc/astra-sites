@@ -66,16 +66,17 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @return void
 		 */
 		function getting_started() {
-			if( 'plugins' !== get_current_screen()->base ) {
+			if ( 'plugins' !== get_current_screen()->base ) {
 				return;
 			}
 
 			$processed = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
 
-			if( $processed ) {
+			if ( $processed ) {
 				return;
 			}
 			?>
+			<?php /* translators: %1$s is the admin page URL. */ ?>
 			<div class="astra-sites-getting-started-notice notice notice-info"><p><?php printf( __( 'Welcome! Import your favorite site from the website <a class="astra-sites-getting-started-btn" href="%1$s">library</a>!', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites' ) ); ?></p></div>
 			<?php
 		}
