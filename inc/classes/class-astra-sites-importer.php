@@ -549,8 +549,8 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			if ( $term_id ) {
 				$term    = get_term( $term_id );
-				$message = '==== DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
 				if ( $term ) {
+					$message = '==== DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
 					Astra_Sites_Importer_Log::add( $message );
 					wp_delete_term( $term_id, $term->taxonomy );
 				}
