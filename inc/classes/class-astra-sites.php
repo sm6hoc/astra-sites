@@ -88,9 +88,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			}
 
 			$data = isset( $_POST['data'] ) ? $_POST['data'] : array();
+
 			if ( empty( $data ) ) {
 				wp_send_json_error( 'Empty page data.' );
 			}
+
 			$page_id = isset( $_POST['data']['id'] ) ? $_POST['data']['id'] : '';
 			$title   = isset( $_POST['data']['title']['rendered'] ) ? $_POST['data']['title']['rendered'] : '';
 			$excerpt = isset( $_POST['data']['excerpt']['rendered'] ) ? $_POST['data']['excerpt']['rendered'] : '';
@@ -144,28 +146,26 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 				if ( $meta_value ) {
 
-					if ( is_serialized( $meta_value, true ) ) {
-						$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
-					} elseif ( is_array( $meta_value ) ) {
-						$raw_data = json_decode( ( $meta_value ), true );
-					} else {
-						$raw_data = $meta_value;
-					}
-
 					if ( '_elementor_data' === $meta_key ) {
+
+						$raw_data = json_decode( stripslashes( $meta_value ), true );
+
 						if ( is_array( $raw_data ) ) {
 							$raw_data = wp_slash( json_encode( $raw_data ) );
 						} else {
 							$raw_data = wp_slash( $raw_data );
 						}
-					}
+					} else {
 
-					if ( '_elementor_data' !== $meta_key && '_elementor_draft' !== $meta_key && '_fl_builder_data' !== $meta_key && '_fl_builder_draft' !== $meta_key && 'brizy' !== $meta_key && 'brizy-migrations' !== $meta_key && 'brizy-bk-Brizy_Admin_Migrations_ShortcodesMobileOneMigration-1.0.39' !== $meta_key ) {
-
-						if ( is_array( $raw_data ) ) {
-							$raw_data = json_encode( $raw_data );
+						if ( is_serialized( $meta_value, true ) ) {
+							$raw_data = maybe_unserialize( stripslashes( $meta_value ) );
+						} elseif ( is_array( $meta_value ) ) {
+							$raw_data = json_decode( stripslashes( $meta_value ), true );
+						} else {
+							$raw_data = $meta_value;
 						}
 					}
+
 					update_post_meta( $post_id, $meta_key, $raw_data );
 				}
 			}
@@ -327,7 +327,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://astra-sites-multisite.sharkz.in/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://nik-websitedemos.sharkz.in/wp-json/wp/v2/' );
 
 		}
 
