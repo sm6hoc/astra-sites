@@ -166,15 +166,6 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 							$raw_data = json_encode( $raw_data );
 						}
 					}
-
-					// if ( str ) {
-
-					// }
-
-					vl( $meta_key );
-					vl( $meta_value );
-					vl( $raw_data );
-					vl( '===' );
 					update_post_meta( $post_id, $meta_key, $raw_data );
 				}
 			}
