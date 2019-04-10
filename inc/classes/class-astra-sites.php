@@ -397,28 +397,31 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'astra-sites'             => array(),
 				);
 
-				$category_slug = 'astra-site-category';
-				$cpt_slug      = 'astra-sites';
-				$page_builder  = 'astra-site-page-builder';
+				$category_slug   = 'astra-site-category';
+				$cpt_slug        = 'astra-sites';
+				$page_builder    = 'astra-site-page-builder';
+				$parent_category = '';
 
 			} elseif ( 'appearance_page_site-pages' == $hook ) {
 
 				$_stored_data = array(
-					'site-pages-category'     => array(),
-					'site-pages-page-builder' => array(),
-					'site-pages'              => array(),
+					'site-pages-category'        => array(),
+					'site-pages-page-builder'    => array(),
+					'site-pages-parent-category' => array(),
+					'site-pages'                 => array(),
 				);
 
-				$category_slug = 'site-pages-category';
-				$cpt_slug      = 'site-pages';
-				$page_builder  = 'site-pages-page-builder';
+				$category_slug   = 'site-pages-category';
+				$cpt_slug        = 'site-pages';
+				$page_builder    = 'site-pages-page-builder';
+				$parent_category = 'site-pages-parent-category';
 			}
 
 			$data = apply_filters(
 				'astra_sites_localize_vars',
 				array(
-					'ApiURL'        => self::$api_url,
-					'filters'       => array(
+					'ApiURL'          => self::$api_url,
+					'filters'         => array(
 						'page_builder' => array(
 							'title'   => __( 'Page Builder', 'astra-sites' ),
 							'slug'    => 'astra-site-page-builder',
@@ -430,10 +433,11 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 							'trigger' => 'astra-api-category-loaded',
 						),
 					),
-					'_stored_data'  => $_stored_data,
-					'category_slug' => $category_slug,
-					'page_builder'  => $page_builder,
-					'cpt_slug'      => $cpt_slug,
+					'_stored_data'    => $_stored_data,
+					'category_slug'   => $category_slug,
+					'page_builder'    => $page_builder,
+					'cpt_slug'        => $cpt_slug,
+					'parent_category' => $parent_category,
 				)
 			);
 			wp_localize_script( 'astra-sites-api', 'astraSitesApi', $data );
@@ -454,6 +458,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					'sites'                => $request_params,
 					'page-builders'        => array(),
 					'categories'           => array(),
+					'parent_categories'    => array(),
 					'settings'             => array(),
 					'default_page_builder' => Astra_Sites_Page::get_instance()->get_setting( 'page_builder' ),
 				)

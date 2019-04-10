@@ -44,8 +44,8 @@ $import_text = ( 'site-pages' == $global_cpt_meta['cpt_slug'] ) ? __( 'Import Pa
 						<input placeholder="<?php _e( 'Search Sites...', 'astra-sites' ); ?>" type="search" aria-describedby="live-search-desc" id="wp-filter-search-input" class="wp-filter-search">
 					</div>
 
-					<div class="page-filters-wrap">
-						<div class="page-filters-slug" data-id="astra-site-category"></div>
+					<div class="filters-wrap">
+						<div class="page-filters-slug" data-id="site-pages-parent-category"></div>
 					</div>
 
 				</div>

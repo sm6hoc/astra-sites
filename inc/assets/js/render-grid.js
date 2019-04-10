@@ -23,6 +23,7 @@
 		{
 			this._resetPagedCount();
 			this._bind();
+			this._loadParentPageCategory();
 			this._loadPageBuilders();
 		},
 
@@ -40,6 +41,7 @@
 			$( document ).on('astra-api-post-loaded-on-scroll' , AstraRender._reinitGridScrolled );
 			$( document ).on('astra-api-post-loaded'           , AstraRender._reinitGrid );
 			$( document ).on('astra-api-page-builder-loaded'       , AstraRender._addPageBuilders );
+			$( document ).on('astra-api-page-parent-loaded'       , AstraRender._addParentCategory );
 			$( document ).on('astra-api-category-loaded'   			, AstraRender._loadFirstGrid );
 
 			// Event's for API request.
@@ -211,6 +213,25 @@
 			}
 		},
 
+		_apiAddParam_astra_page_parent_category: function() {
+
+			// Add 'site-pages-parent-category'
+			if ( '' == astraSitesApi.parent_category) {
+				return;
+			}
+
+			var selected_category_id = jQuery( '.filter-links[data-category="' + astraSitesApi.parent_category + '"]' ).find('.current').data('group') || '';
+			if( '' !== selected_category_id && 'all' !== selected_category_id ) {
+				AstraRender._api_params[astraSitesApi.parent_category] =  selected_category_id;
+			} else if( astraRenderGrid.sites && astraRenderGrid['categories'].include ) {
+				if( AstraRender._isArray( astraRenderGrid['categories'].include ) ) {
+					AstraRender._api_params[astraSitesApi.parent_category] = astraRenderGrid['categories'].include.join(',');
+				} else {
+					AstraRender._api_params[astraSitesApi.parent_category] = astraRenderGrid['categories'].include;
+				}
+			}
+		},
+
 		_apiAddParam_astra_site_page_builder: function() {
 			// Add 'astra-site-page-builder'
 			var selected_page_builder_id = jQuery( '.filter-links[data-category="' + astraSitesApi.page_builder + '"]' ).find('.current').data('group') || '';
@@ -272,6 +293,7 @@
 			AstraRender._apiAddParam_search();
 			AstraRender._apiAddParam_per_page();
 			AstraRender._apiAddParam_astra_site_category();
+			AstraRender._apiAddParam_astra_page_parent_category();
 			AstraRender._apiAddParam_astra_site_page_builder();
 			AstraRender._apiAddParam_page();
 			AstraRender._apiAddParam_site_url();
@@ -316,6 +338,33 @@
 					_params['include'] = astraRenderGrid['page-builders'].include.join(',');
 				} else {
 					_params['include'] = astraRenderGrid['page-builders'].include;
+				}
+			}
+
+			var decoded_params = decodeURIComponent( $.param( _params ) );
+
+			if( decoded_params.length ) {
+				return '/?' + decoded_params;
+			}
+
+			return '/';
+		},
+
+		/**
+		 * Get Parent Category Params
+		 *
+		 * @param  {string} category_slug Category Slug.
+		 * @return {mixed}               Add `include=<category-ids>` in API request.
+		 */
+		_getParentCategoryParams: function( category_slug ) {
+
+			var _params = {};
+
+			if( astraRenderGrid.sites && astraRenderGrid['categories'].include ) {
+				if( AstraRender._isArray( astraRenderGrid['categories'].include ) ) {
+					_params['include'] = astraRenderGrid['categories'].include.join(',');
+				} else {
+					_params['include'] = astraRenderGrid['categories'].include;
 				}
 			}
 
@@ -378,6 +427,33 @@
 		/**
 		 * Show Filters
 		 */
+		_loadParentPageCategory: function() {
+
+			if ( '' !== astraSitesApi.parent_category ) {
+
+				console.log(astraSitesApi.parent_category);
+
+				/**
+				 * Page Parent Site Category
+				 */
+				var parent_category = {
+					slug          : astraSitesApi.parent_category + AstraRender._getParentCategoryParams(),
+					id            : astraSitesApi.parent_category,
+					class         : astraSitesApi.parent_category,
+					trigger       : 'astra-api-page-parent-loaded',
+					wrapper_class : 'filter-links',
+					show_all      : AstraRender._getCategoryAllSelectStatus( astraSitesApi.parent_category ),
+				};
+
+				console.log(parent_category)
+
+				AstraSitesAPI._api_request( parent_category );
+			}
+		},
+
+		/**
+		 * Show Filters
+		 */
 		_loadPageBuilders: function() {
 
 			/**
@@ -423,6 +499,23 @@
 				AstraRender._showSites();
 			}
 
+		},
+
+		/**
+		 * Append filters for Parent Category.
+		 *
+		 * @param  {object} event Object.
+		 * @param  {object} data  API response data.
+		 */
+		_addParentCategory: function(  event, data  ) {
+
+			event.preventDefault();
+
+			if( $( '.page-filters-slug[data-id="' + data.args.id + '"]' ).length ) {
+				var template = wp.template('astra-site-filters');
+				$( '.page-filters-slug[data-id="' + data.args.id + '"]' ).html(template( data ));
+				$( '.page-filters-slug[data-id="' + data.args.id + '"]' ).find('li:first a').addClass('current');
+			}
 		},
 
 		/**
