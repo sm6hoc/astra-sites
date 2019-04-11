@@ -685,9 +685,8 @@ body.loading-content .select-page-builder {
 }
 
 .astra-sites-page-builder-notice {
-    text-align: left;
-    margin-top: 5em;
-    padding: .5em 1.5em;
+    text-align: center;
+    margin: 1em 0 2em 0;
 }
 
 .current-importing-status-wrap {

@@ -264,7 +264,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 									<li>
 										<label>
 											<input type="radio" name="page_builder" value="elementor">
-											<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/elementor.png' ); ?>" />
+											<img src="<?php echo esc_url( ASTRA_SITES_URI . 'inc/assets/images/elementor.jpg' ); ?>" />
 											<div class="title"><?php _e( 'Elementor', 'astra-sites' ); ?></div>
 										</label>
 									</li>
@@ -282,7 +282,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 										</label>
 									</li>
 								</ul>
-								<div class="notice notice-warning astra-sites-page-builder-notice" style="display: none;">
+								<div class="astra-sites-page-builder-notice" style="display: none;">
 									<p class="description"><?php _e( 'Please select your favorite page builder to continue..', 'astra-sites' ); ?></p>
 								</div>
 								<?php submit_button( __( 'Next', 'astra-sites' ), 'primary button-hero disabled' ); ?>
