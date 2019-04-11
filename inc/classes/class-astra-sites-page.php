@@ -253,7 +253,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 					<div class="inner">
 						<form id="astra-sites-welcome-form" enctype="multipart/form-data" method="post">
 							<h1><?php _e( 'Select Page Builder', 'astra-sites' ); ?></h1>
-							<p class="description"><?php _e( 'Select your favorite page builder to import sites or individual pages.', 'astra-sites' ); ?></p>
+							<p><?php _e( 'Astra offers starter sites that can be imported in one click. These templates are available in few different page builders. Please choose your preferred page builder from the list below.', 'astra-sites' ); ?></p>
 							<div class="fields">
 								<ul class="page-builders">
 									<li>
