@@ -241,6 +241,9 @@
 #astra-sites-admin {
     height: 100vh;
 }
+#astra-sites-admin[data-slug="astra-sites"] .section-right .filters-wrap {
+	display: none;
+}
 .install-theme-info > .notice {
     margin: 5px 0 10px 0;
 }
@@ -652,4 +655,4 @@ body.loading-content .select-page-builder {
     width: 100%;
     border: none;
     margin: 0;
-} 
+}
