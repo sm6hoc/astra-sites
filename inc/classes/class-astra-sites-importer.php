@@ -169,7 +169,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 										// Set meta for tracking the post.
 										update_post_meta( $new_id, '_astra_sites_imported_wp_forms', true );
-										Astra_Sites_Importer_Log::add( '==== INSERTED - WP Form ' . $new_id );
+										Astra_Sites_Importer_Log::add( 'INSERTED - WP Form ' . $new_id );
 									}
 
 									if ( $new_id ) {
@@ -209,7 +209,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			if ( ! empty( $customizer_data ) ) {
 
-				Astra_Sites_Importer_Log::add( '==== IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $customizer_data ) );
+				Astra_Sites_Importer_Log::add( 'IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $customizer_data ) );
 
 				// Set meta for tracking the post.
 				update_option( '_astra_sites_old_customizer_data', $customizer_data );
@@ -240,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			if ( isset( $wxr_url ) ) {
 
-				Astra_Sites_Importer_Log::add( '==== IMPORTING from XML ' . $xml );
+				Astra_Sites_Importer_Log::add( 'IMPORTING from XML ' . $xml );
 
 				// Download XML file.
 				$xml_path = Astra_Sites_Helper::download_file( $wxr_url );
@@ -276,7 +276,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 				// Set meta for tracking the post.
 				if ( is_array( $options_data ) ) {
-					Astra_Sites_Importer_Log::add( '==== IMPORTED - SITE OPTIONS ' . json_encode( $options_data ) );
+					Astra_Sites_Importer_Log::add( 'IMPORTED - SITE OPTIONS ' . json_encode( $options_data ) );
 					update_option( '_astra_sites_old_site_options', $options_data );
 				}
 
@@ -299,7 +299,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			$widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripcslashes( $_POST['widgets_data'] ) ) : '';
 
-			Astra_Sites_Importer_Log::add( '==== IMPORTED - WIDGETS ' . json_encode( $widgets_data ) );
+			Astra_Sites_Importer_Log::add( 'IMPORTED - WIDGETS ' . json_encode( $widgets_data ) );
 
 			if ( ! empty( $widgets_data ) ) {
 
@@ -427,7 +427,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 				Astra_Minify::refresh_assets();
 			}
 
-			Astra_Sites_Importer_Log::add( '==== Complete ====' );
+			Astra_Sites_Importer_Log::add( 'Complete ' );
 		}
 
 		/**
@@ -437,7 +437,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 * @return void
 		 */
 		function reset_customizer_data() {
-			Astra_Sites_Importer_Log::add( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( get_option( 'astra-settings', array() ) ) );
+			Astra_Sites_Importer_Log::add( 'DELETED - CUSTOMIZER SETTINGS ' . json_encode( get_option( 'astra-settings', array() ) ) );
 
 			delete_option( 'astra-settings' );
 
@@ -454,7 +454,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			$options = get_option( '_astra_sites_old_site_options', array() );
 
-			Astra_Sites_Importer_Log::add( '==== DELETED - SITE OPTIONS ' . json_encode( $options ) );
+			Astra_Sites_Importer_Log::add( 'DELETED - SITE OPTIONS ' . json_encode( $options ) );
 
 			if ( $options ) {
 				foreach ( $options as $option_key => $option_value ) {
@@ -474,7 +474,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		function reset_widgets_data() {
 			$old_widgets = get_option( '_astra_sites_old_widgets_data', array() );
 
-			Astra_Sites_Importer_Log::add( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
+			Astra_Sites_Importer_Log::add( 'DELETED - WIDGETS ' . json_encode( $old_widgets ) );
 
 			if ( $old_widgets ) {
 				$sidebars_widgets = get_option( 'sidebars_widgets', array() );
@@ -507,7 +507,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 */
 		function delete_imported_posts() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
-			$message = '==== DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+			$message = 'DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
 
 			Astra_Sites_Importer_Log::add( $message );
 			wp_delete_post( $post_id, true );
@@ -525,7 +525,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		function delete_imported_wp_forms() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
 
-			$message = '==== DELETED - FORM ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+			$message = 'DELETED - FORM ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
 
 			Astra_Sites_Importer_Log::add( $message );
 
@@ -550,7 +550,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			if ( $term_id ) {
 				$term    = get_term( $term_id );
 				if ( $term ) {
-					$message = '==== DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
+					$message = 'DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
 					Astra_Sites_Importer_Log::add( $message );
 					wp_delete_term( $term_id, $term->taxonomy );
 				}

@@ -117,7 +117,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 */
 		function start( $data = array(), $demo_api_uri = '' ) {
 
-			Astra_Sites_Importer_Log::add( '==== Started ====' );
+			Astra_Sites_Importer_Log::add( 'Started Import Process' );
 
 			Astra_Sites_Importer_Log::add( '# System Details: ' );
 			Astra_Sites_Importer_Log::add( "Debug Mode \t\t: " . self::get_debug_mode() );
