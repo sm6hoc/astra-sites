@@ -6,6 +6,7 @@
 		 * Init
 		 */
 		init: function() {
+			this._auto_close_notice();
 			this._bind();
 		},
 
@@ -22,7 +23,6 @@
 			$( document ).on( 'click', '.astra-sites-theme-not-installed', AstraSitesInstallTheme._install_and_activate );
 			$( document ).on( 'click', '.astra-sites-theme-installed-but-inactive', AstraSitesInstallTheme._activateTheme );
 			$( document ).on('wp-theme-install-success' , AstraSitesInstallTheme._activateTheme);
-			$( document ).on( 'click', '.astra-sites-getting-started-btn' , AstraSitesInstallTheme._notice_closed);
 		},
 
 		/**
@@ -31,23 +31,20 @@
 		 * @param  {object} event
 		 * @return void
 		 */
-		_notice_closed: function( event ) {
-			event.preventDefault();
+		_auto_close_notice: function() {
+			
+			if( $( '.astra-sites-getting-started-btn' ).length ) {
+				$.ajax({
+					url: AstraSitesInstallThemeVars.ajaxurl,
+					type: 'POST',
+					data: {
+						'action' : 'astra-sites-getting-started-notice'
+					},
+				})
+				.done(function (result) {
+				});
+			}
 
-			var admin_link = $(this).attr('href') || '';
-
-			$.ajax({
-				url: AstraSitesInstallThemeVars.ajaxurl,
-				type: 'POST',
-				data: {
-					'action' : 'astra-sites-getting-started-notice'
-				},
-			})
-			.done(function (result) {
-				if( result.success ) {
-					window.location = admin_link;
-				}
-			});
 		},
 
 		/**

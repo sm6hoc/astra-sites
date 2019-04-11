@@ -77,7 +77,9 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			}
 			?>
 			<?php /* translators: %1$s is the admin page URL. */ ?>
-			<div class="astra-sites-getting-started-notice notice notice-info"><p><?php printf( __( 'Welcome! Import your favorite site from the website <a class="astra-sites-getting-started-btn" href="%1$s">library</a>!', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites' ) ); ?></p></div>
+			<div class="notice notice-info is-dismissible astra-sites-getting-started-notice"> 
+				<p><?php printf( __( 'Welcome! Import your favorite site from the website <a class="astra-sites-getting-started-btn" href="%1$s">library</a>!', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites' ) ); ?></p>
+			</div>
 			<?php
 		}
 
