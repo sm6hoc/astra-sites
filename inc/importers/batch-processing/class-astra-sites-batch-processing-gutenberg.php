@@ -105,21 +105,19 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
-			error_log( '---- Processing WordPress Page - for gutenberg ---- "' . $post_id . '"' );
+			error_log( '---- Processing WordPress Page - for Gutenberg ---- "' . $post_id . '"' );
 
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
-
-			// Empty mapping? Then return.
-			if ( empty( $ids_mapping ) ) {
-				return;
-			}
 
 			// Post content.
 			$content = get_post_field( 'post_content', $post_id );
 
-			// Replace ID's.
-			foreach ( $ids_mapping as $old_id => $new_id ) {
-				$content = str_replace( '[wpforms id="' . $old_id, '[wpforms id="' . $new_id, $content );
+			// Empty mapping? Then return.
+			if ( ! empty( $ids_mapping ) ) {
+				// Replace ID's.
+				foreach ( $ids_mapping as $old_id => $new_id ) {
+					$content = str_replace( '[wpforms id="' . $old_id, '[wpforms id="' . $new_id, $content );
+				}
 			}
 
 			// # Tweak
@@ -159,7 +157,8 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			}
 
 			foreach ( $all_links as $key => $link ) {
-				if ( preg_match( '/\.(jpg|jpeg|png|gif)/i', $link ) ) {
+
+				if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|gif|jpeg)\/?$/i', $link ) ) {
 					$image_links[] = $link;
 				}
 			}

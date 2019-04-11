@@ -77,36 +77,30 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 
 		if ( ! empty( $post_id ) ) {
 
-			$hotlink_imported = get_post_meta( $post_id, '_astra_sites_hotlink_imported', true );
+			$data = get_post_meta( $post_id, '_elementor_data', true );
 
-			if ( empty( $hotlink_imported ) ) {
+			if ( ! empty( $data ) ) {
 
-				$data = get_post_meta( $post_id, '_elementor_data', true );
-
-				if ( ! empty( $data ) ) {
-
-					// Update WP form IDs.
-					$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
-					if ( $ids_mapping ) {
-						foreach ( $ids_mapping as $old_id => $new_id ) {
-							$data = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $data );
-						}
+				// Update WP form IDs.
+				$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
+				if ( $ids_mapping ) {
+					foreach ( $ids_mapping as $old_id => $new_id ) {
+						$data = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $data );
 					}
-
-					$data = add_magic_quotes( $data );
-					$data = json_decode( $data, true );
-
-					// Import the data.
-					$data = $this->process_export_import_content( $data, 'on_import' );
-
-					// Update processed meta.
-					update_metadata( 'post', $post_id, '_elementor_data', $data );
-					update_metadata( 'post', $post_id, '_astra_sites_hotlink_imported', true );
-
-					// !important, Clear the cache after images import.
-					Plugin::$instance->posts_css_manager->clear_cache();
-
 				}
+
+				$data = add_magic_quotes( $data );
+				$data = json_decode( $data, true );
+
+				// Import the data.
+				$data = $this->process_export_import_content( $data, 'on_import' );
+
+				// Update processed meta.
+				update_metadata( 'post', $post_id, '_elementor_data', $data );
+
+				// !important, Clear the cache after images import.
+				Plugin::$instance->posts_css_manager->clear_cache();
+
 			}
 		}
 	}

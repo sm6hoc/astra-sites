@@ -40,9 +40,6 @@ if ( class_exists( 'WP_Background_Process' ) ) :
 			$page_id = $object['page_id'];
 			$process = $object['instance'];
 
-			error_log( print_r( $page_id, true ) );
-			error_log( print_r( $process, true ) );
-
 			if ( method_exists( $process, 'import_single_post' ) ) {
 
 				$process->import_single_post( $page_id );
