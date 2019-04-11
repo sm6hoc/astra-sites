@@ -273,7 +273,6 @@ defined( 'ABSPATH' ) or exit;
 					</div>
 					<div class="astra-sites-import-complete-message" style="display: none;"></div>
 					<div class="astra-sites-import-complete-message-extra" style="display: none;"></div>
-					<div class="notice notice-warning"><p>Please do not close this browser window until the site is imported completely.</p></div>
 				</div>
 			</div>
 		</div>
