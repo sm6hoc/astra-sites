@@ -262,9 +262,9 @@ defined( 'ABSPATH' ) or exit;
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
 			<div class="astra-sites-result-preview" style="display: none;">
 				<div class="inner">
-					<h2>Welcome!</h2>
-					<p>We're importing your website!</p>
-					<p>The process usually takes anywhere between 60 seconds to 10 minutes depending on the size of the website and speed of connection.</p>
+					<h2><?php _e( 'We\'re importing your website!', 'astra-sites' ); ?></h2>
+					<p><?php _e( 'The process usually takes anywhere between 2 ~ 10 minutes depending on the size of the website and speed of connection.', 'astra-sites' ); ?></p>
+					<p><?php _e( 'Please do not close this browser window until the site is imported completely.', 'astra-sites' ); ?></p>
 					<div class="current-importing-status-wrap">
 						<div class="current-importing-status">
 							<div class="current-importing-status-title"></div>
