@@ -390,7 +390,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						'importWidgets'           => __( 'Importing "Widgets"...', 'astra-sites' ),
 						'importWidgetsSuccess'    => __( 'Imported Widgets!', 'astra-sites' ),
 						'serverConfiguration'     => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=import-error&utm_medium=wp-dashboard' ),
-						'success'                 => __( 'Site imported successfully! visit : ', 'astra-sites' ),
+						'success'                 => __( 'View site: ', 'astra-sites' ),
 						'gettingData'             => __( 'Getting Site Information..', 'astra-sites' ),
 						'importingCustomizer'     => __( 'Importing Customizer Settings..', 'astra-sites' ),
 						'importingWPForms'        => __( 'Importing Contact Forms..', 'astra-sites' ),

@@ -761,20 +761,6 @@ body.loading-content .select-page-builder {
   100% {transform: scale(1.03);}
 }
 
-.astra-sites-tweet-box {
-    border: 2px dashed #ccc;
-    padding: 1em;
-}
-
-.astra-sites-tweet-box > p:first-child {
-    margin-top: 0;
-}
-
-
-.astra-sites-tweet-box .action {
-    text-align: right;
-}
-
 .astra-sites-import-complete-message-extra {
     font-size: 1rem;
 }

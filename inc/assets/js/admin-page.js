@@ -662,15 +662,7 @@ var AstraSitesAjaxQueue = (function() {
 						time += seconds + ' Seconds';
 					}
 
-					// var	output  = '<p>Import End Time ' + AstraSitesAdmin.import_end_time.toLocaleTimeString() + '</p>';
-					// 	output += '<p>Done!</p>';
-					var	output  = '<p>Done!</p>';
-						output += '<p>Your new website is ready 😍 and it took just <span class="import-time">'+time+'</span>!</p>';
-						output += '<div class="astra-sites-tweet-box">';
-						output += '<p>I just built my ❤ website using @AstraWP in just '+time+'!</p>';
-						output += '<div class="action"><a href="https://twitter.com/share" target="_blank" class="twitter-share-button" data-url="'+astraSitesAdmin.siteURL+'" data-text="I just built my ❤ website using @AstraWP in just '+time+'!" data-hashtags="wpastra" data-count="none">Click to Tweet</a></div>';
-						output += '<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>';
-						output += '</div>';
+					var	output  = '<p>Your new website is ready 😍 and it took just <span class="import-time">'+time+'</span>!</p>';
 				
 					$('.rotating,.current-importing-status-wrap,.notice-warning').remove();
 					$('.astra-sites-import-complete-message').show().html(output);
