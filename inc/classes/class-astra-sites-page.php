@@ -217,7 +217,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		public function render( $action ) {
 
 			// Settings update message.
-			if ( isset( $_REQUEST['message'] ) && ( 'saved' == $_REQUEST['message'] || 'saved_ext' == $_REQUEST['message'] ) ) {
+			if ( isset( $_REQUEST['message'] ) && ( 'saved' === $_REQUEST['message'] || 'saved_ext' === $_REQUEST['message'] ) ) {
 				?>
 					<span id="message" class="notice notice-success is-dismissive"><p> <?php esc_html_e( 'Settings saved successfully.', 'astra-sites' ); ?> </p></span>
 				<?php
@@ -277,11 +277,11 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 						$url = $this->get_page_url( $slug );
 
-						if ( 'general' == $slug ) {
+						if ( 'general' === $slug ) {
 							update_option( 'astra_parent_page_url', $url );
 						}
 
-						$active = ( $slug == $action ) ? 'nav-tab-active' : '';
+						$active = ( $slug === $action ) ? 'nav-tab-active' : '';
 						?>
 							<a class='nav-tab <?php echo esc_attr( $active ); ?>' href='<?php echo esc_url( $url ); ?>'> <?php echo esc_html( $data['label'] ); ?> </a>
 					<?php } ?>

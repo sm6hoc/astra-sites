@@ -110,7 +110,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 
 			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 
-			if ( 'gutenberg' == $default_page_builder ) {
+			if ( 'gutenberg' === $default_page_builder ) {
 
 				// Add "gutenberg" in import [queue].
 				self::$process_single->push_to_queue(
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			}
 
 			// Add "brizy" in import [queue].
-			if ( 'brizy' == $default_page_builder && is_plugin_active( 'brizy/brizy.php' ) ) {
+			if ( 'brizy' === $default_page_builder && is_plugin_active( 'brizy/brizy.php' ) ) {
 
 				// Add "gutenberg" in import [queue].
 				self::$process_single->push_to_queue(
@@ -135,7 +135,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 
 			// Add "bb-plugin" in import [queue].
 			if (
-				'beaver-builder' == $default_page_builder &&
+				'beaver-builder' === $default_page_builder &&
 				( is_plugin_active( 'beaver-builder-lite-version/fl-builder.php' ) || is_plugin_active( 'bb-plugin/fl-builder.php' ) )
 			) {
 
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			}
 
 			// Add "elementor" in import [queue].
-			if ( 'elementor' == $default_page_builder ) {
+			if ( 'elementor' === $default_page_builder ) {
 
 				// @todo Remove required `allow_url_fopen` support.
 				if ( ini_get( 'allow_url_fopen' ) ) {

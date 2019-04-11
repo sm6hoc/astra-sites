@@ -88,11 +88,6 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
-			// Empty mapping? Then return.
-			if ( empty( $ids_mapping ) ) {
-				return;
-			}
-
 			$json_value = null;
 
 			$post = Brizy_Editor_Post::get( (int) $post_id );
@@ -101,9 +96,15 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Brizy' ) ) :
 			// Decode current data.
 			$json_value = base64_decode( $data['editor_data'] );
 
-			// Update WPForm IDs.
-			foreach ( $ids_mapping as $old_id => $new_id ) {
-				$json_value = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $json_value );
+			// Empty mapping? Then return.
+			if ( ! empty( $ids_mapping ) ) {
+				// Update WPForm IDs.
+				error_log( '---- Processing WP Forms Mapping ----' );
+				error_log( print_r( $ids_mapping, true ) );
+
+				foreach ( $ids_mapping as $old_id => $new_id ) {
+					$json_value = str_replace( '[wpforms id=\"' . $old_id, '[wpforms id=\"' . $new_id, $json_value );
+				}
 			}
 
 			// Encode modified data.

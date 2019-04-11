@@ -81,7 +81,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 
-			if ( 'gutenberg' == $default_page_builder ) {
+			if ( 'gutenberg' === $default_page_builder ) {
 				$content = isset( $_POST['data']['original_content'] ) ? $_POST['data']['original_content'] : '';
 			} else {
 				$content = isset( $_POST['data']['content']['rendered'] ) ? $_POST['data']['content']['rendered'] : '';
@@ -138,7 +138,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			$default_page_builder = Astra_Sites_Page::get_instance()->get_setting( 'page_builder' );
 
-			if ( 'gutenberg' == $default_page_builder ) {
+			if ( 'gutenberg' === $default_page_builder ) {
 				return;
 			}
 
@@ -228,7 +228,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$file_system  = Astra_Sites_Importer_Log::get_instance()->get_filesystem();
 
 			// If file system fails? Then take a backup in site option.
-			if ( false == $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+			if ( false === $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
 				update_option( 'astra_sites_' . $file_name, $old_settings );
 			}
 
@@ -268,13 +268,13 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$theme = wp_get_theme();
 
 			// Theme installed and activate.
-			if ( 'Astra' == $theme->name || 'Astra' == $theme->parent_theme ) {
+			if ( 'Astra' === $theme->name || 'Astra' === $theme->parent_theme ) {
 				return 'installed-and-active';
 			}
 
 			// Theme installed but not activate.
 			foreach ( (array) wp_get_themes() as $theme_dir => $theme ) {
-				if ( 'Astra' == $theme->name || 'Astra' == $theme->parent_theme ) {
+				if ( 'Astra' === $theme->name || 'Astra' === $theme->parent_theme ) {
 					return 'installed-but-inactive';
 				}
 			}
@@ -380,7 +380,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 			wp_enqueue_script( 'astra-sites-render-grid', ASTRA_SITES_URI . 'inc/assets/js/render-grid.js', array( 'wp-util', 'astra-sites-api', 'imagesloaded', 'jquery' ), ASTRA_SITES_VER, true );
 
-			if ( 'appearance_page_astra-sites' == $hook ) {
+			if ( 'appearance_page_astra-sites' === $hook ) {
 				$_stored_data = array(
 					'astra-site-category'     => array(),
 					'astra-site-page-builder' => array(),
@@ -392,7 +392,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 				$page_builder    = 'astra-site-page-builder';
 				$parent_category = '';
 
-			} elseif ( 'appearance_page_site-pages' == $hook ) {
+			} elseif ( 'appearance_page_site-pages' === $hook ) {
 
 				$_stored_data = array(
 					'site-pages-category'        => array(),

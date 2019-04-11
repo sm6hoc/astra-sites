@@ -144,7 +144,7 @@ if ( ! class_exists( 'Astra_Sites_Helper' ) ) :
 
 					// Found slug in current menu list.
 					if ( isset( $widget->nav_menu ) ) {
-						$menu_id = array_search( $widget->nav_menu, $menu_locations );
+						$menu_id = array_search( $widget->nav_menu, $menu_locations, true );
 						if ( ! empty( $menu_id ) ) {
 							$all_sidebars->$widgets_key->$widget_key->nav_menu = $menu_id;
 						}

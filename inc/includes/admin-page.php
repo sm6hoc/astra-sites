@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) or exit;
 
-$import_text = ( 'site-pages' == $global_cpt_meta['cpt_slug'] ) ? __( 'Import Page', 'astra-sites' ) : __( 'Import Site', 'astra-sites' );
+$import_text = ( 'site-pages' === $global_cpt_meta['cpt_slug'] ) ? __( 'Import Page', 'astra-sites' ) : __( 'Import Site', 'astra-sites' );
 ?>
 
 <div class="wrap" id="astra-sites-admin" data-slug="<?php echo $global_cpt_meta['cpt_slug']; ?>">
