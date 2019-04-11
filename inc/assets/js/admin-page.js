@@ -1418,8 +1418,6 @@ var AstraSitesAjaxQueue = (function() {
 				// var output  = '<div class="current-importing-status-title">Plugins Used in This Starter Site</div>';
 				var output = '<div class="current-importing-status-title"></div><div class="current-importing-status-description"></div>';
 				$('.current-importing-status').html( output );
-				$('.current-importing-status-wrap').prepend( '<div style="display: flex;"><span class="dashicons dashicons-admin-generic rotating"></span><span style="margin-left: 5px;">The estimate time to import the site is <span class="countdown">10:00</span> Minutes!</span></div><hr/>' );
-				// $('.current-importing-status-wrap').prepend( '<p>Import process started at time ' + AstraSitesAdmin.import_start_time.toLocaleTimeString() + '</p>' );
 				AstraSitesAdmin.startTimer();
 
 				/**

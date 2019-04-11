@@ -226,7 +226,7 @@ if ( ! class_exists( 'Astra_Sites_Image_Importer' ) ) :
 				'url' => $upload['url'],
 			);
 
-			Astra_Sites_Importer_Log::add( 'BATCH - SUCCESS Image {Imported Successfully} - ' . $new_attachment['url'] );
+			Astra_Sites_Importer_Log::add( 'BATCH - SUCCESS Image {Imported} - ' . $new_attachment['url'] );
 
 			$this->already_imported_ids[ $attachment['id'] ] = $new_attachment;
 

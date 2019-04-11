@@ -724,8 +724,12 @@ body.loading-content .select-page-builder {
 .current-importing-status {
     font-size: 1rem;
     background: #eeeeee;
-    padding: 1em;
+    padding: 1em 1.5em;
     margin-bottom: 4em;
+}
+
+.current-importing-status-title {
+    margin-bottom: .5em;
 }
 
 .rotating {

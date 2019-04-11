@@ -95,7 +95,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_send_json_success(
 				array(
 					'success' => true,
-					'message' => __( 'Theme Successfully Activated', 'astra-sites' ),
+					'message' => __( 'Theme Activated', 'astra-sites' ),
 				)
 			);
 		}
@@ -237,7 +237,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://astra-zip.sharkz.in/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'https://websitedemos.net/wp-json/wp/v2/' );
 
 		}
 
@@ -367,28 +367,28 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 					),
 					'log'               => array(
 						'installingPlugin'        => __( 'Installing plugin ', 'astra-sites' ),
-						'installed'               => __( 'Successfully plugin installed!', 'astra-sites' ),
+						'installed'               => __( 'Plugin installed!', 'astra-sites' ),
 						'activating'              => __( 'Activating plugin ', 'astra-sites' ),
-						'activated'               => __( 'Successfully plugin activated ', 'astra-sites' ),
+						'activated'               => __( 'Plugin activated ', 'astra-sites' ),
 						'bulkActivation'          => __( 'Bulk plugin activation...', 'astra-sites' ),
-						'activate'                => __( 'Successfully plugin activate - ', 'astra-sites' ),
+						'activate'                => __( 'Plugin activate - ', 'astra-sites' ),
 						'activationError'         => __( 'Error! While activating plugin  - ', 'astra-sites' ),
 						'bulkInstall'             => __( 'Bulk plugin installation...', 'astra-sites' ),
 						'api'                     => __( 'Site API ', 'astra-sites' ),
 						'importing'               => __( 'Importing..', 'astra-sites' ),
 						'processingRequest'       => __( 'Processing requests...', 'astra-sites' ),
 						'importCustomizer'        => __( 'Importing "Customizer Settings"...', 'astra-sites' ),
-						'importCustomizerSuccess' => __( 'Successfully imported customizer settings!', 'astra-sites' ),
+						'importCustomizerSuccess' => __( 'Imported customizer settings!', 'astra-sites' ),
 						'importWPForms'           => __( 'Importing "Contact Forms"...', 'astra-sites' ),
-						'importWPFormsSuccess'    => __( 'Successfully imported Contact Forms!', 'astra-sites' ),
+						'importWPFormsSuccess'    => __( 'Imported Contact Forms!', 'astra-sites' ),
 						'importXMLPrepare'        => __( 'Preparing "XML" Data...', 'astra-sites' ),
-						'importXMLPrepareSuccess' => __( 'Successfully set XML data!', 'astra-sites' ),
+						'importXMLPrepareSuccess' => __( 'Set XML data!', 'astra-sites' ),
 						'importXML'               => __( 'Importing "XML"...', 'astra-sites' ),
-						'importXMLSuccess'        => __( 'Successfully imported XML!', 'astra-sites' ),
+						'importXMLSuccess'        => __( 'Imported XML!', 'astra-sites' ),
 						'importOptions'           => __( 'Importing "Options"...', 'astra-sites' ),
-						'importOptionsSuccess'    => __( 'Successfully imported Options!', 'astra-sites' ),
+						'importOptionsSuccess'    => __( 'Imported Options!', 'astra-sites' ),
 						'importWidgets'           => __( 'Importing "Widgets"...', 'astra-sites' ),
-						'importWidgetsSuccess'    => __( 'Successfully imported Widgets!', 'astra-sites' ),
+						'importWidgetsSuccess'    => __( 'Imported Widgets!', 'astra-sites' ),
 						'serverConfiguration'     => esc_url( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=import-error&utm_medium=wp-dashboard' ),
 						'success'                 => __( 'Site imported successfully! visit : ', 'astra-sites' ),
 						'gettingData'             => __( 'Getting Site Information..', 'astra-sites' ),
@@ -463,7 +463,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			wp_send_json_success(
 				array(
 					'success' => true,
-					'message' => __( 'Plugin Successfully Activated', 'astra-sites' ),
+					'message' => __( 'Plugin Activated', 'astra-sites' ),
 				)
 			);
 
