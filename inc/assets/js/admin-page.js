@@ -837,10 +837,10 @@ var AstraSitesAjaxQueue = (function() {
 									break;
 							}
 						};
-						evtSource.addEventListener( 'log', function ( message ) {
-							var data = JSON.parse( message.data );
-							AstraSitesAdmin._log_title( data.level + ' ' + data.message );
-						});
+						// evtSource.addEventListener( 'log', function ( message ) {
+						// 	var data = JSON.parse( message.data );
+						// 	AstraSitesAdmin._log_title( data.level + ' ' + data.message );
+						// });
 					}
 				});
 			} else {
