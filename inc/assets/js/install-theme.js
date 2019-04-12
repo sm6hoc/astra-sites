@@ -13,7 +13,7 @@
 		 * Binds events for the Astra Sites.
 		 *
 		 * @since 1.3.2
-		 * 
+		 *
 		 * @access private
 		 * @method _bind
 		 */
@@ -69,15 +69,13 @@
 		 * Install and activate
 		 *
 		 * @since 1.3.2
-		 * 
+		 *
 		 * @param  {object} event Current event.
 		 * @return void
 		 */
 		_install_and_activate: function(event ) {
 			event.preventDefault();
 			var theme_slug = $(this).data('theme-slug') || '';
-			console.log( theme_slug );
-			console.log( 'yes' );
 
 			var btn = $( event.target );
 
@@ -90,7 +88,7 @@
 			if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
 				wp.updates.requestFilesystemCredentials( event );
 			}
-			
+
 			wp.updates.installTheme( {
 				slug: theme_slug
 			});

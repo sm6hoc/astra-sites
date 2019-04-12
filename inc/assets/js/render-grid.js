@@ -431,8 +431,6 @@
 
 			if ( '' !== astraSitesApi.parent_category ) {
 
-				console.log(astraSitesApi.parent_category);
-
 				/**
 				 * Page Parent Site Category
 				 */
@@ -444,8 +442,6 @@
 					wrapper_class : 'filter-links',
 					show_all      : AstraRender._getCategoryAllSelectStatus( astraSitesApi.parent_category ),
 				};
-
-				console.log(parent_category)
 
 				AstraSitesAPI._api_request( parent_category );
 			}

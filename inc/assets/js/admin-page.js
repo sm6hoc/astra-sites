@@ -769,37 +769,44 @@ var AstraSitesAjaxQueue = (function() {
 
 		_startImportWPForms: function( event ) {
 
-			$.ajax({
-				url  : astraSitesAdmin.ajaxurl,
-				type : 'POST',
-				dataType: 'json',
-				data : {
-					action      : 'astra-sites-import-wpforms',
-					wpforms_url : AstraSitesAdmin.wpforms_url,
-				},
-				beforeSend: function() {
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWPForms );
-					$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWPForms );
-				},
-			})
-			.fail(function( jqXHR ){
-				AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
-			})
-			.done(function ( forms ) {
+			if ( '' !== AstraSitesAdmin.wpforms_url ) {
 
-				// 1. Fail - Import WPForms Options.
-				if( false === forms.success ) {
-					AstraSitesAdmin._importFailMessage( forms.data );
-					AstraSitesAdmin._log( forms.data );
-				} else {
+				$.ajax({
+					url  : astraSitesAdmin.ajaxurl,
+					type : 'POST',
+					dataType: 'json',
+					data : {
+						action      : 'astra-sites-import-wpforms',
+						wpforms_url : AstraSitesAdmin.wpforms_url,
+					},
+					beforeSend: function() {
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWPForms );
+						$('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWPForms );
+					},
+				})
+				.fail(function( jqXHR ){
+					AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log( jqXHR.status + ' ' + jqXHR.responseText );
+				})
+				.done(function ( forms ) {
 
-					// 1. Pass - Import Customizer Options.
-					AstraSitesAdmin._log( astraSitesAdmin.log.importWPFormsSuccess );
+					// 1. Fail - Import WPForms Options.
+					if( false === forms.success ) {
+						AstraSitesAdmin._importFailMessage( forms.data );
+						AstraSitesAdmin._log( forms.data );
+					} else {
 
-					$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
-				}
-			});
+						// 1. Pass - Import Customizer Options.
+						AstraSitesAdmin._log( astraSitesAdmin.log.importWPFormsSuccess );
+
+						$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
+					}
+				});
+
+			} else {
+				$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
+			}
+
 		},
 
 		/**
@@ -810,13 +817,11 @@ var AstraSitesAjaxQueue = (function() {
 			if ( 'site-pages' == AstraSitesAdmin.action_slug ) {
 
 				$(document).trigger( 'astra-sites-import-wpforms' );
-				//$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
 
 			} else {
 				if ( AstraSitesAdmin._is_process_customizer() ) {
 
 					$(document).trigger( 'astra-sites-import-wpforms' );
-					//$(document).trigger( AstraSitesAdmin.action_slug + '-import-wpforms-done' );
 				}
 			}
 		},
