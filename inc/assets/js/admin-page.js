@@ -110,7 +110,7 @@ var AstraSitesAjaxQueue = (function() {
 					document.getElementById( 'astra-site-import-process' ).value          = progress_bar;
 					// $('.current-importing-status-description').html( astraSitesAdmin.log.importingXML + ' '+progress );
 					// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingXML + ' '+progress );
-					AstraSitesAdmin._log_title( astraSitesAdmin.log.importingXML + ' '+progress );
+					AstraSitesAdmin._log_title( 'Importing Content.. ' + progress );
 				}
 			}
 		},
@@ -551,7 +551,7 @@ var AstraSitesAjaxQueue = (function() {
 				// $('.current-importing-status-description').html( astraSitesAdmin.log.backupCustomizerSuccess );
 
 				// 1. Pass - Import Customizer Options.
-				AstraSitesAdmin._log_title( astraSitesAdmin.log.backupCustomizerSuccess );
+				AstraSitesAdmin._log_title( 'Customizer Settings Backup Done..' );
 
 				// Custom trigger.
 				$(document).trigger( trigger_name );
@@ -575,7 +575,7 @@ var AstraSitesAjaxQueue = (function() {
 					customizer_data : AstraSitesAdmin.current_site['astra-site-customizer-data'],
 				},
 				beforeSend: function() {
-					AstraSitesAdmin._log_title( astraSitesAdmin.log.importCustomizer );
+					AstraSitesAdmin._log_title( 'Importing Customizer Settings..' );
 					// $('.current-importing-status-description').html( astraSitesAdmin.log.importingCustomizer );
 					// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingCustomizer );
 				},
@@ -595,7 +595,7 @@ var AstraSitesAjaxQueue = (function() {
 				} else {
 
 					// 1. Pass - Import Customizer Options.
-					AstraSitesAdmin._log_title( astraSitesAdmin.log.importCustomizerSuccess );
+					AstraSitesAdmin._log_title( 'Imported Customizer Settings..' );
 
 					$(document).trigger( 'astra-sites-import-customizer-settings-done' );
 				}
@@ -615,7 +615,7 @@ var AstraSitesAjaxQueue = (function() {
 					action : 'astra-sites-import-end',
 				},
 				beforeSend: function() {
-					AstraSitesAdmin._log_title( astraSitesAdmin.log.importComplete );
+					AstraSitesAdmin._log_title( 'Import Complete!' );
 					// $('.current-importing-status-description').html( astraSitesAdmin.log.importComplete );
 					// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importComplete );
 				}
@@ -688,7 +688,7 @@ var AstraSitesAjaxQueue = (function() {
 						widgets_data : AstraSitesAdmin.widgets_data,
 					},
 					beforeSend: function() {
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importWidgets );
+						AstraSitesAdmin._log_title( 'Importing Widgets..' );
 						// $('.current-importing-status-description').html( astraSitesAdmin.log.importingWidgets );
 						// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWidgets );
 					},
@@ -707,7 +707,7 @@ var AstraSitesAjaxQueue = (function() {
 					} else {
 						
 						// 4. Pass - Import Widgets.
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importWidgetsSuccess );
+						AstraSitesAdmin._log_title( 'Imported Widgets!' );
 						$(document).trigger( 'astra-sites-import-widgets-done' );					
 					}
 				});
@@ -731,7 +731,7 @@ var AstraSitesAjaxQueue = (function() {
 						options_data : AstraSitesAdmin.options_data,
 					},
 					beforeSend: function() {
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importOptions );
+						AstraSitesAdmin._log_title( 'Importing Options..' );
 						// $('.current-importing-status-description').html( astraSitesAdmin.log.importingOptions );
 						// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingOptions );
 						$('.astra-demo-import .percent').html('');
@@ -752,7 +752,7 @@ var AstraSitesAjaxQueue = (function() {
 					} else {
 
 						// 3. Pass - Import Site Options.
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importOptionsSuccess );
+						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importOptionsSuccess );
 						$(document).trigger( 'astra-sites-import-options-done' );
 					}
 				});
@@ -777,7 +777,8 @@ var AstraSitesAjaxQueue = (function() {
 					},
 					beforeSend: function() {
 						$('#astra-site-import-process-wrap').show();
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importXMLPrepare );
+						AstraSitesAdmin._log_title( 'Importing Contents..' );
+						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importXMLPrepare );
 						// $('.current-importing-status-description').html( astraSitesAdmin.log.importXMLPreparing );
 						// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importXMLPreparing );
 					},
@@ -799,7 +800,7 @@ var AstraSitesAjaxQueue = (function() {
 					} else {
 
 						// 2. Pass - Prepare XML Data.
-						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importXMLPrepareSuccess );
+						// AstraSitesAdmin._log_title( 'Importing Options..' );
 
 						// Import XML though Event Source.
 						AstraSSEImport.data = xml_data.data;
@@ -821,7 +822,7 @@ var AstraSitesAjaxQueue = (function() {
 									evtSource.close();
 
 									// 2. Pass - Import XML though "Source Event".
-									AstraSitesAdmin._log_title( astraSitesAdmin.log.importXMLSuccess );
+									// AstraSitesAdmin._log_title( astraSitesAdmin.log.importXMLSuccess );
 									// AstraSitesAdmin._log_title( '----- SSE - XML import Complete -----' );
 
 									document.getElementById( 'astra-site-import-process' ).value = 100;
@@ -884,7 +885,7 @@ var AstraSitesAjaxQueue = (function() {
 						wpforms_url : AstraSitesAdmin.wpforms_url,
 					},
 					beforeSend: function() {
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importWPForms );
+						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importWPForms );
 						// $('.current-importing-status-description').html( astraSitesAdmin.log.importingWPForms );
 						// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingWPForms );
 					},
@@ -902,7 +903,7 @@ var AstraSitesAjaxQueue = (function() {
 					} else {
 
 						// 1. Pass - Import Customizer Options.
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importWPFormsSuccess );
+						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importWPFormsSuccess );
 
 						$(document).trigger( 'astra-sites-import-wpforms-done' );
 					}
@@ -926,7 +927,7 @@ var AstraSitesAjaxQueue = (function() {
 						customizer_data : AstraSitesAdmin.customizer_data,
 					},
 					beforeSend: function() {
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importCustomizer );
+						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importCustomizer );
 						// $('.current-importing-status-description').html( astraSitesAdmin.log.importingCustomizer );
 						// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.importingCustomizer );
 					},
@@ -944,7 +945,7 @@ var AstraSitesAjaxQueue = (function() {
 					} else {
 
 						// 1. Pass - Import Customizer Options.
-						AstraSitesAdmin._log_title( astraSitesAdmin.log.importCustomizerSuccess );
+						// AstraSitesAdmin._log_title( astraSitesAdmin.log.importCustomizerSuccess );
 
 						$(document).trigger( 'astra-sites-import-customizer-settings-done' );
 					}
@@ -1084,7 +1085,7 @@ var AstraSitesAjaxQueue = (function() {
 				} );
 			}
 
-			AstraSitesAdmin._log_title( astraSitesAdmin.log.installingPlugin + ' ' + $button.data( 'slug' ) );
+			AstraSitesAdmin._log_title( 'Installing ' + ' ' + $button.data( 'slug' ) );
 
 			wp.updates.installPlugin( {
 				slug:    $button.data( 'slug' )
@@ -1177,7 +1178,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			// $('.current-importing-status-description').html( astraSitesAdmin.log.installingPlugin + ' ' + single_plugin.slug );
 
-			AstraSitesAdmin._log_title( astraSitesAdmin.log.installingPlugin + ' ' + args.slug );
+			AstraSitesAdmin._log_title( 'Installing ' + ' ' + args.slug );
 
 			$card.addClass('updating-message');
 
@@ -1198,8 +1199,7 @@ var AstraSitesAjaxQueue = (function() {
 				return;
 			}
 
-			AstraSitesAdmin._log_title( 'Activating Plugin..' );
-			AstraSitesAdmin._log_title( astraSitesAdmin.log.activating + ' ' + $slug );
+			AstraSitesAdmin._log_title( 'Activating plugin ' + ' ' + $slug );
 
 			$button.addClass('updating-message button-primary')
 				.html( astraSitesAdmin.strings.btnActivating );
@@ -1221,7 +1221,7 @@ var AstraSitesAjaxQueue = (function() {
 
 				if( result.success ) {
 
-					AstraSitesAdmin._log_title( astraSitesAdmin.log.activated + ' ' + $slug );
+					AstraSitesAdmin._log_title( 'Activated ' + $slug  );
 
 					var pluginsList = astraSitesAdmin.requiredPlugins.inactive;
 
@@ -1322,7 +1322,7 @@ var AstraSitesAjaxQueue = (function() {
 
 							// $('.current-importing-status-description').html( astraSitesAdmin.log.activate + ' ' + single_plugin.slug );
 
-							AstraSitesAdmin._log_title( astraSitesAdmin.log.activate + ' ' + single_plugin.slug );
+							// AstraSitesAdmin._log_title( astraSitesAdmin.log.activate + ' ' + single_plugin.slug );
 
 							var pluginsList = astraSitesAdmin.requiredPlugins.inactive;
 
@@ -1332,7 +1332,7 @@ var AstraSitesAjaxQueue = (function() {
 							// Enable Demo Import Button
 							AstraSitesAdmin._enable_demo_import_button();
 						} else {
-							AstraSitesAdmin._log_title( astraSitesAdmin.log.activationError + ' - ' + single_plugin.slug );
+							// AstraSitesAdmin._log_title( astraSitesAdmin.log.activationError + ' - ' + single_plugin.slug );
 						}
 					}
 				});
@@ -1453,7 +1453,7 @@ var AstraSitesAjaxQueue = (function() {
 			// $('.current-importing-status-description').html( astraSitesAdmin.log.importing );
 
 			AstraSitesAdmin._log_title( 'Started Importing..' );
-			AstraSitesAdmin._log_title( astraSitesAdmin.log.api + ' : ' + apiURL );
+			// AstraSitesAdmin._log_title( astraSitesAdmin.log.api + ' : ' + apiURL );
 
 			// $('.current-importing-status-description').html( astraSitesAdmin.log.gettingData );
 			// $('.button-hero.astra-demo-import').text( astraSitesAdmin.log.gettingData );
@@ -1487,7 +1487,7 @@ var AstraSitesAjaxQueue = (function() {
 					}
 
 					// 1. Pass - Request Site Import
-					AstraSitesAdmin._log_title( astraSitesAdmin.log.processingRequest );
+					// AstraSitesAdmin._log_title( astraSitesAdmin.log.processingRequest );
 
 					AstraSitesAdmin.customizer_data = JSON.stringify( demo_data.data['astra-site-customizer-data'] ) || '';
 					AstraSitesAdmin.wxr_url         = encodeURI( demo_data.data['astra-site-wxr-path'] ) || '';
