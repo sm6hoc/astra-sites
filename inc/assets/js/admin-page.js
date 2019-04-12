@@ -1599,7 +1599,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			if ( 'site-pages' == AstraSitesAdmin.current_site.type ) {
 				preview_template = 'astra-page-preview';
-				demoURL                = AstraSitesAdmin.current_site['astra-page-url'] || '',
+				demoURL                = AstraSitesAdmin.current_site['astra-page-url'] + '?preview_type=page' || '',
 				apiURL = AstraSitesAdmin.current_site['astra-page-api-url'] || '';
 				requiredPlugins        = AstraSitesAdmin.current_site['site-pages-required-plugins'];
 			} else {
@@ -1639,6 +1639,7 @@ var AstraSitesAjaxQueue = (function() {
 
 			$('#astra-sites-menu-page').append(template(templateData[0]));
 			$('.theme-install-overlay').css('display', 'block');
+
 			AstraSitesAdmin._checkNextPrevButtons();
 
 			var desc       = $('.theme-details');

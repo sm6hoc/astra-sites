@@ -73,8 +73,10 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 
 		/**
 		 * Import Page.
+		 *
+		 * @since  x.x.x
 		 */
-		function create_page() {
+		public function create_page() {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
