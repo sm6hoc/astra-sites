@@ -14,49 +14,40 @@
 		 */
 		_api_request: function( args ) {
 
-			// Set API Request Data.
-			var data = {
-				url: AstraSitesAPI._api_url + args.slug,
+			var params = {
+				method: 'GET',
+	            cache: 'default',
 			};
 
 			if( astraRenderGrid.headers ) {
-				data.headers = astraRenderGrid.headers;
+				params['headers'] = astraRenderGrid.headers;
 			}
 
-			$.ajax( data )
-			.done(function( items, status, XHR ) {
-
-				if( 'success' === status && XHR.getResponseHeader('x-wp-total') ) {
-
-					if( args.id ) {
-						AstraSitesAPI._stored_data[ args.id ] = $.merge( AstraSitesAPI._stored_data[ args.id ], items );
-					}
-
-					var data = {
-						args 		: args,
+			fetch( AstraSitesAPI._api_url + args.slug, params).then(response => {
+				if ( response.status === 200 ) {
+					return response.json().then(items => ({
 						items 		: items,
-						items_count	: XHR.getResponseHeader('x-wp-total') || 0,
-					};
-
-					if( 'undefined' !== args.trigger && '' !== args.trigger ) {
-						$(document).trigger( args.trigger, [data] );
-					}
-
+						items_count	: response.headers.get( 'x-wp-total' ),
+						item_pages	: response.headers.get( 'x-wp-totalpages' ),
+					}))
 				} else {
 					$(document).trigger( 'astra-sites-api-request-error' );
+					return response.json();
+				}
+			})
+			.then(data => {
+
+				if( data ) {
+					data['args'] = args;
+					if( data.args.id ) {
+						AstraSitesAPI._stored_data[ args.id ] = $.merge( AstraSitesAPI._stored_data[ data.args.id ], data.items );
+					}
 				}
 
-			})
-			.fail(function( jqXHR, textStatus ) {
-
-				$(document).trigger( 'astra-sites-api-request-fail', [jqXHR, textStatus, args] );
-
-			})
-			.always(function() {
-
-				$(document).trigger( 'astra-sites-api-request-always' );
-
-			});
+				if( 'undefined' !== args.trigger && '' !== args.trigger ) {
+					$(document).trigger( args.trigger, [data] );
+				}
+	        });
 
 		},
 
