@@ -12,7 +12,7 @@
 		/**
 		 * API Request
 		 */
-		_api_request: function( args ) {
+		_api_request: function( args, callback ) {
 
 			var params = {
 				method: 'GET',
@@ -47,6 +47,11 @@
 				if( 'undefined' !== args.trigger && '' !== args.trigger ) {
 					$(document).trigger( args.trigger, [data] );
 				}
+
+				if( callback && typeof callback == "function"){
+					callback( data );
+			    }
+
 	        });
 
 		},

@@ -272,8 +272,8 @@
 			AstraRender._apiAddParam_search();
 			AstraRender._apiAddParam_per_page();
 			AstraRender._apiAddParam_astra_site_category();
-			AstraRender._apiAddParam_astra_site_page_builder();
 			AstraRender._apiAddParam_page();
+			AstraRender._apiAddParam_astra_site_page_builder();
 			AstraRender._apiAddParam_site_url();
 			AstraRender._apiAddParam_purchase_key();
 
@@ -380,20 +380,86 @@
 		 */
 		_loadPageBuilders: function() {
 
-			/**
-			 * Page Builder
-			 */
-			var category_slug = 'astra-site-page-builder';
-			var category = {
-				slug          : category_slug + AstraRender._getPageBuilderParams(),
-				id            : category_slug,
-				class         : category_slug,
-				trigger       : 'astra-api-page-builder-loaded',
-				wrapper_class : 'filter-links',
-				show_all      : false,
-			};
+			// Is Welcome screen?
+			// Then pre-send the API request to avoid the loader.
+			if( $('.astra-sites-welcome').length ) {
 
-			AstraSitesAPI._api_request( category );
+				var plugins = $('.astra-sites-welcome').attr( 'data-plugins' ) || '';
+				var plugins = plugins.split(",");
+
+				// Also, Send page builder request with `/?search=` parameter. Because, We send the selected page builder request 
+				// Which does not cached due to extra parameter `/?search=`. For that we initially send all these requests.
+				$.each(plugins, function( key, plugin) {
+					console.log( plugin );
+					var category_slug = 'astra-site-page-builder';
+					var category = {
+						slug          : category_slug + '/?search=' + plugin,
+						id            : category_slug,
+						class         : category_slug,
+						trigger       : '',
+						wrapper_class : 'filter-links',
+						show_all      : false,
+					};
+
+					// Pre-Send `sites` request for each active page builder to avoid the loader.
+					AstraSitesAPI._api_request( category, function( data ) {
+						if( data.items ) {
+
+							var per_page_val = 30;
+							if( astraRenderGrid.sites && astraRenderGrid.sites["par-page"] ) {
+								per_page_val = parseInt( astraRenderGrid.sites["par-page"] );
+							}
+							
+							var api_params = {
+												per_page : per_page_val,
+												page : 1,
+											};
+							// Load `all` sites from each page builder.
+							$.each(data.items, function(index, item) {
+
+								if( item.id ) {
+									api_params['astra-site-page-builder'] =  item.id;
+
+									// API Request.
+									var api_post = {
+										id: 'astra-sites',
+										slug: 'astra-sites?' + decodeURIComponent( $.param( api_params ) ),
+									};
+
+									AstraSitesAPI._api_request( api_post );
+								}
+							});
+						}
+					});
+
+				} );
+
+				// Pre-Send `category` request to avoid the loader.
+				var category_slug = 'astra-site-category';
+				var category = {
+					slug          : category_slug + '/',
+					id            : category_slug,
+					class         : category_slug,
+					trigger       : '',
+					wrapper_class : 'filter-links',
+					show_all      : false,
+				};
+				AstraSitesAPI._api_request( category );
+
+			// Load `sites` from selected page builder.
+			} else {
+				var category_slug = 'astra-site-page-builder';
+				var category = {
+					slug          : category_slug + AstraRender._getPageBuilderParams(),
+					id            : category_slug,
+					class         : category_slug,
+					trigger       : 'astra-api-page-builder-loaded',
+					wrapper_class : 'filter-links',
+					show_all      : false,
+				};
+
+				AstraSitesAPI._api_request( category );
+			}
 		},
 
 		/**
