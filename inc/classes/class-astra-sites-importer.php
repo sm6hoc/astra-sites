@@ -548,7 +548,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			$message = '';
 
 			if ( $term_id ) {
-				$term    = get_term( $term_id );
+				$term = get_term( $term_id );
 				if ( $term ) {
 					$message = 'DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
 					Astra_Sites_Importer_Log::add( $message );

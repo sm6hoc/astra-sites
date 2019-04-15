@@ -76,8 +76,8 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				return;
 			}
 			?>
-			<?php /* translators: %1$s is the admin page URL. */ ?>
 			<div class="notice notice-info is-dismissible astra-sites-getting-started-notice"> 
+				<?php /* translators: %1$s is the admin page URL. */ ?>
 				<p><?php printf( __( 'Welcome! Import your favorite site from the website <a class="astra-sites-getting-started-btn" href="%1$s">library</a>!', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites' ) ); ?></p>
 			</div>
 			<?php
@@ -249,24 +249,24 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 
 			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 
-				$plugins = get_option( 'active_plugins', array() );
-				$page_builders = array( );
-				if( $plugins ) {
-					foreach ($plugins as $key => $plugin_init) {
-						if( false !== strpos($plugin_init, 'elementor' ) ) {
+				$plugins       = get_option( 'active_plugins', array() );
+				$page_builders = array();
+				if ( $plugins ) {
+					foreach ( $plugins as $key => $plugin_init ) {
+						if ( false !== strpos( $plugin_init, 'elementor' ) ) {
 							$page_builders[] = 'elementor';
 						}
-						if( false !== strpos($plugin_init, 'beaver-builder' ) ) {
+						if ( false !== strpos( $plugin_init, 'beaver-builder' ) ) {
 							$page_builders[] = 'beaver-builder';
 						}
-						if( false !== strpos($plugin_init, 'brizy' ) ) {
+						if ( false !== strpos( $plugin_init, 'brizy' ) ) {
 							$page_builders[] = 'brizy';
 						}
 					}
 				}
-				$page_builders = array_unique($page_builders);
+				$page_builders   = array_unique( $page_builders );
 				$page_builders[] = 'gutenberg';
-				$page_builders = implode(',', $page_builders);
+				$page_builders   = implode( ',', $page_builders );
 				?>
 				<div class="astra-sites-welcome" data-plugins="<?php echo esc_attr( $page_builders ); ?>">
 					<div class="inner">

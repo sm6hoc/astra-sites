@@ -18,6 +18,7 @@
 		_api_params		: {},
 		_breakpoint		: 768,
 		_has_default_page_builder : false,
+		_first_time_loaded : true,
 	
 		init: function()
 		{
@@ -586,6 +587,42 @@
 				$('body').removeClass('listed-all-sites');
 			}
 
+			// Re-Send `categories` sites request to avoid the loader.
+			var categories = AstraSitesAPI._stored_data['astra-site-category'];
+			if( categories && AstraRender._first_time_loaded ) {
+				
+				var per_page_val = 30;
+				if( astraRenderGrid.sites && astraRenderGrid.sites["par-page"] ) {
+					per_page_val = parseInt( astraRenderGrid.sites["par-page"] );
+				}
+				
+				var api_params = {
+					per_page : per_page_val,
+				};
+				
+				var page_builder_id = $('#astra-site-page-builder').find('.current').data('group') || '';
+
+				$.each( categories, function( index, category ) {
+
+					api_params['astra-site-category'] =  category.id;
+
+					api_params['page'] = 1;
+
+					if( page_builder_id ) {
+						api_params['astra-site-page-builder'] = page_builder_id;
+					}
+
+					// API Request.
+					var api_post = {
+						id: 'astra-sites',
+						slug: 'astra-sites?' + decodeURIComponent( $.param( api_params ) ),
+					};
+
+					AstraSitesAPI._api_request( api_post );
+				} );
+
+				AstraRender._first_time_loaded = false;
+			}
 
 		},
 
