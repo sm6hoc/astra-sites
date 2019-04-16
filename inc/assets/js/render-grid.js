@@ -564,6 +564,10 @@
 		 */
 		_reinitGrid: function( event, data ) {
 
+			// $.each( data.items, function(i, v) {
+			// 	$('head').append( '<link rel="preload" href="'+v['featured-image-url']+'" as="image">' );
+			// });
+
 			var template = wp.template('astra-sites-list');
 
 			$('body').addClass( 'page-builder-selected' );
@@ -599,7 +603,7 @@
 				var api_params = {
 					per_page : per_page_val,
 				};
-				
+
 				var page_builder_id = $('#astra-site-page-builder').find('.current').data('group') || '';
 
 				$.each( categories, function( index, category ) {
