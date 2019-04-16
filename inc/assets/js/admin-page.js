@@ -224,6 +224,7 @@ var AstraSitesAjaxQueue = (function() {
 			$( document ).on('click'                     , '.astra-import-settings', AstraSitesAdmin._import_settings);
 			$( document ).on('click'					 , '.devices button', AstraSitesAdmin._previewDevice);
 			$( document ).on('click'                     , '.theme-browser .theme-screenshot, .theme-browser .more-details, .theme-browser .install-theme-preview', AstraSitesAdmin._preview);
+			$( document ).on('click'                     , '.install-page-preview', AstraSitesAdmin._previewPages);
 			$( document ).on('click'                     , '.next-theme', AstraSitesAdmin._nextTheme);
 			$( document ).on('click'                     , '.previous-theme', AstraSitesAdmin._previousTheme);
 			$( document ).on('click'                     , '.collapse-sidebar', AstraSitesAdmin._collapse);
@@ -1674,6 +1675,12 @@ var AstraSitesAjaxQueue = (function() {
 
 			$('.astra-sites-preview').attr( 'screen', screen );
 			$('.astra-sites-preview').addClass( 'screen-' + screen );
+		},
+
+		_previewPages: function( event ) {
+			var template = wp.template( 'astra-pages-list-preview' );
+			console.log(template);
+			$('#astra-sites-menu-page').append(template());
 		},
 
 		/**

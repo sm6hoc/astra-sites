@@ -379,6 +379,22 @@ $import_text = ( 'site-pages' === $global_cpt_meta['cpt_slug'] ) ? __( 'Import P
 
 <?php
 /**
+ * TMPL - Single Page Demo Preview
+ */
+?>
+<script type="text/template" id="tmpl-astra-pages-list-preview">
+	<div class="dialog-widget dialog-lightbox-widget dialog-type-buttons dialog-type-lightbox elementor-templates-modal" id="elementor-template-library-modal" style="display: block;">
+		<div class="dialog-widget-content dialog-lightbox-widget-content" style="top: 30px; left: 360px;">
+			<div class="dialog-header dialog-lightbox-header">
+				<div class="elementor-templates-modal__header">
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+
+<?php
+/**
  * TMPL - No more demos
  */
 ?>
@@ -481,6 +497,7 @@ $import_text = ( 'site-pages' === $global_cpt_meta['cpt_slug'] ) ? __( 'Import P
 					<div class="theme-id-container">
 						<h3 class="theme-name" id="astra-theme-name"> {{{ data.items[ key ].title.rendered }}} </h3>
 						<div class="theme-actions">
+							<button class="button install-page-preview"><?php esc_html_e( 'Import Pages', 'astra-sites' ); ?></button>
 							<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
 						</div>
 					</div>
