@@ -76,7 +76,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				return;
 			}
 			?>
-			<div class="notice notice-info is-dismissible astra-sites-getting-started-notice"> 
+			<div class="notice notice-info is-dismissible astra-sites-getting-started-notice">
 				<?php /* translators: %1$s is the admin page URL. */ ?>
 				<p><?php printf( __( 'Welcome! Import your favorite site from the website <a class="astra-sites-getting-started-btn" href="%1$s">library</a>!', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites' ) ); ?></p>
 			</div>
@@ -248,6 +248,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			}
 
 			$default_page_builder = $this->get_setting( 'page_builder' );
+			$current_slug         = isset( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'astra-sites';
 
 			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
 
@@ -310,7 +311,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 								</div>
 								<?php submit_button( __( 'Next', 'astra-sites' ), 'primary button-hero disabled' ); ?>
 							</div>
-
+							<input type="hidden" name="redirect_page" value="<?php echo $current_slug; ?>">
 							<input type="hidden" name="message" value="saved" />
 							<?php wp_nonce_field( 'astra-sites-welcome-screen', 'astra-sites-page-builder' ); ?>
 						</form>
@@ -318,8 +319,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				</div>
 			<?php } else { ?>
 				<?php
-				$page_title   = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
-				$current_slug = isset( $_GET['page'] ) ? esc_attr( $_GET['page'] ) : 'astra-sites';
+				$page_title = apply_filters( 'astra_sites_page_title', __( 'Astra Starter Sites - Your Library of 100+ Ready Templates!', 'astra-sites' ) );
 				?>
 				<div class="nav-tab-wrapper">
 					<h1 class='astra-sites-title'> <?php echo esc_html( $page_title ); ?> </h1>
