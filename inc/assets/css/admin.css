@@ -732,7 +732,7 @@ body.loading-content .select-page-builder {
     margin-bottom: .5em;
 }
 
-.rotating {
+.appearance_page_astra-sites .rotating {
     height: auto;
     animation: rotation 2s infinite linear;
     width: auto;

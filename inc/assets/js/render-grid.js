@@ -564,10 +564,6 @@
 		 */
 		_reinitGrid: function( event, data ) {
 
-			// $.each( data.items, function(i, v) {
-			// 	$('head').append( '<link rel="preload" href="'+v['featured-image-url']+'" as="image">' );
-			// });
-
 			var template = wp.template('astra-sites-list');
 
 			$('body').addClass( 'page-builder-selected' );

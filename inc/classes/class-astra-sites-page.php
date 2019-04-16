@@ -61,7 +61,9 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		}
 
 		/**
-		 * Save Page Builder
+		 * Admin notice
+		 *
+		 * @since x.x.x
 		 *
 		 * @return void
 		 */
