@@ -44,7 +44,7 @@
 						AstraSitesAPI._stored_data[ args.id ] = $.merge( AstraSitesAPI._stored_data[ data.args.id ], data.items );
 					}
 
-					if( 'undefined' !== args.trigger && '' !== args.trigger ) {
+					if( 'undefined' !== typeof args.trigger && '' !== args.trigger ) {
 						$(document).trigger( args.trigger, [data] );
 					}
 
