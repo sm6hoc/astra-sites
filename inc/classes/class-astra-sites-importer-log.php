@@ -78,22 +78,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 			// Initial AJAX Import Hooks.
 			add_action( 'astra_sites_import_start', array( $this, 'start' ), 10, 2 );
-			add_action( 'astra_sites_import_customizer_settings', array( $this, 'start_customizer' ) );
-			add_action( 'astra_sites_import_prepare_xml_data', array( $this, 'start_xml' ) );
-			add_action( 'astra_sites_import_options', array( $this, 'start_options' ) );
-			add_action( 'astra_sites_import_widgets', array( $this, 'start_widgets' ) );
-			add_action( 'astra_sites_import_complete', array( $this, 'start_end' ) );
-
-			add_action( 'wxr_importer.processed.post', array( $this, 'track_post' ) );
-			add_action( 'wxr_importer.processed.term', array( $this, 'track_term' ) );
-
-			// Delete..
-			add_action( 'astra_sites_reset_customizer_data', array( $this, 'reset_customizer_data' ) );
-			add_action( 'astra_sites_reset_site_options', array( $this, 'reset_site_options' ) );
-			add_action( 'astra_sites_reset_widgets_data', array( $this, 'reset_widgets_data' ) );
-			add_action( 'astra_sites_delete_imported_posts', array( $this, 'delete_imported_posts' ) );
-			add_action( 'astra_sites_delete_imported_wp_forms', array( $this, 'delete_imported_wp_forms' ) );
-			add_action( 'astra_sites_delete_imported_terms', array( $this, 'delete_imported_terms' ), 10, 2 );
 		}
 
 		/**
@@ -134,7 +118,7 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 		 */
 		function start( $data = array(), $demo_api_uri = '' ) {
 
-			Astra_Sites_Importer_Log::add( '==== Started ====' );
+			Astra_Sites_Importer_Log::add( 'Started Import Process' );
 
 			Astra_Sites_Importer_Log::add( '# System Details: ' );
 			Astra_Sites_Importer_Log::add( "Debug Mode \t\t: " . self::get_debug_mode() );
@@ -158,179 +142,6 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 			Astra_Sites_Importer_Log::add( 'https://wpastra.com/docs/?p=1314&utm_source=demo-import-panel&utm_campaign=import-error&utm_medium=wp-dashboard' . PHP_EOL );
 			Astra_Sites_Importer_Log::add( '---' . PHP_EOL );
 
-		}
-
-		/**
-		 * Track Post
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  int $post_id Post ID.
-		 * @return void
-		 */
-		function track_post( $post_id ) {
-			Astra_Sites_Importer_Log::add( '==== INSERTED - Post ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
-		}
-
-		/**
-		 * Track Term
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  int $term_id Term ID.
-		 * @return void
-		 */
-		function track_term( $term_id ) {
-			$term = get_term( $term_id );
-			if ( $term ) {
-				Astra_Sites_Importer_Log::add( '==== INSERTED - Term ' . $term_id . ' - ' . json_encode( $term ) );
-			}
-		}
-
-		/**
-		 * Reset Customizer Data
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  array $data Customizer Data.
-		 * @return void
-		 */
-		function reset_customizer_data( $data ) {
-			if ( $data ) {
-				Astra_Sites_Importer_Log::add( '==== DELETED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
-			}
-		}
-
-		/**
-		 * Reset Site Options
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  array $data Site options.
-		 * @return void
-		 */
-		function reset_site_options( $data ) {
-			if ( $data ) {
-				Astra_Sites_Importer_Log::add( '==== DELETED - SITE OPTIONS ' . json_encode( $data ) );
-			}
-		}
-
-		/**
-		 * Reset Widgets Data
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  array $old_widgets Old Widgets.
-		 * @return void
-		 */
-		function reset_widgets_data( $old_widgets ) {
-			if ( $old_widgets ) {
-				Astra_Sites_Importer_Log::add( '==== DELETED - WIDGETS ' . json_encode( $old_widgets ) );
-			}
-		}
-
-		/**
-		 * Delete Imported Posts
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  int $post_id Post ID.
-		 * @return void
-		 */
-		function delete_imported_posts( $post_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
-		}
-
-		/**
-		 * Delete Imported WP Forms
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  int $form_id Form ID.
-		 * @return void
-		 */
-		function delete_imported_wp_forms( $form_id ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - FORM ID ' . $form_id . ' - ' . get_post_type( $form_id ) . ' - ' . get_the_title( $form_id ) );
-		}
-
-		/**
-		 * Delete Imported Terms
-		 *
-		 * @since  1.3.0
-		 *
-		 * @param  int   $term_id Term ID.
-		 * @param  array $term Term array.
-		 * @return void
-		 */
-		function delete_imported_terms( $term_id, $term ) {
-			Astra_Sites_Importer_Log::add( '==== DELETED - TERM ID ' . $term_id . ' - ' . json_encode( $term ) );
-		}
-
-		/**
-		 * Start Customizer Import
-		 *
-		 * @since 1.3.0
-		 *
-		 * @param  array $data Customizer Data.
-		 * @return void
-		 */
-		function start_customizer( $data ) {
-			if ( $data ) {
-				Astra_Sites_Importer_Log::add( '==== IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $data ) );
-			}
-		}
-
-		/**
-		 * Start XML Import
-		 *
-		 * @param  string $xml XML file URL.
-		 * @since 1.3.0
-		 * @return void
-		 */
-		function start_xml( $xml ) {
-			Astra_Sites_Importer_Log::add( '==== IMPORTING from XML ' . $xml );
-		}
-
-		/**
-		 * Start Options Import
-		 *
-		 * @since 1.3.0
-		 *
-		 * @param  array $data Site options.
-		 * @return void
-		 */
-		function start_options( $data ) {
-			if ( $data ) {
-				Astra_Sites_Importer_Log::add( '==== IMPORTED - SITE OPTIONS ' . json_encode( $data ) );
-			}
-		}
-
-		/**
-		 * Start Widgets Import
-		 *
-		 * @since 1.3.0
-		 *
-		 * @param  array $old_widgets Widgets Data.
-		 * @return void
-		 */
-		function start_widgets( $old_widgets ) {
-			if ( $old_widgets ) {
-				Astra_Sites_Importer_Log::add( '==== IMPORTED - WIDGETS ' . json_encode( $old_widgets ) );
-			}
-		}
-
-		/**
-		 * End Import Process
-		 *
-		 * @since 1.3.0
-		 *
-		 * @return void
-		 */
-		function start_end() {
-			Astra_Sites_Importer_Log::add( '==== Complete ====' );
-
-			// Delete Log file.
-			delete_option( 'astra_sites_recent_import_log_file' );
 		}
 
 		/**

@@ -205,7 +205,8 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		 */
 		public function start_process() {
 
-			Astra_Sites_Image_Importer::log( '=================== ' . Astra_Sites_White_Label::get_instance()->page_title( ASTRA_SITES_NAME ) . ' - Importing Images for Blog name \'' . get_bloginfo( 'name' ) . '\' (' . get_current_blog_id() . ') ===================' );
+			Astra_Sites_Importer_Log::add( 'Batch Process Started!' );
+			Astra_Sites_Importer_Log::add( Astra_Sites_White_Label::get_instance()->page_title( ASTRA_SITES_NAME ) . ' - Importing Images for Blog name \'' . get_bloginfo( 'name' ) . '\' (' . get_current_blog_id() . ')' );
 
 			// Add "widget" in import [queue].
 			if ( class_exists( 'Astra_Sites_Batch_Processing_Widgets' ) ) {
@@ -234,7 +235,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 					self::$process_all->push_to_queue( $import );
 				}
 			} else {
-				Astra_Sites_Image_Importer::log( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
+				Astra_Sites_Importer_Log::add( 'Couldn\'t not import image due to allow_url_fopen() is disabled!' );
 			}
 
 			// Add "astra-addon" in import [queue].

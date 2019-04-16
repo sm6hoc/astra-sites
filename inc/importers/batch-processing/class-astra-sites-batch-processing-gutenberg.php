@@ -85,7 +85,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 			// Allow the SVG tags in batch update process.
 			add_filter( 'wp_kses_allowed_html', array( $this, 'allowed_tags_and_attributes' ), 10, 2 );
 
-			error_log( '---- Processing WordPress Posts / Pages - for "Gutenberg" ----' );
+			Astra_Sites_Importer_Log::add( '---- Processing WordPress Posts / Pages - for "Gutenberg" ----' );
 
 			$post_ids = Astra_Sites_Batch_Processing::get_pages( array( 'page' ) );
 			if ( empty( $post_ids ) && ! is_array( $post_ids ) ) {
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 		 */
 		public function import_single_post( $post_id = 0 ) {
 
-			error_log( '---- Processing WordPress Page - for Gutenberg ---- "' . $post_id . '"' );
+			Astra_Sites_Importer_Log::add( '---- Processing WordPress Page - for Gutenberg ---- "' . $post_id . '"' );
 
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
