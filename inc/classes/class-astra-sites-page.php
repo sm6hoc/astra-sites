@@ -63,7 +63,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		/**
 		 * Admin notice
 		 *
-		 * @since x.x.x
+		 * @since 1.3.5
 		 *
 		 * @return void
 		 */

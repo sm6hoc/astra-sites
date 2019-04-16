@@ -74,7 +74,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		/**
 		 * Close getting started notice for current user
 		 *
-		 * @since x.x.x
+		 * @since 1.3.5
 		 * @return void
 		 */
 		function getting_started_notice() {
