@@ -186,11 +186,17 @@ var AstraSitesAjaxQueue = (function() {
 			}
 		},
 
-		_log_title: function( data ) {
-			if (typeof data == 'object') { 
-				$('.current-importing-status-title').html( '<p>'  + JSON.stringify( data ) + '</p>' );
+		_log_title: function( data, append ) {
+
+			var markup = '<p>' +  data + '</p>';
+			if (typeof data == 'object' ) {
+				var markup = '<p>'  + JSON.stringify( data ) + '</p>';
+			}
+
+			if ( append ) {
+				$('.current-importing-status-title').append( markup );
 			} else {
-				$('.current-importing-status-title').html( '<p>' +  data + '</p>' );
+				$('.current-importing-status-title').html( markup );
 			}
 		},
 
@@ -312,7 +318,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 		    })
 			.done(function ( data ) {
 				AstraSitesAdmin._log_title( 'Complete Resetting Customizer Data..' );
@@ -336,7 +342,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 		    })
 			.done(function ( data ) {
 				AstraSitesAdmin._log_title( 'Complete Reseting Site Options..' );
@@ -360,7 +366,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 		    })
 			.done(function ( data ) {
 				AstraSitesAdmin._log_title( 'Complete Reseting Widgets..' );
@@ -544,7 +550,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 		    })
 			.done(function ( data ) {
 
@@ -582,7 +588,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 		    })
 			.done(function ( customizer_data ) {
 
@@ -622,7 +628,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 		    })
 			.done(function ( data ) {
 
@@ -695,7 +701,7 @@ var AstraSitesAjaxQueue = (function() {
 				})
 				.fail(function( jqXHR ){
 					// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 			    })
 				.done(function ( widgets_data ) {
 
@@ -739,7 +745,7 @@ var AstraSitesAjaxQueue = (function() {
 				})
 				.fail(function( jqXHR ){
 					// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 			    })
 				.done(function ( options_data ) {
 
@@ -785,7 +791,7 @@ var AstraSitesAjaxQueue = (function() {
 				})
 				.fail(function( jqXHR ){
 					// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 			    })
 				.done(function ( xml_data ) {
 
@@ -892,7 +898,7 @@ var AstraSitesAjaxQueue = (function() {
 				})
 				.fail(function( jqXHR ){
 					// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 			    })
 				.done(function ( forms ) {
 
@@ -934,7 +940,7 @@ var AstraSitesAjaxQueue = (function() {
 				})
 				.fail(function( jqXHR ){
 					// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText );
-					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText );
+					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 			    })
 				.done(function ( customizer_data ) {
 
@@ -1470,7 +1476,7 @@ var AstraSitesAjaxQueue = (function() {
 			})
 			.fail(function( jqXHR ){
 				// AstraSitesAdmin._importFailMessage( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
-				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText );
+				AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText + ' ' + jqXHR.statusText, true );
 		    })
 			.done(function ( demo_data ) {
 
