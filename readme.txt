@@ -5,7 +5,7 @@ Tags: Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites
 Requires at least: 4.4
 Requires PHP: 5.3
 Tested up to: 5.1
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,7 +35,7 @@ All you need to do is select the demo that suits your needs, import, tweak and g
 
 = FULL WEBSITE TEMPLATES FOR =
 
-Businesses like restaurants, lawyers, agencies, interior designers, artist shops, brandstore, pet services, charity, plumber, dental clinic, construction, fitness trainer, gardening, makeup artist and a lot more. You can take a look at all of them built with different page builders. 
+Businesses like restaurants, lawyers, agencies, interior designers, artist shops, brandstore, pet services, charity, plumber, dental clinic, construction, fitness trainer, gardening, makeup artist and a lot more. You can take a look at all of them built with different page builders.
 
 - [Elementor Free Website Templates](https://wpastra.com/ready-websites/?page-builder=elementor&category=free)
 - [Beaver Builder Free Website Templates](https://wpastra.com/ready-websites/?page-builder=beaver-builder&category=free)
@@ -44,7 +44,7 @@ Businesses like restaurants, lawyers, agencies, interior designers, artist shops
 
 You can extend this library with premium ready-to-use website demos by purchasing one of the Agency Bundles, i.e. either the Mini Agency Bundle or the Agency Bundle.
 
-= WHY PEOPLE LOVE THE ASTRA THEME? = 
+= WHY PEOPLE LOVE THE ASTRA THEME? =
 
 Over 200,000+ users are empowering their websites with Astra! From beginners to industry experts, everyone is loving Astra for its performance and ease of use.
 
@@ -116,6 +116,9 @@ We are open to suggestions and would love to work on topics that our users are l
 3. Click the import site button to start the import process.
 
 == Changelog ==
+
+v1.3.4 - 16-April-2019
+- Hot Fix: Sites not visible for import.
 
 v1.3.3 - 2-April-2019
 - Improvement: Added compatibility for WP Forms pro version.
