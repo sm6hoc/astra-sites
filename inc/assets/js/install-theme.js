@@ -99,9 +99,6 @@
 		_install_and_activate: function(event ) {
 			event.preventDefault();
 			var theme_slug = $(this).data('theme-slug') || '';
-			console.log( theme_slug );
-			console.log( 'yes' );
-
 			var btn = $( event.target );
 
 			if ( btn.hasClass( 'processing' ) ) {

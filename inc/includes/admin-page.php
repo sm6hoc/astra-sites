@@ -271,8 +271,6 @@ defined( 'ABSPATH' ) or exit;
 							<div class="current-importing-status-description"></div>
 						</div>
 					</div>
-					<div class="astra-sites-import-complete-message" style="display: none;"></div>
-					<div class="astra-sites-import-complete-message-extra" style="display: none;"></div>
 				</div>
 			</div>
 		</div>
