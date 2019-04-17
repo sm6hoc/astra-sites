@@ -503,9 +503,8 @@ body.loading-content .select-page-builder {
     margin-bottom: 1em;
 }
 
-.astra-sites-welcome p.description {
+.astra-sites-welcome p {
     font-size: 1rem;
-    margin-bottom: 2em;
 }
 
 .astra-sites-welcome select {
@@ -513,24 +512,15 @@ body.loading-content .select-page-builder {
     height: 100%;
 }
 
-.astra-sites-welcome p.submit {
+.astra-sites-welcome .submit {
     text-align: center;
     margin: 0;
     padding: 0;
     margin-left: .5em;
 }
 
-.astra-sites-welcome .fields {
-    display: flex;
-    vertical-align: middle;
-    align-items: center;
-    justify-content: center;
-}
-
-.astra-sites-welcome #submit {
-    line-height: 1;
-    padding: .5rem 1rem;
-    height: auto;
+.astra-sites-welcome .disabled {
+    pointer-events: none;
 }
 
 .astra-site-page-builder {
@@ -603,9 +593,19 @@ body.loading-content .select-page-builder {
     pointer-events: none;
 }
 
+.astra-sites-preview input[type="checkbox"].disabled {
+    background: #eeeeee;
+    opacity: 1;
+    color: #fff;
+    box-shadow: none;
+    border-color: #b4b9be;
+}
+
 .astra-sites-tooltip-icon .dashicons {
-    color: #5d5d5d;
-    font-size: 18px;
+    color: #757575;
+    font-size: 15px;
+    vertical-align: middle;
+    height: auto;
 }
 
 #astra-sites-welcome-form-inline {
@@ -653,3 +653,118 @@ body.loading-content .select-page-builder {
     border: none;
     margin: 0;
 } 
+
+#astra-sites-welcome-form #submit {
+    padding: 0em 4rem;
+}
+
+.page-builders li {
+    cursor: pointer;
+    display: inline-block;
+    padding: 1em;
+}
+
+.page-builders [type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.page-builders [type=radio] + img {
+    cursor: pointer;
+    opacity: .9;
+    border: 3px solid transparent;
+    border-radius: 10px;
+    transition: all linear 0.2s;
+}
+
+.page-builders [type=radio]:hover + img,
+.page-builders [type=radio]:checked + img {
+    opacity: 1;
+}
+
+.astra-sites-page-builder-notice {
+    text-align: center;
+    margin: 1em 0 2em 0;
+}
+
+.current-importing-status-wrap {
+    font-size: 1rem;
+}
+
+.current-importing-status-wrap hr {
+    border-color: #f1f1f1;
+}
+
+.astra-sites-result-preview {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    overflow-y: auto;
+}
+
+.astra-sites-result-preview .inner {
+    margin: 0 auto;
+    max-width: 700px;
+    padding: 5em 0;
+}
+
+.astra-sites-result-preview h2 {
+    font-size: 2rem;
+}
+
+.astra-sites-result-preview p {
+    font-size: 1rem;
+}
+
+.current-importing-status {
+    font-size: 1rem;
+    background: #eeeeee;
+    padding: 1em 1.5em;
+    margin-bottom: 4em;
+}
+
+.current-importing-status-title {
+    margin-bottom: .5em;
+}
+
+.appearance_page_astra-sites .rotating {
+    height: auto;
+    animation: rotation 2s infinite linear;
+    width: auto;
+    color: #c1c1c1;
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+.import-time {
+    display: inline-block;
+    background: #0185ba;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 3px;
+    animation: astra-scale 0.5s alternate infinite ease-in;
+}
+
+@keyframes astra-scale {
+  0%   {transform: scale(1);}
+  100% {transform: scale(1.03);}
+}
+
+.astra-sites-import-complete-message-extra {
+    font-size: 1rem;
+}
+
+.current-importing-status p {
+    margin: 0;
+}

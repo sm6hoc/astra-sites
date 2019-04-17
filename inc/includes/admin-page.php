@@ -170,9 +170,7 @@ defined( 'ABSPATH' ) or exit;
 									<strong><?php _e( 'Install Required Plugins', 'astra-sites' ); ?></strong>
 									<span class="astra-sites-tooltip-icon" data-tip-id="astra-sites-tooltip-plugins-settings"><span class="dashicons dashicons-editor-help"></span></span>
 									<div class="astra-sites-tooltip-message" id="astra-sites-tooltip-plugins-settings" style="display: none;">
-										<p><?php _e( 'Plugins below are used to build this website:', 'astra-sites' ); ?></p>
 										<ul class="required-plugins-list"><span class="spinner is-active"></span></ul>
-										<p><?php _e( 'These are required for this website to work.', 'astra-sites' ); ?></p>
 									</div>
 								</li>
 								<li class="astra-sites-import-customizer">
@@ -262,6 +260,21 @@ defined( 'ABSPATH' ) or exit;
 		</div>
 		<div class="wp-full-overlay-main">
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
+			<div class="astra-sites-result-preview" style="display: none;">
+				<div class="inner">
+					<h2><?php _e( 'We\'re importing your website!', 'astra-sites' ); ?></h2>
+					<p><?php _e( 'The process usually takes anywhere between 2 ~ 10 minutes depending on the size of the website and speed of connection.', 'astra-sites' ); ?></p>
+					<p><?php _e( 'Please do not close this browser window until the site is imported completely.', 'astra-sites' ); ?></p>
+					<div class="current-importing-status-wrap">
+						<div class="current-importing-status">
+							<div class="current-importing-status-title"></div>
+							<div class="current-importing-status-description"></div>
+						</div>
+					</div>
+					<div class="astra-sites-import-complete-message" style="display: none;"></div>
+					<div class="astra-sites-import-complete-message-extra" style="display: none;"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </script>
