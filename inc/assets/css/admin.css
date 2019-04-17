@@ -761,10 +761,6 @@ body.loading-content .select-page-builder {
   100% {transform: scale(1.03);}
 }
 
-.astra-sites-import-complete-message-extra {
-    font-size: 1rem;
-}
-
 .current-importing-status p {
     margin: 0;
 }

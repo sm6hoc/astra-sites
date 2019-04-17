@@ -391,7 +391,6 @@
 				// Also, Send page builder request with `/?search=` parameter. Because, We send the selected page builder request 
 				// Which does not cached due to extra parameter `/?search=`. For that we initially send all these requests.
 				$.each(plugins, function( key, plugin) {
-					console.log( plugin );
 					var category_slug = 'astra-site-page-builder';
 					var category = {
 						slug          : category_slug + '/?search=' + plugin,
