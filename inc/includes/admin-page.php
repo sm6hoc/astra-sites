@@ -54,10 +54,21 @@ $import_text = ( 'site-pages' === $global_cpt_meta['cpt_slug'] ) ? __( 'Import P
 
 	</div>
 
+	<div id="astra-pages-back-wrap">
+
+		<div class="wp-filter hide-if-no-js">
+			<div class="section-left">
+				<a class="astra-pages-back" href="javascript:void(0);"><?php _e( 'Go back to Sites', 'astra-sites' ); ?></a>
+			</div>
+		</div>
+
+	</div>
+
 	<?php do_action( 'astra_sites_before_site_grid' ); ?>
 
 	<div class="theme-browser rendered">
 		<div id="astra-sites" class="themes wp-clearfix"></div>
+		<div id="site-pages" class="themes wp-clearfix"></div>
 	</div>
 
 	<div class="spinner-wrap">
@@ -471,11 +482,13 @@ $import_text = ( 'site-pages' === $global_cpt_meta['cpt_slug'] ) ? __( 'Import P
 
 			<div class="theme astra-theme site-single {{ data.items[ key ].status }}" tabindex="0" aria-describedby="astra-theme-action astra-theme-name"
 				data-demo-id="{{{ data.items[ key ].id }}}"
+				data-type="{{{ data.type }}}"
 				data-demo-type="{{{ data.items[ key ]['astra-site-type'] }}}"
 				data-demo-url="{{{ data.items[ key ]['astra-site-url'] }}}"
 				data-demo-api="{{{ data.items[ key ]['_links']['self'][0]['href'] }}}"
 				data-demo-name="{{{  data.items[ key ].title.rendered }}}"
 				data-demo-slug="{{{  data.items[ key ].slug }}}"
+				data-demo-parent="{{{  data.items[ key ]['astra-site-parent-id'] }}}"
 				data-screenshot="{{{ data.items[ key ]['featured-image-url'] }}}"
 				data-content="{{{ data.items[ key ].content.rendered }}}"
 				data-required-plugins="{{ JSON.stringify( data.items[ key ]['required-plugins'] ) }}"

@@ -32,7 +32,6 @@
 				}
 			})
 			.then(data => {
-				console.log( typeof data );
 
 				if( 'object' === typeof data ) {
 					data['args'] = args;

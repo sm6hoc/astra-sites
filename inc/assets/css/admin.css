@@ -473,6 +473,43 @@ body.loading-content .select-page-builder {
 	width: 100%;
 }
 
+#astra-pages-back-wrap {
+	display: none;
+}
+
+#astra-pages-back-wrap .section-left {
+	background: #fff;
+	-ms-flex: 0 0 50px;
+	flex: 0 0 50px;
+	padding: 0 20px;
+	box-shadow: 0 1px 0 rgba(0,0,0,.1);
+	z-index: 8;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 50px;
+}
+
+a.astra-pages-back {
+	color: #555d66;
+	text-decoration: none;
+	font-size: 13px;
+	font-weight: 500;
+	position: relative;
+	padding-left: 16px;
+	padding-right: 6px;
+}
+
+a.astra-pages-back:before {
+	content: "\f341";
+	opacity: .7;
+	margin-top: 1px;
+	font-family: dashicons;
+	position: absolute;
+	left: 0;
+}
+
 .astra-site-down {
 	padding: 1em 2em;
 	margin-top: 1em;
