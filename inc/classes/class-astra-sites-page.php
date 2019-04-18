@@ -72,7 +72,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				return;
 			}
 
-			delete_user_meta( get_current_user_id(), '_astra_sites_gettings_started' );
 			$processed = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
 			$product_name = Astra_Pro_Sites_White_Label::get_option( 'astra-sites', 'name', ASTRA_PRO_SITES_NAME );
 
