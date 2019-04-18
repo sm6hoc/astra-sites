@@ -549,7 +549,7 @@ body.loading-content .select-page-builder {
     margin: 0;
 }
 
-#astra-site-import-process-wrap {
+.astra-site-import-process-wrap {
     display: flex;
     align-items: center;
     margin-top: -2px;
@@ -558,7 +558,16 @@ body.loading-content .select-page-builder {
     border-radius: 3px;
     overflow: hidden;
 }
-#astra-site-import-process-wrap progress {
+
+.astra-sites-result-preview .astra-site-import-process-wrap progress {
+    background: #eeeeee;
+}
+
+.astra-sites-result-preview .astra-site-import-process-wrap progress::-webkit-progress-value {
+    background: #0185ba;
+}
+
+.astra-site-import-process-wrap progress {
     padding: 0px;
     border: 0 none;
     background: #0085bd;
@@ -567,10 +576,15 @@ body.loading-content .select-page-builder {
     flex: 1;
 }
 
-#astra-site-import-process-wrap progress::-webkit-progress-value {
+.astra-sites-result-preview .dashicons {
+    vertical-align: text-bottom;
+}
+
+.astra-site-import-process-wrap progress::-webkit-progress-value {
   background: #00679b;
 }
-#astra-site-import-process-wrap progress::-webkit-progress-bar {
+
+.astra-site-import-process-wrap progress::-webkit-progress-bar {
     background: transparent;
 }
 
@@ -725,7 +739,7 @@ body.loading-content .select-page-builder {
     font-size: 1rem;
     background: #eeeeee;
     padding: 1em 1.5em;
-    margin-bottom: 4em;
+    margin-bottom: 1em;
 }
 
 .current-importing-status-title {

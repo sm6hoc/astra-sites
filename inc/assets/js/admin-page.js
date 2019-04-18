@@ -107,7 +107,10 @@ var AstraSitesAjaxQueue = (function() {
 				var progress_bar = percent * 100;
 
 				if( progress_bar <= 100 ) {
-					document.getElementById( 'astra-site-import-process' ).value          = progress_bar;
+					var process_bars = document.getElementsByClassName( 'astra-site-import-process' );
+					for ( var i = 0; i < process_bars.length; i++ ) {
+						process_bars[i].value = progress_bar;
+					}
 					AstraSitesAdmin._log_title( 'Importing Content.. ' + progress );
 				}
 			}
@@ -207,7 +210,8 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_bind: function()
 		{
-			$( document ).on( 'click'					 , '.astra-sites-reset-data .page-builders li', AstraSitesAdmin._toggle_reset_notice );
+			$( document ).on( 'click'					 , '.astra-sites-reset-data .checkbox', AstraSitesAdmin._toggle_reset_notice );
+			$( document ).on( 'click'					 , '.page-builders li', AstraSitesAdmin._toggle_reset_notice );
 			$( document ).on('click'                     , '#astra-sites-welcome-form .submit', AstraSitesAdmin._show_page_builder_notice);
 			$( document ).on('click'                     , '#astra-sites-welcome-form li', AstraSitesAdmin._show_next_button);
 			$( document ).on('change'                    , '#astra-sites-welcome-form-inline select', AstraSitesAdmin._change_page_builder);
@@ -600,10 +604,10 @@ var AstraSitesAjaxQueue = (function() {
 						time += seconds + ' Seconds';
 					}
 
-					var	output  = '<h2>Your New Website is Ready!</h2>';
-						output += '<p>It took just <span class="import-time">'+time+'</span> for it to import!</p>';
+					var	output  = '<h2>Done 🎉</h2>';
+						output += '<p>Your starter site has been imported successfully in '+time+'! Now go ahead, customize the text, images, and design to make it yours!</p>';
 						output += '<p>You can now start making changes according to your requirements.</p>';
-						output += '<p>Wish to see how it looks now? <a href="'+astraSitesAdmin.siteURL+'" target="_blank">Take a look</a>!</p>';
+						output += '<p><a class="button button-primary button-hero" href="'+astraSitesAdmin.siteURL+'" target="_blank">View Site <i class="dashicons dashicons-external"></i></a></p>';
 
 					$('.rotating,.current-importing-status-wrap,.notice-warning').remove();
 					$('.astra-sites-result-preview .inner').html(output);
@@ -705,7 +709,7 @@ var AstraSitesAjaxQueue = (function() {
 						wxr_url : AstraSitesAdmin.current_site['astra-site-wxr-path'],
 					},
 					beforeSend: function() {
-						$('#astra-site-import-process-wrap').show();
+						$('.astra-site-import-process-wrap').show();
 						AstraSitesAdmin._log_title( 'Importing Content..' );
 					},
 				})
@@ -713,7 +717,6 @@ var AstraSitesAjaxQueue = (function() {
 					AstraSitesAdmin._log_title( jqXHR.status + ' ' + jqXHR.responseText, true );
 			    })
 				.done(function ( xml_data ) {
-
 
 					// 2. Fail - Prepare XML Data.
 					if( false === xml_data.success ) {
@@ -729,24 +732,31 @@ var AstraSitesAjaxQueue = (function() {
 						AstraSSEImport.data = xml_data.data;
 						AstraSSEImport.render();
 
+						$('.current-importing-status-description').html('').show();
+
+						$('.astra-sites-result-preview .inner').append('<div class="astra-site-import-process-wrap"><progress class="astra-site-import-process" max="100" value="0"></progress></div>');
 						
 						var evtSource = new EventSource( AstraSSEImport.data.url );
 						evtSource.onmessage = function ( message ) {
 							var data = JSON.parse( message.data );
 							switch ( data.action ) {
 								case 'updateDelta':
+
 										AstraSSEImport.updateDelta( data.type, data.delta );
 									break;
 
 								case 'complete':
 									evtSource.close();
 
-									// 2. Pass - Import XML though "Source Event".
+									$('.current-importing-status-description').hide();
 
-									document.getElementById( 'astra-site-import-process' ).value = 100;
-									
+									// var process_bars = document.getElementsByClassName( 'astra-site-import-process' );
+									// for ( var i = 0; i < process_bars.length; i++ ) {
+									// 	process_bars[i].value = progress_bar;
+									// }
+									document.getElementsByClassName("astra-site-import-process").value = '100';
 
-									$('#astra-site-import-process-wrap').hide();
+									$('.astra-site-import-process-wrap').hide();
 
 									$(document).trigger( 'astra-sites-import-xml-done' );
 
@@ -755,7 +765,7 @@ var AstraSitesAjaxQueue = (function() {
 						};
 						evtSource.addEventListener( 'log', function ( message ) {
 							var data = JSON.parse( message.data );
-							AstraSitesAdmin._log( data.level + ' ' + data.message );
+							$('.current-importing-status-description').html( data.level + ' ' + data.message );
 						});
 					}
 				});
