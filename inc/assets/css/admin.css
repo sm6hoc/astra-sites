@@ -721,6 +721,10 @@ body.loading-content .select-page-builder {
     overflow-y: auto;
 }
 
+.astra-sites-result-preview .button {
+    margin-top: 1em;
+}
+
 .astra-sites-result-preview .inner {
     margin: 0 auto;
     max-width: 700px;
