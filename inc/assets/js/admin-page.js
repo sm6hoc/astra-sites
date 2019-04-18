@@ -750,10 +750,6 @@ var AstraSitesAjaxQueue = (function() {
 
 									$('.current-importing-status-description').hide();
 
-									// var process_bars = document.getElementsByClassName( 'astra-site-import-process' );
-									// for ( var i = 0; i < process_bars.length; i++ ) {
-									// 	process_bars[i].value = progress_bar;
-									// }
 									document.getElementsByClassName("astra-site-import-process").value = '100';
 
 									$('.astra-site-import-process-wrap').hide();
