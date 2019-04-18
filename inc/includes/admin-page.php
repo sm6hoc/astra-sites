@@ -510,7 +510,9 @@ $import_text = ( 'site-pages' === $global_cpt_meta['cpt_slug'] ) ? __( 'Import P
 					<div class="theme-id-container">
 						<h3 class="theme-name" id="astra-theme-name"> {{{ data.items[ key ].title.rendered }}} </h3>
 						<div class="theme-actions">
+							<# if ( data.type != 'site-pages' ) { #>
 							<button class="button install-page-preview"><?php esc_html_e( 'Import Pages', 'astra-sites' ); ?></button>
+							<# } #>
 							<button class="button-primary button preview install-theme-preview"><?php esc_html_e( 'Preview', 'astra-sites' ); ?></button>
 						</div>
 					</div>

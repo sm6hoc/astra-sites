@@ -1689,8 +1689,10 @@ var AstraSitesAjaxQueue = (function() {
 
 			if ( 'site-pages' == $(this).parents('.site-single').data('type') ) {
 				astraSitesApi.cpt_slug = 'site-pages';
+				AstraSitesAdmin.action_slug = 'site-pages';
 			} else {
 				astraSitesApi.cpt_slug = 'astra-sites';
+				AstraSitesAdmin.action_slug = 'astra-sites';
 			}
 
 			if( AstraSitesAPI._stored_data ) {
