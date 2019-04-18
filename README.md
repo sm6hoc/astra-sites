@@ -117,7 +117,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 ## Changelog ##
 
-v1.3.5 - 17-April-2019
+v1.3.5 - 18-April-2019
 - Improvement: Updated page builder selection screen UI.
 - Improvement: Showing import process on separate window. In which we can see all the current import process.
 - Improvement: Added one time welcome notice after plugin install and activate.
