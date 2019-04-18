@@ -1216,7 +1216,7 @@ var AstraSitesAjaxQueue = (function() {
 		 */
 		_activateAllPlugins: function( activate_plugins ) {
 
-			AstraSitesAdmin._log_title( 'Activating Plguins..' );
+			AstraSitesAdmin._log_title( 'Activating Plugins..' );
 
 			$.each( activate_plugins, function(index, single_plugin) {
 

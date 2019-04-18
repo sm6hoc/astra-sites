@@ -73,7 +73,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			}
 
 			$processed    = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
-			$product_name = Astra_Pro_Sites_White_Label::get_option( 'astra-sites', 'name', ASTRA_PRO_SITES_NAME );
+			$product_name = Astra_Sites_White_Label::get_instance()->page_title( 'Astra' );
 
 			if ( $processed ) {
 				return;
@@ -390,7 +390,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @since 1.0.6
 		 */
 		public function add_admin_menu() {
-			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
+			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Starter Sites', 'astra-sites' ) );
 
 			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
 		}
