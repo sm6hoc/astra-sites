@@ -100,6 +100,7 @@
 
 			jQuery('#astra-sites-filters').hide();
 			jQuery('#astra-sites').hide();
+			jQuery('html,body').animate({scrollTop:0},50);
 			jQuery('#astra-pages-back-wrap').show();
 			jQuery('#site-pages').show().html( template( data ) );
 
