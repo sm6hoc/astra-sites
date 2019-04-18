@@ -27,12 +27,12 @@
 
 		/**
 		 * Close Getting Started Notice
-		 * 
+		 *
 		 * @param  {object} event
 		 * @return void
 		 */
 		_auto_close_notice: function() {
-			
+
 			if( $( '.astra-sites-getting-started-btn' ).length ) {
 				$.ajax({
 					url: AstraSitesInstallThemeVars.ajaxurl,
@@ -99,7 +99,6 @@
 		_install_and_activate: function(event ) {
 			event.preventDefault();
 			var theme_slug = $(this).data('theme-slug') || '';
-
 			var btn = $( event.target );
 
 			if ( btn.hasClass( 'processing' ) ) {

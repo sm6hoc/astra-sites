@@ -69,7 +69,7 @@ class Astra_WXR_Importer {
 	 * @return void
 	 */
 	function track_post( $post_id ) {
-		Astra_Sites_Importer_Log::add( 'INSERTED - Post ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
+		Astra_Sites_Importer_Log::add( 'Inserted - Post ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id ) );
 		update_post_meta( $post_id, '_astra_sites_imported_post', true );
 	}
 
@@ -82,7 +82,7 @@ class Astra_WXR_Importer {
 	function track_term( $term_id ) {
 		$term = get_term( $term_id );
 		if ( $term ) {
-			Astra_Sites_Importer_Log::add( 'INSERTED - Term ' . $term_id . ' - ' . json_encode( $term ) );
+			Astra_Sites_Importer_Log::add( 'Inserted - Term ' . $term_id . ' - ' . json_encode( $term ) );
 		}
 		update_term_meta( $term_id, '_astra_sites_imported_term', true );
 	}

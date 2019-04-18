@@ -589,29 +589,43 @@ a.astra-pages-back:before {
 	margin: 0;
 }
 
-#astra-site-import-process-wrap {
-	display: flex;
-	align-items: center;
-	margin-top: -2px;
-	z-index: 999999;
-	position: relative;
-	border-radius: 3px;
-	overflow: hidden;
-}
-#astra-site-import-process-wrap progress {
-	padding: 0px;
-	border: 0 none;
-	background: #0085bd;
-	border-radius: 5px;
-	height: 4px;
-	flex: 1;
+.astra-site-import-process-wrap {
+    display: flex;
+    align-items: center;
+    margin-top: -2px;
+    z-index: 999999;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
 }
 
-#astra-site-import-process-wrap progress::-webkit-progress-value {
+.astra-sites-result-preview .astra-site-import-process-wrap progress {
+    background: #eeeeee;
+}
+
+.astra-sites-result-preview .astra-site-import-process-wrap progress::-webkit-progress-value {
+    background: #0185ba;
+}
+
+.astra-site-import-process-wrap progress {
+    padding: 0px;
+    border: 0 none;
+    background: #0085bd;
+    border-radius: 5px;
+    height: 4px;
+    flex: 1;
+}
+
+.astra-sites-result-preview .dashicons {
+    vertical-align: text-bottom;
+}
+
+.astra-site-import-process-wrap progress::-webkit-progress-value {
   background: #00679b;
 }
-#astra-site-import-process-wrap progress::-webkit-progress-bar {
-	background: transparent;
+
+.astra-site-import-process-wrap progress::-webkit-progress-bar {
+    background: transparent;
 }
 
 .theme-browser .theme .site-preview > .theme-screenshot {
@@ -747,6 +761,10 @@ a.astra-pages-back:before {
 	overflow-y: auto;
 }
 
+.astra-sites-result-preview .button {
+    margin-top: 1em;
+}
+
 .astra-sites-result-preview .inner {
 	margin: 0 auto;
 	max-width: 700px;
@@ -772,7 +790,7 @@ a.astra-pages-back:before {
 	margin-bottom: .5em;
 }
 
-.rotating {
+.appearance_page_astra-sites .rotating {
 	height: auto;
 	animation: rotation 2s infinite linear;
 	width: auto;
@@ -801,11 +819,6 @@ a.astra-pages-back:before {
   100% {transform: scale(1.03);}
 }
 
-.astra-sites-import-complete-message-extra {
-	font-size: 1rem;
-}
-
 .current-importing-status p {
 	margin: 0;
 }
->>>>>>> 7a8225e5ca761ae3c85901202a024e7443cffa61

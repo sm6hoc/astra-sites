@@ -32,7 +32,6 @@
 				}
 			})
 			.then(data => {
-
 				if( 'object' === typeof data ) {
 					data['args'] = args;
 					if( data.args.id ) {
