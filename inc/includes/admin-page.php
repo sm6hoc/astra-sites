@@ -228,9 +228,8 @@ defined( 'ABSPATH' ) or exit;
 						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
 						<span class="percent"></span>
 					</a>
-					<div id="astra-site-import-process-wrap" style="display: none;">
-						<progress id="astra-site-import-process" max="100" value="0"></progress>
-						<!-- <span id="astra-site-import-process-text"></span> -->
+					<div class="astra-site-import-process-wrap" style="display: none;">
+						<progress class="astra-site-import-process" max="100" value="0"></progress>
 					</div>
 					<!-- <a class="button button-hero hide-if-no-customize astra-site-import" href="#">
 						<?php esc_html_e( 'Import Site', 'astra-sites' ); ?>
@@ -262,8 +261,8 @@ defined( 'ABSPATH' ) or exit;
 			<iframe src="{{{data.astra_demo_url}}}" title="<?php esc_attr_e( 'Preview', 'astra-sites' ); ?>"></iframe>
 			<div class="astra-sites-result-preview" style="display: none;">
 				<div class="inner">
-					<h2><?php _e( 'We\'re importing your website!', 'astra-sites' ); ?></h2>
-					<p><?php _e( 'The process usually takes anywhere between 2 ~ 10 minutes depending on the size of the website and speed of connection.', 'astra-sites' ); ?></p>
+					<h2><?php _e( 'We\'re building your website.', 'astra-sites' ); ?></h2>
+					<p><?php _e( 'The process can take anywhere between 2 to 10 minutes depending on the size of the website and speed of connection.', 'astra-sites' ); ?></p>
 					<p><?php _e( 'Please do not close this browser window until the site is imported completely.', 'astra-sites' ); ?></p>
 					<div class="current-importing-status-wrap">
 						<div class="current-importing-status">
