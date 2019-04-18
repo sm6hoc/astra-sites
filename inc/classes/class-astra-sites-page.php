@@ -72,7 +72,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				return;
 			}
 
-			$processed = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
+			$processed    = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
 			$product_name = Astra_Pro_Sites_White_Label::get_option( 'astra-sites', 'name', ASTRA_PRO_SITES_NAME );
 
 			if ( $processed ) {
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			?>
 			<div class="notice notice-info is-dismissible astra-sites-getting-started-notice"> 
 				<?php /* translators: %1$s is the admin page URL, %2$s is product name. */ ?>
-				<p><?php printf( __( 'Thank you for choosing %1$s! Check the library of <a class="astra-sites-getting-started-btn" href="%2$s">ready starter sites here »</a>', 'astra-sites' ), $product_name, admin_url( 'themes.php?page=astra-sites' )); ?></p>
+				<p><?php printf( __( 'Thank you for choosing %1$s! Check the library of <a class="astra-sites-getting-started-btn" href="%2$s">ready starter sites here »</a>', 'astra-sites' ), $product_name, admin_url( 'themes.php?page=astra-sites' ) ); ?></p>
 			</div>
 			<?php
 		}
