@@ -139,7 +139,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$file_system  = Astra_Sites_Importer_Log::get_instance()->get_filesystem();
 
 			// If file system fails? Then take a backup in site option.
-			if ( false == $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
+			if ( false === $file_system->put_contents( $log_file, json_encode( $old_settings ), FS_CHMOD_FILE ) ) {
 				update_option( 'astra_sites_' . $file_name, $old_settings );
 			}
 
@@ -178,13 +178,13 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 			$theme = wp_get_theme();
 
 			// Theme installed and activate.
-			if ( 'Astra' == $theme->name || 'Astra' == $theme->parent_theme ) {
+			if ( 'Astra' === $theme->name || 'Astra' === $theme->parent_theme ) {
 				return 'installed-and-active';
 			}
 
 			// Theme installed but not activate.
 			foreach ( (array) wp_get_themes() as $theme_dir => $theme ) {
-				if ( 'Astra' == $theme->name || 'Astra' == $theme->parent_theme ) {
+				if ( 'Astra' === $theme->name || 'Astra' === $theme->parent_theme ) {
 					return 'installed-but-inactive';
 				}
 			}

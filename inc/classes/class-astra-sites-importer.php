@@ -240,7 +240,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 
 			if ( isset( $wxr_url ) ) {
 
-				Astra_Sites_Importer_Log::add( 'Importing from XML ' . $xml );
+				Astra_Sites_Importer_Log::add( 'Importing from XML ' . $wxr_url );
 
 				// Download XML file.
 				$xml_path = Astra_Sites_Helper::download_file( $wxr_url );
@@ -378,7 +378,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			// API Call.
 			$response = wp_remote_get( $demo_api_uri, $api_args );
 
-			if ( is_wp_error( $response ) || ( isset( $response->status ) && 0 == $response->status ) ) {
+			if ( is_wp_error( $response ) || ( isset( $response->status ) && 0 === $response->status ) ) {
 				if ( isset( $response->status ) ) {
 					$data = json_decode( $response, true );
 				} else {
@@ -487,7 +487,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 						foreach ( $widgets as $widget_key => $widget_data ) {
 
 							if ( isset( $sidebars_widgets['wp_inactive_widgets'] ) ) {
-								if ( ! in_array( $widget_key, $sidebars_widgets['wp_inactive_widgets'] ) ) {
+								if ( ! in_array( $widget_key, $sidebars_widgets['wp_inactive_widgets'], true ) ) {
 									$sidebars_widgets['wp_inactive_widgets'][] = $widget_key;
 								}
 							}

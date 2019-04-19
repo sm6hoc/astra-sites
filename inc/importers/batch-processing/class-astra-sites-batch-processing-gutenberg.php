@@ -107,26 +107,26 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 
 			$ids_mapping = get_option( 'astra_sites_wpforms_ids_mapping', array() );
 
-			// Empty mapping? Then return.
-			if ( empty( $ids_mapping ) ) {
-				return;
-			}
-
 			// Post content.
 			$content = get_post_field( 'post_content', $post_id );
 
-			// Replace ID's.
-			foreach ( $ids_mapping as $old_id => $new_id ) {
-				$content = str_replace( '[wpforms id="' . $old_id, '[wpforms id="' . $new_id, $content );
+			if ( ! empty( $ids_mapping ) ) {
+				// Replace ID's.
+				foreach ( $ids_mapping as $old_id => $new_id ) {
+					$content = str_replace( '[wpforms id="' . $old_id, '[wpforms id="' . $new_id, $content );
+				}
 			}
 
 			// This replaces the category ID in UAG Post blocks.
 			$site_options = get_option( 'astra_sites_import_data', array() );
+
 			if ( isset( $site_options['astra-site-taxonomy-mapping'] ) ) {
+
 				$tax_mapping = $site_options['astra-site-taxonomy-mapping'];
 
 				if ( isset( $tax_mapping['post'] ) ) {
-					$catogory_mapping = $tax_mapping['post']['category'];
+
+					$catogory_mapping = ( isset( $tax_mapping['post']['category'] ) ) ? $tax_mapping['post']['category'] : array();
 
 					if ( is_array( $catogory_mapping ) ) {
 
