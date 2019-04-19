@@ -161,13 +161,13 @@ class Astra_WXR_Importer {
 	function real_mimes( $defaults, $filename ) {
 
 		// Set EXT and real MIME type only for the file name `wxr.xml`.
-		if ( 'wxr.xml' == $filename ) {
+		if ( 'wxr.xml' === $filename ) {
 			$defaults['ext']  = 'xml';
 			$defaults['type'] = 'text/xml';
 		}
 
 		// Set EXT and real MIME type only for the file name `wpforms.json`.
-		if ( 'wpforms.json' == $filename ) {
+		if ( 'wpforms.json' === $filename ) {
 			$defaults['ext']  = 'json';
 			$defaults['type'] = 'text/plain';
 		}

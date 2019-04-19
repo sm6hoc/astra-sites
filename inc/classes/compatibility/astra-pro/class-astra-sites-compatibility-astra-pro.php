@@ -216,7 +216,8 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Astra_Pro' ) ) :
 				foreach ( $location['specific']['post'] as $post_type => $old_post_data ) {
 					if ( is_array( $old_post_data ) ) {
 						foreach ( $old_post_data as $post_key => $post ) {
-							if ( $post_object = get_page_by_path( $post['slug'] ) ) {
+							$post_object = get_page_by_path( $post['slug'] );
+							if ( $post_object ) {
 								$mapping[] = 'post-' . absint( $post_object->ID );
 							}
 						}

@@ -129,7 +129,7 @@ class Astra_Site_Options_Import {
 			if ( null !== $option_value ) {
 
 				// Is option exist in defined array site_options()?
-				if ( in_array( $option_name, self::site_options() ) ) {
+				if ( in_array( $option_name, self::site_options(), true ) ) {
 
 					switch ( $option_name ) {
 
