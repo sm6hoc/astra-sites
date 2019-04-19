@@ -68,7 +68,8 @@ if ( ! class_exists( 'Astra_Sites_Importer_Log' ) ) :
 
 			// Get user credentials for WP file-system API.
 			$astra_sites_import = wp_nonce_url( admin_url( 'themes.php?page=astra-sites' ), 'astra-import' );
-			if ( false === ( $creds = request_filesystem_credentials( $astra_sites_import, '', false, false, null ) ) ) {
+			$creds              = request_filesystem_credentials( $astra_sites_import, '', false, false, null );
+			if ( false === $creds ) {
 				return;
 			}
 

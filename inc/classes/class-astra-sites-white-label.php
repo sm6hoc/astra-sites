@@ -141,7 +141,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 			}
 
 			// Set White Labels.
-			if ( ASTRA_SITES_BASE == $plugin_file ) {
+			if ( ASTRA_SITES_BASE === $plugin_file ) {
 
 				$name        = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );
 				$description = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'description' );
