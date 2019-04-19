@@ -119,6 +119,7 @@ We are open to suggestions and would love to work on topics that our users are l
 
 v1.3.6 - 19-April-2019
 - Fix: After Import UAG - Post Grid categories do not retain issue fixed
+- Fix: Premium Sites not importing due to invalid URL error.
 
 v1.3.5 - 18-April-2019
 - Improvement: Updated page builder selection screen UI.
