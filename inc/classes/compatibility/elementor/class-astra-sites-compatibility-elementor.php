@@ -80,7 +80,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			}
 
 			$element->start_controls_section(
-				'ast_body_and_paragraph_typography',
+				'astra_sites_body_and_paragraph_typography',
 				array(
 					'label' => __( 'Astra Site Settings', 'astra-sites' ),
 					'tab'   => Controls_Manager::TAB_STYLE,
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			);
 
 			$element->add_control(
-				'ast_headings_typography_description',
+				'astra_sites_headings_typography_description',
 				array(
 					'raw'             => __( 'You can still override individual values for each element.', 'astra-sites' ),
 					'type'            => Controls_Manager::RAW_HTML,
@@ -99,7 +99,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			$element->add_group_control(
 				Group_Control_Typography::get_type(),
 				array(
-					'name'     => 'ast_body',
+					'name'     => 'astra_sites_body',
 					'label'    => __( 'Body Typography', 'astra-sites' ),
 					'selector' => 'body',
 					'scheme'   => Scheme_Typography::TYPOGRAPHY_3,
@@ -107,7 +107,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			);
 
 			$element->add_control(
-				'ast_main_color',
+				'astra_sites_main_color',
 				array(
 					'label'     => __( 'Main Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			$element->add_group_control(
 				Group_Control_Typography::get_type(),
 				array(
-					'name'     => 'ast_paragraph',
+					'name'     => 'astra_sites_paragraph',
 					'label'    => __( 'Paragraph (primary text)', 'astra-sites' ),
 					'selector' => 'body p',
 					'scheme'   => Scheme_Typography::TYPOGRAPHY_4,
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			);
 
 			$element->add_control(
-				'ast_text_color',
+				'astra_sites_text_color',
 				array(
 					'label'     => __( 'Text Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
@@ -139,7 +139,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			);
 
 			$element->add_control(
-				'ast_link_color',
+				'astra_sites_link_color',
 				array(
 					'label'     => __( 'Link Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
@@ -150,7 +150,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			);
 
 			$element->add_control(
-				'ast_link_hover_color',
+				'astra_sites_link_hover_color',
 				array(
 					'label'     => __( 'Link Hover Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			}
 
 			$element->add_control(
-				'ast_default_heading_font_family',
+				'astra_sites_default_heading_font_family',
 				array(
 					'label'     => __( 'Default Headings Font', 'astra-sites' ),
 					'type'      => Controls_Manager::FONT,
@@ -182,7 +182,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 				$element->add_group_control(
 					Group_Control_Typography::get_type(),
 					array(
-						'name'     => 'ast_heading_' . $i,
+						'name'     => 'astra_sites_heading_' . $i,
 						/* translators: %s: Heading 1-6 type */
 						'label'    => sprintf( __( 'Heading %s', 'astra-sites' ), $i ),
 						'selector' => "body h{$i}, body .elementor-widget-heading h{$i}.elementor-heading-title",
@@ -209,19 +209,19 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 			$keys = apply_filters(
 				'astra_sites_elementor_typography_keys',
 				array(
-					'ast_heading_1',
-					'ast_heading_2',
-					'ast_heading_3',
-					'ast_heading_4',
-					'ast_heading_5',
-					'ast_heading_6',
-					'ast_default_heading',
-					'ast_body',
-					'ast_paragraph',
-					'ast_main_color',
-					'ast_text_color',
-					'ast_link_color',
-					'ast_link_hover_color',
+					'astra_sites_heading_1',
+					'astra_sites_heading_2',
+					'astra_sites_heading_3',
+					'astra_sites_heading_4',
+					'astra_sites_heading_5',
+					'astra_sites_heading_6',
+					'astra_sites_default_heading',
+					'astra_sites_body',
+					'astra_sites_paragraph',
+					'astra_sites_main_color',
+					'astra_sites_text_color',
+					'astra_sites_link_color',
+					'astra_sites_link_hover_color',
 				)
 			);
 
@@ -236,7 +236,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 
 			if ( count( $font_families ) ) {
 				wp_enqueue_style(
-					'ast_typography_fonts',
+					'astra_sites_typography_fonts',
 					'https://fonts.googleapis.com/css?family=' . implode( '|', $font_families ),
 					array(),
 					get_the_modified_time( 'U', $post_id )
@@ -251,7 +251,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 		 */
 		public function enqueue_editor_scripts() {
 			wp_enqueue_script(
-				'ast_typography_script',
+				'astra_sites_typography_script',
 				ASTRA_SITES_URI . 'inc/classes/compatibility/elementor/astra-sites-typography.js',
 				array(
 					'jquery',
