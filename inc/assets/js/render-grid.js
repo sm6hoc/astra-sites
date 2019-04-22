@@ -463,7 +463,6 @@
 				// Also, Send page builder request with `/?search=` parameter. Because, We send the selected page builder request
 				// Which does not cached due to extra parameter `/?search=`. For that we initially send all these requests.
 				$.each(plugins, function( key, plugin) {
-					console.log( plugin );
 					var category_slug = 'astra-site-page-builder';
 					var category = {
 						slug          : category_slug + '/?search=' + plugin,
@@ -651,10 +650,6 @@
 		 */
 		_reinitGrid: function( event, data ) {
 
-			// $.each( data.items, function(i, v) {
-			// 	$('head').append( '<link rel="preload" href="'+v['featured-image-url']+'" as="image">' );
-			// });
-
 			var template = wp.template('astra-sites-list');
 
 			$('body').addClass( 'page-builder-selected' );
@@ -701,6 +696,13 @@
 
 					if( page_builder_id ) {
 						api_params['astra-site-page-builder'] = page_builder_id;
+					}
+
+					if( astraRenderGrid.sites && astraRenderGrid.sites.site_url ) {
+						api_params['site_url'] = astraRenderGrid.sites.site_url;
+					}
+					if( astraRenderGrid.sites && astraRenderGrid.sites.purchase_key ) {
+						api_params['purchase_key'] = astraRenderGrid.sites.purchase_key;
 					}
 
 					// API Request.

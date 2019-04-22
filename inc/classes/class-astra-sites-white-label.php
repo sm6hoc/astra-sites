@@ -197,7 +197,7 @@ if ( ! class_exists( 'Astra_Sites_White_Label' ) ) :
 		 * @param  string $title Page Title.
 		 * @return string        Filtered Page Title.
 		 */
-		function page_title( $title ) {
+		function page_title( $title = '' ) {
 
 			if ( is_callable( 'Astra_Ext_White_Label_Markup::get_whitelabel_string' ) ) {
 				$astra_sites_name = Astra_Ext_White_Label_Markup::get_whitelabel_string( 'astra-sites', 'name' );

@@ -169,7 +169,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 										// Set meta for tracking the post.
 										update_post_meta( $new_id, '_astra_sites_imported_wp_forms', true );
-										Astra_Sites_Importer_Log::add( 'INSERTED - WP Form ' . $new_id );
+										Astra_Sites_Importer_Log::add( 'Inserted WP Form ' . $new_id );
 									}
 
 									if ( $new_id ) {
@@ -209,7 +209,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 			if ( ! empty( $customizer_data ) ) {
 
-				Astra_Sites_Importer_Log::add( 'IMPORTED - CUSTOMIZER SETTINGS ' . json_encode( $customizer_data ) );
+				Astra_Sites_Importer_Log::add( 'Imported Customizer Settings ' . json_encode( $customizer_data ) );
 
 				// Set meta for tracking the post.
 				error_log( 'Customizer Data ' . json_encode( $customizer_data ) );
@@ -242,7 +242,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 			if ( isset( $wxr_url ) ) {
 
-				Astra_Sites_Importer_Log::add( 'IMPORTING from XML ' . $xml );
+				Astra_Sites_Importer_Log::add( 'Importing from XML ' . $wxr_url );
 
 				// Download XML file.
 				$xml_path = Astra_Sites_Helper::download_file( $wxr_url );
@@ -278,7 +278,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 				// Set meta for tracking the post.
 				if ( is_array( $options_data ) ) {
-					Astra_Sites_Importer_Log::add( 'IMPORTED - SITE OPTIONS ' . json_encode( $options_data ) );
+					Astra_Sites_Importer_Log::add( 'Imported - Site Options ' . json_encode( $options_data ) );
 					update_option( '_astra_sites_old_site_options', $options_data );
 				}
 
@@ -301,7 +301,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 			$widgets_data = ( isset( $_POST['widgets_data'] ) ) ? (object) json_decode( stripcslashes( $_POST['widgets_data'] ) ) : '';
 
-			Astra_Sites_Importer_Log::add( 'IMPORTED - WIDGETS ' . json_encode( $widgets_data ) );
+			Astra_Sites_Importer_Log::add( 'Imported - Widgets ' . json_encode( $widgets_data ) );
 
 			if ( ! empty( $widgets_data ) ) {
 
@@ -347,16 +347,17 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			// default values.
 			$remote_args = array();
 			$defaults    = array(
-				'id'                         => '',
-				'astra-site-widgets-data'    => '',
-				'astra-site-customizer-data' => '',
-				'astra-site-options-data'    => '',
-				'astra-post-data-mapping'    => '',
-				'astra-site-wxr-path'        => '',
-				'astra-site-wpforms-path'    => '',
-				'astra-enabled-extensions'   => '',
-				'astra-custom-404'           => '',
-				'required-plugins'           => '',
+				'id'                          => '',
+				'astra-site-widgets-data'     => '',
+				'astra-site-customizer-data'  => '',
+				'astra-site-options-data'     => '',
+				'astra-post-data-mapping'     => '',
+				'astra-site-wxr-path'         => '',
+				'astra-site-wpforms-path'     => '',
+				'astra-enabled-extensions'    => '',
+				'astra-custom-404'            => '',
+				'required-plugins'            => '',
+				'astra-site-taxonomy-mapping' => '',
 			);
 
 			$api_args = apply_filters(
@@ -393,16 +394,17 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
 
 			if ( ! isset( $data['code'] ) ) {
-				$remote_args['id']                         = $data['id'];
-				$remote_args['astra-site-widgets-data']    = json_decode( $data['astra-site-widgets-data'] );
-				$remote_args['astra-site-customizer-data'] = $data['astra-site-customizer-data'];
-				$remote_args['astra-site-options-data']    = $data['astra-site-options-data'];
-				$remote_args['astra-post-data-mapping']    = $data['astra-post-data-mapping'];
-				$remote_args['astra-site-wxr-path']        = $data['astra-site-wxr-path'];
-				$remote_args['astra-site-wpforms-path']    = $data['astra-site-wpforms-path'];
-				$remote_args['astra-enabled-extensions']   = $data['astra-enabled-extensions'];
-				$remote_args['astra-custom-404']           = $data['astra-custom-404'];
-				$remote_args['required-plugins']           = $data['required-plugins'];
+				$remote_args['id']                          = $data['id'];
+				$remote_args['astra-site-widgets-data']     = json_decode( $data['astra-site-widgets-data'] );
+				$remote_args['astra-site-customizer-data']  = $data['astra-site-customizer-data'];
+				$remote_args['astra-site-options-data']     = $data['astra-site-options-data'];
+				$remote_args['astra-post-data-mapping']     = $data['astra-post-data-mapping'];
+				$remote_args['astra-site-wxr-path']         = $data['astra-site-wxr-path'];
+				$remote_args['astra-site-wpforms-path']     = $data['astra-site-wpforms-path'];
+				$remote_args['astra-enabled-extensions']    = $data['astra-enabled-extensions'];
+				$remote_args['astra-custom-404']            = $data['astra-custom-404'];
+				$remote_args['required-plugins']            = $data['required-plugins'];
+				$remote_args['astra-site-taxonomy-mapping'] = $data['astra-site-taxonomy-mapping'];
 			}
 
 			// Merge remote demo and defaults.
@@ -440,7 +442,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 * @return void
 		 */
 		function reset_customizer_data() {
-			Astra_Sites_Importer_Log::add( 'DELETED - CUSTOMIZER SETTINGS ' . json_encode( get_option( 'astra-settings', array() ) ) );
+			Astra_Sites_Importer_Log::add( 'Deleted customizer Settings ' . json_encode( get_option( 'astra-settings', array() ) ) );
 
 			delete_option( 'astra-settings' );
 
@@ -457,7 +459,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 
 			$options = get_option( '_astra_sites_old_site_options', array() );
 
-			Astra_Sites_Importer_Log::add( 'DELETED - SITE OPTIONS ' . json_encode( $options ) );
+			Astra_Sites_Importer_Log::add( 'Deleted - Site Options ' . json_encode( $options ) );
 
 			if ( $options ) {
 				foreach ( $options as $option_key => $option_value ) {
@@ -488,9 +490,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 						foreach ( $widgets as $widget_key => $widget_data ) {
 
 							if ( isset( $sidebars_widgets['wp_inactive_widgets'] ) ) {
-
 								if ( ! in_array( $widget_key, $sidebars_widgets['wp_inactive_widgets'], true ) ) {
-									error_log( '==== IN ACTIVATE - Widget ' . $widget_key );
 									$sidebars_widgets['wp_inactive_widgets'][] = $widget_key;
 								}
 							}
@@ -512,7 +512,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		 */
 		function delete_imported_posts() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
-			$message = 'DELETED - POST ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+			$message = 'Deleted - Post ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
 
 			Astra_Sites_Importer_Log::add( $message );
 			wp_delete_post( $post_id, true );
@@ -530,7 +530,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 		function delete_imported_wp_forms() {
 			$post_id = isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : '';
 
-			$message = 'DELETED - FORM ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
+			$message = 'Deleted - Form ID ' . $post_id . ' - ' . get_post_type( $post_id ) . ' - ' . get_the_title( $post_id );
 
 			Astra_Sites_Importer_Log::add( $message );
 
@@ -555,7 +555,7 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) {
 			if ( $term_id ) {
 				$term = get_term( $term_id );
 				if ( $term ) {
-					$message = 'DELETED - TERM ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
+					$message = 'Deleted - Term ' . $term_id . ' - ' . $term->name . ' ' . $term->taxonomy;
 					Astra_Sites_Importer_Log::add( $message );
 					wp_delete_term( $term_id, $term->taxonomy );
 				}

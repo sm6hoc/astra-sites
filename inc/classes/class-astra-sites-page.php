@@ -61,7 +61,9 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		}
 
 		/**
-		 * Save Page Builder
+		 * Admin notice
+		 *
+		 * @since 1.3.5
 		 *
 		 * @return void
 		 */
@@ -70,15 +72,17 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				return;
 			}
 
-			$processed = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
+			$processed    = get_user_meta( get_current_user_id(), '_astra_sites_gettings_started', true );
+			$product_name = Astra_Sites_White_Label::get_instance()->page_title( 'Astra' );
 
 			if ( $processed ) {
 				return;
 			}
+
 			?>
 			<div class="notice notice-info is-dismissible astra-sites-getting-started-notice">
-				<?php /* translators: %1$s is the admin page URL. */ ?>
-				<p><?php printf( __( 'Welcome! Import your favorite site from the website <a class="astra-sites-getting-started-btn" href="%1$s">library</a>!', 'astra-sites' ), admin_url( 'themes.php?page=astra-sites' ) ); ?></p>
+				<?php /* translators: %1$s is the admin page URL, %2$s is product name. */ ?>
+				<p><?php printf( __( 'Thank you for choosing %1$s! Check the library of <a class="astra-sites-getting-started-btn" href="%2$s">ready starter sites here »</a>', 'astra-sites' ), $product_name, admin_url( 'themes.php?page=astra-sites' ) ); ?></p>
 			</div>
 			<?php
 		}
@@ -391,7 +395,7 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 		 * @since 1.0.6
 		 */
 		public function add_admin_menu() {
-			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Sites', 'astra-sites' ) );
+			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Starter Sites', 'astra-sites' ) );
 
 			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
 

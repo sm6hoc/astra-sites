@@ -120,6 +120,28 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing_Gutenberg' ) ) :
 				}
 			}
 
+			// This replaces the category ID in UAG Post blocks.
+			$site_options = get_option( 'astra_sites_import_data', array() );
+
+			if ( isset( $site_options['astra-site-taxonomy-mapping'] ) ) {
+
+				$tax_mapping = $site_options['astra-site-taxonomy-mapping'];
+
+				if ( isset( $tax_mapping['post'] ) ) {
+
+					$catogory_mapping = ( isset( $tax_mapping['post']['category'] ) ) ? $tax_mapping['post']['category'] : array();
+
+					if ( is_array( $catogory_mapping ) ) {
+
+						foreach ( $catogory_mapping as $key => $value ) {
+
+							$this_site_term = get_term_by( 'slug', $value['slug'], 'category' );
+							$content        = str_replace( '"categories":"' . $value['id'], '"categories":"' . $this_site_term->term_id, $content );
+						}
+					}
+				}
+			}
+
 			// # Tweak
 			// Gutenberg break block markup from render. Because the '&' is updated in database with '&amp;' and it
 			// expects as 'u0026amp;'. So, Converted '&amp;' with 'u0026amp;'.
