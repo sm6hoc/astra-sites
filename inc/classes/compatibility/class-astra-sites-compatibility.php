@@ -52,6 +52,9 @@ if ( ! class_exists( 'Astra_Sites_Compatibility' ) ) :
 
 			// Plugin - WooCommerce.
 			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/woocommerce/class-astra-sites-compatibility-woocommerce.php';
+
+			// Plugin - Elementor.
+			require_once ASTRA_SITES_DIR . 'inc/classes/compatibility/elementor/class-astra-sites-compatibility-elementor.php';
 		}
 
 	}
