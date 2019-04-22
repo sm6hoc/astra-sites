@@ -771,6 +771,13 @@
 						api_params['astra-site-page-builder'] = page_builder_id;
 					}
 
+					if( astraRenderGrid.sites && astraRenderGrid.sites.site_url ) {
+						api_params['site_url'] = astraRenderGrid.sites.site_url;
+					}
+					if( astraRenderGrid.sites && astraRenderGrid.sites.purchase_key ) {
+						api_params['purchase_key'] = astraRenderGrid.sites.purchase_key;
+					}
+
 					// API Request.
 					var api_post = {
 						id: 'astra-sites',
