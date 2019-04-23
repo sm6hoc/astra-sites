@@ -200,6 +200,23 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 			return null;
 		}
 
+		/**
+		 * Get Supporting Post Types..
+		 *
+		 * @since x.x.x
+		 * @param  integer $feature Feature.
+		 * @return array
+		 */
+		public static function get_post_types_supporting( $feature ) {
+			global $_wp_post_type_features;
+
+			$post_types = array_keys(
+				wp_filter_object_list( $_wp_post_type_features, array( $feature => true ) )
+			);
+
+			return $post_types;
+		}
+
 	}
 
 	/**
