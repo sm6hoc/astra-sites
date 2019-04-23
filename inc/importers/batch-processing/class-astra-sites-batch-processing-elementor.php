@@ -45,7 +45,7 @@ class Astra_Sites_Batch_Processing_Elementor extends Source_Local {
 	 */
 	public function import() {
 
-		$post_types = get_option( 'elementor_cpt_support', array( 'page', 'post' ) );
+		$post_types = \Astra_Sites_Batch_Processing::get_post_types_supporting( 'elementor' );
 		if ( empty( $post_types ) && ! is_array( $post_types ) ) {
 			return;
 		}
