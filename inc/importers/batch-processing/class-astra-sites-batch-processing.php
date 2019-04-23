@@ -203,7 +203,7 @@ if ( ! class_exists( 'Astra_Sites_Batch_Processing' ) ) :
 		/**
 		 * Get Supporting Post Types..
 		 *
-		 * @since x.x.x
+		 * @since 1.3.7
 		 * @param  integer $feature Feature.
 		 * @return array
 		 */
