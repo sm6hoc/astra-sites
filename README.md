@@ -4,8 +4,8 @@
 **Tags:** Elementor,Beaver Builder,Templates,Gutenberg,Astra Starter Sites  
 **Requires at least:** 4.4  
 **Requires PHP:** 5.3  
-**Tested up to:** 5.1  
-**Stable tag:** 1.3.5  
+**Tested up to:** 5.1.1  
+**Stable tag:** 1.3.7  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -116,6 +116,13 @@ We are open to suggestions and would love to work on topics that our users are l
 3. Click the import site button to start the import process.
 
 ## Changelog ##
+
+v1.3.7 - 23-April-2019
+- Fix: Compatibility to WP Forms in Header and Footer of the demo site for Elementor.
+
+v1.3.6 - 19-April-2019
+- Fix: After Import UAG - Post Grid categories do not retain issue fixed
+- Fix: Premium Sites not importing due to invalid URL error.
 
 v1.3.5 - 18-April-2019
 - Improvement: Updated page builder selection screen UI.
