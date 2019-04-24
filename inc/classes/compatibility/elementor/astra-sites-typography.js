@@ -5,19 +5,19 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	const keys = [
-		'ast_heading_1',
-		'ast_heading_2',
-		'ast_heading_3',
-		'ast_heading_4',
-		'ast_heading_5',
-		'ast_heading_6',
-		'ast_default_heading',
-		'ast_body',
-		'ast_paragraph',
-		'ast_main_color',
-		'ast_text_color',
-		'ast_link_color',
-		'ast_link_hover_color'
+		'astra_sites_page_setting_enable',
+		'astra_sites_heading_1',
+		'astra_sites_heading_2',
+		'astra_sites_heading_3',
+		'astra_sites_heading_4',
+		'astra_sites_heading_5',
+		'astra_sites_heading_6',
+		'astra_sites_default_heading',
+		'astra_sites_body',
+		'astra_sites_main_color',
+		'astra_sites_text_color',
+		'astra_sites_link_color',
+		'astra_sites_link_hover_color',
 	];
 
 	for ( let index = 0; index < keys.length; index++ ) {

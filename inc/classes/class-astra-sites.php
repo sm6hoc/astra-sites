@@ -169,6 +169,12 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 						}
 					}
 
+					if ( '_elementor_page_settings' === $meta_key ) {
+						if ( is_array( $raw_data ) && isset( $raw_data['astra_sites_page_setting_enable'] ) ) {
+							$raw_data['astra_sites_page_setting_enable'] = 'yes';
+						}
+					}
+
 					update_post_meta( $post_id, $meta_key, $raw_data );
 				}
 			}
@@ -340,7 +346,7 @@ if ( ! class_exists( 'Astra_Sites' ) ) :
 		 */
 		public static function set_api_url() {
 
-			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://nik-websitedemos.sharkz.in/wp-json/wp/v2/' );
+			self::$api_url = apply_filters( 'astra_sites_api_url', 'http://localhost/projects/ast-starter/wp-json/wp/v2/' );
 
 		}
 
