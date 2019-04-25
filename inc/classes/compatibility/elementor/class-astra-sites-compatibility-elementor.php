@@ -119,7 +119,8 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 					'label'     => __( 'Main Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => array(
-						'body' => 'color: {{VALUE}};',
+						'body'        => 'color: {{VALUE}};',
+						'::selection' => 'background: {{VALUE}};',
 					),
 					'condition' => array(
 						'astra_sites_page_setting_enable' => 'yes',
@@ -133,7 +134,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 					'label'     => __( 'Text Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => array(
-						'body p' => 'color: {{VALUE}};',
+						'body, h1, .entry-title a, .entry-content h1, .entry-content h1 a, h2, .entry-content h2, .entry-content h2 a, h3, .entry-content h3, .entry-content h3 a, h4, .entry-content h4, .entry-content h4 a, h5, .entry-content h5, .entry-content h5 a, h6, .entry-content h6, .entry-content h6 a' => 'color: {{VALUE}};',
 					),
 					'condition' => array(
 						'astra_sites_page_setting_enable' => 'yes',
@@ -147,7 +148,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 					'label'     => __( 'Link Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => array(
-						'body a' => 'color: {{VALUE}};',
+						'a, .page-title' => 'color: {{VALUE}};',
 					),
 					'condition' => array(
 						'astra_sites_page_setting_enable' => 'yes',
@@ -161,7 +162,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 					'label'     => __( 'Link Hover Color', 'uael' ),
 					'type'      => Controls_Manager::COLOR,
 					'selectors' => array(
-						'body a:hover' => 'color: {{VALUE}};',
+						'a:hover, a:focus' => 'color: {{VALUE}};',
 					),
 					'condition' => array(
 						'astra_sites_page_setting_enable' => 'yes',
