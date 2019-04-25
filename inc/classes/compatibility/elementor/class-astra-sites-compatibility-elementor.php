@@ -97,7 +97,7 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 					'label_off'    => __( 'No', 'uael' ),
 					'description'  => __( 'Enables the page settings. You can still override individual values for each element.', 'uael' ),
 					'return_value' => 'yes',
-					'default'      => 'no',
+					'default'      => '',
 				)
 			);
 
@@ -106,10 +106,10 @@ if ( ! class_exists( 'Astra_Sites_Compatibility_Elementor' ) ) :
 				array(
 					'label'     => __( 'Colors', 'uael' ),
 					'type'      => Controls_Manager::HEADING,
+					'separator' => 'before',
 					'condition' => array(
 						'astra_sites_page_setting_enable' => 'yes',
 					),
-					'separator' => 'before',
 				)
 			);
 
