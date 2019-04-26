@@ -398,30 +398,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 			$page_title = apply_filters( 'astra_sites_menu_page_title', __( 'Astra Starter Sites', 'astra-sites' ) );
 
 			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'astra-sites', array( $this, 'menu_callback' ) );
-
-			$page_title = apply_filters( 'astra_pages_menu_page_title', __( 'Astra Pages', 'astra-sites' ) );
-
-			$page = add_theme_page( $page_title, $page_title, 'manage_options', 'site-pages', array( $this, 'page_menu_callback' ) );
-		}
-
-		/**
-		 * Site Pages Menu callback
-		 *
-		 * @since x.x.x
-		 */
-		public function page_menu_callback() {
-
-			$current_slug = isset( $_GET['action'] ) ? esc_attr( $_GET['action'] ) : 'general';
-
-			$active_tab   = str_replace( '_', '-', $current_slug );
-			$current_slug = str_replace( '-', '_', $current_slug );
-
-			?>
-			<div class="astra-sites-menu-page-wrapper">
-				<?php $this->init_nav_menu( $active_tab ); ?>
-				<?php do_action( 'astra_pages_menu_' . esc_attr( $current_slug ) . '_action' ); ?>
-			</div>
-			<?php
 		}
 
 		/**
@@ -458,27 +434,6 @@ if ( ! class_exists( 'Astra_Sites_Page' ) ) {
 				'category_slug' => 'astra-site-category',
 				'cpt_slug'      => 'astra-sites',
 				'page_builder'  => 'astra-site-page-builder',
-			);
-
-			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
-		}
-
-		/**
-		 * Include general page
-		 *
-		 * @since x.x.x
-		 */
-		public function general_page_for_astra_pages() {
-			$default_page_builder = $this->get_setting( 'page_builder' );
-
-			if ( empty( $default_page_builder ) || isset( $_GET['change-page-builder'] ) ) {
-				return;
-			}
-
-			$global_cpt_meta = array(
-				'category_slug' => 'site-pages-category',
-				'cpt_slug'      => 'site-pages',
-				'page_builder'  => 'site-pages-page-builder',
 			);
 
 			require_once ASTRA_SITES_DIR . 'inc/includes/admin-page.php';
