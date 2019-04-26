@@ -118,7 +118,8 @@ We are open to suggestions and would love to work on topics that our users are l
 ## Changelog ##
 
 v1.3.8 - 26-April-2019
-- Fix: Astra Sites not visible due to caching issue from the fetch() API now used ajax() API.
+- Improvement: Improve logic for importing images.
+- Fix: Implemented better caching technique for Astra Sites.
 
 v1.3.7 - 23-April-2019
 - Fix: Compatibility to WP Forms in Header and Footer of the demo site for Elementor.
