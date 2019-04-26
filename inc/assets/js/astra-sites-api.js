@@ -39,7 +39,7 @@
 						item_pages	: XHR.getResponseHeader('x-wp-totalpages') || 0,
 					};
 
-					if( 'undefined' !== args.trigger && '' !== args.trigger ) {
+					if( 'undefined' !== typeof args.trigger && '' !== args.trigger ) {
 						$(document).trigger( args.trigger, [data] );
 					}
 				} else {
