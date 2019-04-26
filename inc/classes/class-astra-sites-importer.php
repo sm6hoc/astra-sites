@@ -77,7 +77,32 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			add_action( 'wp_ajax_astra-sites-delete-posts', array( $this, 'delete_imported_posts' ) );
 			add_action( 'wp_ajax_astra-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ) );
 			add_action( 'wp_ajax_astra-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
+			add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
 		}
+
+		/**
+		 * Set the timeout for the HTTP request by request URL.
+		 *
+		 * E.g. If URL is images (jpg|png|gif|jpeg) are from the domain `https://websitedemos.net` then we have set the timeout by 30 seconds. Default 5 seconds.
+		 *
+		 * @since 1.3.8
+		 *
+		 * @param int    $timeout_value Time in seconds until a request times out. Default 5.
+		 * @param string $url           The request URL.
+		 */
+		function set_timeout_for_images( $default, $url ) {
+
+			// Not URL contain `https://websitedemos.net` then return $default.
+			if ( strpos( $url, 'https://websitedemos.net' ) === false ) {
+				return $default;
+			}
+
+			// Check is image URL of type jpg|png|gif|jpeg.
+			if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|gif|jpeg)\/?$/i', $url ) ) {
+				$default = 30; // Set the timeout to 30 seconds. Change it as per your requirement.
+			}
+			return $default;
+	   	}
 
 		/**
 		 * Load WordPress WXR importer.
