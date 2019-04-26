@@ -90,19 +90,19 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 * @param int    $timeout_value Time in seconds until a request times out. Default 5.
 		 * @param string $url           The request URL.
 		 */
-		function set_timeout_for_images( $default, $url ) {
+		function set_timeout_for_images( $timeout_value, $url ) {
 
-			// URL not contain `https://websitedemos.net` then return $default.
+			// URL not contain `https://websitedemos.net` then return $timeout_value.
 			if ( strpos( $url, 'https://websitedemos.net' ) === false ) {
-				return $default;
+				return $timeout_value;
 			}
 
 			// Check is image URL of type jpg|png|gif|jpeg.
 			if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|gif|jpeg)\/?$/i', $url ) ) {
-				$default = 30;
+				$timeout_value = 30;
 			}
-			return $default;
-	   	}
+			return $timeout_value;
+		}
 
 		/**
 		 * Load WordPress WXR importer.
