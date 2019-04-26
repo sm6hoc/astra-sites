@@ -92,14 +92,14 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 		 */
 		function set_timeout_for_images( $default, $url ) {
 
-			// Not URL contain `https://websitedemos.net` then return $default.
+			// URL not contain `https://websitedemos.net` then return $default.
 			if ( strpos( $url, 'https://websitedemos.net' ) === false ) {
 				return $default;
 			}
 
 			// Check is image URL of type jpg|png|gif|jpeg.
 			if ( preg_match( '/^((https?:\/\/)|(www\.))([a-z0-9-].?)+(:[0-9]+)?\/[\w\-]+\.(jpg|png|gif|jpeg)\/?$/i', $url ) ) {
-				$default = 30; // Set the timeout to 30 seconds. Change it as per your requirement.
+				$default = 30;
 			}
 			return $default;
 	   	}
