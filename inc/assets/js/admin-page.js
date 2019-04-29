@@ -298,7 +298,7 @@ var AstraSitesAjaxQueue = (function() {
 			}
 		},
 
-		_reset_customizer_data() {
+		_reset_customizer_data: function() {
 			$.ajax({
 				url  : astraSitesAdmin.ajaxurl,
 				type : 'POST',
