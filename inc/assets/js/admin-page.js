@@ -1317,7 +1317,7 @@ var AstraSitesAjaxQueue = (function() {
 			}
 		},
 
-		_process_import() {
+		_process_import: function() {
 
 			var $theme  = $('.astra-sites-preview').find('.wp-full-overlay-header'),
 				apiURL  = $theme.data('demo-api') || '';

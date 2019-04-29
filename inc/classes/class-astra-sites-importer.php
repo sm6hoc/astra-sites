@@ -77,7 +77,10 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 			add_action( 'wp_ajax_astra-sites-delete-posts', array( $this, 'delete_imported_posts' ) );
 			add_action( 'wp_ajax_astra-sites-delete-wp-forms', array( $this, 'delete_imported_wp_forms' ) );
 			add_action( 'wp_ajax_astra-sites-delete-terms', array( $this, 'delete_imported_terms' ) );
-			add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
+
+			if ( version_compare( get_bloginfo( 'version' ), '5.1.0', '>=' ) ) {
+				add_filter( 'http_request_timeout', array( $this, 'set_timeout_for_images' ), 10, 2 );
+			}
 		}
 
 		/**
@@ -595,3 +598,5 @@ if ( ! class_exists( 'Astra_Sites_Importer' ) ) :
 	Astra_Sites_Importer::get_instance();
 
 endif;
+
+
