@@ -120,7 +120,6 @@ var AstraSitesAjaxQueue = (function() {
 			var complete = 0;
 			var total = 0;
 
-
 			for (var i = types.length - 1; i >= 0; i--) {
 				var type = types[i];
 				this.updateProgress( type, this.complete[ type ], this.data.count[ type ] );
@@ -762,7 +761,7 @@ var AstraSitesAjaxQueue = (function() {
 						evtSource.addEventListener( 'log', function ( message ) {
 							var data = JSON.parse( message.data );
 							var message = data.message || '';
-							if( message ) {
+							if( message && 'info' === data.level ) {
 								message = message.replace(/"/g, function(letter) {
 								    return '';
 								});
